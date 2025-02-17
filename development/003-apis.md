@@ -1,6 +1,6 @@
 ---
 title: Use Huma for APIs
-date: 2024-02-17
+date: 2025-02-17
 status: Proposed
 tags:
 - #api

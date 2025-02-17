@@ -24,6 +24,7 @@ References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
 References: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/)
 
 - Proposed: [003-apis.md](development/003-apis.md) - Use Huma for APIs
+- Proposed: [004-cicd.md](development/004-cicd.md) - Implement CI/CD and QA to sign build artifacts (containers and software) before release
 
 ## Record Template
 
