@@ -25,6 +25,8 @@ References: [OWASP ASVS](https://owasp.org/www-project-application-security-veri
 
 - Proposed: [003-apis.md](development/003-apis.md) - Use Huma for APIs
 
+## Record Template
+
 Each record (named `001-name.md`)should have the below content named like defining high level decisions:
 
 ```markdown
