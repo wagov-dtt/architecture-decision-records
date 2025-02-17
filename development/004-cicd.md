@@ -1,5 +1,5 @@
 ---
-title: Implement CI/CD and QA to sign build artifacts (containers and software) before release
+title: Implement CI/CD and QA to test and sign software before release
 date: 2025-02-17
 status: Proposed
 tags:
@@ -14,7 +14,7 @@ Proposed
 
 ## Context
 
-The goal is to ensure the security and integrity of containerised applications throughout the development lifecycle. Threat actors exploit vulnerabilities in container images, misconfigurations, and exposed secrets.
+The goal is to ensure the security and integrity of containerised applications throughout the development lifecycle. Threat actors exploit vulnerabilities in code, software dependencies, build tooling, container images, misconfigurations, and exposed secrets.
 
 - [ACSC Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
 
