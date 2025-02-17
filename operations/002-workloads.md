@@ -18,7 +18,7 @@ Proposed
 The challenge is to efficiently manage and scale bespoke workloads in a secure and scalable manner. Traditional server management can be cumbersome and inefficient, especially for dynamic workloads. Provider specific control planes can result in lock-in and artificial constraints limiting technology options.
 
 - [CNCF Cloud Native Landscape](https://landscape.cncf.io/)
-- [AWS EKS Auto Mode Quickstart](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html)
+- [AWS EKS Quickstart](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html)
 
 ## Decision
 
