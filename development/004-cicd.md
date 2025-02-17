@@ -22,13 +22,13 @@ The goal is to ensure the security and integrity of containerised applications t
 
 To address these risks, implement a CI/CD pipeline with the following standardised practices (or similar equivalents) before releasing code and build artifacts (i.e. below should indicate low risk prior to a release being tagged and published for deployment to real (non-development) infrastructure):
 
-- Use GitHub Actions for CI/CD to **automate building and signing of container images**, and Justfiles to manage development tasks.
-- **Sign container images** with Cosign to ensure integrity and authenticity.
-- Integrate Trivy for **vulnerability scanning of container images**.
-- Use Checkov to **identify misconfigurations and exposed secrets**.
-- Implement Semgrep for **static code analysis** to find common issues.
-- Use Playwright for **end-to-end testing of web applications**.
-- Employ Grafana K6 for **API testing to ensure performance and reliability**.
+- Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) for CI/CD to **automate building and signing of container images**, and [Justfiles](https://just.systems/man/en/) to manage development tasks.
+- **Sign container images** with [Cosign](https://github.com/sigstore/cosign) to ensure integrity and authenticity.
+- Integrate [Trivy](https://trivy.dev/latest/docs/target/container_image/) for **vulnerability scanning of container images**.
+- Use [Checkov](https://www.checkov.io/1.Welcome/What%20is%20Checkov.html) to **identify misconfigurations and exposed secrets**.
+- Implement [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) for **static code analysis** to find common issues.
+- Use [Playwright](https://playwright.dev/docs/intro) for **end-to-end testing of web applications**.
+- Use [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) for **performance and reliability testing**.
 - Align development practices to [ACSC guidelines for software development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development).
 
 ## Consequences
