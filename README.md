@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-Architecture records and current decision state to support DTT Operational Control Framework
+Architecture records and current decision state to support infrastructure and platform operations for DGOV DTT Team.
 
 ## Structure
 
