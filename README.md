@@ -1,17 +1,29 @@
 # Architecture Decision Records
 
-Architecture records and current decision state to support infrastructure and platform operations for DGOV DTT Team.
+Architecture records and current decision state to support infrastructure and platform operations for DGOV DTT Team. Supporting training material is available at the
+[DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/) (guided by the [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)).
 
 ## Structure
 
 The repository will hold lightweight version controlled architecture decision records as below. On acceptance of a record a new tagged release should be made and this readme updated.
 
-- [Security](/security/) - Common decisions to uphold security and design controls (ref: ACSC ISM, OWASP ASVS, MASVS & NIST CSF)
-    - Proposed: [001-isolation.md](security/001-isolation.md) - Isolate Applications and Environments by Default
-- [Operations](/operations/) - Common decisions to support how infrastructure workloads are released and operated (ref: CNCF Cloud native)
-    - Proposed: [002-workloads.md](operations/002-workloads.md) - Adopt AWS EKS auto mode for public cloud workloads
-- [Development](/development/) - Decisions to design, build and run software securely (ref: OWASP ASVS, MASVS)
-    - Proposed: [003-apis.md](development/003-apis.md) - Use Huma for APIs
+### [/security/](/security/) Decisions to uphold security and design controls
+
+References: [ACSC ISM](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism), [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/) & [NIST CSF](https://www.nist.gov/cyberframework)
+
+- Proposed: [001-isolation.md](security/001-isolation.md) - Isolate Applications and Environments by Default
+
+### [/operations/](/operations/) Decisions to support how infrastructure workloads are released and operated
+
+References: CNCF Cloud native
+
+- Proposed: [002-workloads.md](operations/002-workloads.md) - Adopt AWS EKS auto mode for public cloud workloads
+
+### [/development/](/development/) Decisions to design, develop, build and test software securely
+
+References: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/)
+
+- Proposed: [003-apis.md](development/003-apis.md) - Use Huma for APIs
 
 Each record (named `001-name.md`)should have the below content named like defining high level decisions:
 
