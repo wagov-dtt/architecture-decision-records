@@ -15,7 +15,7 @@ References: [ACSC ISM](https://www.cyber.gov.au/resources-business-and-governmen
 
 ### [/operations/](/operations/) Decisions to support how infrastructure workloads are released and operated
 
-References: CNCF Cloud native
+References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
 
 - Proposed: [002-workloads.md](operations/002-workloads.md) - Adopt AWS EKS auto mode for public cloud workloads
 
