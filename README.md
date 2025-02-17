@@ -8,7 +8,7 @@ The repository will hold lightweight version controlled architecture decision re
 
 - [Security](/security/) - Common decisions to uphold security and design controls (ref: OWASP ASVS, MASVS & NIST CSF)
 - [Operations](/operations/) - Common decisions to support how infrastructure workloads are released and operated (ref: CNCF Cloud native)
-- [Language Specific](/language-specific/) - Decisions to design, build and run language specific codebases and workloads securely (ref: OWASP ASVS, MASVS)
+- [Development](/development/) - Decisions to design, build and run software securely (ref: OWASP ASVS, MASVS)
 
 Each record (named `001-name.md`)should have the below content named like defining high level decisions:
 
