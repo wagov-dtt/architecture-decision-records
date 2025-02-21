@@ -1,5 +1,5 @@
 ---
-title: Use Huma for APIs
+title: Use Huma REST/HTTP Framework for APIs
 date: 2025-02-17
 status: Proposed
 tags:

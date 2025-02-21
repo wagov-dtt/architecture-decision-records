@@ -1,5 +1,5 @@
 ---
-title: Implement CI/CD and QA to test and sign software before release
+title: Enforce release quality with CI/CD prechecks and build attestation
 date: 2025-02-17
 status: Proposed
 tags:
