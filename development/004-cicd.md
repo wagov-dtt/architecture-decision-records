@@ -16,6 +16,7 @@ Proposed
 
 The goal is to ensure the security and integrity of containerised applications throughout the development lifecycle. Threat actors exploit vulnerabilities in code, software dependencies, build tooling, container images, misconfigurations, and exposed secrets.
 
+- [OWASP CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)
 - [ACSC Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
 
 ## Decision
