@@ -29,6 +29,7 @@ To address these risks, implement a CI/CD pipeline with the following standardis
 - Use [Checkov](https://www.checkov.io/1.Welcome/What%20is%20Checkov.html) to **identify misconfigurations and exposed secrets**.
 - Implement [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) for **static code analysis** to find common issues.
 - Use [Playwright](https://playwright.dev/docs/intro) for **end-to-end testing of web applications**.
+- Use [Restish](https://rest.sh/#/guide) for **scripted validation of [REST APIs](003-apis.md)**.
 - Use [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) for **performance and reliability testing**.
 - Align development practices to [ACSC guidelines for software development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development).
 
