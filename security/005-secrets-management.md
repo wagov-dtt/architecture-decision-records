@@ -14,9 +14,9 @@ Proposed
 
 ## Context
 
-We need a secure method to manage secrets for various environments thats easy to use and auditable. The core goals are to ensure secrets are never stored in version control, don't need to be accessed or copied for business as usual, can be rotated easily, and are accessible at runtime by workloads where needed.
+We need a secure method to manage secrets for various environments thats easy to use and auditable. The core goals are to ensure secrets are never stored unencrypted or in version control, don't need to be accessed or copied for business as usual, can be rotated easily, and are accessible at runtime by workloads where needed.
 
-- [OWASP Secrets Management Chear Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
 - [AWS Secrets Manager Compliance validation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/secretsmanager-compliance.html)
 - [Using EKS encryption provider support for defense-in-depth](https://aws.amazon.com/blogs/containers/using-eks-encryption-provider-support-for-defense-in-depth/)
 
