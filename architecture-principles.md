@@ -15,17 +15,17 @@ Integrate security practices throughout the development lifecycle, not as an aft
 
 ### Threat Modeling
 
-The following threat model framing should be addressed during system design:
+Ensure [Threat Modeling](https://github.com/adamshostack/4QuestionFrame) occurs during system design:
 
 - What are we working on?
 - What can go wrong?
 - What are we going to do about it?
 - How will we measure if we did a good job?
 
-The above should be used to prioritise the following technical controls:
+Adopt OWASP technical security controls (below) prioritised by threat models:
 
-- Server software exposed to the internet meets the [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) v4+ standard at **ASVS Level 2**.
-- Client software, including mobile apps, should meet the [OWASP MASVS](https://mas.owasp.org) v2+ standard at **MAS-L1**.
+- Server software, including APIs, should target [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) v4+ standard at **ASVS Level 2**.
+- Client software, including mobile apps, should target [OWASP MASVS](https://mas.owasp.org) v2+ standard at **MAS-L1**.
 
 ## 2. Privacy by Design
 
