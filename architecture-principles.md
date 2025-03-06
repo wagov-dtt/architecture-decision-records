@@ -37,9 +37,9 @@ Classify information based on sensitivity and implement appropriate handling pro
 
 ## 4. Prioritise investments based on risk
 
-Systematically migrate legacy systems to modern, low-risk environments with reduced technical debt, prioritising based on business value and risk assessment, as per [ACSC Managing the Risks of Legacy IT: Executive Guidance](https://www.cyber.gov.au/resources-business-and-government/maintaining-devices-and-systems/system-hardening-and-administration/legacy-it-management/managing-risks-legacy-it-executive-guidance). Re-use or acquire systems where existing or commercial options closely match business needs, and develop systems only when commercial options are limited or require significant tailoring.
+Systematically migrate legacy systems to modern, low-risk environments with reduced technical debt, prioritising based on business value and risk assessment, as per [ACSC Managing the Risks of Legacy IT: Executive Guidance](https://www.cyber.gov.au/resources-business-and-government/maintaining-devices-and-systems/system-hardening-and-administration/legacy-it-management/managing-risks-legacy-it-executive-guidance). Re-use, deploy or acquire systems where existing, [opensource](https://opensource.org/osd) or mature commercial options closely match business needs. Develop bespoke systems when alternatives are limited, high risk or require significant tailoring.
 
-## 5. Adopt CNCF Cloud-native practices
+## 5. Adopt [CNCF Cloud-native practices](https://github.com/cncf/toc/blob/main/DEFINITION.md)
 
 Architect loosely coupled systems that interoperate securely, resiliently, manageably, sustainably, and observably. Use automation to enable frequent, high-impact changes with minimal effort and clear separation of concerns.
 
@@ -47,10 +47,6 @@ Architect loosely coupled systems that interoperate securely, resiliently, manag
 
 Retain ownership of code and artifacts developed with public funding and use the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0) to enable broad use, modification, and distribution while limiting legal liability.
 
-## 7. Microservices Architecture (for bespoke systems)
+## 7. Minimise Complexity (for bespoke systems)
 
-Design applications as collections of loosely coupled, independently deployable services, following [Microservices Patterns](https://microservices.io/patterns/index.html) and [security/001-isolation.md](security/001-isolation.md). Develop and document APIs according to the [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) to ensure consistency, clarity, and interoperability, as per [development/003-apis.md](development/003-apis.md).
-
-## 8. Continuous Integration & Delivery (for bespoke systems)
-
-Package applications and dependencies into containers for consistency and portability, enforcing release quality and build attestation with CI/CD, as per [development/004-cicd.md](development/004-cicd.md).
+Design applications and platforms as cohesive systems composed of distinct, loosely coupled modules with clear boundaries and responsibilities. Enforce release quality and build attestation with CI/CD as per [development/004-cicd.md](development/004-cicd.md). Bundle and isolate production workloads to reduce operational complexity as per [security/001-isolation.md](security/001-isolation.md). Expose interfaces as [OAS HTTP APIs](https://spec.openapis.org/oas/latest.html) to ensure consistency, clarity, and interoperability, as per [development/003-apis.md](development/003-apis.md).
