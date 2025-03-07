@@ -11,7 +11,7 @@ tags:
 
 ## 1. Establish secure foundations
 
-Integrate security practices **throughout the development lifecycle**, not as an afterthought, as per the [ACSC Secure-by-Design](https://www.cyber.gov.au/resources-business-and-government/governance-and-user-education/secure-by-design) guidelines.
+Integrate security practices **from the outset**, and throughout the design, development and deployment of products and services, not as an afterthought, as per the [ACSC Secure-by-Design](https://www.cyber.gov.au/resources-business-and-government/governance-and-user-education/secure-by-design) guidelines.
 
 ## 2. Preference tried and tested approaches
 
