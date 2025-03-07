@@ -15,7 +15,7 @@ Integrate security practices **from the outset**, and throughout the design, dev
 
 ## 2. Preference tried and tested approaches
 
-Adopt sustainable [opensource](https://opensource.org/osd) software, and mature managed services where capabilities closely match business needs. When necessary, bespoke service development should be **led by internal technical capabilites** to ensure appropriate risk ownership. Bespoke software should **preference open standards and code** to avoid lock-in.
+Adopt sustainable [opensource](https://opensource.org/osd) software, and mature managed services where capabilities closely match business needs. When necessary, bespoke service development should be **led by internal technical capabilites** to ensure appropriate risk ownership. Bespoke software should **preference open standards and code** to avoid vendor lock-in.
 
 ## 3. Understand and govern data
 
