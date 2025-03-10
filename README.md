@@ -21,6 +21,7 @@ References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
 
 - Proposed: [002-workloads.md](operations/002-workloads.md) - Adopt AWS EKS auto mode for public cloud workloads.
 - Proposed: [007-logging.md](operations/007-logging.md) - Collect relevant security logs into [centralised SIEM tooling](https://soc.cyber.wa.gov.au/onboarding/sentinel-guidance/), and minimise logging of sensitive information.
+- Proposed: [010-configmgmt.md](operations/010-configmgmt.md) - Deploy Infrastructure As Code (IAC) and identify misconfiguration.
 - TODO: [008-email.md](operations/008-email.md) - Configure [BIMI](https://bimigroup.org) (including SPF/DKIM/DMARC) for all transactional and campaign based email.
 
 ### [/development/](/development/) Decisions to design, develop, build and test software securely
