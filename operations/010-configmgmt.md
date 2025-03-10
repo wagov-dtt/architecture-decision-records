@@ -14,7 +14,7 @@ Proposed
 
 ## Context
 
-The goal is to ensure the security and integrity of infrastructure throughout the deployment lifecycle. Threat actors exploit vulnerabilities in infrastructure configurations, misconfigurations, exposed secrets, and deployment drift.
+The goal is to ensure the security and integrity of infrastructure throughout the deployment lifecycle. Threat actors exploit vulnerabilities in infrastructure components, misconfigurations, exposed secrets, and deployment drift.
 
 - [OWASP Infrastructure as Code Security Guidance](https://cheatsheetseries.owasp.org/cheatsheets/Infrastructure_as_Code_Security_Cheat_Sheet.html)
 - [ACSC Guidelines for System Hardening](https://www.cyber.gov.au/resources-business-and-government/essential-cybersecurity/ism/cybersecurity-guidelines/guidelines-system-hardening)
