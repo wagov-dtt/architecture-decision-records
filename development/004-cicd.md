@@ -21,7 +21,7 @@ The goal is to ensure the security and integrity of containerised applications t
 
 ## Decision
 
-To address these risks, implement a CI/CD pipeline with the following standardised practices (or similar equivalents) before releasing code and build artifacts:
+To address these risks, implement a CI/CD pipeline with the following standardised practices (or similar equivalents) before releasing code and build artifacts to be released via [010-configmgmt.md](../operations/010-configmgmt.md):
 
 - Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) for CI/CD to **automate building and signing of container images**.
 - Use [Justfiles](https://just.systems/man/en/) to **manage development tasks**.
@@ -32,12 +32,6 @@ To address these risks, implement a CI/CD pipeline with the following standardis
 - Use [Restish](https://rest.sh/#/guide) for **scripted validation of [REST APIs](003-apis.md)**.
 - Use [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) for **performance and reliability testing**.
 - Align development practices to [ACSC guidelines for software development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development).
-
-Infrastructure as Code (IAC) repos should follow the below standard practices (or similar equivalents) before deploying tagged workloads (indicated as low risk by above) to production environments:
-
-- Use [Justfiles](https://just.systems/man/en/) to **manage operations tasks**.
-- Use [kubectl & kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) for **config management and naming conventions**.
-- Use [Checkov](https://www.checkov.io/1.Welcome/What%20is%20Checkov.html) to **identify misconfigurations and exposed secrets**.
 
 ## Consequences
 
