@@ -25,9 +25,10 @@ Infrastructure as Code (IaC) repositories should follow the below standard pract
 
 - Use [Justfiles](https://just.systems/man/en/) to **manage operations tasks**.
 - Use [kubectl & kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) for **config management and naming conventions**.
-- Use [Checkov](https://www.checkov.io/1.Welcome/What%20is%20Checkov.html) to **identify misconfigurations and exposed secrets**.
+- Use [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html) to **identify misconfigurations and exposed secrets**.
 - **Maintain isolation between workloads** as per [security/001-isolation.md](../security/001-isolation.md)
-- **Test releases against multiple targets** like local [minikube](https://minikube.sigs.k8s.io/docs/handbook/) and other [CNCF Certified Kubernetes platforms](https://www.cncf.io/training/certification/software-conformance/#logos) like [EKS](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html) as per [operations/002-workloads.md](../operations/002-workloads.md).
+- **Encrypt and audit secrets** as per [security/005-secrets-management.md](../security/005-secrets-management.md)
+- **Test releases against multiple targets** like [minikube](https://minikube.sigs.k8s.io/docs/handbook/), [localstack](https://docs.localstack.cloud/getting-started/quickstart/) and [CNCF Certified Kubernetes platforms](https://www.cncf.io/training/certification/software-conformance/#logos) such as [EKS](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html) as per [operations/002-workloads.md](../operations/002-workloads.md).
 
 ## Consequences
 
