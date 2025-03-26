@@ -1,6 +1,6 @@
 ---
 title: Ensure APIs are documented and testable
-date: 2025-02-17
+date: 2025-03-26
 status: Proposed
 tags:
 - #api
@@ -22,12 +22,17 @@ A secure, and maintainable API framework is key for backends and new capabilitie
 
 ## Decision
 
-Ensure all APIs have [Restish](https://rest.sh/#/openapi) test scripts. Develop new APIs with self-documenting frameworks such as [Huma](https://huma.rocks/) or [FastAPI](https://fastapi.tiangolo.com/) that meet the following criteria:
+Ensure all APIs have OpenAPI documentation and [Restish](https://rest.sh/#/openapi) test scripts validating security and behaviour. New APIs should be developed with self-documenting frameworks such as [Huma](https://huma.rocks/) or [FastAPI](https://fastapi.tiangolo.com/).
 
-1. **Maturity**: Golang & Python are mature languages with strong ecosystems, making them reliable choices for API development.
-2. **Standards Compliance**: Adhere to the OpenAPI standards, ensuring that our APIs are well-documented and testable.
-3. **Security**: The frameworks align with OWASP standards, providing a secure foundation for our APIs.
-4. **Low Complexity**: Self-documenting frameworks are low in complexity, making it easier to maintain and keep in sync with expected changes.
+### API requirements
+
+- **Naming Convention**: APIs **must** use a consistent naming convention.
+- **Documentation & Testing**: APIs **must** be documented via the [OpenAPI specification ](https://spec.openapis.org/). APIs **should** have test-cases developed for quality assurance and annotations documented for better clarity.
+- **Automated Testing**: APIs **must** include automated test scripts (preferably based on [Restish CLI](https://rest.sh/)) with coverage for minimum required behaviour and common API security flaws (refer [OWASP API Security](https://owasp.org/www-project-api-security/)).
+- **Exposure Control**: Ensure administration/management APIs are not exposed to the Internet.
+- **Frameworks:** New APIs **should** be developed with self-documenting frameworks such as Huma or FastAPI.
+- **Data Types**: APIs **should** use standard data types and formats where possible, avoiding custom data types.
+- **API Segregation**: APIs **should** be segregated by purpose.
 
 ## Consequences
 
