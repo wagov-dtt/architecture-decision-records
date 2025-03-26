@@ -28,7 +28,7 @@ References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
 
 References: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/)
 
-- Proposed: [003-apis.md](development/003-apis.md) - Use Huma REST/HTTP Framework for APIs.
+- Proposed: [003-apis.md](development/003-apis.md) - Ensure APIs are documented and testable.
 - Proposed: [004-cicd.md](development/004-cicd.md) - Enforce release quality with CI/CD prechecks and build attestation.
 - Proposed: [009-release.md](development/009-release.md) - Consistent release documentation.
 
