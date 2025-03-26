@@ -22,7 +22,7 @@ A secure, and maintainable API framework is key for backends and new capabilitie
 
 ## Decision
 
-Ensure all APIs have [restish](https://rest.sh/#/openapi) test scripts. Develop new APIs with self-documenting frameworks such as [Huma](https://huma.rocks/) or [FastAPI](https://fastapi.tiangolo.com/) that meet the following criteria:
+Ensure all APIs have [Restish](https://rest.sh/#/openapi) test scripts. Develop new APIs with self-documenting frameworks such as [Huma](https://huma.rocks/) or [FastAPI](https://fastapi.tiangolo.com/) that meet the following criteria:
 
 1. **Maturity**: Golang & Python are mature languages with strong ecosystems, making them reliable choices for API development.
 2. **Standards Compliance**: Adhere to the OpenAPI standards, ensuring that our APIs are well-documented and testable.
