@@ -27,7 +27,7 @@ Ensure all APIs have OpenAPI documentation and [Restish](https://rest.sh/#/opena
 ### API requirements
 
 - **Naming Convention**: APIs **must** use a consistent naming convention.
-- **Documentation & Testing**: APIs **must** be documented via the [OpenAPI specification](https://spec.openapis.org/). APIs **should** have test-cases developed for quality assurance and annotations documented for better clarity.
+- **Documentation**: APIs **must** be documented via the [OpenAPI specification](https://spec.openapis.org/). APIs **should** have test-cases developed for quality assurance and annotations documented for better clarity.
 - **Automated Testing**: APIs **must** include automated test scripts (preferably based on [Restish CLI](https://rest.sh/)) with coverage for minimum required behaviour and common API security flaws (refer [OWASP API Security](https://owasp.org/www-project-api-security/)).
 - **Exposure Control**: Ensure administration/management APIs are not exposed to the Internet.
 - **Frameworks:** New APIs **should** be developed with self-documenting frameworks such as Huma or FastAPI.
