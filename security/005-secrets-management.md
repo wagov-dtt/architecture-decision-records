@@ -13,16 +13,25 @@ tags:
 Proposed
 
 ## Context
+Per the [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html):
 
-We need a secure method to manage secrets for various environments thats easy to use and auditable. The core goals are to ensure secrets are never stored unencrypted or in version control, don't need to be accessed or copied for business as usual, can be rotated easily, and are accessible at runtime by workloads where needed.
+> There is a growing need for organizations to centralize the storage, provisioning, auditing, rotation and management of secrets to control access to secrets and prevent them from leaking and compromising the organization. Often, services share the same secrets, which makes identifying the source of compromise or leak challenging.
 
-- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+To address these challenges, we need a standardised, auditable approach to managing and rotating secrets within our environments. Secrets should be accessed at runtime by workloads and should never be hard-coded or stored in plain text.
+
 - [AWS Secrets Manager Compliance validation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/secretsmanager-compliance.html)
 - [Using EKS encryption provider support for defense-in-depth](https://aws.amazon.com/blogs/containers/using-eks-encryption-provider-support-for-defense-in-depth/)
 
 ## Decision
 
-Use [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) to store and manage secrets. Secrets should be fetched and injected into AWS Resources at runtime. [Kubernetes workloads](../operations/002-workloads.md) should use [EKS KMS secrets encryption](https://docs.aws.amazon.com/eks/latest/userguide/enable-kms.html) with cluster local secrets by default. If secrets need to be accessed by multiple clusters, use [External Secrets Operator](https://external-secrets.io/latest/) to synchronise them from a primary secret store in AWS Secrets Manager.
+Use [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) to store and manage secrets. 
+
+- Secrets should be fetched and securely injected into AWS resources at runtime.
+- The secret rotation period (lifetime) must be captured in the system design.
+  - Rotate secrets automatically where possible, or ensure that a manual rotation process is documented and regularly followed. 
+- [Use IAM policy statements](https://docs.aws.amazon.com/secretsmanager/latest/userguide/best-practices.html#w21aab9c19) to implement least-privilege access to secrets. 
+- [Kubernetes workloads](../operations/002-workloads.md) should use [EKS KMS secrets encryption](https://docs.aws.amazon.com/eks/latest/userguide/enable-kms.html) with cluster local secrets by default.
+  - If secrets need to be accessed by multiple clusters, use [External Secrets Operator](https://external-secrets.io/latest/) to synchronise them from the primary secret store in AWS Secrets Manager.
 
 ## Consequences
 
