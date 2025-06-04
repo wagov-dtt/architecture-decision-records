@@ -1,7 +1,7 @@
 # Architecture Decision Records
 
 Architecture records and current decision state to support infrastructure and platform operations for DGOV DTT Team. Supporting training material is available at the
-[DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/) (guided by the [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)). The [Architecture Principles (Proposed)](./architecture-principles.md) used to guide decisions are also in this repository for reference.
+[DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/) (guided by the [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)). The [Architecture Principles](./architecture-principles.md) used to guide decisions are also in this repository for reference.
 
 ## Structure
 
