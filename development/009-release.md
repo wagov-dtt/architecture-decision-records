@@ -1,7 +1,7 @@
 ---
 title: Consistent release documentation
 date: 2025-03-04
-status: Proposed
+status: Accepted
 tags:
 - #code
 - #infrastructure
@@ -11,7 +11,7 @@ tags:
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 

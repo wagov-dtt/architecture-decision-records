@@ -1,7 +1,7 @@
 ---
 title: Isolate Applications and Environments by Default
 date: 2025-02-17
-status: Proposed
+status: Accepted
 tags:
 - #security
 - #architecture
@@ -10,7 +10,7 @@ tags:
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
@@ -26,6 +26,8 @@ To mitigate the risks associated with shared environments, all applications and 
 1. **Dedicated Accounts**: Use separate cloud accounts / resource groups for different environments (e.g., development, testing, production) to ensure complete isolation of resources and data.
 2. **Kubernetes Clusters**: Deploy separate Kubernetes clusters for different applications or environments to isolate workloads and manage resources independently.
 3. **Kubernetes Namespaces**: Within a Kubernetes cluster, use namespaces to logically separate different applications or environments, providing a level of isolation for network traffic, resource quotas, and access controls.
+
+The preferred approach for isolation should be driven by data sensitivity and product boundaries.
 
 ## Consequences
 

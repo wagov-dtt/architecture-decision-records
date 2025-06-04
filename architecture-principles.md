@@ -1,17 +1,17 @@
 ---
 title: Architecture Principles
 date: 2025-03-07
-status: Proposed
+status: Accepted
 tags:
 - #architecture
 - #principles
 ---
 
-# Architecture Principles (Proposed)
+# Architecture Principles
 
 ## 1. Establish secure foundations
 
-Integrate security practices **from the outset**, and throughout the design, development and deployment of products and services, as per the [ACSC Secure-by-Design](https://www.cyber.gov.au/resources-business-and-government/governance-and-user-education/secure-by-design) guidelines.
+Integrate security practices **from the outset**, and throughout the design, development and deployment of products and services, as per the [ACSC Foundations for modern defensible architecture](https://www.cyber.gov.au/resources-business-and-government/governance-and-user-education/modern-defensible-architecture/foundations-modern-defensible-architecture).
 
 ## 2. Understand and govern data
 
