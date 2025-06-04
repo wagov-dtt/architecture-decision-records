@@ -1,7 +1,7 @@
 ---
 title: Collect relevant security logs into centralised SIEM tooling, and minimise logging of sensitive information.
 date: 2025-02-25
-status: Proposed
+status: Accepted
 tags:
 - #logging
 - #aws
@@ -11,7 +11,7 @@ tags:
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
@@ -27,7 +27,9 @@ Implement centralized logging using [Microsoft Sentinel](https://soc.cyber.wa.go
 
 - Configure default collection for audit and authentication logs to simplify security investigations.
 - Container workloads should have [Container insights with enhanced observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-EKS.html) + [EKS control plane logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) of audit and authentication logs by default.
-- Regularly review and update logging configurations.
+- Logging should be configured to avoid capturing and exposing PII.
+- Regularly review and update logging configurations to ensure coverage and privacy requirements are met.
+- Log information used during an investigation should be extracted and archived to an appropriate location (in alignment with record keeping requirements).
 
 ## Consequences
 

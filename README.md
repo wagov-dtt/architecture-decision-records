@@ -11,7 +11,7 @@ The repository will hold lightweight version controlled architecture decision re
 
 References: [ACSC ISM](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism), [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/) & [NIST CSF](https://www.nist.gov/cyberframework)
 
-- Proposed: [001-isolation.md](security/001-isolation.md) - Isolate Applications and Environments by Default
+- Accepted: [001-isolation.md](security/001-isolation.md) - Isolate Applications and Environments by Default
 - Proposed: [005-secrets-management.md](security/005-secrets-management.md) - Use AWS Secrets Manager and secrets encryption on Kubernetes.
 - TODO: [006-infrastructure-constraints.md](security/006-infrastructure-constraints.md) - Ensure infrastructure constraints are centrally defined and enforced.
 
@@ -19,8 +19,8 @@ References: [ACSC ISM](https://www.cyber.gov.au/resources-business-and-governmen
 
 References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
 
-- Proposed: [002-workloads.md](operations/002-workloads.md) - Adopt AWS EKS auto mode for public cloud workloads.
-- Proposed: [007-logging.md](operations/007-logging.md) - Collect relevant security logs into [centralised SIEM tooling](https://soc.cyber.wa.gov.au/onboarding/sentinel-guidance/), and minimise logging of sensitive information.
+- Accepted: [002-workloads.md](operations/002-workloads.md) - Adopt AWS EKS auto mode for public cloud workloads.
+- Accepted: [007-logging.md](operations/007-logging.md) - Collect relevant security logs into [centralised SIEM tooling](https://soc.cyber.wa.gov.au/onboarding/sentinel-guidance/), and minimise logging of sensitive information.
 - Proposed: [010-configmgmt.md](operations/010-configmgmt.md) - Deploy Infrastructure As Code (IAC) and identify misconfiguration.
 - TODO: [008-email.md](operations/008-email.md) - Configure [BIMI](https://bimigroup.org) (including SPF/DKIM/DMARC) for all transactional and campaign based email.
 
@@ -28,8 +28,8 @@ References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
 
 References: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/)
 
-- Proposed: [003-apis.md](development/003-apis.md) - Ensure APIs are documented and testable.
-- Proposed: [004-cicd.md](development/004-cicd.md) - Enforce release quality with CI/CD prechecks and build attestation.
+- Accepted: [003-apis.md](development/003-apis.md) - Ensure APIs are documented and testable.
+- Accepted: [004-cicd.md](development/004-cicd.md) - Enforce release quality with CI/CD prechecks and build attestation.
 - Proposed: [009-release.md](development/009-release.md) - Consistent release documentation.
 
 ## How to document decisions

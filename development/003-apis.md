@@ -1,7 +1,7 @@
 ---
 title: Ensure APIs are documented and testable
 date: 2025-03-26
-status: Proposed
+status: Accepted
 tags:
 - #api
 - #openapi
@@ -10,11 +10,11 @@ tags:
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
-A secure, and maintainable API framework is key for backends and new capabilities. We need to ensure that our APIs are built using mature technologies that adhere to industry standards such as the ACSC ISM, OpenAPI and OWASP. Additionally, the framework should be low in complexity to reduce maintenance overheads and implementation burdens.
+A secure, and maintainable API framework is key for backends and new capabilities. We need to ensure that our APIs are built using mature technologies that adhere to industry standards such as the ACSC ISM, OpenAPI and OWASP. Additionally, the framework should be low in complexity to reduce maintenance overheads and implementation burdens. Where an exisiting mature industry standard exists, that interface may be more suitable than a bespoke Rest API as described here.
 
 - [ACSC ISM Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
 - [OWASP API Security](https://owasp.org/www-project-api-security/)

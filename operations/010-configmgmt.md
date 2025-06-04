@@ -1,7 +1,7 @@
 ---
 title: Deploy Infrastructure As Code (IAC) and identify misconfiguration
 date: 2025-03-10
-status: Proposed
+status: Accepted
 tags:
 - #infrastructure
 - #security
@@ -10,7 +10,7 @@ tags:
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
@@ -24,11 +24,11 @@ The goal is to ensure the security and integrity of infrastructure throughout th
 Infrastructure as Code (IaC) repositories should follow the below standard practices (or similar equivalents) before deploying tagged workloads (indicated as low risk by [development/004-cicd.md](../development/004-cicd.md)) to production environments:
 
 - Use [Justfiles](https://just.systems/man/en/) to **manage operations tasks**.
-- Use [kubectl & kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) for **config management and naming conventions**.
-- Use [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html) to **identify misconfigurations and exposed secrets**.
+- Use [kubectl & kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) or a [trivy supported IaC language](https://trivy.dev/latest/docs/coverage/iac/) (e.g. Terraform) for **config management and naming conventions**.
+- Use [Trivy](https://trivy.dev/latest/docs/configuration/) to **identify misconfigurations and exposed secrets**.
 - **Maintain isolation between workloads** as per [security/001-isolation.md](../security/001-isolation.md)
 - **Encrypt and audit secrets** as per [security/005-secrets-management.md](../security/005-secrets-management.md)
-- **Test releases against multiple targets** like [minikube](https://minikube.sigs.k8s.io/docs/handbook/), [localstack](https://docs.localstack.cloud/getting-started/quickstart/) and [CNCF Certified Kubernetes platforms](https://www.cncf.io/training/certification/software-conformance/#logos) such as [EKS](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html) as per [operations/002-workloads.md](../operations/002-workloads.md).
+- **Test releases against multiple accounts or targets** like [k3d](https://k3d.io/stable/) locally and [EKS](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html) on a hyperscaler as per [operations/002-workloads.md](../operations/002-workloads.md).
 
 ## Consequences
 

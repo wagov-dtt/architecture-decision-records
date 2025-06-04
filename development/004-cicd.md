@@ -1,7 +1,7 @@
 ---
 title: Enforce release quality with CI/CD prechecks and build attestation
 date: 2025-03-10
-status: Proposed
+status: Accepted
 tags:
 - #ci/cd
 - #security
@@ -10,7 +10,7 @@ tags:
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 

@@ -1,7 +1,7 @@
 ---
 title: Adopt AWS EKS auto mode for public cloud workloads
 date: 2025-02-17
-status: Proposed
+status: Accepted
 tags:
 - #containers
 - #aws
@@ -11,7 +11,7 @@ tags:
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
