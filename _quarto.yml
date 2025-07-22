@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Architecture Decision Records"
+  description: "DGOV DTT Team Architecture Decision Records"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Principles" 
+        href: architecture-principles.md
+      - text: "Development"
+        href: development/
+      - text: "Operations"
+        href: operations/
+      - text: "Security"
+        href: security/
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 2
+  pdf:
+    documentclass: scrartcl
+    toc: true
+
+filters:
+  - quarto
