@@ -1,5 +1,5 @@
 ---
-title: Collect relevant security logs into centralised SIEM tooling, and minimise logging of sensitive information.
+title: "ADR 007: Collect relevant security logs into centralised Security Information and Event Management (SIEM) tooling, and minimise logging of sensitive information."
 date: 2025-02-25
 status: Accepted
 tags:
@@ -15,21 +15,21 @@ Accepted
 
 ## Context
 
-Security logs should be centrally collected to support monitoring, detection, and response capabilities across workloads. Sensitive information logging must be minimized to comply with data protection regulations and reduce the risk of data breaches. Audit and authentication logs are critical for security monitoring and should be collected by default.
+Security logs should be centrally collected to support monitoring, detection, and response capabilities across workloads. Sensitive information logging must minimize to follow data protection regulations and reduce the risk of data breaches. Audit and authentication logs are critical for security monitoring and should collect by default.
 
-- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
-- [ACSC Guidelines for system monitoring](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-system-monitoring)
+- [Open Web Application Security Project (OWASP) Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [Australian Cyber Security Centre (ACSC) Guidelines for system monitoring](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-system-monitoring)
 - [DGOV Technical Baseline for Detection Coverage (MITRE ATT&CK)](https://soc.cyber.wa.gov.au/baselines/data-sources/)
 
 ## Decision
 
-Implement centralized logging using [Microsoft Sentinel](https://soc.cyber.wa.gov.au/onboarding/sentinel-guidance/) and [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
+Use centralized logging using [Microsoft Sentinel](https://soc.cyber.wa.gov.au/onboarding/sentinel-guidance/) and [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 
 - Configure default collection for audit and authentication logs to simplify security investigations.
-- Container workloads should have [Container insights with enhanced observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-EKS.html) + [EKS control plane logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) of audit and authentication logs by default.
-- Logging should be configured to avoid capturing and exposing PII.
-- Regularly review and update logging configurations to ensure coverage and privacy requirements are met.
-- Log information used during an investigation should be extracted and archived to an appropriate location (in alignment with record keeping requirements).
+- Container workloads should configure [Container insights with enhanced observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-EKS.html) + [EKS control plane logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) of audit and authentication logs by default.
+- Logging should configure to avoid capturing and exposing Personally Identifiable Information (PII).
+- Review and update logging configurations to ensure coverage and privacy requirements meet.
+- Log information used during an investigation should extract and archive to an appropriate location (in alignment with record keeping requirements).
 
 ## Consequences
 

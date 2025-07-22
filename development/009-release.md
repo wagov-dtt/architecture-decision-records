@@ -1,5 +1,5 @@
 ---
-title: Consistent release documentation
+title: "ADR 009: Consistent release documentation"
 date: 2025-03-04
 status: Accepted
 tags:
@@ -15,16 +15,22 @@ Accepted
 
 ## Context
 
-To ensure clear communication of changes and updates to security and infrastructure operations teams, release notes should be standardised. The release notes should succinctly capture key information, including new features, improvements, bug fixes, security updates, and infrastructure changes, with links to relevant changelogs.
+To ensure clear communication of changes and updates to security and infrastructure operations teams, release notes should standardize. The release notes should succinctly capture key information, including new features, improvements, bug fixes, security updates, and infrastructure changes, with links to relevant changelogs.
 
 
-- [ACSC Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
+- [Australian Cyber Security Centre (ACSC) Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
 
 
 ## Decision
-Adopt a standardised release notes template in [Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) format. Brief descriptions should include the security implications and operational impacts of changes such as vulnerability fixes, compliance improvements, or changes to authentication and authorization mechanisms. Descriptions should also detail operational aspects, including deployment processes, logging & monitoring considerations, and any modifications to infrastructure as code (IaC).
+Adopt a standardised release notes template in [Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) format. Brief descriptions should include the security implications and operational impacts of changes such as vulnerability fixes, compliance improvements, or changes to authentication and authorization mechanisms. Descriptions should also detail operational aspects, including deployment processes, logging & monitoring considerations, and any modifications to Infrastructure as Code (IaC).
 
-A template is provided below that can be tailored per project. A completed release notes Markdown document should be provided with all proposed changes.
+**Git Tagging Requirements:**
+- Create a git tag for each release following semantic versioning (v1.0.0, v1.1.0, etc.)
+- Tags must annotate with release notes summary
+- Tags should create after all ADR acceptance and README updates
+- Tag message should reference the release documentation
+
+A template provide below that can tailor per project. A completed release notes Markdown document should provide with all proposed changes.
 
 ```markdown
 ## Release Notes
