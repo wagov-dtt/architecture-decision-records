@@ -37,18 +37,9 @@ References: [OWASP ASVS](https://owasp.org/www-project-application-security-veri
 
 ## Contributing
 
-### Quick Start
+**Quick Start:** Open in GitHub Codespaces → `just next-number` → Create ADR → `just validate` → Submit PR
 
-1. **Setup**: Open in GitHub Codespaces or VS Code with devcontainer
-2. **Find next number**: Run `just next-number`
-3. **Create ADR**: Create new file in appropriate directory:
-   - **development/** - Code, APIs, testing, CI/CD decisions
-   - **operations/** - Infrastructure, deployments, monitoring
-   - **security/** - Controls, compliance, isolation policies
-4. **Use template**: Copy template below and fill in details ([Quick Reference](CONTRIBUTING.md))
-5. **Validate**: Run `just validate` to check format and prose quality
-6. **Preview**: Run `just serve` to preview website
-7. **Update README**: Add your ADR to the appropriate section above
+See [CONTRIBUTING.md](CONTRIBUTING.md) for complete guide with examples and quality checklist.
 
 ### ADR Format
 

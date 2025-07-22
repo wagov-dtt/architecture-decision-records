@@ -18,23 +18,6 @@ The devcontainer automatically installs:
 - `write-good` for writing quality analysis
 - Port 8080 forwarded for preview server
 
-## ADR Creation
-
-1. Run `just next-number` to get next number (e.g., 015)
-2. Create file: `{development|operations|security}/015-short-name.md`
-3. Use template from README.md with required frontmatter
-4. Update README.md with new ADR entry
-5. Run `just validate` to check format
-
-## File Structure
-
-- `/development/` - Software development ADRs
-- `/operations/` - Infrastructure & ops ADRs  
-- `/security/` - Security control ADRs
-- `architecture-principles.md` - Guiding principles
-- `justfile` - Build commands
-- `_quarto.yml` - Website configuration
-
 ## For New Contributors
 
 1. Open repository in GitHub Codespaces or VS Code with devcontainer

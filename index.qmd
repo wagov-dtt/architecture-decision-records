@@ -1,32 +1,29 @@
 ---
-title: "Architecture Decision Records"
+title: "DGOV DTT Architecture Decision Records"
 ---
 
-Architecture records and current decision state to support infrastructure and platform operations for DGOV DTT Team. Supporting training material is available at the [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/) (guided by the [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)). The [Architecture Principles](./architecture-principles.md) used to guide decisions are also in this repository for reference.
+Architecture records and current decision state to support infrastructure and platform operations for DGOV DTT Team. Supporting training material is available at the [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/) (guided by the [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)). 
 
-## Structure
+The [Architecture Principles](./architecture-principles.md) guide all decisions documented here.
 
-The repository holds lightweight version controlled architecture decision records. On acceptance of a record a new tagged release should be made and this readme updated.
+## ADR Categories
 
-### [Development](/development/) - Decisions to design, develop, build and test software securely
+The repository holds lightweight, version-controlled architecture decision records organized by domain:
 
-References: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/)
+### [Development](/development/) 
+Code quality, APIs, testing, CI/CD, build processes, AI usage policies  
+*References: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/)*
 
-### [Operations](/operations/) - Decisions to support how infrastructure workloads are released and operated
+### [Operations](/operations/)
+Infrastructure, deployments, monitoring, backups, configuration management  
+*References: [CNCF Cloud native landscape](https://landscape.cncf.io/)*
 
-References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
+### [Security](/security/)
+Access controls, compliance, isolation policies, secrets management  
+*References: [ACSC ISM](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism), [NIST CSF](https://www.nist.gov/cyberframework)*
 
-### [Security](/security/) - Decisions to uphold security and design controls  
+## Contributing
 
-References: [ACSC ISM](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism), [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/) & [NIST CSF](https://www.nist.gov/cyberframework)
+New ADRs follow a structured format documenting the **context** (problem), **decision** (solution), and **consequences** (risks). 
 
-## How to Document Decisions
-
-Architecture decisions should be stored in version control so there is a record of what was changed, who by, and when. We use the Architecture Decision Record (ADR) format, proposed by Michael Nygard.
-
-Each record should have:
-- **Title**: a description of the decision (not the problem)
-- **Status**: Proposed|Accepted|Deprecated|Superseded  
-- **Context**: the facts behind the need to make the decision
-- **Decision**: what the team has decided to do
-- **Consequences**: both positive and negative consequences (start with 'risks of not implementing')
+See the [Contributing Guide](https://github.com/wagov-dtt/architecture-decision-records/blob/main/CONTRIBUTING.md) for complete workflow and quality standards.
