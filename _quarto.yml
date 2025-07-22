@@ -18,12 +18,16 @@ book:
         - operations/010-configmgmt.md
         - operations/013-config-consistency.md
         - operations/014-object-backup.md
+        - operations/017-policy-enforcement.md
     - part: Security ADRs
       chapters:
         - security/001-isolation.md
         - security/005-secrets-management.md
         - security/011-ai-preapproval.md
         - security/012-ai-sandbox.md
+        - security/015-email-authentication.md
+        - security/016-edge-protection.md
+        - security/018-zero-trust-access.md
 format:
   html:
     toc: true

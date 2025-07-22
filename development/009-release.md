@@ -49,8 +49,9 @@ High level summary
 - [Feature/Improvement 2]: Brief description including testing.
 
 **Bug Fixes & Security Updates**:
-- [Bug Fix/Security Update 1]: Brief description.
-- [Bug Fix/Security Update 2]: Brief description.
+- [Bug Fix/Security Update 1]: Brief description with severity level and response timeline.
+- [Bug Fix/Security Update 2]: Brief description with severity level and response timeline.
+- **Response Timelines**: Critical (24h), High (7d), Medium (30d), Low (90d)
 
 ### Changelogs
 

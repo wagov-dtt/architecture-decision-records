@@ -17,7 +17,7 @@ update-chapters:
       if ls $dir/*.md 1> /dev/null 2>&1; then
         title="$(echo ${dir^} ADRs)"
         yq eval ".book.chapters += [{\"part\": \"$title\", \"chapters\": []}]" -i _quarto.yml
-        for file in $(ls $dir/*.md | sort); do
+        for file in $(ls $dir/*.md | sort -V); do
           yq eval ".book.chapters[-1].chapters += [\"$file\"]" -i _quarto.yml
         done
       fi

@@ -31,6 +31,8 @@ To address these risks, use a CI/CD pipeline with the following standardised pra
 - Use [Playwright](https://playwright.dev/docs/intro) for **end-to-end testing of web applications**.
 - Use [Restish](https://rest.sh/#/guide) for **scripted validation of [Representational State Transfer (REST) APIs](003-apis.md)**.
 - Use [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) for **performance and reliability testing**.
+- **Implement automated patching workflows** with vulnerability response timelines.
+- **Automated vulnerability remediation** with pull request generation for security updates.
 - Align development practices to [ACSC guidelines for software development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development).
 
 ## Consequences

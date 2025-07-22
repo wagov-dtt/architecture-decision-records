@@ -48,7 +48,9 @@ All critical data and system backups must store in object storage with cross-reg
 - Documented Recovery Time Objective (RTO) and Recovery Point Objective (RPO)
 - Automated recovery testing procedures
 - Cross-cloud recovery capabilities
-- Regular disaster recovery exercises
+- Infrastructure-agnostic restoration procedures
+- Multi-cloud backup format compatibility
+- Regular disaster recovery exercises with cross-platform testing
 
 ## Consequences
 
