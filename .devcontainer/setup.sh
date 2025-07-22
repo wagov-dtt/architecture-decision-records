@@ -2,6 +2,7 @@
 set -e
 
 echo "🚀 Setting up ADR development environment..."
+export NONINTERACTIVE=1
 
 # Install Homebrew
 echo "📦 Installing Homebrew..."
