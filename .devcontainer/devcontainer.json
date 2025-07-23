@@ -1,0 +1,15 @@
+{
+	"name": "ADR Development Environment",
+	"image": "mcr.microsoft.com/devcontainers/base:bookworm",
+	"hostRequirements": {
+		"memory": "16gb"
+	},
+	"onCreateCommand": "scripts/setup.sh",
+	"forwardPorts": [8080],
+	"portsAttributes": {
+		"8080": {
+			"label": "Quarto Preview",
+			"onAutoForward": "openBrowser"
+		}
+	}
+}

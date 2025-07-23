@@ -1,81 +1,72 @@
 # Architecture Decision Records
 
-Architecture records and current decision state to support infrastructure and platform operations for DGOV DTT Team. Supporting training material is available at the
-[DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/) (guided by the [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)). The [Architecture Principles](./architecture-principles.md) used to guide decisions are also in this repository for reference.
+Architecture Decision Records (ADRs) for Office of Digital Government (DGOV) Digital Transformation and Technology Unit (DTT) infrastructure and platform operations.
 
-## Structure
+**Quick Start:** [Open in Codespaces](https://codespaces.new/wagov-dtt/architecture-decision-records) → `just next-number` → Create ADR → `just validate` → Submit PR
 
-The repository will hold lightweight version controlled architecture decision records as below. On acceptance of a record a new tagged release should be made and this readme updated.
+[**View Full Documentation**](https://wagov-dtt.github.io/architecture-decision-records/) | [**Download PDF**](https://github.com/wagov-dtt/architecture-decision-records/releases/latest)
 
-### [/security/](/security/) Decisions to uphold security and design controls
+## Quick Reference
 
-References: [ACSC ISM](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism), [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/) & [NIST CSF](https://www.nist.gov/cyberframework)
+### Creating ADRs
 
-- Accepted: [001-isolation.md](security/001-isolation.md) - Isolate Applications and Environments by Default
-- Accepted: [005-secrets-management.md](security/005-secrets-management.md) - Use AWS Secrets Manager and secrets encryption on Kubernetes.
-- TODO: [006-infrastructure-constraints.md](security/006-infrastructure-constraints.md) - Ensure infrastructure constraints are centrally defined and enforced.
+```bash
+just next-number          # Get next ADR number
+just validate            # Check format and quality  
+just serve              # Preview website locally
+just clean              # Remove generated files
+```
 
-### [/operations/](/operations/) Decisions to support how infrastructure workloads are released and operated
-
-References: [CNCF Cloud native landscape](https://landscape.cncf.io/)
-
-- Accepted: [002-workloads.md](operations/002-workloads.md) - Adopt AWS EKS auto mode for public cloud workloads.
-- Accepted: [007-logging.md](operations/007-logging.md) - Collect relevant security logs into [centralised SIEM tooling](https://soc.cyber.wa.gov.au/onboarding/sentinel-guidance/), and minimise logging of sensitive information.
-- Accepted: [010-configmgmt.md](operations/010-configmgmt.md) - Deploy Infrastructure As Code (IAC) and identify misconfiguration.
-- TODO: [008-email.md](operations/008-email.md) - Configure [BIMI](https://bimigroup.org) (including SPF/DKIM/DMARC) for all transactional and campaign based email.
-
-### [/development/](/development/) Decisions to design, develop, build and test software securely
-
-References: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/), [MASVS](https://mas.owasp.org/MASVS/)
-
-- Accepted: [003-apis.md](development/003-apis.md) - Ensure APIs are documented and testable.
-- Accepted: [004-cicd.md](development/004-cicd.md) - Enforce release quality with CI/CD prechecks and build attestation.
-- Accepted: [009-release.md](development/009-release.md) - Consistent release documentation.
-
-## How to document decisions
-
-Architecture decisions should be stored in version control so there is a record of what was changed, who by, and when. Decisions that affect a specific application should be in that application's code repository. Larger-scale decisions will reside in this central documentation repository.
-
-We are using the Architecture Decision Record (ADR) format, proposed by Michael Nygard in [a blog post](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) and since adopted widely. It consists of the following sections:
-
--   **Title**: a description of the decision (not the problem)
--   **Status**: Proposed|Accepted|Deprecated|Superseded
--   **Context**: the facts behind the need to make the decision
--   **Decision**: what the team has decided to do
--   **Consequences**: both positive and negative consequences of the decision (start with 'risks of not implementing')
-
-Amazon Web Services (AWS) also provide [useful advice](https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/welcome.html) about how and why the ADR process should be adopted.
-
-### Decision Record Template
-
-Each record (named `001-name.md`)should have the below content named like defining high level decisions:
+### ADR Template
 
 ```markdown
 ---
-title: 1. Use Cloudfront for Ingress
-date: 2024-09-13
-status: Proposed|Accepted|Deprecated|Superseded
-tags:
-- #networks
-- #infrastructure
-- #aws
+title: "ADR 015: Your Decision Title"
+date: 2025-07-22
+status: Proposed
+tags: [#category, #technology]
 ---
 
-## Status
-
-[Proposed, Accepted, Deprecated, Superseded]
-
 ## Context
+What problem are we solving?
 
-What is the problem (Threat actors like attacking things on the internet)
-
-- [Framework References]
-
-## Decision
-
-What should become standardised to avoid the problem (We should ensure all inbound traffic from internet is logged/monitored/controlled)
+## Decision  
+What did we decide and why?
 
 ## Consequences
-
-What will happen if we don't avoid the problem (Exposed systems will get compromised)
+What are the trade-offs and risks?
 ```
+
+## Title Examples
+
+**Good:** "ADR 015: Email Authentication", "ADR 016: Edge Protection", "ADR 017: Policy Enforcement"  
+**Bad:** "Database stuff", "Security improvements", "Frontend updates"
+
+## Development Commands
+
+| Command | Purpose |
+|---------|---------|
+| `just next-number` | Get next ADR number to use |
+| `just validate` | Check format and prose quality |
+| `just serve` | Preview website locally |
+| `just build` | Generate final website/PDF |
+| `just clean` | Remove generated files |
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for complete workflow and quality standards.
+
+## Automated Deployment
+
+**Website:** Automatically deploys to GitHub Pages on every push to `main`  
+**PDF Releases:** Automatically attached to GitHub releases when published
+
+### Manual Deployment
+
+```bash
+just build    # Build website and PDF locally
+```
+
+## Related Resources
+
+- [Architecture Principles](./architecture-principles.md) - Guide all decisions
+- [DGOV DevSecOps Training](https://soc.cyber.wa.gov.au/training/devsecops-induction/) - Supporting material
+- [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy) - Compliance framework

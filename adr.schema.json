@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/wagov-dtt/architecture-decision-records/adr.schema.json",
+  "title": "ADR Frontmatter Schema",
+  "description": "Schema for Architecture Decision Record frontmatter validation",
+  "type": "object",
+  "required": ["title", "date", "status"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "pattern": "^ADR \\d{3}: .+",
+      "description": "Title must start with 'ADR ###: '"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date in YYYY-MM-DD format"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Proposed", "Accepted", "Superseded", "Deprecated"],
+      "description": "Current status of the ADR"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^#[a-z-]+$"
+      },
+      "description": "Tags must start with # and use lowercase with hyphens"
+    },
+    "supersedes": {
+      "type": "string",
+      "pattern": "^\\d{3}$",
+      "description": "ADR number this supersedes (3 digits)"
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d{3}$"
+      },
+      "description": "Related ADR numbers (3 digits each)"
+    }
+  },
+  "additionalProperties": false
+}

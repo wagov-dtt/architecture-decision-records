@@ -7,11 +7,9 @@ tags:
 - #principles
 ---
 
-# Architecture Principles
-
 ## 1. Establish secure foundations
 
-Integrate security practices **from the outset**, and throughout the design, development and deployment of products and services, as per the [ACSC Foundations for modern defensible architecture](https://www.cyber.gov.au/resources-business-and-government/governance-and-user-education/modern-defensible-architecture/foundations-modern-defensible-architecture).
+Integrate security practices **from the outset**, and throughout the design, development and deployment of products and services, per the [ACSC Foundations for modern defensible architecture](https://www.cyber.gov.au/resources-business-and-government/governance-and-user-education/modern-defensible-architecture/foundations-modern-defensible-architecture).
 
 ## 2. Understand and govern data
 
@@ -27,7 +25,7 @@ Adopt sustainable [opensource](https://opensource.org/osd) software, and mature 
 
 ## 5. Embrace change, release early, release often
 
-Design services as **loosely coupled** modules with **clear boundaries and responsibilities**. Release often with tight feedback loops to test assumptions, learn and iterate. Enable frequent and predictable high-impact changes (your service does not deliver or add value until it is in the hands of users) as per the [CNCF Cloud Native Definition](https://github.com/cncf/toc/blob/main/DEFINITION.md).
+Design services as **loosely coupled** modules with **clear boundaries and responsibilities**. Release often with tight feedback loops to test assumptions, learn, and iterate. Enable frequent and predictable high-impact changes (your service does not deliver or add value until it is in the hands of users) per the [CNCF Cloud Native Definition](https://github.com/cncf/toc/blob/main/DEFINITION.md).
 
 ## 6. Default to open
 

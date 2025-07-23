@@ -1,0 +1,6 @@
+extends: metric
+message: "Reading level is too high (grade %s). Aim for grade 12 or lower."
+level: suggestion
+formula: |
+  (0.39 * (tokens / sentences)) + (11.8 * (syllables / tokens)) - 15.59
+condition: "> 12"

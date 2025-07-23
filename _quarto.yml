@@ -1,0 +1,47 @@
+project:
+  type: book
+  output-dir: _site
+book:
+  title: "DGOV DTT Architecture Decision Records"
+  output-file: "architecture-decision-records"
+  chapters:
+    - index.qmd
+    - architecture-principles.md
+    - part: Development ADRs
+      chapters:
+        - development/003-apis.md
+        - development/004-cicd.md
+        - development/009-release.md
+    - part: Operations ADRs
+      chapters:
+        - operations/002-workloads.md
+        - operations/007-logging.md
+        - operations/010-configmgmt.md
+        - operations/013-config-consistency.md
+        - operations/014-object-backup.md
+        - operations/017-policy-enforcement.md
+    - part: Security ADRs
+      chapters:
+        - security/001-isolation.md
+        - security/005-secrets-management.md
+        - security/011-ai-preapproval.md
+        - security/012-ai-sandbox.md
+        - security/015-email-authentication.md
+        - security/016-edge-protection.md
+        - security/018-zero-trust-access.md
+    - CONTRIBUTING.md
+    - glossary.md
+format:
+  html:
+    toc: true
+    number-sections: false
+    search: true
+  pdf:
+    toc: true
+    toc-depth: 1
+    number-sections: false
+    documentclass: scrbook
+    classoption: [openany, oneside, fontsize=10pt]
+    geometry: [margin=0.75in]
+    colorlinks: true
+git-hash: july-2025-draft
