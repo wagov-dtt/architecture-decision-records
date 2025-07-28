@@ -16,19 +16,20 @@ update-chapters:
     # Update git hash and chapters in _quarto.yml (prefer tag over commit)
     git_ref=$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)
     yq eval ".git-hash = \"$git_ref\"" -i _quarto.yml
-    yq eval '.book.chapters = ["index.qmd", "architecture-principles.md"]' -i _quarto.yml
-    for dir in development operations security; do
-      if ls $dir/*.md 1> /dev/null 2>&1; then
+    yq eval '.book.chapters = ["index.qmd", "architecture-principles.qmd"]' -i _quarto.yml
+    for dir in */; do
+      dir=${dir%/}  # Remove trailing slash
+      if ls $dir/*.qmd 1> /dev/null 2>&1; then
         title="$(echo ${dir^} ADRs)"
         yq eval ".book.chapters += [{\"part\": \"$title\", \"chapters\": []}]" -i _quarto.yml
-        for file in $(ls $dir/*.md | sort -V); do
+        for file in $(ls $dir/*.qmd | sort -V); do
           yq eval ".book.chapters[-1].chapters += [\"$file\"]" -i _quarto.yml
         done
       fi
     done
-    yq eval '.book.chapters += ["CONTRIBUTING.md", "glossary.md"]' -i _quarto.yml
+    yq eval '.book.chapters += ["CONTRIBUTING.md", "glossary.qmd"]' -i _quarto.yml
     echo "Running markdownlint..."
-    markdownlint --fix */*.md *.md || echo "Markdown formatting suggestions found"
+    markdownlint --fix */*.qmd *.qmd CONTRIBUTING.md AGENT.md README.md || echo "Markdown formatting suggestions found"
 
 # Start development server (static build)
 serve: build
@@ -41,16 +42,16 @@ clean:
 # Full validation
 validate:
     vale sync
-    @find . -name "*.md" -path "./*/[0-9][0-9][0-9]-*.md" -exec grep -L "^---$" {} \; | \
+    @find . -name "*.qmd" -path "./*/[0-9][0-9][0-9]-*.qmd" -exec grep -L "^---$" {} \; | \
     if read file; then echo "Missing frontmatter: $file"; exit 1; else echo "Frontmatter valid"; fi
     @echo "Validating ADR frontmatter schemas..."
-    @for file in */[0-9][0-9][0-9]-*.md; do \
+    @for file in */[0-9][0-9][0-9]-*.qmd; do \
       if [ -f "$$file" ]; then \
         yq eval '.title, .date, .status' "$$file" > /dev/null || echo "Invalid frontmatter in $$file"; \
       fi \
     done
-    @markdownlint */*.md *.md || echo "Markdown formatting suggestions found"
-    @vale --no-exit --ignore-syntax *.md */*.md --glob='!glossary.md' || echo "Style suggestions found"
+    @markdownlint */*.qmd *.qmd CONTRIBUTING.md AGENT.md README.md || echo "Markdown formatting suggestions found"
+    @vale --no-exit --ignore-syntax *.qmd */*.qmd CONTRIBUTING.md AGENT.md README.md --glob='!glossary.qmd' || echo "Style suggestions found"
 
 # Create/update git release tag
 release TAG="":
@@ -66,4 +67,4 @@ release TAG="":
 
 # Get next ADR number
 next-number:
-    @find . -name "[0-9][0-9][0-9]-*.md" | sed 's/.*\/\([0-9][0-9][0-9]\)-.*/\1/' | sort -n | tail -1 | awk '{printf "%03d\n", $1+1}'
+    @find . -name "[0-9][0-9][0-9]-*.qmd" | sed 's/.*\/\([0-9][0-9][0-9]\)-.*/\1/' | sort -n | tail -1 | awk '{printf "%03d\n", $1+1}'

@@ -1,0 +1,59 @@
+---
+title: "Reference Architecture: Data Pipelines"
+---
+
+## Overview
+
+This reference architecture provides patterns for building secure, scalable data pipelines that align with DGOV DTT standards.
+
+```{mermaid}
+%%| fig-cap: "Data Pipeline Reference Architecture"
+flowchart TD
+    A[Data Sources] --> B[Ingestion Layer]
+    B --> C[Stream Processing]
+    C --> D[Data Lake/Warehouse]
+    D --> E[Analytics/ML]
+    
+    F[Monitoring & Observability] --> B
+    F --> C
+    F --> D
+    F --> E
+    
+    G[Security & Compliance] --> B
+    G --> C
+    G --> D
+    G --> E
+```
+
+## Existing ADR Coverage
+
+| Component | Covered by ADR | Status |
+|-----------|----------------|--------|
+| Container Orchestration | [ADR 002: AWS EKS](../operations/002-workloads.md) | YES |
+| CI/CD Pipeline | [ADR 004: CI/CD Quality](../development/004-cicd.md) | YES |
+| Logging & Monitoring | [ADR 007: Centralised Logging](../operations/007-logging.md) | YES |
+| Configuration Management | [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md) | YES |
+
+## Required New ADRs (Backlog)
+
+### High Priority
+
+- **Stream Processing Framework** - Kafka vs Pulsar vs AWS Kinesis patterns
+- **Data Validation Standards** - Schema registry, data quality checks
+- **ETL Security Patterns** - Secrets handling, data lineage, access controls
+
+### Medium Priority  
+
+- **Pipeline Orchestration** - Airflow vs Prefect vs AWS Step Functions
+- **Data Lake Architecture** - Storage tiers, partitioning, lifecycle policies
+- **Performance Monitoring** - Pipeline metrics, SLA monitoring, alerting
+
+### Low Priority
+
+- **Data Governance** - Data cataloging, retention policies, compliance automation
+- **Disaster Recovery** - Backup strategies, failover procedures
+- **Cost Optimization** - Resource scheduling, storage optimization
+
+## Implementation Template
+
+Coming soon: Step-by-step implementation guide with code examples and configuration templates.

@@ -1,0 +1,28 @@
+---
+title: "Reference Architectures"
+---
+
+## Overview
+
+This section provides reference architectures that combine existing ADRs into practical implementation patterns for common use cases. Each reference architecture maps to existing decisions and identifies gaps where new ADRs are needed.
+
+## Available Reference Architectures
+
+- [Data Pipelines](data-pipelines.md) - Stream processing, ETL, and data lake patterns
+- [OpenAPI Backends](openapi-backends.md) - RESTful service patterns with authentication and observability
+
+## Purpose
+
+Reference architectures serve to:
+
+1. **Reduce Decision Uncertainty** - Clear patterns for common scenarios
+2. **Accelerate Implementation** - Ready-to-use templates and examples  
+3. **Ensure Compliance** - Built-in alignment with DGOV security and operational requirements
+4. **Identify ADR Gaps** - Systematic discovery of missing architectural decisions
+
+Each reference architecture includes:
+
+- Architecture overview with Mermaid diagrams
+- Mapping to existing ADRs  
+- Identified gaps requiring new ADRs
+- Implementation templates and examples

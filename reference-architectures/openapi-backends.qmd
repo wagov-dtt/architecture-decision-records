@@ -1,0 +1,66 @@
+---
+title: "Reference Architecture: OpenAPI Backends"
+---
+
+## Overview
+
+This reference architecture provides patterns for building secure, maintainable REST API backends that align with DGOV DTT standards.
+
+```{mermaid}
+%%| fig-cap: "OpenAPI Backend Reference Architecture"
+flowchart TD
+    A[Client Applications] --> B[Load Balancer/CDN]
+    B --> C[API Gateway]
+    C --> D[Authentication Service]
+    C --> E[Business Logic APIs]
+    E --> F[Database Layer]
+    E --> G[External Services]
+    
+    H[Monitoring & Logging] --> C
+    H --> D
+    H --> E
+    H --> F
+    
+    I[CI/CD Pipeline] --> E
+    I --> D
+```
+
+## Existing ADR Coverage
+
+| Component | Covered by ADR | Status |
+|-----------|----------------|--------|
+| API Standards | [ADR 003: API Documentation](../development/003-apis.md) | YES |
+| Container Platform | [ADR 002: AWS EKS](../operations/002-workloads.md) | YES |
+| CI/CD Security | [ADR 004: CI/CD Quality](../development/004-cicd.md) | YES |
+| Centralized Logging | [ADR 007: Centralised Logging](../operations/007-logging.md) | YES |
+| Secrets Management | [ADR 005: Secrets Management](../security/005-secrets-management.md) | YES |
+
+## Required New ADRs (Backlog)
+
+### High Priority
+
+- **Database Patterns** - ORM standards, connection pooling, migration strategies
+- **Authentication Architecture** - JWT vs OAuth2 vs OIDC implementation patterns  
+- **Error Handling Standards** - Consistent error responses, logging patterns
+
+### Medium Priority
+
+- **Performance Patterns** - Caching strategies, rate limiting, pagination
+- **Service Communication** - Inter-service patterns, circuit breakers, timeouts
+- **Testing Strategies** - Unit, integration, contract testing standards
+
+### Low Priority
+
+- **API Versioning** - Breaking change management, deprecation policies
+- **Documentation Automation** - Auto-generated docs, examples, SDK generation
+- **Deployment Patterns** - Blue-green, canary, rolling deployment strategies
+
+## Implementation Template
+
+Coming soon: Complete backend template with:
+
+- FastAPI/Huma framework setup
+- Database integration patterns
+- Authentication middleware
+- OpenAPI specification examples
+- CI/CD pipeline configuration

@@ -21,14 +21,14 @@ The goal is to ensure the security and integrity of infrastructure throughout th
 
 ## Decision
 
-Infrastructure as Code (IaC) repositories should follow the below standard practices (or similar equivalents) before deploying tagged workloads (indicated as low risk by [ADR 004: CI/CD Quality Assurance](../development/004-cicd.md)) to production environments:
+Infrastructure as Code (IaC) repositories should follow the below standard practices (or similar equivalents) before deploying tagged workloads (indicated as low risk by [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd)) to production environments:
 
 - Use [Justfiles](https://just.systems/man/en/) to **manage operations tasks**.
 - Use [kubectl & kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) or a [trivy supported IaC language](https://trivy.dev/latest/docs/coverage/iac/) (for example Terraform) for **config management and naming conventions**.
 - Use [Trivy](https://trivy.dev/latest/docs/configuration/) to **identify misconfigurations and exposed secrets**.
-- **Maintain isolation between workloads** per [ADR 001: Application Isolation](../security/001-isolation.md)
-- **Encrypt and audit secrets** per [ADR 005: Secrets Management](../security/005-secrets-management.md)
-- **Test releases against several accounts or targets** like [k3d](https://k3d.io/stable/) locally and [EKS](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html) on a hyperscaler per [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.md).
+- **Maintain isolation between workloads** per [ADR 001: Application Isolation](../security/001-isolation.qmd)
+- **Encrypt and audit secrets** per [ADR 005: Secrets Management](../security/005-secrets-management.qmd)
+- **Test releases against several accounts or targets** like [k3d](https://k3d.io/stable/) locally and [EKS](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html) on a hyperscaler per [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd).
 
 ## Consequences
 

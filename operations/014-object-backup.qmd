@@ -37,14 +37,14 @@ Implement standardized object storage backup solution with automated cross-regio
 
 - Object storage with versioning and immutable storage capabilities
 - Database, application data, and infrastructure configuration backups
-- Encryption at rest and in transit per [ADR 005: Secrets Management](../security/005-secrets-management.md)
-- Access controls aligned with [ADR 001: Application Isolation](../security/001-isolation.md)
+- Encryption at rest and in transit per [ADR 005: Secrets Management](../security/005-secrets-management.qmd)
+- Access controls aligned with [ADR 001: Application Isolation](../security/001-isolation.qmd)
 
 **Geographic Distribution:**
 
 - Cross-region replication within Australia
 - Multi-cloud backup for critical systems
-- Monitoring integration per [ADR 007: Centralised Security Logging](../operations/007-logging.md)
+- Monitoring integration per [ADR 007: Centralised Security Logging](../operations/007-logging.qmd)
 
 **Lifecycle Management:**
 

@@ -15,7 +15,7 @@
 
 1. **Open in Codespaces** - Automatic setup with all tools
 2. **Get ADR number** - `just next-number`
-3. **Create file** - Use pattern `###-short-name.md` in correct directory
+3. **Create file** - Use pattern `###-short-name.qmd` in correct directory
 4. **Write ADR** - Follow template structure
 5. **Validate** - `just validate` (fix any issues)
 6. **Preview** - `just serve` to check locally
@@ -49,6 +49,14 @@ What we decided and implementation approach
 Trade-offs, risks, and benefits
 ```
 
+## Writing Guidelines
+
+- **Avoid Extended Characters** - Use ASCII characters only to prevent PDF font rendering issues
+  - Use `"quotes"` not `"smart quotes"`
+  - Use `--` not em dashes `—`
+  - Use `[x]` or `YES` instead of unicode symbols like `✅`
+  - Use standard apostrophes `'` not curved `'`
+
 ## Automated Features
 
 - **Chapter ordering** - Files sorted numerically by ADR number
@@ -75,6 +83,13 @@ Trade-offs, risks, and benefits
 - **PDF generation** - Automatically creates and attaches PDFs to GitHub releases
 - **Chapter ordering** - Files sorted numerically by ADR number
 - **Index updates** - Executive summaries automatically generated
+- **Auto-add directories** - `just update-chapters` automatically adds any top-level directory containing `.qmd` files to book structure
+
+## Quarto Project Notes
+
+- **Diagram Support** - Use Mermaid diagrams with ````{mermaid}` code blocks (full quarto support with captions)
+- **Reference Architectures** - Located in root directory, use simple flat structure
+- **Book Format** - Project uses quarto book format, chapters defined in `_quarto.yml`
 
 ## Maintainer Tasks
 
