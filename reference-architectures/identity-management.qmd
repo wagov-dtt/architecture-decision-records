@@ -1,0 +1,39 @@
+---
+title: "Reference Architecture: Identity Management"
+date: 2025-07-28
+status: Proposed
+tags: [reference, keycloak, identity]
+---
+
+## When to Use This Pattern
+
+Use when building systems requiring centralized authentication, single sign-on, or federated identity management across multiple services.
+
+## Overview
+
+Template for implementing identity and access management with centralized authentication and authorization patterns.
+
+## Core Components
+
+```{mermaid}
+graph TB
+    User[User] --> KC[Keycloak]
+    KC --> App1[Service A]
+    KC --> App2[Service B] 
+    KC --> App3[API Gateway]
+    
+    KC --> LDAP[LDAP/AD]
+    KC --> SAML[SAML IdP]
+    KC --> OIDC[OIDC Provider]
+```
+
+## Project Kickoff Steps
+
+1. **Configure Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for identity provider credentials and keys
+2. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for authentication audit trails
+3. **Apply Zero Trust Access** - Follow [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for API-based administration
+4. **Deploy on EKS** - See [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for identity service deployment
+5. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for identity service separation
+6. **RBAC Patterns** - *ADR needed for role-based access control standards and group management*
+7. **Federation Standards** - *ADR needed for integration standards*
+8. **Session Management** - *ADR needed for session policies, timeouts, and multi-factor authentication*

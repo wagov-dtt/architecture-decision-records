@@ -1,59 +1,38 @@
 ---
 title: "Reference Architecture: Data Pipelines"
+date: 2025-01-28
+status: Proposed
+tags: [reference, data, pipelines]
 ---
+
+## When to Use This Pattern
+
+Use when building data processing systems for analytics, ETL workloads, or real-time data transformation across organisational systems.
 
 ## Overview
 
-This reference architecture provides patterns for building secure, scalable data pipelines that align with DGOV DTT standards.
+Template for implementing scalable data pipelines using SQLMesh framework with S3 object storage, Aurora database patterns, and modern analytics engines (DuckDB/DuckLake) or legacy engines (Iceberg/Trino/Athena) based on existing data lake alignment.
+
+## Core Components
 
 ```{mermaid}
-%%| fig-cap: "Data Pipeline Reference Architecture"
-flowchart TD
-    A[Data Sources] --> B[Ingestion Layer]
-    B --> C[Stream Processing]
-    C --> D[Data Lake/Warehouse]
-    D --> E[Analytics/ML]
+graph TB
+    Sources[Data Sources] --> SQLMesh[SQLMesh Orchestration]
+    SQLMesh --> Aurora[Aurora PostgreSQL<br/>Schema & Metadata]
+    SQLMesh --> S3[S3 Object Storage<br/>Data Files]
     
-    F[Monitoring & Observability] --> B
-    F --> C
-    F --> D
-    F --> E
-    
-    G[Security & Compliance] --> B
-    G --> C
-    G --> D
-    G --> E
+    Aurora --> DuckLake[DuckDB/DuckLake]
+    S3 --> DuckLake
+    DuckLake --> Reports[Static Reports]
 ```
 
-## Existing ADR Coverage
+## Project Kickoff Steps
 
-| Component | Covered by ADR | Status |
-|-----------|----------------|--------|
-| Container Orchestration | [ADR 002: AWS EKS](../operations/002-workloads.md) | YES |
-| CI/CD Pipeline | [ADR 004: CI/CD Quality](../development/004-cicd.md) | YES |
-| Logging & Monitoring | [ADR 007: Centralised Logging](../operations/007-logging.md) | YES |
-| Configuration Management | [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md) | YES |
-
-## Required New ADRs (Backlog)
-
-### High Priority
-
-- **Stream Processing Framework** - Kafka vs Pulsar vs AWS Kinesis patterns
-- **Data Validation Standards** - Schema registry, data quality checks
-- **ETL Security Patterns** - Secrets handling, data lineage, access controls
-
-### Medium Priority  
-
-- **Pipeline Orchestration** - Airflow vs Prefect vs AWS Step Functions
-- **Data Lake Architecture** - Storage tiers, partitioning, lifecycle policies
-- **Performance Monitoring** - Pipeline metrics, SLA monitoring, alerting
-
-### Low Priority
-
-- **Data Governance** - Data cataloging, retention policies, compliance automation
-- **Disaster Recovery** - Backup strategies, failover procedures
-- **Cost Optimization** - Resource scheduling, storage optimization
-
-## Implementation Template
-
-Coming soon: Step-by-step implementation guide with code examples and configuration templates.
+1. **Setup Database** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 as data warehouse and backup strategies
+2. **Deploy on EKS** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for SQLMesh container deployment
+3. **Configure Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for transformation audit trails
+4. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as Code](../operations/010-configmgmt.qmd) for git-based workflows and state management
+5. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for data processing separation
+6. **SQLMesh Standards** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd) and [ADR 009: Release Documentation Standards](../development/009-release.qmd) for SQLMesh CI/CD integration
+7. **Data Governance** - Follow [ADR 020: Data Governance Standards](../operations/020-data-governance.qmd) for SQLMesh data contracts, lineage tracking, and quality validation
+8. **Analytics Tools** - Follow [ADR 021: Analytics Tooling Standards](../operations/021-analytics-tooling.qmd) for Quarto static reporting and Evidence BI interactive dashboards

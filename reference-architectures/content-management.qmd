@@ -1,0 +1,37 @@
+---
+title: "Reference Architecture: Content Management"
+date: 2025-07-28
+status: Proposed
+tags: [reference, drupal, cms]
+---
+
+## When to Use This Pattern
+
+Use when building websites, content portals, or applications requiring structured content management with editorial workflows.
+
+## Overview
+
+Template for implementing content management systems to meet jurisdiction compliance requirements.
+
+## Core Components
+
+```{mermaid}
+graph TB
+    Editor[Content Editor] --> CMS[CMS Application]
+    CMS --> DB[(Database)]
+    CMS --> Files[File Storage]
+    CMS --> CDN[CDN/Edge Cache]
+    
+    CDN --> Users[End Users]
+```
+
+## Project Kickoff Steps
+
+1. **Setup Database** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 and backup strategies
+2. **Deploy on EKS** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for container deployment
+3. **Setup Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for database credentials and API keys
+4. **Configure Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for audit trails and access logs
+5. **Setup Backup Strategy** - Follow [ADR 014: Object Storage Backups](../operations/014-object-backup.qmd) for content and media backup
+6. **Configure Edge Protection** - Follow [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd) for CDN caching, content delivery optimization, and WAF setup
+7. **Content Workflows** - *ADR needed for editorial approval processes and content governance*
+8. **Accessibility Standards** - *ADR needed for WCAG compliance and accessibility testing*

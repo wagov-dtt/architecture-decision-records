@@ -1,5 +1,6 @@
 ---
 title: "DGOV DTT Architecture Decision Records"
+status: Accepted
 format:
   html:
     listing:
@@ -8,7 +9,7 @@ format:
       sort: "title asc"
       fields: [title, status, date]
       field-display-names:
-        title: "ADR"
+        title: "Title"
         status: "Status"
         date: "Date"
       sort-ui: false
@@ -16,7 +17,7 @@ format:
       table-striped: true
 ---
 
-**Version:** [{{< meta git-hash >}}](<https://github.com/wagov-dtt/architecture-decision-records/tree/{{>< meta git-hash >}})
+**Version:** [{{< meta git-hash >}}](https://github.com/wagov-dtt/architecture-decision-records)
 
 Architecture records and current decision state to support infrastructure and platform operations for Office of Digital Government (DGOV) Digital Transformation and Technology Unit (DTT). Supporting training material is available at the [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/) (guided by the [WA Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)).
 

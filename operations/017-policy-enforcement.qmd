@@ -14,54 +14,39 @@ Proposed
 
 ## Context
 
-Cloud infrastructure requires automated policy enforcement to prevent misconfigurations, non-compliant deployments, and unauthorized resource provisioning. Manual compliance checking is prone to human error and cannot scale effectively.
+Cloud infrastructure needs automated policy enforcement to prevent misconfigurations and compliance violations. Manual checking cannot scale effectively.
 
 - [ACSC Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
+- [AWS Config Best Practices](https://docs.aws.amazon.com/config/latest/developerguide/best-practices.html)
 
 ## Decision
 
-Implement automated infrastructure policy guardrails across all cloud environments:
+Use automated policy enforcement with preventive and detective controls:
 
-**Preventive Controls:**
+### Core Policies
 
-- Service Control Policies (SCPs) preventing non-compliant resource creation
-- IAM policies enforcing least-privilege access
-- Resource tagging policies for governance and cost allocation
-- Encryption-at-rest and in-transit enforcement
+- **Encryption**: Mandatory encryption for all data stores and communications
+- **Access Control**: IAM least-privilege access and public resource restrictions
+- **Resource Tagging**: Governance and cost allocation requirements
+- **Data Sovereignty**: Geographic restrictions for compliance
 
-**Detective Controls:**
+### Implementation
 
-- AWS Config Rules or equivalent for compliance monitoring
-- Real-time configuration drift detection
-- Security group and public resource exposure monitoring
-- Cost anomaly detection and alerting
-
-**Key Policy Areas:**
-
-- Mandatory encryption for all data stores
-- Public access restrictions on storage buckets
-- SSL/TLS enforcement for all communications
-- Geographic restrictions for data sovereignty
-- Backup and disaster recovery configuration validation
-
-**Implementation:**
-
-- IaC integration with policy validation
-- CI/CD pipeline policy checks before deployment
-- Real-time policy violation alerting
-- Exception approval workflows for valid business needs
-- Automated remediation for common violations
+- **Preventive**: [Service Control Policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) blocking non-compliant resource creation
+- **Detective**: [AWS Config Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html) for compliance monitoring and drift detection
+- **Integration**: Policy validation in CI/CD pipelines following [ADR 010: Infrastructure as Code](010-configmgmt.qmd)
+- **Alerting**: Real-time violations with exception workflows for business needs
 
 ## Consequences
 
-**Risks of not implementing:**
+### Risks of not implementing
 
-- Security misconfigurations leading to data breaches
+- Security misconfigurations and data breaches
 - Compliance violations and regulatory penalties
 - Uncontrolled cloud spending
 
-**Benefits:**
+### Benefits
 
 - Proactive prevention of security misconfigurations
-- Automated compliance with government requirements
+- Automated compliance with jurisdiction requirements
 - Consistent security policies across environments

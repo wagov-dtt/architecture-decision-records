@@ -24,9 +24,10 @@
 ## ADR Structure
 
 ```text
-development/    # API standards, CI/CD, releases
-operations/     # Infrastructure, logging, config
-security/       # Isolation, secrets, AI governance
+development/          # API standards, CI/CD, releases
+operations/           # Infrastructure, logging, config
+security/             # Isolation, secrets, AI governance
+reference-architectures/  # Standard patterns (automatically placed at end)
 ```
 
 ## Template
@@ -57,6 +58,23 @@ Trade-offs, risks, and benefits
   - Use `[x]` or `YES` instead of unicode symbols like `✅`
   - Use standard apostrophes `'` not curved `'`
 
+- **Terminology Standards** - Use consistent terminology for broad applicability
+  - Use "jurisdiction compliance/requirements" instead of "government compliance/requirements"
+  - Use "organisational" instead of "government" when referring to general use cases
+  - Reference specific jurisdiction standards in links where appropriate
+
+- **Australian English** - Use Australian English spelling and terminology
+  - Use "optimisation" not "optimization"
+  - Use "colour" not "color"
+  - Use "centre" not "center"
+  - Use "organisation" not "organization"
+
+- **Writing Objectives** - Prioritise simplicity, conciseness, and usability
+  - Keep ADRs lightweight and focused on essential decisions
+  - Use bullet points and numbered lists for easy scanning
+  - Link to existing ADRs rather than repeating detailed guidance
+  - Focus on practical implementation steps over comprehensive coverage
+
 ## Automated Features
 
 - **Chapter ordering** - Files sorted numerically by ADR number
@@ -70,6 +88,7 @@ Trade-offs, risks, and benefits
 
 - Restart devcontainer if Homebrew fails
 - Run `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"` if commands not found
+- If PDF generation fails, ensure system dependencies are installed: `sudo apt-get install -y chromium`
 
 **Validation Issues:**
 

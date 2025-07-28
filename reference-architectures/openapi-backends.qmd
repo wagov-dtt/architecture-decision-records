@@ -1,66 +1,40 @@
 ---
-title: "Reference Architecture: OpenAPI Backends"
+title: "Reference Architecture: OpenAPI Backend"
+date: 2025-07-28
+status: Proposed
+tags: [reference, api, openapi]
 ---
+
+## When to Use This Pattern
+
+Use when building REST APIs for organizational services, public APIs, or backend services requiring structured documentation and testing.
 
 ## Overview
 
-This reference architecture provides patterns for building secure, maintainable REST API backends that align with DGOV DTT standards.
+Template for implementing OpenAPI-first backend services with standardized development and deployment practices.
+
+## Core Components
 
 ```{mermaid}
-%%| fig-cap: "OpenAPI Backend Reference Architecture"
-flowchart TD
-    A[Client Applications] --> B[Load Balancer/CDN]
-    B --> C[API Gateway]
-    C --> D[Authentication Service]
-    C --> E[Business Logic APIs]
-    E --> F[Database Layer]
-    E --> G[External Services]
+graph TB
+    Client[Clients] --> Gateway[API Gateway]
+    Gateway --> Auth[Authentication]
+    Gateway --> API[Business APIs]
+    API --> DB[Database]
+    API --> External[External Services]
     
-    H[Monitoring & Logging] --> C
-    H --> D
-    H --> E
-    H --> F
-    
-    I[CI/CD Pipeline] --> E
-    I --> D
+    Monitor[Monitoring] --> Gateway
+    Monitor --> API
+    Monitor --> DB
 ```
 
-## Existing ADR Coverage
+## Project Kickoff Steps
 
-| Component | Covered by ADR | Status |
-|-----------|----------------|--------|
-| API Standards | [ADR 003: API Documentation](../development/003-apis.md) | YES |
-| Container Platform | [ADR 002: AWS EKS](../operations/002-workloads.md) | YES |
-| CI/CD Security | [ADR 004: CI/CD Quality](../development/004-cicd.md) | YES |
-| Centralized Logging | [ADR 007: Centralised Logging](../operations/007-logging.md) | YES |
-| Secrets Management | [ADR 005: Secrets Management](../security/005-secrets-management.md) | YES |
-
-## Required New ADRs (Backlog)
-
-### High Priority
-
-- **Database Patterns** - ORM standards, connection pooling, migration strategies
-- **Authentication Architecture** - JWT vs OAuth2 vs OIDC implementation patterns  
-- **Error Handling Standards** - Consistent error responses, logging patterns
-
-### Medium Priority
-
-- **Performance Patterns** - Caching strategies, rate limiting, pagination
-- **Service Communication** - Inter-service patterns, circuit breakers, timeouts
-- **Testing Strategies** - Unit, integration, contract testing standards
-
-### Low Priority
-
-- **API Versioning** - Breaking change management, deprecation policies
-- **Documentation Automation** - Auto-generated docs, examples, SDK generation
-- **Deployment Patterns** - Blue-green, canary, rolling deployment strategies
-
-## Implementation Template
-
-Coming soon: Complete backend template with:
-
-- FastAPI/Huma framework setup
-- Database integration patterns
-- Authentication middleware
-- OpenAPI specification examples
-- CI/CD pipeline configuration
+1. **Setup API Standards** - Follow [ADR 003: API Documentation Standards](../development/003-apis.qmd) for OpenAPI documentation and testing
+2. **Configure Authentication** - See [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for API-based access patterns
+3. **Setup Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for credential handling
+4. **Deploy on EKS** - See [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for container deployment
+5. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd) for automated testing and security scanning
+6. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for audit trails
+7. **Database Integration** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 and backup strategies
+8. **API Versioning** - *ADR needed for versioning and backward compatibility strategies*

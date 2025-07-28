@@ -1,5 +1,6 @@
 /.quarto/
 /_site/
+*_files/
 /.vale/styles/
 *.pdf
 *.tex

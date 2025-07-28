@@ -17,14 +17,11 @@ book:
         - operations/002-workloads.qmd
         - operations/007-logging.qmd
         - operations/010-configmgmt.qmd
-        - operations/013-config-consistency.qmd
         - operations/014-object-backup.qmd
         - operations/017-policy-enforcement.qmd
-    - part: Reference-architectures ADRs
-      chapters:
-        - reference-architectures/data-pipelines.qmd
-        - reference-architectures/openapi-backends.qmd
-        - reference-architectures/reference-architectures.qmd
+        - operations/019-database-patterns.qmd
+        - operations/020-data-governance.qmd
+        - operations/021-analytics-tooling.qmd
     - part: Security ADRs
       chapters:
         - security/001-isolation.qmd
@@ -34,6 +31,12 @@ book:
         - security/015-email-authentication.qmd
         - security/016-edge-protection.qmd
         - security/018-zero-trust-access.qmd
+    - part: Reference Architectures
+      chapters:
+        - reference-architectures/content-management.qmd
+        - reference-architectures/data-pipelines.qmd
+        - reference-architectures/identity-management.qmd
+        - reference-architectures/openapi-backends.qmd
     - CONTRIBUTING.md
     - glossary.qmd
 format:
@@ -49,4 +52,4 @@ format:
     classoption: [openany, oneside, fontsize=10pt]
     geometry: [margin=0.75in]
     colorlinks: true
-git-hash: july-2025-draft
+git-hash: be33eaf

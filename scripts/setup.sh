@@ -2,16 +2,23 @@
 set -e
 
 echo "Setting up ADR development environment..."
+export NONINTERACTIVE=1
 
 # Install Homebrew if not present
 if ! command -v brew >/dev/null 2>&1; then
-    export NONINTERACTIVE=1
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
 else
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" 2>/dev/null || true
 fi
+
+# Install system dependencies for PDF generation
+sudo apt-get update
+sudo apt-get install -y chromium
+
+# Create symlink for Quarto (expects chromium-browser)
+sudo ln -sf /usr/bin/chromium /usr/bin/chromium-browser
 
 # Install Quarto and TinyTeX
 if ! command -v quarto >/dev/null 2>&1; then

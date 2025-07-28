@@ -17,9 +17,10 @@ update-chapters:
     git_ref=$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)
     yq eval ".git-hash = \"$git_ref\"" -i _quarto.yml
     yq eval '.book.chapters = ["index.qmd", "architecture-principles.qmd"]' -i _quarto.yml
+    # Process ADR directories first (exclude reference-architectures)
     for dir in */; do
       dir=${dir%/}  # Remove trailing slash
-      if ls $dir/*.qmd 1> /dev/null 2>&1; then
+      if [[ "$dir" != "reference-architectures" ]] && ls $dir/*.qmd 1> /dev/null 2>&1; then
         title="$(echo ${dir^} ADRs)"
         yq eval ".book.chapters += [{\"part\": \"$title\", \"chapters\": []}]" -i _quarto.yml
         for file in $(ls $dir/*.qmd | sort -V); do
@@ -27,6 +28,13 @@ update-chapters:
         done
       fi
     done
+    # Process reference-architectures at the end
+    if ls reference-architectures/*.qmd 1> /dev/null 2>&1; then
+      yq eval '.book.chapters += [{"part": "Reference Architectures", "chapters": []}]' -i _quarto.yml
+      for file in $(ls reference-architectures/*.qmd | sort -V); do
+        yq eval ".book.chapters[-1].chapters += [\"$file\"]" -i _quarto.yml
+      done
+    fi
     yq eval '.book.chapters += ["CONTRIBUTING.md", "glossary.qmd"]' -i _quarto.yml
     echo "Running markdownlint..."
     markdownlint --fix */*.qmd *.qmd CONTRIBUTING.md AGENT.md README.md || echo "Markdown formatting suggestions found"

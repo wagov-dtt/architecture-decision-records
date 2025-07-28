@@ -4,7 +4,7 @@
 
 1. **Open in Codespaces** → Automatic tool setup
 2. **Get number** → `just next-number`
-3. **Create file** → `###-short-name.md` in correct directory
+3. **Create file** → `###-short-name.qmd` in correct directory
 4. **Write content** → Follow template below
 5. **Validate** → `just validate` and fix issues
 6. **Submit PR** → Ready for review
@@ -91,13 +91,13 @@ related: ["005", "007"]  # Related to ADRs 005 and 007
 
 **In text (for implementation details):**
 
-- Reference format: `[ADR 005: Secrets Management](../security/005-secrets-management.md)`
+- Reference format: `[ADR 005: Secrets Management](../security/005-secrets-management.qmd)`
 - Quick reference: `per ADR 005`
 - Multiple refs: `aligned with ADR 001 and ADR 005`
 
 **Examples:**
 
-- Implementation: "Encryption handled per [ADR 005: Secrets Management](../security/005-secrets-management.md)"
+- Implementation: "Encryption handled per [ADR 005: Secrets Management](../security/005-secrets-management.qmd)"
 - Quick mention: "Access controls aligned with ADR 001"
 - Multiple: "Following standards from ADR 003 and ADR 009"
 
