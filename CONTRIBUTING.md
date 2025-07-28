@@ -16,6 +16,7 @@
 | `development/` | API standards, CI/CD, releases |
 | `operations/` | Infrastructure, logging, config |
 | `security/` | Isolation, secrets, AI governance |
+| `reference-architectures/` | Project kickoff templates |
 
 ## ADR Template
 
@@ -45,6 +46,35 @@ What we decided and how to implement it:
 **Negative:**
 - Risk 1 with mitigation
 - Risk 2 with mitigation
+```
+
+## Reference Architecture Template
+
+```markdown
+---
+title: "Reference Architecture: Pattern Name"
+date: 2025-07-28
+status: Proposed
+tags: [reference, technology, domain]
+---
+
+## When to Use This Pattern
+Clear use case description for when to apply this architecture.
+
+## Overview
+Brief template description focusing on practical implementation.
+
+## Core Components
+```{mermaid}
+graph TB
+    Component1[Source] --> Component2[Process]
+    Component2 --> Component3[Output]
+```
+
+## Project Kickoff Steps
+1. **Step Name** - Follow [ADR ###: Title](../category/###-filename.qmd) for implementation
+2. **Next Step** - *ADR needed for missing standards*
+3. **Final Step** - Reference to existing practices
 ```
 
 ## Quality Standards
@@ -108,3 +138,19 @@ related: ["005", "007"]  # Related to ADRs 005 and 007
 - **Define scope**: What's included and excluded
 - **Reference standards**: Link to external docs
 - **Use Australian English**: "organisation" not "organization", "colour" not "color"
+
+## Reference Architecture Guidelines
+
+**Purpose**: Project kickoff templates to reduce delivery uncertainty
+
+**Structure**: 
+- **When to Use**: Clear use case description
+- **Overview**: Brief template description  
+- **Core Components**: Mermaid diagram showing architecture flow
+- **Project Kickoff Steps**: Numbered implementation steps
+
+**Content Rules**:
+- Link to existing ADRs rather than duplicating guidance
+- Include "*ADR needed*" placeholders for missing decisions
+- Focus on practical steps over comprehensive coverage
+- Use "jurisdiction" not "government" for broad applicability
