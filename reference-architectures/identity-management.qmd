@@ -1,39 +1,82 @@
 ---
 title: "Reference Architecture: Identity Management"
-date: 2025-07-28
+date: 2025-07-29
 status: Proposed
-tags: [reference, keycloak, identity]
+tags: [reference, oidc, identity, federation]
 ---
 
 ## When to Use This Pattern
 
-Use when building systems requiring centralized authentication, single sign-on, or federated identity management across multiple services.
+Use when building systems requiring federated identity management, single sign-on across multiple services, or integration with jurisdiction identity providers using OIDC standards.
 
 ## Overview
 
-Template for implementing identity and access management with centralized authentication and authorization patterns.
+Template for implementing OIDC-based identity federation with upstream identity providers (verifiable credentials, Australian Government Digital ID) and downstream identity consumers (AWS Cognito, Microsoft Entra ID) for comprehensive identity management across organisational boundaries.
 
 ## Core Components
 
 ```{mermaid}
 graph TB
-    User[User] --> KC[Keycloak]
-    KC --> App1[Service A]
-    KC --> App2[Service B] 
-    KC --> App3[API Gateway]
+    subgraph "Upstream Identity Providers"
+        VC[Verifiable Credentials<br/>Provider]
+        DigitalID[Australian Government<br/>Digital ID]
+        Other[Other OIDC<br/>Providers]
+    end
     
-    KC --> LDAP[LDAP/AD]
-    KC --> SAML[SAML IdP]
-    KC --> OIDC[OIDC Provider]
+    subgraph "Identity Federation Layer"
+        Broker[Identity Broker<br/>OIDC/SAML]
+    end
+    
+    subgraph "Downstream Identity Consumers"
+        Cognito[AWS Cognito<br/>User Pools]
+        Entra[Microsoft Entra ID<br/>External Identities]
+        Custom[Custom Applications<br/>OIDC Clients]
+    end
+    
+    subgraph "Protected Resources"
+        API[APIs/Services]
+        Web[Web Applications]
+        Mobile[Mobile Apps]
+    end
+    
+    VC --> Broker
+    DigitalID --> Broker
+    Other --> Broker
+    
+    Broker --> Cognito
+    Broker --> Entra
+    Broker --> Custom
+    
+    Cognito --> API
+    Entra --> Web
+    Custom --> Mobile
+    
+    style Broker fill:#e1f5fe
+    style VC fill:#f3e5f5
+    style DigitalID fill:#f3e5f5
 ```
 
 ## Project Kickoff Steps
 
-1. **Configure Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for identity provider credentials and keys
-2. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for authentication audit trails
-3. **Apply Zero Trust Access** - Follow [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for API-based administration
-4. **Deploy on EKS** - See [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for identity service deployment
-5. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for identity service separation
-6. **RBAC Patterns** - *ADR needed for role-based access control standards and group management*
-7. **Federation Standards** - *ADR needed for integration standards*
-8. **Session Management** - *ADR needed for session policies, timeouts, and multi-factor authentication*
+### Foundation Setup
+
+1. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for identity service network and runtime separation
+2. **Deploy Infrastructure** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for identity service deployment
+3. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as Code](../operations/010-configmgmt.qmd) for reproducible identity infrastructure
+4. **Configure Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for OIDC client secrets and signing keys
+
+### Identity Architecture
+
+1. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for authentication audit trails
+2. **Apply Zero Trust Access** - Follow [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for identity service administration
+3. **OIDC Federation Standards** - Follow [ADR 013: OIDC Federation Standards](../security/013-oidc-federation.qmd) for upstream provider integration (verifiable credentials, Government Digital ID) and downstream consumer configuration (AWS Cognito, Microsoft Entra)
+
+### Implementation Details
+
+- Configure upstream OIDC providers for verifiable credentials per [ISO/IEC 18013-5:2021](https://www.iso.org/standard/69084.html) and [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) standards
+- Integrate with Australian Government Digital ID following [Digital ID Act 2024](https://www.legislation.gov.au/Details/C2024A00069) requirements
+- Support international transport credential holders accessing citizen services via [eIDAS Regulation](https://digital-strategy.ec.europa.eu/en/policies/eidas-regulation) interoperability patterns and [ISO/IEC 18013-5:2021](https://www.iso.org/standard/69084.html) mobile driving licence standards
+- Setup downstream identity consumers (AWS Cognito User Pools, Microsoft Entra External Identities)  
+- Implement role mapping and attribute-based access control
+- Configure session management policies and multi-factor authentication
+- Setup token validation and refresh policies

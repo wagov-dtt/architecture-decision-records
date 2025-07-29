@@ -7,11 +7,11 @@ tags: [reference, api, openapi]
 
 ## When to Use This Pattern
 
-Use when building REST APIs for organizational services, public APIs, or backend services requiring structured documentation and testing.
+Use when building REST APIs for organizational services, public APIs, or API services requiring structured documentation and testing.
 
 ## Overview
 
-Template for implementing OpenAPI-first backend services with standardized development and deployment practices.
+Template for implementing OpenAPI-first API services with standardised development and deployment practices.
 
 ## Core Components
 
@@ -30,11 +30,29 @@ graph TB
 
 ## Project Kickoff Steps
 
-1. **Setup API Standards** - Follow [ADR 003: API Documentation Standards](../development/003-apis.qmd) for OpenAPI documentation and testing
-2. **Configure Authentication** - See [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for API-based access patterns
-3. **Setup Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for credential handling
-4. **Deploy on EKS** - See [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for container deployment
-5. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd) for automated testing and security scanning
-6. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for audit trails
-7. **Database Integration** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 and backup strategies
-8. **API Versioning** - *ADR needed for versioning and backward compatibility strategies*
+### Foundation Setup
+
+1. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for service network and runtime separation
+2. **Deploy Infrastructure** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for container orchestration
+3. **Setup API Standards** - Follow [ADR 003: API Documentation Standards](../development/003-apis.qmd) for OpenAPI specification and testing
+4. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as Code](../operations/010-configmgmt.qmd) for reproducible deployments
+
+### Security & Operations
+
+1. **Configure Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for database credentials and API keys
+2. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for request audit trails
+3. **Configure Authentication** - Follow [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for API access patterns
+4. **Setup Edge Protection** - Follow [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd) for rate limiting and DDoS protection
+
+### Development Process
+
+1. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd) for automated testing and deployment
+2. **Setup Release Process** - Follow [ADR 009: Release Documentation Standards](../development/009-release.qmd) for version management
+3. **Database Integration** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 patterns
+
+### Implementation Details
+
+- Design RESTful API endpoints with OpenAPI specification
+- Implement consistent error handling and status codes
+- Setup API versioning and backward compatibility strategies
+- Configure performance monitoring and SLA tracking

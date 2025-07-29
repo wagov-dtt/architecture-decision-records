@@ -1,5 +1,19 @@
 # Contributing Guide
 
+## When to Create ADRs
+
+**Create ADRs for foundational decisions only:**
+- High cost to change mid/late project
+- Architectural patterns and technology standards
+- Security frameworks and compliance requirements
+- Infrastructure patterns that affect multiple teams
+
+**Don't create ADRs for:**
+- Implementation details (use documentation)
+- Project-specific configurations
+- Operational procedures that change frequently
+- Tool-specific guidance that belongs in user manuals
+
 ## Quick Workflow
 
 1. **Open in Codespaces** → Automatic tool setup
@@ -25,7 +39,7 @@
 title: "ADR ###: Specific Decision Title"
 date: 2025-07-22
 status: Proposed
-tags: [#category, #technology]
+tags: [category, technology]
 ---
 
 ## Context
@@ -47,6 +61,8 @@ What we decided and how to implement it:
 - Risk 1 with mitigation
 - Risk 2 with mitigation
 ```
+
+**Important**: Tags should NOT be prefixed with # to avoid YAML parsing errors
 
 ## Reference Architecture Template
 
@@ -72,9 +88,11 @@ graph TB
 ```
 
 ## Project Kickoff Steps
+
 1. **Step Name** - Follow [ADR ###: Title](../category/###-filename.qmd) for implementation
 2. **Next Step** - *ADR needed for missing standards*
 3. **Final Step** - Reference to existing practices
+
 ```
 
 ## Quality Standards
@@ -141,16 +159,23 @@ related: ["005", "007"]  # Related to ADRs 005 and 007
 
 ## Reference Architecture Guidelines
 
-**Purpose**: Project kickoff templates to reduce delivery uncertainty
+**Purpose**: Project kickoff templates linking foundational ADRs for faster, consistent delivery
 
-**Structure**: 
+**Consolidated Approach**:
+- **9-11 foundational steps maximum** linking to existing ADRs only
+- **Implementation Details section** for specifics that don't need ADRs
+- **Focus on high-cost-to-change decisions** (architectural patterns, technology standards, security frameworks)
+- **Avoid creating ADRs** for implementation details that can be handled in documentation
+
+**Structure**:
 - **When to Use**: Clear use case description
 - **Overview**: Brief template description  
 - **Core Components**: Mermaid diagram showing architecture flow
-- **Project Kickoff Steps**: Numbered implementation steps
+- **Project Kickoff Steps**: Foundational ADRs grouped by logical sections (Foundation, Security, Development)
+- **Implementation Details**: Bullet points for project-specific guidance
 
 **Content Rules**:
-- Link to existing ADRs rather than duplicating guidance
-- Include "*ADR needed*" placeholders for missing decisions
-- Focus on practical steps over comprehensive coverage
+- Link to existing foundational ADRs only
+- Use "Implementation Details" for specifics instead of creating new ADRs
+- Consolidate related concerns into existing comprehensive ADRs
 - Use "jurisdiction" not "government" for broad applicability

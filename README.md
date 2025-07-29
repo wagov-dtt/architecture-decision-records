@@ -24,7 +24,7 @@ just clean              # Remove generated files
 title: "ADR 015: Your Decision Title"
 date: 2025-07-22
 status: Proposed
-tags: [#category, #technology]
+tags: [category, technology]
 ---
 
 ## Context

@@ -1,52 +1,57 @@
 ---
 title: "ADR 017: Automated Policy Enforcement"
-date: 2025-07-22
+date: 2025-07-29
 status: Proposed
-tags:
-- #infrastructure
-- #governance
-- #compliance
+tags: [infrastructure, governance, compliance]
 ---
-
-## Status
-
-Proposed
 
 ## Context
 
-Cloud infrastructure needs automated policy enforcement to prevent misconfigurations and compliance violations. Manual checking cannot scale effectively.
-
-- [ACSC Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
-- [AWS Config Best Practices](https://docs.aws.amazon.com/config/latest/developerguide/best-practices.html)
+Cloud infrastructure requires automated policy enforcement to prevent misconfigurations, ensure compliance, and provide secure network access patterns. Manual checking cannot scale effectively across multiple accounts and services.
 
 ## Decision
 
-Use automated policy enforcement with preventive and detective controls:
+Implement comprehensive automated policy enforcement using AWS native services for governance, network security, and access control.
 
-### Core Policies
+### Governance Foundation
+
+- **AWS Control Tower**: Account factory, guardrails, and compliance monitoring across organisation
+- **Service Control Policies**: Preventive controls blocking non-compliant resource creation
+- **AWS Config Rules**: Detective controls for compliance monitoring and drift detection
+
+### Network Security & Access
+
+- **Transit Gateway**: Central hub for intra-account resource exposure via security groups
+- **Security Group References**: Use security group IDs instead of hardcoded IP addresses for dynamic, maintainable access policies
+- **Shield Advanced**: DDoS protection and egress intrusion detection for public-facing resources
+- **VPC Flow Logs**: Complete egress traffic monitoring and analysis per [WA SOC Cyber Network Management Guideline](https://soc.cyber.wa.gov.au/guidelines/network-management/)
+
+**Note**: This approach creates dependency on AWS for traffic and network protection. Open-source equivalents include [Security Onion](https://securityonionsolutions.com/) for network security monitoring, [OPNsense](https://opnsense.org/) and [pfSense](https://www.pfsense.org/) for firewall and intrusion detection capabilities.
+
+### Core Policy Areas
 
 - **Encryption**: Mandatory encryption for all data stores and communications
-- **Access Control**: IAM least-privilege access and public resource restrictions
+- **Access Control**: IAM least-privilege access and security group-based resource access
 - **Resource Tagging**: Governance and cost allocation requirements
-- **Data Sovereignty**: Geographic restrictions for compliance
-
-### Implementation
-
-- **Preventive**: [Service Control Policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) blocking non-compliant resource creation
-- **Detective**: [AWS Config Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html) for compliance monitoring and drift detection
-- **Integration**: Policy validation in CI/CD pipelines following [ADR 010: Infrastructure as Code](010-configmgmt.qmd)
-- **Alerting**: Real-time violations with exception workflows for business needs
+- **Data Sovereignty**: Geographic restrictions for jurisdiction compliance
+- **Network Segmentation**: Security group-based micro-segmentation over IP-based rules
 
 ## Consequences
 
-### Risks of not implementing
-
-- Security misconfigurations and data breaches
-- Compliance violations and regulatory penalties
-- Uncontrolled cloud spending
-
-### Benefits
-
-- Proactive prevention of security misconfigurations
+**Benefits:**
+- Proactive prevention of security misconfigurations through Control Tower guardrails
+- Complete egress traffic visibility and monitoring capabilities
+- Dynamic, maintainable access policies using security group references
+- Centralised network access management via Transit Gateway
 - Automated compliance with jurisdiction requirements
-- Consistent security policies across environments
+- DDoS protection for critical public resources
+
+**Risks:**
+- Dependency on AWS native services for policy enforcement
+- Complexity in multi-account Transit Gateway routing
+- Potential performance impact from comprehensive logging
+
+**Mitigation:**
+- Implement policy validation in CI/CD pipelines following [ADR 010: Infrastructure as Code](010-configmgmt.qmd)
+- Use security group references over hardcoded IPs for maintainable policies
+- Monitor VPC Flow Logs for egress traffic analysis and anomaly detection

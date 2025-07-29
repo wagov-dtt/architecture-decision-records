@@ -37,7 +37,7 @@ reference-architectures/  # Standard patterns (automatically placed at end)
 title: "ADR ###: Decision Title"
 date: YYYY-MM-DD
 status: Proposed
-tags: [#category, #tech]
+tags: [category, tech]
 ---
 
 ## Context
@@ -50,7 +50,12 @@ What we decided and implementation approach
 Trade-offs, risks, and benefits
 ```
 
+**Important**: Tags should NOT be prefixed with # to avoid YAML parsing errors
+
 ## Writing Guidelines
+
+- **Frontmatter Tags** - Do NOT prefix tags with # to avoid YAML parsing errors
+  - Use `tags: [category, tech]` not `tags: [#category, #tech]`
 
 - **Avoid Extended Characters** - Use ASCII characters only to prevent PDF font rendering issues
   - Use `"quotes"` not `"smart quotes"`
@@ -74,6 +79,19 @@ Trade-offs, risks, and benefits
   - Use bullet points and numbered lists for easy scanning
   - Link to existing ADRs rather than repeating detailed guidance
   - Focus on practical implementation steps over comprehensive coverage
+
+## ADR Philosophy
+
+**Focus on Foundational Decisions Only:**
+- ADRs address decisions with high cost to change mid/late project
+- Cover architectural patterns, technology standards, and security frameworks
+- Avoid detailed implementation guidance that can be handled in documentation
+
+**Reference Architecture Approach:**
+- Link to existing foundational ADRs (9-11 steps maximum)
+- Use "Implementation Details" section for specifics that don't need ADRs
+- Consolidate related concerns into single comprehensive ADRs
+- Prioritise decisions that affect multiple teams or long-term maintainability
 
 ## Automated Features
 

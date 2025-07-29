@@ -17,6 +17,7 @@ Proposed
 Traditional remote access methods (SSH, RDP, VPN) create security risks through persistent network connections, shared credentials, and broad network access. These approaches conflict with zero-trust principles and enable lateral movement attacks.
 
 - [ACSC Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
+- [WA SOC Cyber Network Management Guideline](https://soc.cyber.wa.gov.au/guidelines/network-management/)
 
 ## Decision
 

@@ -28,11 +28,31 @@ graph TB
 
 ## Project Kickoff Steps
 
-1. **Setup Database** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 as data warehouse and backup strategies
-2. **Deploy on EKS** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for SQLMesh container deployment
-3. **Configure Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for transformation audit trails
-4. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as Code](../operations/010-configmgmt.qmd) for git-based workflows and state management
-5. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for data processing separation
-6. **SQLMesh Standards** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd) and [ADR 009: Release Documentation Standards](../development/009-release.qmd) for SQLMesh CI/CD integration
-7. **Data Governance** - Follow [ADR 020: Data Governance Standards](../operations/020-data-governance.qmd) for SQLMesh data contracts, lineage tracking, and quality validation
-8. **Analytics Tools** - Follow [ADR 021: Analytics Tooling Standards](../operations/021-analytics-tooling.qmd) for Quarto static reporting and Evidence BI interactive dashboards
+### Foundation Setup
+
+1. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for data processing network and runtime separation
+2. **Deploy Infrastructure** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for SQLMesh container deployment
+3. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as Code](../operations/010-configmgmt.qmd) for reproducible data infrastructure
+4. **Setup Database** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 as data warehouse
+
+### Security & Operations
+
+1. **Configure Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for data source credentials and API keys
+2. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for transformation audit trails
+3. **Setup Backup Strategy** - Follow [ADR 014: Object Storage Backups](../operations/014-object-backup.qmd) for data warehouse backup
+4. **Data Governance** - Follow [ADR 020: Data Governance Standards](../operations/020-data-governance.qmd) for SQLMesh data contracts and lineage
+
+### Development Process
+
+1. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd) for automated testing of data transformations
+2. **Setup Release Process** - Follow [ADR 009: Release Documentation Standards](../development/009-release.qmd) for SQLMesh model versioning
+3. **Analytics Tools** - Follow [ADR 021: Analytics Tooling Standards](../operations/021-analytics-tooling.qmd) for Quarto and Evidence BI integration
+
+### Implementation Details
+
+- Configure SQLMesh for data transformation and orchestration
+- Setup S3 object storage for data files and Aurora for metadata
+- Implement data quality validation rules and testing frameworks
+- Configure DuckDB/DuckLake or Iceberg/Trino based on existing data lake alignment
+- Setup data API following [ADR 003: API Documentation Standards](../development/003-apis.qmd)
+- Implement PII handling, data classification, and retention policies

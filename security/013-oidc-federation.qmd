@@ -1,0 +1,50 @@
+---
+title: "ADR 013: OIDC Federation Standards"
+date: 2025-07-29
+status: Proposed
+tags: [oidc, identity, federation]
+---
+
+## Context
+
+Organisational systems require integration with multiple identity providers (upstream) and identity consumers (downstream) to support federated authentication and single sign-on patterns. This includes integration with jurisdiction citizen-focused identity providers, verifiable credentials platforms, and cloud identity services.
+
+Federated identity management reduces password fatigue, improves security through centralised authentication, and enables seamless access across organisational boundaries.
+
+- [OpenID Connect Core 1.0 Specification](https://openid.net/specs/openid-connect-core-1_0.html)
+- [OWASP Authentication Cheat Sheet - Federation](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#federated-authentication)
+- [RFC 7636: Proof Key for Code Exchange by OAuth Public Clients](https://tools.ietf.org/html/rfc7636)
+
+## Decision
+
+Adopt OpenID Connect (OIDC) as the standard federation protocol for all identity integration across organisational systems.
+
+### Federation Requirements
+
+- **Standards Compliance**: All implementations must support [Digital ID Act 2024](https://www.legislation.gov.au/Details/C2024A00069) for jurisdiction identity services
+- **Verifiable Credentials**: Support [ISO/IEC 18013-5:2021](https://www.iso.org/standard/69084.html) and [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) standards
+- **Multi-Provider Support**: Enable integration with multiple upstream identity providers per application
+- **Security Requirements**: Implement [PKCE](https://datatracker.ietf.org/doc/html/rfc7636) for public clients and proper token validation
+
+### Implementation Approach
+
+Tools and platforms (Keycloak, AWS Cognito, Microsoft Entra, etc.) will be selected based on specific project requirements, but all must implement OIDC federation patterns consistently.
+
+## Consequences
+
+**Benefits:**
+- Consistent identity federation patterns across all organisational systems
+- Standardised integration with jurisdiction citizen-focused identity providers
+- Reduced complexity through unified OIDC approach
+- Better security through proven federation standards
+
+**Risks:**
+- Dependency on external identity provider availability
+- Complexity in multi-provider scenarios
+- Token management overhead
+
+**Mitigation:**
+- Implement fallback authentication mechanisms per [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- Monitor provider health using [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html) standards
+- Use [token refresh strategies](https://datatracker.ietf.org/doc/html/rfc6749#section-6) to handle temporary provider unavailability
+- Maintain audit trails following [ADR 007: Centralized Security Logging](../operations/007-logging.qmd)
