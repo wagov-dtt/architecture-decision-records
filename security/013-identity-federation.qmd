@@ -37,17 +37,20 @@ Adopt OpenID Connect (OIDC) as the default federation protocol for all identity 
 ### Implementation Approach
 
 **IDAM Solution Selection:**
+
 - **AWS Cognito**: For cloud-native applications requiring AWS integration
 - **Microsoft Entra**: For Microsoft 365/Azure ecosystem integration  
 - **Authelia**: For self-hosted applications requiring fine-grained access control
 - **Custom Solutions**: Only when existing IDAM platforms cannot meet specific jurisdiction requirements
 
 **Protocol Implementation:**
+
 - All IDAM solutions must support both OIDC and SAML 2.0 upstream federation
 - Applications integrate only with the chosen IDAM solution, never directly with identity providers
 - IDAM solutions handle protocol translation and token management
 
 **Domain Isolation:**
+
 - **Standard Users**: Configure in primary domain/realm for regular application access
 - **Privileged Users**: Configure in separate administrative domain/realm for system administration
 - **Cross-Domain Access**: Implement clear separation with different authentication flows and token scopes

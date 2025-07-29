@@ -83,7 +83,7 @@ Clear use case description for when to apply this architecture.
 Brief template description focusing on practical implementation.
 
 ## Core Components
-```{mermaid}
+```mermaid
 graph TB
     Component1[Source] --> Component2[Process]
     Component2 --> Component3[Output]
@@ -94,8 +94,6 @@ graph TB
 1. **Step Name** - Follow [ADR ###: Title](../category/###-filename.qmd) for implementation
 2. **Next Step** - *ADR needed for missing standards*
 3. **Final Step** - Reference to existing practices
-
-```
 
 ## Quality Standards
 

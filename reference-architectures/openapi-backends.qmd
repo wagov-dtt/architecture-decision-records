@@ -7,68 +7,51 @@ tags: [reference, api, openapi]
 
 ## When to Use This Pattern
 
-Use when building REST APIs for organizational services, public APIs, or API services requiring structured documentation and testing.
+Use when you need clear separation between user-facing and administrative operations in REST APIs requiring structured documentation and testing.
 
 ## Overview
 
-Template for implementing OpenAPI-first API services with standardised development and deployment practices.
+Template for implementing OpenAPI-first API services with complete separation between user-facing and administrative operations.
 
 ## Core Components
 
 ```{mermaid}
 graph TB
-    Client[Clients] --> Gateway[API Gateway]
-    Gateway --> Auth[Authentication]
-    Gateway --> API[Business APIs]
-    API --> DB[Database]
-    API --> External[External Services]
+    Clients[API Clients] --> Edge[Edge Protection]
+    Edge --> StandardRouter[Standard Router]
+    Edge --> AdminRouter[Admin Router]
     
-    Monitor[Monitoring] --> Gateway
-    Monitor --> API
-    Monitor --> DB
+    StandardRealm[Standard Realm] --> StandardRouter
+    AdminRealm[Admin Realm] --> AdminRouter
+    
+    subgraph EKS[AWS EKS Cluster]
+        StandardRouter --> StandardAPI[Standard APIs<br/>api.domain/api/v1/*]
+        AdminRouter --> AdminAPI[Admin APIs<br/>admin.domain/admin/v1/*]
+    end
+    
+    StandardAPI --> UserData[User Data]
+    AdminAPI --> SensitiveData[Sensitive / Global Data]
 ```
+
+## API Design Pattern
+
+**Standard APIs** (`/api/v1/*`): Business operations for authenticated users
+
+- Examples: `/api/v1/users/profile`, `/api/v1/orders`, `/api/v1/documents`
+- Domain: `api.domain` with Standard Realm authentication
+
+**Administrative APIs** (`/admin/v1/*`): System management for privileged users
+
+- Examples: `/admin/v1/users`, `/admin/v1/system/config`, `/admin/v1/audit-logs`
+- Domain: `admin.domain` with Admin Realm authentication
+
+**Complete Separation**: Two separate routers provide full network and authentication isolation between standard and administrative operations per [ADR 013: Identity Federation Standards](../security/013-identity-federation.qmd).
 
 ## Project Kickoff Steps
 
-### Foundation Setup
-
-1. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for service network and runtime separation
-2. **Deploy Infrastructure** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for container orchestration
-3. **Setup API Standards** - Follow [ADR 003: API Documentation Standards](../development/003-apis.qmd) for OpenAPI specification and testing
-4. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as Code](../operations/010-configmgmt.qmd) for reproducible deployments
-
-### Security & Operations
-
-1. **Configure Secrets Management** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for database credentials and API keys
-2. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for request audit trails
-3. **Configure Authentication** - Follow [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for API access patterns
-4. **Setup Edge Protection** - Follow [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd) for rate limiting and DDoS protection
-
-### Development Process
-
-1. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.qmd) for automated testing and deployment
-2. **Setup Release Process** - Follow [ADR 009: Release Documentation Standards](../development/009-release.qmd) for version management
-3. **Database Integration** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 patterns
-
-### Implementation Details
-
-**API Design & Security:**
-
-- Design RESTful API endpoints with OpenAPI specification
-- Implement threat modeling for API attack vectors (injection, broken authentication, BOLA)
-- Configure rate limiting per [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd)
-- Setup API versioning strategies (header-based vs URL-based)
-
-**Error Handling & Monitoring:**
-
-- Implement consistent error handling with structured error responses
-- Configure performance monitoring and SLA tracking per [ADR 007: Centralized Security Logging](../operations/007-logging.qmd)  
-- Setup distributed tracing for multi-service API calls
-- Implement health checks and circuit breaker patterns
-
-**Migration & Backwards Compatibility:**
-
-- Plan versioning migration steps (deprecation notices, sunset schedules)
-- Configure blue-green deployment patterns for zero-downtime updates
-- Implement contract testing to prevent breaking changes
-- Setup API documentation versioning and change logs
+1. **Infrastructure Foundation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) and [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd)
+2. **API Standards** - Follow [ADR 003: API Documentation Standards](../development/003-apis.qmd) for OpenAPI specification
+3. **Identity Federation** - Follow [ADR 013: Identity Federation Standards](../security/013-identity-federation.qmd) for domain separation
+4. **Edge Protection** - Follow [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd) for rate limiting and security
+5. **Database & Secrets** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) and [ADR 005: Secrets Management](../security/005-secrets-management.qmd)
+6. **Logging & Monitoring** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for audit trails
