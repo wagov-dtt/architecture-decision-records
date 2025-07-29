@@ -26,12 +26,11 @@ book:
       chapters:
         - security/001-isolation.qmd
         - security/005-secrets-management.qmd
-        - security/011-ai-preapproval.qmd
-        - security/012-ai-sandbox.qmd
+        - security/011-ai-governance.qmd
+        - security/012-privileged-remote-access.qmd
         - security/013-identity-federation.qmd
         - security/015-email-authentication.qmd
         - security/016-edge-protection.qmd
-        - security/018-zero-trust-access.qmd
     - part: Reference Architectures
       chapters:
         - reference-architectures/content-management.qmd
@@ -53,4 +52,4 @@ format:
     classoption: [openany, oneside, fontsize=10pt]
     geometry: [margin=0.75in]
     colorlinks: true
-git-hash: e192acf
+git-hash: d9ff854
