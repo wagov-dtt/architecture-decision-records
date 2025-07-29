@@ -22,9 +22,10 @@ Key challenges:
 - Lack of automated recovery testing
 - Insufficient geographic separation for disaster recovery
 
-- [Australian Cyber Security Centre (ACSC) Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
-- [Amazon Web Services (AWS) Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
-- [National Institute of Standards and Technology (NIST) Cybersecurity Framework (CSF)](https://www.nist.gov/cyberframework)
+References:
+
+- [ACSC Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
+- [AWS Well-Architected Framework - Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
 
 ## Decision
 
@@ -36,6 +37,13 @@ Implement standardized object storage backup solution with automated cross-regio
 - Database, application data, and infrastructure configuration backups
 - Encryption at rest and in transit per [ADR 005: Secrets Management](../security/005-secrets-management.qmd)
 - Access controls aligned with [ADR 001: Application Isolation](../security/001-isolation.qmd)
+
+**Critical Systems Definition:**
+
+- Production databases containing citizen or business data
+- Application source code and deployment configurations
+- Security logs and audit trails
+- Infrastructure as Code templates and state files
 
 **Geographic Distribution:**
 
@@ -49,6 +57,12 @@ Implement standardized object storage backup solution with automated cross-regio
 - Compliance-based retention policies
 - Recovery testing and validation procedures
 
+**Recovery Objectives:**
+
+- **Recovery Time Objective (RTO)**: 4 hours for critical systems, 24 hours for standard systems
+- **Recovery Point Objective (RPO)**: 1 hour for databases, 24 hours for static content
+- **Implementation Example**: [AWS S3 Cross-Region Replication](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html) to Australian regions
+
 ## Consequences
 
 **Risks of not implementing:**
@@ -57,5 +71,10 @@ Implement standardized object storage backup solution with automated cross-regio
 - Extended recovery times during disasters
 - Compliance violations from inadequate data retention
 - Regional outages affecting backup availability
-- Inability to meet business continuity requirements
-- Legal and regulatory penalties from data loss incidents
+
+**Benefits of implementation:**
+
+- Automated recovery capabilities meeting defined RTO/RPO objectives
+- Compliance with government data retention requirements
+- Geographic redundancy protecting against regional disasters
+- Reduced operational overhead through automated lifecycle management

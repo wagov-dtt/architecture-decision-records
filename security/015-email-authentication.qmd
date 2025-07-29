@@ -9,9 +9,17 @@ tags:
 
 ## Context
 
-Government domains are vulnerable to email spoofing, phishing, and brand impersonation attacks without proper email authentication protocols. Industry standards (SPF, DKIM, DMARC, BIMI) provide essential protection against these threats.
+Government email domains are prime targets for cybercriminals who exploit them for phishing attacks, business email compromise, and brand impersonation. Citizens and businesses expect government emails to be trustworthy, making email authentication critical for maintaining public confidence and preventing fraud.
+
+Without proper email authentication, attackers can easily spoof government domains to conduct social engineering attacks, distribute malware, or harvest credentials from unsuspecting recipients.
+
+References:
 
 - [ACSC Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
+- [ACSC Email Security Guidelines](https://www.cyber.gov.au/acsc/view-all-content/publications/email-gateway-security-guidance)
+- [RFC 7208 - Sender Policy Framework (SPF)](https://tools.ietf.org/html/rfc7208)
+- [RFC 6376 - DomainKeys Identified Mail (DKIM)](https://tools.ietf.org/html/rfc6376)
+- [RFC 7489 - Domain-based Message Authentication, Reporting, and Conformance (DMARC)](https://tools.ietf.org/html/rfc7489)
 
 ## Decision
 
