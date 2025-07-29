@@ -15,11 +15,7 @@ Without proper email authentication, attackers can easily spoof government domai
 
 References:
 
-- [ACSC Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
-- [ACSC Email Security Guidelines](https://www.cyber.gov.au/acsc/view-all-content/publications/email-gateway-security-guidance)
-- [RFC 7208 - Sender Policy Framework (SPF)](https://tools.ietf.org/html/rfc7208)
-- [RFC 6376 - DomainKeys Identified Mail (DKIM)](https://tools.ietf.org/html/rfc6376)
-- [RFC 7489 - Domain-based Message Authentication, Reporting, and Conformance (DMARC)](https://tools.ietf.org/html/rfc7489)
+- [ACSC How to combat fake emails](https://www.cyber.gov.au/resources-business-and-government/maintaining-devices-and-systems/system-hardening-and-administration/email-hardening/how-combat-fake-emails)
 
 ## Decision
 

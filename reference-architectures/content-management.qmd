@@ -40,7 +40,7 @@ graph TB
 2. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for audit trails and editorial tracking
 3. **Setup Backup Strategy** - Follow [ADR 014: Object Storage Backups](../operations/014-object-backup.qmd) for content and media backup
 4. **Configure Edge Protection** - Follow [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd) for CDN and WAF setup
-5. **Identity Integration** - Follow [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for editorial authentication
+5. **Identity Integration** - Follow [ADR 012: Privileged Remote Access](../security/012-privileged-remote-access.qmd) for editorial authentication
 
 ### Implementation Details
 

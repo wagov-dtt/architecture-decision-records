@@ -52,4 +52,4 @@ format:
     classoption: [openany, oneside, fontsize=10pt]
     geometry: [margin=0.75in]
     colorlinks: true
-git-hash: d9ff854
+git-hash: a9e7cee

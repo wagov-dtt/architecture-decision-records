@@ -3,7 +3,7 @@ title: "ADR 019: Database Patterns"
 date: 2025-07-28
 status: Proposed
 tags: [infrastructure, database, aurora]
-related: ["005", "014", "007", "018"]
+related: ["005", "014", "007", "012"]
 ---
 
 ## Context
@@ -23,7 +23,7 @@ Use [Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUs
 - **Deployment**: Outside EKS cluster (handles complexity automatically)
 - **Credentials**: Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for endpoint and credential management
 - **Backup**: Follow [ADR 014: Object Storage Backups](014-object-backup.qmd) plus AWS automated snapshots
-- **Security**: Follow [ADR 007: Centralized Security Logging](007-logging.qmd) and [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd)
+- **Security**: Follow [ADR 007: Centralized Security Logging](007-logging.qmd) and [ADR 012: Privileged Remote Access](../security/012-privileged-remote-access.qmd)
 
 ## Consequences
 
