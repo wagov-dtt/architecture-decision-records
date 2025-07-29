@@ -3,6 +3,7 @@ title: "ADR 017: Automated Policy Enforcement"
 date: 2025-07-29
 status: Proposed
 tags: [infrastructure, governance, compliance]
+related: ["010"]
 ---
 
 ## Context
@@ -39,6 +40,7 @@ Implement comprehensive automated policy enforcement using AWS native services f
 ## Consequences
 
 **Benefits:**
+
 - Proactive prevention of security misconfigurations through Control Tower guardrails
 - Complete egress traffic visibility and monitoring capabilities
 - Dynamic, maintainable access policies using security group references
@@ -47,11 +49,13 @@ Implement comprehensive automated policy enforcement using AWS native services f
 - DDoS protection for critical public resources
 
 **Risks:**
+
 - Dependency on AWS native services for policy enforcement
 - Complexity in multi-account Transit Gateway routing
 - Potential performance impact from comprehensive logging
 
 **Mitigation:**
+
 - Implement policy validation in CI/CD pipelines following [ADR 010: Infrastructure as Code](010-configmgmt.qmd)
 - Use security group references over hardcoded IPs for maintainable policies
 - Monitor VPC Flow Logs for egress traffic analysis and anomaly detection

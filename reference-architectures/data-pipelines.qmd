@@ -50,9 +50,20 @@ graph TB
 
 ### Implementation Details
 
-- Configure SQLMesh for data transformation and orchestration
+**Data Processing & Quality:**
+- Configure SQLMesh for data transformation and orchestration  
 - Setup S3 object storage for data files and Aurora for metadata
 - Implement data quality validation rules and testing frameworks
 - Configure DuckDB/DuckLake or Iceberg/Trino based on existing data lake alignment
+
+**Cost Optimization & Performance:**
+- Configure Aurora Serverless v2 autoscaling for cost-effective metadata storage
+- Implement S3 lifecycle policies for data archival (Intelligent Tiering → Glacier)
+- Setup DuckDB for cost-effective analytics vs Athena for large-scale queries
+- Configure SQLMesh incremental processing to minimize compute costs
+
+**Data Governance & API Access:**
 - Setup data API following [ADR 003: API Documentation Standards](../development/003-apis.qmd)
-- Implement PII handling, data classification, and retention policies
+- Implement PII handling, data classification, and retention policies per [ADR 020: Data Governance Standards](../operations/020-data-governance.qmd)
+- Configure data lineage tracking and impact analysis through SQLMesh
+- Setup automated data profiling and anomaly detection

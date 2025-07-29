@@ -3,14 +3,11 @@ title: "ADR 004: CI/CD Quality Assurance"
 date: 2025-03-10
 status: Accepted
 tags:
-- #ci/cd
-- #security
-- #containers
+- ci/cd
+- security
+- containers
+related: ["010", "003"]
 ---
-
-## Status
-
-Accepted
 
 ## Context
 

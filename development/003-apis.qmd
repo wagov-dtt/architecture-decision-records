@@ -3,14 +3,10 @@ title: "ADR 003: API Documentation Standards"
 date: 2025-03-26
 status: Accepted
 tags:
-- #api
-- #openapi
-- #owasp
+- api
+- openapi
+- owasp
 ---
-
-## Status
-
-Accepted
 
 ## Context
 

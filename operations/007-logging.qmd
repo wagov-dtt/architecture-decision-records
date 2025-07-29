@@ -3,15 +3,11 @@ title: "ADR 007: Centralised Security Logging"
 date: 2025-02-25
 status: Accepted
 tags:
-- #logging
-- #aws
-- #sentinel
-- #infrastructure
+- logging
+- aws
+- sentinel
+- infrastructure
 ---
-
-## Status
-
-Accepted
 
 ## Context
 

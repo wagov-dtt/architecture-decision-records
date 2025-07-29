@@ -3,6 +3,7 @@ title: "ADR 013: OIDC Federation Standards"
 date: 2025-07-29
 status: Proposed
 tags: [oidc, identity, federation]
+related: ["007"]
 ---
 
 ## Context
@@ -33,17 +34,20 @@ Tools and platforms (Keycloak, AWS Cognito, Microsoft Entra, etc.) will be selec
 ## Consequences
 
 **Benefits:**
+
 - Consistent identity federation patterns across all organisational systems
 - Standardised integration with jurisdiction citizen-focused identity providers
 - Reduced complexity through unified OIDC approach
 - Better security through proven federation standards
 
 **Risks:**
+
 - Dependency on external identity provider availability
 - Complexity in multi-provider scenarios
 - Token management overhead
 
 **Mitigation:**
+
 - Implement fallback authentication mechanisms per [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 - Monitor provider health using [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html) standards
 - Use [token refresh strategies](https://datatracker.ietf.org/doc/html/rfc6749#section-6) to handle temporary provider unavailability

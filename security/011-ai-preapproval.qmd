@@ -3,15 +3,11 @@ title: "ADR 011: AI Tool Pre-Approval"
 date: 2025-07-22
 status: Proposed
 tags:
-- #development
-- #ai
-- #security
-- #governance
+- development
+- ai
+- security
+- governance
 ---
-
-## Status
-
-Proposed
 
 ## Context
 

@@ -83,11 +83,13 @@ Trade-offs, risks, and benefits
 ## ADR Philosophy
 
 **Focus on Foundational Decisions Only:**
+
 - ADRs address decisions with high cost to change mid/late project
 - Cover architectural patterns, technology standards, and security frameworks
 - Avoid detailed implementation guidance that can be handled in documentation
 
 **Reference Architecture Approach:**
+
 - Link to existing foundational ADRs (9-11 steps maximum)
 - Use "Implementation Details" section for specifics that don't need ADRs
 - Consolidate related concerns into single comprehensive ADRs

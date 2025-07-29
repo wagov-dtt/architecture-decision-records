@@ -3,14 +3,10 @@ title: "ADR 016: Web Application Edge Protection"
 date: 2025-07-22
 status: Proposed
 tags:
-- #security
-- #cdn
-- #waf
+- security
+- cdn
+- waf
 ---
-
-## Status
-
-Proposed
 
 ## Context
 

@@ -3,16 +3,13 @@ title: "ADR 014: Object Storage Backups"
 date: 2025-07-22
 status: Proposed
 tags:
-- #operations
-- #backup
-- #storage
-- #disaster-recovery
-- #compliance
+- operations
+- backup
+- storage
+- disaster-recovery
+- compliance
+related: ["005", "001", "007"]
 ---
-
-## Status
-
-Proposed
 
 ## Context
 

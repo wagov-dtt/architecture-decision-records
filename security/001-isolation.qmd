@@ -3,14 +3,10 @@ title: "ADR 001: Application Isolation"
 date: 2025-02-17
 status: Accepted
 tags:
-- #security
-- #architecture
-- #isolation
+- security
+- architecture
+- isolation
 ---
-
-## Status
-
-Accepted
 
 ## Context
 

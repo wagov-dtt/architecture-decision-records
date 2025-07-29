@@ -3,12 +3,14 @@
 ## When to Create ADRs
 
 **Create ADRs for foundational decisions only:**
+
 - High cost to change mid/late project
 - Architectural patterns and technology standards
 - Security frameworks and compliance requirements
 - Infrastructure patterns that affect multiple teams
 
 **Don't create ADRs for:**
+
 - Implementation details (use documentation)
 - Project-specific configurations
 - Operational procedures that change frequently
@@ -162,12 +164,14 @@ related: ["005", "007"]  # Related to ADRs 005 and 007
 **Purpose**: Project kickoff templates linking foundational ADRs for faster, consistent delivery
 
 **Consolidated Approach**:
+
 - **9-11 foundational steps maximum** linking to existing ADRs only
 - **Implementation Details section** for specifics that don't need ADRs
 - **Focus on high-cost-to-change decisions** (architectural patterns, technology standards, security frameworks)
 - **Avoid creating ADRs** for implementation details that can be handled in documentation
 
 **Structure**:
+
 - **When to Use**: Clear use case description
 - **Overview**: Brief template description  
 - **Core Components**: Mermaid diagram showing architecture flow
@@ -175,6 +179,7 @@ related: ["005", "007"]  # Related to ADRs 005 and 007
 - **Implementation Details**: Bullet points for project-specific guidance
 
 **Content Rules**:
+
 - Link to existing foundational ADRs only
 - Use "Implementation Details" for specifics instead of creating new ADRs
 - Consolidate related concerns into existing comprehensive ADRs

@@ -3,6 +3,7 @@ title: "ADR 019: Database Patterns"
 date: 2025-07-28
 status: Proposed
 tags: [infrastructure, database, aurora]
+related: ["005", "014", "007", "018"]
 ---
 
 ## Context

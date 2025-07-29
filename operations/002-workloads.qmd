@@ -3,15 +3,11 @@ title: "ADR 002: AWS EKS for Cloud Workloads"
 date: 2025-02-17
 status: Accepted
 tags:
-- #containers
-- #aws
-- #eks
-- #infrastructure
+- containers
+- aws
+- eks
+- infrastructure
 ---
-
-## Status
-
-Accepted
 
 ## Context
 

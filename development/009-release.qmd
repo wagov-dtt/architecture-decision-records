@@ -3,15 +3,11 @@ title: "ADR 009: Release Documentation Standards"
 date: 2025-03-04
 status: Accepted
 tags:
-- #code
-- #infrastructure
-- #security
-- #change
+- code
+- infrastructure
+- security
+- change
 ---
-
-## Status
-
-Accepted
 
 ## Context
 

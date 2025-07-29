@@ -3,6 +3,7 @@ title: "ADR 021: Analytics Tooling Standards"
 date: 2025-07-28
 status: Proposed
 tags: [analytics, reporting, quarto]
+related: ["019", "016"]
 ---
 
 ## Context

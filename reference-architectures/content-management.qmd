@@ -44,9 +44,20 @@ graph TB
 
 ### Implementation Details
 
+**Content Workflows & Editorial:**
 - Configure content workflows and editorial approval processes
-- Setup media asset management and CDN integration
+- Setup media asset management and CDN integration per [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd)
 - Implement headless CMS API following [ADR 003: API Documentation Standards](../development/003-apis.qmd)
-- Configure WCAG accessibility compliance and testing
-- Setup SEO metadata management and structured data
-- Implement content performance monitoring
+- Configure content moderation and approval workflows
+
+**Compliance & Accessibility:**  
+- Configure WCAG 2.1 AA accessibility compliance and automated testing
+- Setup jurisdiction-specific compliance requirements (e.g., privacy policies, cookie consent)
+- Implement content governance and retention policies per [ADR 020: Data Governance Standards](../operations/020-data-governance.qmd)
+- Configure multilingual content management if required
+
+**Performance & SEO:**
+- Setup SEO metadata management and structured data (JSON-LD)
+- Implement content performance monitoring per [ADR 007: Centralized Security Logging](../operations/007-logging.qmd)
+- Configure CDN caching strategies and cache invalidation
+- Setup content analytics and user behavior tracking

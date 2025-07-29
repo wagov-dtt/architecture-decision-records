@@ -3,14 +3,10 @@ title: "ADR 018: Zero Trust Remote Access"
 date: 2025-07-22
 status: Proposed
 tags:
-- #security
-- #remote-access
-- #zero-trust
+- security
+- remote-access
+- zero-trust
 ---
-
-## Status
-
-Proposed
 
 ## Context
 
