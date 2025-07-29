@@ -69,7 +69,7 @@ graph TB
 
 1. **Setup Logging** - Follow [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for authentication audit trails
 2. **Apply Zero Trust Access** - Follow [ADR 018: Zero Trust Remote Access](../security/018-zero-trust-access.qmd) for identity service administration
-3. **OIDC Federation Standards** - Follow [ADR 013: OIDC Federation Standards](../security/013-oidc-federation.qmd) for upstream provider integration (verifiable credentials, Government Digital ID) and downstream consumer configuration (AWS Cognito, Microsoft Entra)
+3. **Identity Federation Standards** - Follow [ADR 013: Identity Federation Standards](../security/013-identity-federation.qmd) for upstream provider integration (verifiable credentials, Government Digital ID) and downstream consumer configuration (AWS Cognito, Microsoft Entra, Authelia)
 
 ### Implementation Details
 

@@ -1,0 +1,80 @@
+---
+title: "ADR 013: Identity Federation Standards"
+date: 2025-07-29
+status: Proposed
+tags: [identity, federation, oidc, saml]
+related: ["007"]
+---
+
+## Context
+
+Organisational systems require integration with multiple identity providers (upstream) and identity consumers (downstream) to support federated authentication and single sign-on patterns. This includes integration with jurisdiction citizen-focused identity providers, verifiable credentials platforms, and cloud identity services.
+
+Federated identity management reduces password fatigue, improves security through centralised authentication, and enables seamless access across organisational boundaries.
+
+- [OpenID Connect Core 1.0 Specification](https://openid.net/specs/openid-connect-core-1_0.html)
+- [OWASP Authentication Cheat Sheet - Federation](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#federated-authentication)
+- [RFC 7636: Proof Key for Code Exchange by OAuth Public Clients](https://tools.ietf.org/html/rfc7636)
+
+## Decision
+
+Adopt OpenID Connect (OIDC) as the default federation protocol for all identity integration across organisational systems, with SAML 2.0 support when required by legacy upstream providers. All federation must be abstracted through application-specific Identity and Access Management (IDAM) solutions.
+
+### Federation Requirements
+
+- **Standards Compliance**: All implementations must support [Digital ID Act 2024](https://www.legislation.gov.au/Details/C2024A00069) for jurisdiction identity services
+- **Verifiable Credentials**: Support [ISO/IEC 18013-5:2021](https://www.iso.org/standard/69084.html) and [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) standards
+- **Multi-Provider Support**: Enable integration with multiple upstream identity providers per application
+- **Security Requirements**: Implement [PKCE](https://datatracker.ietf.org/doc/html/rfc7636) for OIDC clients and proper token validation
+- **User Isolation**: Privileged and standard users must be isolated by domain/realm to enable clear differentiation of administrative activities from standard access
+
+### Protocol Selection
+
+- **Primary Protocol**: OpenID Connect (OIDC) for new integrations and modern identity providers
+- **Legacy Protocol**: SAML 2.0 only when upstream providers require it and OIDC is unavailable
+- **Abstraction Layer**: All applications must use IDAM solutions (AWS Cognito, Microsoft Entra, Authelia) rather than direct protocol implementation
+
+### Implementation Approach
+
+**IDAM Solution Selection:**
+- **AWS Cognito**: For cloud-native applications requiring AWS integration
+- **Microsoft Entra**: For Microsoft 365/Azure ecosystem integration  
+- **Authelia**: For self-hosted applications requiring fine-grained access control
+- **Custom Solutions**: Only when existing IDAM platforms cannot meet specific jurisdiction requirements
+
+**Protocol Implementation:**
+- All IDAM solutions must support both OIDC and SAML 2.0 upstream federation
+- Applications integrate only with the chosen IDAM solution, never directly with identity providers
+- IDAM solutions handle protocol translation and token management
+
+**Domain Isolation:**
+- **Standard Users**: Configure in primary domain/realm for regular application access
+- **Privileged Users**: Configure in separate administrative domain/realm for system administration
+- **Cross-Domain Access**: Implement clear separation with different authentication flows and token scopes
+- **Audit Differentiation**: Ensure logging can clearly distinguish between privileged and standard user activities
+
+## Consequences
+
+**Benefits:**
+
+- Consistent identity federation patterns across all organisational systems
+- Standardised integration with jurisdiction citizen-focused identity providers
+- Simplified application development through IDAM abstraction layer
+- Protocol flexibility supporting both OIDC and SAML requirements
+- Better security through proven federation standards and dedicated IDAM platforms
+- Clear separation of privileged and standard user activities for improved security posture
+
+**Risks:**
+
+- Dependency on external identity provider availability
+- Additional complexity from IDAM solution management
+- Potential vendor lock-in with cloud IDAM providers
+- Protocol translation overhead in SAML-to-OIDC scenarios
+
+**Mitigation:**
+
+- Implement fallback authentication mechanisms per [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- Monitor provider health using [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html) standards
+- Use [token refresh strategies](https://datatracker.ietf.org/doc/html/rfc6749#section-6) to handle temporary provider unavailability
+- Choose IDAM solutions that support data export and migration capabilities
+- Maintain audit trails following [ADR 007: Centralized Security Logging](../operations/007-logging.qmd)

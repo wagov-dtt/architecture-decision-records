@@ -28,7 +28,7 @@ book:
         - security/005-secrets-management.qmd
         - security/011-ai-preapproval.qmd
         - security/012-ai-sandbox.qmd
-        - security/013-oidc-federation.qmd
+        - security/013-identity-federation.qmd
         - security/015-email-authentication.qmd
         - security/016-edge-protection.qmd
         - security/018-zero-trust-access.qmd
@@ -53,4 +53,4 @@ format:
     classoption: [openany, oneside, fontsize=10pt]
     geometry: [margin=0.75in]
     colorlinks: true
-git-hash: f571b54
+git-hash: b4eeee0
