@@ -1,18 +1,6 @@
----
-title: 'ADR 004: CI/CD Quality Assurance'
-date: 2025-03-10T00:00:00.000Z
-status: Accepted
-tags:
-  - ci/cd
-  - security
-  - containers
-related:
-  - '010'
-  - '003'
----
+# ADR 004: CI/CD Quality Assurance
 
-
-**Status:** Accepted \| **Date:** 2025-03-10
+**Status:** Accepted | **Date:** 2025-03-10
 
 ## Context
 
@@ -31,7 +19,23 @@ images, misconfigurations, and exposed secrets.
 To address these risks, use a CI/CD pipeline with the following
 standardised practices (or similar equivalents) before releasing code
 and build artifacts to release via [ADR 010: Infrastructure as
-Code](../operations/010-configmgmt.qmd):
+Code](../operations/010-configmgmt.md):
+
+**CI/CD Pipeline Flow:**
+
+```text
+┌─────────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
+│   Code      │───▶│    Build     │───▶│   Quality       │───▶│   Release    │
+│   Commit    │    │   & Test     │    │   Assurance     │    │   & Deploy   │
+└─────────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+                          │                      │                     │
+                          ▼                      ▼                     ▼
+                   ┌─────────────┐    ┌─────────────────┐    ┌─────────────────┐
+                   │  • Semgrep  │    │ • Trivy scan    │    │ • Cosign        │
+                   │  • Playwright│    │ • K6 tests      │    │ • Auto-patch    │
+                   │  • Restish  │    │ • OWASP checks  │    │ • Deployment    │
+                   └─────────────┘    └─────────────────┘    └─────────────────┘
+```
 
 - Use [GitHub
   Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
@@ -49,7 +53,7 @@ Code](../operations/010-configmgmt.qmd):
 - Use [Playwright](https://playwright.dev/docs/intro) for **end-to-end
   testing of web applications**.
 - Use [Restish](https://rest.sh/#/guide) for **scripted validation of
-  [ADR 003: API Documentation Standards](../development/003-apis.qmd)**.
+  [ADR 003: API Documentation Standards](../development/003-apis.md)**.
 - Use [Grafana
   K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/)
   for **performance and reliability testing**.

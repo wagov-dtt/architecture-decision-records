@@ -1,7 +1,5 @@
 # Contributing Guide
 
-> **Important:** Always edit `.qmd` files, not `.md` files. The `.md` files are automatically generated when running `just update-chapters` and will be overwritten.
-
 ## When to Create ADRs
 
 **Create ADRs for foundational decisions only:**
@@ -21,11 +19,28 @@
 ## Quick Workflow
 
 1. **Open in Codespaces** → Automatic tool setup
-2. **Get number** → `just next-number` (provides next sequential number)
-3. **Create file** → `###-short-name.qmd` in correct directory ([see content types](#content-types-when-to-use-what))
+2. **Get number** → `just next-number`
+3. **Create file** → `###-short-name.md` in correct directory ([see content types](#content-types-when-to-use-what))
 4. **Write content** → Follow template below
-5. **Validate** → `just validate` and fix issues
-6. **Submit PR** → Ready for review (chapters auto-update)
+5. **Lint** → `just lint` to fix formatting, check SUMMARY.md, and validate links
+6. **Add to SUMMARY.md** → Include new ADR in navigation (required for mdBook)
+7. **Submit PR** → Ready for review
+
+**ADR Creation Workflow:**
+
+```text
+┌─────────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
+│   Setup     │───▶│   Create     │───▶│    Validate     │───▶│   Submit     │
+│ Environment │    │   Content    │    │   & Format      │    │     PR       │
+└─────────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+      │                    │                      │                     │
+      ▼                    ▼                      ▼                     ▼
+┌─────────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
+│ • Codespace │    │ • Get number │    │ • just lint     │    │ • Add to     │
+│ • Clone     │    │ • Template   │    │ • Format/links  │    │   SUMMARY.md │
+│ • Tools     │    │ • Directory  │    │ • Build test    │    │ • Review     │
+└─────────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+```
 
 ## Directory Structure
 
@@ -41,13 +56,13 @@
 ### ADRs (Architecture Decision Records)
 
 **Purpose**: Document foundational technology decisions that are expensive to change  
-**Format**: `###-decision-name.qmd` in `development/`, `operations/`, or `security/`  
+**Format**: `###-decision-name.md` in `development/`, `operations/`, or `security/`  
 **Examples**: "AWS EKS for workloads", "Secrets management approach", "API standards"
 
 ### Reference Architectures  
 
 **Purpose**: Project kickoff templates that combine multiple existing ADRs  
-**Format**: `descriptive-name.qmd` in `reference-architectures/`  
+**Format**: `descriptive-name.md` in `reference-architectures/`  
 **Examples**: "Content Management", "Data Pipelines", "Identity Management"
 
 **Rule**: Reference architectures should only link to existing ADRs, not create new ones.
@@ -55,14 +70,9 @@
 ## ADR Template
 
 ```markdown
----
-title: "ADR ###: Specific Decision Title"
-date: 2025-07-22
-status: Proposed
-tags: [category, technology]
----
+# ADR ###: Specific Decision Title
 
-**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+**Status:** Proposed | **Date:** YYYY-MM-DD
 
 ## Context
 What problem are we solving? Include background and constraints.
@@ -84,18 +94,21 @@ What we decided and how to implement it:
 - Risk 2 with mitigation
 ```
 
-**Important**: Tags should NOT be prefixed with # to avoid YAML parsing errors  
+**Status Options:**
+
+- `Accepted` - Decision is final and implemented
+- `Proposed` - Under review or discussion
+- `Rejected` - Decision was declined
+- `Superseded` - Replaced by newer ADR
+
 **Note**: ADR numbers are globally unique across all directories (gaps from removed drafts are normal)
 
 ## Reference Architecture Template
 
 ```markdown
----
-title: "Reference Architecture: Pattern Name"
-date: 2025-07-28
-status: Proposed
-tags: [reference, technology, domain]
----
+# Reference Architecture: Pattern Name
+
+**Status:** Proposed | **Date:** YYYY-MM-DD
 
 ## When to Use This Pattern
 Clear use case description for when to apply this architecture.
@@ -104,17 +117,17 @@ Clear use case description for when to apply this architecture.
 Brief template description focusing on practical implementation.
 
 ## Core Components
-```mermaid
-graph TB
-    Component1[Source] --> Component2[Process]
-    Component2 --> Component3[Output]
-```
+┌─────────┐    ┌─────────┐    ┌─────────┐
+│ Source  │───▶│ Process │───▶│ Output  │
+└─────────┘    └─────────┘    └─────────┘
 
 ## Project Kickoff Steps
 
-1. **Step Name** - Follow [ADR ###: Title](../category/###-filename.qmd) for implementation
+1. **Step Name** - Follow [ADR ###: Title](../category/###-filename.md) for implementation
 2. **Next Step** - *ADR needed for missing standards*
 3. **Final Step** - Reference to existing practices
+
+```
 
 ## Quality Standards
 
@@ -123,7 +136,7 @@ graph TB
 - [ ] Title is concise (under 50 characters) and actionable
 - [ ] All acronyms defined on first use
 - [ ] Active voice (not passive)
-- [ ] Passes `just validate` without errors
+- [ ] Passes `just lint` without errors
 
 **Title Examples:**
 
@@ -134,15 +147,13 @@ graph TB
 
 ## Commands
 
-```bash
-just next-number      # Get next ADR number (auto-increments from highest)
-just validate        # Check format + prose quality (5 validation tools)
-just serve          # Preview website locally (port 8080)
-just clean          # Remove generated files
-just update-chapters  # Refresh _quarto.yml chapters (auto-runs on build)
-```
+Run `just` to see all available commands.
 
-**Validation includes**: markdownlint, Vale style, frontmatter schema, yq parsing, and custom checks
+**Quick setup:**
+
+```bash
+./scripts/setup.sh   # Automated setup script
+```
 
 ## Status Guide
 
@@ -154,24 +165,16 @@ just update-chapters  # Refresh _quarto.yml chapters (auto-runs on build)
 
 ## ADR References
 
-**In frontmatter (for strong relationships):**
+**Reference format:**
 
-```yaml
-supersedes: "012"     # This ADR replaces ADR 012
-related: ["005", "007"]  # Related to ADRs 005 and 007
-```
-
-**In text (for implementation details):**
-
-- Reference format: `[ADR 005: Secrets Management](../security/005-secrets-management.qmd)`
+- `[ADR 005: Secrets Management](../security/005-secrets-management.md)`
 - Quick reference: `per ADR 005`
 - Multiple refs: `aligned with ADR 001 and ADR 005`
 
 **Examples:**
 
-- Implementation: "Encryption handled per [ADR 005: Secrets Management](../security/005-secrets-management.qmd)"
-- Quick mention: "Access controls aligned with ADR 001"
-- Multiple: "Following standards from ADR 003 and ADR 009"
+- "Encryption handled per [ADR 005: Secrets Management](security/005-secrets-management.md)"
+- "Access controls aligned with ADR 001"
 
 ## Writing Tips
 
@@ -180,29 +183,18 @@ related: ["005", "007"]  # Related to ADRs 005 and 007
 - **Define scope**: What's included and excluded
 - **Reference standards**: Link to external docs
 - **Use Australian English**: "organisation" not "organization", "colour" not "color"
+- **Character usage**: Use plain-text safe Unicode (box-drawing ┌─┐ is fine) but avoid emoji, smart quotes (""),  
+  em-dashes (—), and complex symbols for PDF compatibility
+- **Terminology**: Use Australian English ("organisation" not "organization") and "jurisdiction" instead of  
+  "government" for broad applicability
+- **ASCII diagrams**: Use box drawing characters (┌─┐│└┘) for universal compatibility
 
 ## Reference Architecture Guidelines
 
-**Purpose**: Project kickoff templates linking foundational ADRs for faster, consistent delivery
+**Purpose**: Project kickoff templates that combine existing ADRs
 
-**Consolidated Approach**:
-
-- **9-11 foundational steps maximum** linking to existing ADRs only
-- **Implementation Details section** for specifics that don't need ADRs
-- **Focus on high-cost-to-change decisions** (architectural patterns, technology standards, security frameworks)
-- **Avoid creating ADRs** for implementation details that can be handled in documentation
-
-**Structure**:
-
-- **When to Use**: Clear use case description
-- **Overview**: Brief template description  
-- **Core Components**: Mermaid diagram showing architecture flow
-- **Project Kickoff Steps**: Foundational ADRs grouped by logical sections (Foundation, Security, Development)
-- **Implementation Details**: Bullet points for project-specific guidance
-
-**Content Rules**:
-
-- Link to existing foundational ADRs only
-- Use "Implementation Details" for specifics instead of creating new ADRs
-- Consolidate related concerns into existing comprehensive ADRs
+**Rules**:
+- Link to existing ADRs only (don't create new ones)
+- Keep steps focused (9-11 maximum)
+- Include architecture diagram
 - Use "jurisdiction" not "government" for broad applicability

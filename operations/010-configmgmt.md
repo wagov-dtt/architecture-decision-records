@@ -1,19 +1,6 @@
----
-title: 'ADR 010: Infrastructure as Code'
-date: 2025-03-10T00:00:00.000Z
-status: Accepted
-tags:
-  - infrastructure
-  - security
-  - iac
-related:
-  - '001'
-  - '005'
-  - '002'
----
+# ADR 010: Infrastructure as Code
 
-
-**Status:** Accepted \| **Date:** 2025-03-10
+**Status:** Accepted | **Date:** 2025-03-10
 
 ## Context
 
@@ -45,9 +32,9 @@ management:
   configuration management
 - Use [Justfiles](https://just.systems/man/en/) for operations task
   automation
-- Follow [ADR 001: Application Isolation](../security/001-isolation.qmd)
+- Follow [ADR 001: Application Isolation](../security/001-isolation.md)
   and [ADR 005: Secrets
-  Management](../security/005-secrets-management.qmd)
+  Management](../security/005-secrets-management.md)
 
 ### State Management & Git Workflow
 
@@ -60,6 +47,36 @@ management:
   backup
 - Branch protection rules and required reviews for configuration changes
 
+**Infrastructure as Code Workflow:**
+
+```text
+┌───────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
+│    Git    │───▶│   Security   │───▶│   Deployment    │───▶│ Environment  │
+│  Changes  │    │  Validation  │    │   Pipeline      │    │   Update     │
+└───────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+      │                  │                     │                      │
+      ▼                  ▼                     ▼                      ▼
+┌───────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
+│ • PR      │    │ • Trivy scan │    │ • State lock    │    │ • Dev/Test   │
+│ • Review  │    │ • Drift      │    │ • Plan review   │    │ • Staging    │
+│ • Tag     │    │   detection  │    │ • Apply changes │    │ • Production │
+└───────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+
+Environment State Storage:
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│     Dev     │    │   Staging   │    │ Production  │
+│   State     │    │    State    │    │    State    │
+│ (Isolated)  │    │ (Isolated)  │    │ (Isolated)  │
+└─────────────┘    └─────────────┘    └─────────────┘
+       │                   │                   │
+       └───────────────────┼───────────────────┘
+                           ▼
+                 ┌─────────────────┐
+                 │   Cross-region  │
+                 │     Backup      │
+                 └─────────────────┘
+```
+
 ### Deployment Consistency
 
 - Each environment deployable from specific git tag
@@ -67,7 +84,7 @@ management:
   deployment
 - Test releases locally with [k3d](https://k3d.io/stable/) and on EKS
   per [ADR 002: AWS EKS for Cloud
-  Workloads](../operations/002-workloads.qmd)
+  Workloads](../operations/002-workloads.md)
 
 ## Consequences
 

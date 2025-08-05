@@ -1,0 +1,45 @@
+[book]
+title = "DGOV DTT Architecture Decision Records"
+authors = ["DGOV DTT"]
+description = "Architecture records and current decision state to support infrastructure and platform operations"
+src = "."
+
+[build]
+build-dir = "book"
+
+[output.html]
+no-section-label = true
+git-repository-url = "https://github.com/wagov-dtt/architecture-decision-records"
+edit-url-template = "https://github.com/wagov-dtt/architecture-decision-records/edit/main/{path}"
+
+[output.linkcheck]
+
+[output.pandoc]
+
+[output.pandoc.profile.pdf]
+output-file = "adr-guide.pdf"
+to = "latex"
+pdf-engine = "lualatex"
+number-sections = false
+
+[output.pandoc.profile.pdf.variables]
+documentclass = "article"
+papersize = "a4"
+geometry = "margin=2cm"
+mainfont = "DejaVu Sans"
+monofont = "DejaVu Sans Mono"
+fontsize = "10pt"
+linkcolor = "blue!70"
+urlcolor = "blue!70"
+colorlinks = true
+secnumdepth = 0
+linestretch = "1.15"
+indent = false
+block-headings = true
+# Code block styling
+listings = true
+backgroundcolor = "lightgray"
+# Table styling
+tables = true
+# Modern spacing optimized for A4
+parskip = "4pt"

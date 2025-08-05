@@ -1,18 +1,6 @@
----
-title: 'ADR 013: Identity Federation Standards'
-date: 2025-07-29T00:00:00.000Z
-status: Proposed
-tags:
-  - identity
-  - federation
-  - oidc
-  - saml
-related:
-  - '007'
----
+# ADR 013: Identity Federation Standards
 
-
-**Status:** Proposed \| **Date:** 2025-07-29
+**Status:** Proposed | **Date:** 2025-07-29
 
 ## Context
 
@@ -26,12 +14,9 @@ Modern identity federation requires support for emerging standards like
 verifiable credentials while maintaining compatibility with legacy
 enterprise systems.
 
-- [Digital ID Act
-  2024](https://www.legislation.gov.au/Details/C2024A00069)
-- [OpenID Connect Core
-  1.0](https://openid.net/specs/openid-connect-core-1_0.html)
-- [OWASP Authentication Cheat
-  Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- [Digital ID Act 2024](https://www.legislation.gov.au/Details/C2024A00069)
+- [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)
+- [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 
 ## Decision
 
@@ -59,6 +44,27 @@ systems that cannot support OIDC.
 - Support multiple upstream identity providers per application
 - Maintain audit trails distinguishing privileged from standard user
   activities
+
+**Identity Federation Flow:**
+
+```text
+┌─────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────┐
+│   Users     │───▶│    Identity     │───▶│    Managed      │───▶│ Application │
+│ (Citizens/  │    │   Providers     │    │   Platform      │    │   Services  │
+│ Enterprise) │    │                 │    │                 │    │             │
+└─────────────┘    └─────────────────┘    └─────────────────┘    └─────────────┘
+                          │                       │                      │
+                          ▼                       ▼                      ▼
+                   ┌─────────────┐        ┌──────────────┐       ┌─────────────┐
+                   │ • OIDC/SAML │        │ • Token mgmt │       │ • RBAC      │
+                   │ • Verifiable│        │ • Protocol   │       │ • Audit log │
+                   │   Credential│        │   translate  │       │ • Session   │
+                   │ • Legacy IdP│        │ • Audit log  │       │   mgmt      │
+                   └─────────────┘        └──────────────┘       └─────────────┘
+
+Privileged Domain ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Standard Domain   ────────────────────────────────────────────────────────────
+```
 
 **Emerging Standards:**
 
@@ -88,4 +94,4 @@ systems that cannot support OIDC.
 - Choose identity platforms with high availability and data export
   capabilities
 - Maintain audit trails following [ADR 007: Centralized Security
-  Logging](../operations/007-logging.qmd)
+  Logging](../operations/007-logging.md)
