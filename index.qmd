@@ -23,7 +23,7 @@ Architecture records and current decision state to support infrastructure and pl
 
 ::: {.content-visible when-format="html"}
 
-The [Architecture Principles](./architecture-principles.qmd) guide all decisions documented here.
+The [Architecture Principles](./architecture-principles.md) guide all decisions documented here.
 
 **Download:** [PDF Reference Version](./architecture-decision-records.pdf) | [Latest Release](https://github.com/wagov-dtt/architecture-decision-records/releases/latest)
 

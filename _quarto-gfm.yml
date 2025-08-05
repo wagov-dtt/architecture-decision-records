@@ -1,7 +1,11 @@
 project:
-  type: default
+  type: website
   output-dir: "."
   render: ["**/*.qmd", "README.qmd"]
+
+website:
+  repo-url: https://github.com/wagov-dtt/architecture-decision-records
+  repo-actions: [edit, source]
 
 format:
   gfm:

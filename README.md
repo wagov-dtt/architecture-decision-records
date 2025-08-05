@@ -116,7 +116,7 @@ just build    # Build website and PDF locally
 
 ## Related Resources
 
-- [Architecture Principles](./architecture-principles.qmd) - Guide all
+- [Architecture Principles](./architecture-principles.md) - Guide all
   decisions
 - [DGOV DevSecOps
   Training](https://soc.cyber.wa.gov.au/training/devsecops-induction/) -

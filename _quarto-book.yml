@@ -1,6 +1,10 @@
 project:
   output-dir: _site
 
+book:
+  repo-url: https://github.com/wagov-dtt/architecture-decision-records
+  repo-actions: [edit, source]
+
 format:
   html:
     toc: true
