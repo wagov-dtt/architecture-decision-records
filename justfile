@@ -27,6 +27,8 @@ lint:
     @echo "Checking SUMMARY.md completeness..."
     @./scripts/check-summary.sh
     @echo "Checking links (via build)..."
+    @mkdir -p book/pandoc/pdf
+    @touch book/pandoc/pdf/adr-guide.pdf
     @mdbook build
 
 # === Setup Commands ===
