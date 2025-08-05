@@ -1,0 +1,48 @@
+# ADR 015: Data Governance Standards
+
+**Status:** Proposed | **Date:** 2025-07-28
+
+## Context
+
+Data transformation pipelines require basic governance to ensure quality
+and compliance. [SQLMesh](https://sqlmesh.com/) provides built-in
+capabilities for contracts and lineage that reduce governance overhead.
+
+- [SQLMesh Documentation](https://sqlmesh.readthedocs.io/)
+- [Australian Government Data Governance
+  Framework](https://www.finance.gov.au/government/public-data/public-data-policy/data-governance-framework)
+
+## Decision
+
+Use SQLMesh’s semantic understanding for automated data governance with
+git-based workflows.
+
+### Priority Focus Areas
+
+- **Data Contracts**: [SQLMesh model
+  definitions](https://sqlmesh.readthedocs.io/en/stable/concepts/models/overview/)
+  serve as schema contracts with automatic breaking change detection
+- **Column-Level Lineage**: Automatic lineage tracking through [SQLMesh
+  semantic
+  analysis](https://sqlmesh.readthedocs.io/en/stable/concepts/overview/)
+- **Quality Validation**: [SQLMesh unit
+  tests](https://sqlmesh.readthedocs.io/en/stable/concepts/tests/) and
+  [data
+  diff](https://sqlmesh.readthedocs.io/en/stable/concepts/plans/#data-diff)
+  for transformation validation
+- **Audit Integration**: Follow [ADR 007: Centralized Security
+  Logging](007-logging.md) for transformation logs
+
+## Consequences
+
+### Benefits
+
+- **Automated Governance**: SQLMesh reduces manual governance overhead
+- **Git-Based Workflow**: Familiar version control approach
+- **Built-in Validation**: Immediate feedback on quality and contract
+  violations
+
+### Trade-offs
+
+- **SQLMesh Dependency**: Governance tied to SQLMesh framework
+- **Learning Curve**: Teams need SQLMesh knowledge
