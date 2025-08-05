@@ -1,0 +1,10 @@
+project:
+  type: default
+  output-dir: "."
+  render: ["**/*.qmd", "README.qmd"]
+
+format:
+  gfm:
+    output-ext: md
+    variant: +yaml_metadata_block
+    preserve-yaml: true

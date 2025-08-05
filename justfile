@@ -16,7 +16,7 @@ update-chapters:
     # Update git hash and chapters in _quarto.yml (prefer tag over commit)
     git_ref=$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)
     yq eval ".git-hash = \"$git_ref\"" -i _quarto.yml
-    yq eval '.book.chapters = ["index.qmd", "architecture-principles.qmd"]' -i _quarto.yml
+    yq eval '.book.chapters = ["index.qmd", "architecture-principles.md"]' -i _quarto.yml
     # Process ADR directories first (exclude reference-architectures)
     for dir in */; do
       dir=${dir%/}  # Remove trailing slash
@@ -35,65 +35,47 @@ update-chapters:
         yq eval ".book.chapters[-1].chapters += [\"$file\"]" -i _quarto.yml
       done
     fi
-    yq eval '.book.chapters += ["CONTRIBUTING.md", "glossary.qmd"]' -i _quarto.yml
+    yq eval '.book.chapters += ["CONTRIBUTING.md", "glossary.md"]' -i _quarto.yml
     
-    # Generate ADR index for README.md from frontmatter
-    echo "Generating ADR index for README.md..."
+    # Generate ADR index file
+    echo "Generating _adr-index.md..."
     
     # Create markdown table from ADR frontmatter
-    tmp_index=$(mktemp)
-    echo "| ADR | Title | Status |" > "$tmp_index"
-    echo "|-----|-------|--------|" >> "$tmp_index"
+    echo "| ADR | Title | Status | Date |" > _adr-index.md
+    echo "|-----|-------|--------|------|" >> _adr-index.md
     
     # Process ADRs by number order
     for file in $(find . -name "[0-9][0-9][0-9]-*.qmd" | sed 's/.*\/\([0-9][0-9][0-9]\)-\(.*\)/\1 &/' | sort -n | cut -d' ' -f2-); do
       if [ -f "$file" ]; then
         number=$(basename "$file" | sed 's/\([0-9][0-9][0-9]\)-.*/\1/')
-        title=$(sed -n '/^title:/p' "$file" | sed 's/title: *"ADR [0-9]*: //' | sed 's/"$//')
-        status=$(sed -n '/^status:/p' "$file" | sed 's/status: *//')
+        title=$(yq --front-matter=extract eval '.title' "$file" 2>/dev/null | sed 's/^"ADR [0-9]*: //' | sed 's/"$//')
+        status=$(yq --front-matter=extract eval '.status' "$file" 2>/dev/null)
+        date=$(yq --front-matter=extract eval '.date' "$file" 2>/dev/null)
         relative_path="${file#./}"
-        echo "| [ADR ${number}]($relative_path) | $title | $status |" >> "$tmp_index"
+        echo "| [ADR ${number}]($relative_path) | $title | $status | $date |" >> _adr-index.md
       fi
     done
     
     # Add Reference Architectures section
-    echo "" >> "$tmp_index"
-    echo "### Reference Architectures" >> "$tmp_index"
-    echo "" >> "$tmp_index"
-    echo "| Reference | Title | Status |" >> "$tmp_index"
-    echo "|-----------|-------|--------|" >> "$tmp_index"
+    echo "" >> _adr-index.md
+    echo "### Reference Architectures" >> _adr-index.md
+    echo "" >> _adr-index.md
+    echo "| Reference | Title | Status | Date |" >> _adr-index.md
+    echo "|-----------|-------|--------|------|" >> _adr-index.md
     
     for file in $(ls reference-architectures/*.qmd 2>/dev/null | sort); do
       if [ -f "$file" ]; then
-        title=$(sed -n '/^title:/p' "$file" | sed 's/title: *"Reference Architecture: //' | sed 's/"$//')
-        status=$(sed -n '/^status:/p' "$file" | sed 's/status: *//')
+        title=$(yq --front-matter=extract eval '.title' "$file" 2>/dev/null | sed 's/^"Reference Architecture: //' | sed 's/"$//')
+        status=$(yq --front-matter=extract eval '.status' "$file" 2>/dev/null)
+        date=$(yq --front-matter=extract eval '.date' "$file" 2>/dev/null)
         basename_title=$(basename "$file" .qmd | tr '-' ' ' | sed 's/.*/\L&/; s/[a-z]*/\u&/g')
-        echo "| [$basename_title]($file) | $title | $status |" >> "$tmp_index"
+        echo "| [$basename_title]($file) | $title | $status | $date |" >> _adr-index.md
       fi
     done
     
-    # Update README.md with the generated index  
-    awk '
-    /<!-- ADR_INDEX_START -->/ { 
-        print 
-        print ""
-        while ((getline line < "'"$tmp_index"'") > 0) {
-            print line
-        }
-        print ""
-        in_section = 1
-        next 
-    }
-    /<!-- ADR_INDEX_END -->/ { 
-        in_section = 0 
-        print
-        next
-    }
-    !in_section { print }
-    ' README.md > README.tmp && mv README.tmp README.md
-    
-    # Clean up
-    rm -f "$tmp_index"
+    # Generate all markdown files using GFM profile
+    echo "Generating all .md files using Quarto GFM profile..."
+    quarto render --profile gfm
     
     echo "Running markdownlint..."
     markdownlint --fix */*.qmd *.qmd CONTRIBUTING.md AGENT.md README.md || echo "Markdown formatting suggestions found"

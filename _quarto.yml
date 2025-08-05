@@ -1,6 +1,9 @@
 project:
   type: book
-  output-dir: _site
+profile:
+  group:
+    - [book, gfm]
+  default: book
 book:
   title: "DGOV DTT Architecture Decision Records"
   output-file: "architecture-decision-records"
@@ -8,7 +11,7 @@ book:
   # Manual edits to the chapters section will be overwritten
   chapters:
     - index.qmd
-    - architecture-principles.qmd
+    - architecture-principles.md
     - part: Development ADRs
       chapters:
         - development/003-apis.qmd
@@ -40,19 +43,5 @@ book:
         - reference-architectures/identity-management.qmd
         - reference-architectures/openapi-backends.qmd
     - CONTRIBUTING.md
-    - glossary.qmd
-format:
-  html:
-    toc: true
-    number-sections: false
-    search: true
-
-  pdf:
-    toc: true
-    toc-depth: 1
-    number-sections: false
-    documentclass: scrbook
-    classoption: [openany, oneside, fontsize=10pt]
-    geometry: [margin=0.75in]
-    colorlinks: true
-git-hash: 9f06a61
+    - glossary.md
+git-hash: d14f49a
