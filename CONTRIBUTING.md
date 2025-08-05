@@ -1,5 +1,7 @@
 # Contributing Guide
 
+> **Important:** Always edit `.qmd` files, not `.md` files. The `.md` files are automatically generated when running `just update-chapters` and will be overwritten.
+
 ## When to Create ADRs
 
 **Create ADRs for foundational decisions only:**

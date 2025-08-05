@@ -44,4 +44,4 @@ book:
         - reference-architectures/openapi-backends.qmd
     - CONTRIBUTING.md
     - glossary.md
-git-hash: d14f49a
+git-hash: 4c4d75e

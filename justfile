@@ -37,7 +37,14 @@ update-chapters:
     fi
     yq eval '.book.chapters += ["CONTRIBUTING.md", "glossary.md"]' -i _quarto.yml
     
-    # Generate ADR index file
+    echo "Running markdownlint..."
+    markdownlint --fix */*.qmd *.qmd CONTRIBUTING.md AGENT.md README.md || echo "Markdown formatting suggestions found"
+    
+    # Render all .qmd files to .md using GFM profile
+    echo "Generating all .md files using Quarto GFM profile..."
+    quarto render --profile gfm
+    
+    # Generate ADR index file (now that .md files exist)
     echo "Generating _adr-index.md..."
     
     # Create markdown table from ADR frontmatter
@@ -52,7 +59,8 @@ update-chapters:
         status=$(yq --front-matter=extract eval '.status' "$file" 2>/dev/null)
         date=$(yq --front-matter=extract eval '.date' "$file" 2>/dev/null)
         relative_path="${file#./}"
-        echo "| [ADR ${number}]($relative_path) | $title | $status | $date |" >> _adr-index.md
+        md_path="${relative_path%.qmd}.md"
+        echo "| [ADR ${number}]($md_path) | $title | $status | $date |" >> _adr-index.md
       fi
     done
     
@@ -69,16 +77,14 @@ update-chapters:
         status=$(yq --front-matter=extract eval '.status' "$file" 2>/dev/null)
         date=$(yq --front-matter=extract eval '.date' "$file" 2>/dev/null)
         basename_title=$(basename "$file" .qmd | tr '-' ' ' | sed 's/.*/\L&/; s/[a-z]*/\u&/g')
-        echo "| [$basename_title]($file) | $title | $status | $date |" >> _adr-index.md
+        md_path="${file%.qmd}.md"
+        echo "| [$basename_title]($md_path) | $title | $status | $date |" >> _adr-index.md
       fi
     done
     
-    # Generate all markdown files using GFM profile
-    echo "Generating all .md files using Quarto GFM profile..."
-    quarto render --profile gfm
-    
-    echo "Running markdownlint..."
-    markdownlint --fix */*.qmd *.qmd CONTRIBUTING.md AGENT.md README.md || echo "Markdown formatting suggestions found"
+    # Re-render README.qmd with the updated index
+    echo "Re-generating README.md with updated index..."
+    quarto render --profile gfm README.qmd
 
 # Start development server (static build)
 serve: build

@@ -1,8 +1,8 @@
----
-title: "Architecture Decision Records"
----
+# Architecture Decision Records
 
 Architecture Decision Records (ADRs) for Office of Digital Government (DGOV) Digital Transformation and Technology Unit (DTT) infrastructure and platform operations.
+
+> **Note:** `.qmd` files are the source of truth. The `.md` files are automatically generated from `.qmd` files when running `just update-chapters`.
 
 **Quick Start:** [Open in Codespaces](https://codespaces.new/wagov-dtt/architecture-decision-records) → `just next-number` → Create ADR → `just validate` → Submit PR
 
