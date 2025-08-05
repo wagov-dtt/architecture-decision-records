@@ -1,27 +1,29 @@
 #!/bin/bash
 set -e
 
-echo "Setting up ADR development environment..."
+echo "🚀 Setting up ADR development environment..."
 
-# Install Homebrew if not present
-if ! command -v brew >/dev/null 2>&1; then
-    export NONINTERACTIVE=1
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+# Check if Rust is installed
+if ! command -v cargo >/dev/null 2>&1; then
+    echo "📦 Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source ~/.cargo/env
 else
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" 2>/dev/null || true
+    echo "✅ Rust already installed"
 fi
 
-# Install Quarto and TinyTeX
-if ! command -v quarto >/dev/null 2>&1; then
-    curl -LO https://quarto.org/download/latest/quarto-linux-amd64.deb
-    sudo dpkg -i "quarto-linux-amd64.deb" && rm "quarto-linux-amd64.deb"
-    quarto install tinytex --update-path
+# Install required tools using just
+if command -v just >/dev/null 2>&1; then
+    echo "🔧 Installing tools via just..."
+    just setup
+else
+    echo "📦 Installing just first..."
+    cargo install just
+    echo "🔧 Installing remaining tools..."
+    just setup
 fi
 
-# Install tools
-brew install just vale node
-npm install -g markdownlint-cli write-good
-
-echo "Setup complete! Run 'just' to see available commands."
+echo "✅ Setup complete! Available commands:"
+echo "  just lint      - Lint and fix formatting issues"
+echo "  just serve     - Start local development server"
+echo "  just build     - Build documentation"
