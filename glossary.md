@@ -1,6 +1,4 @@
----
-title: "Glossary"
----
+# Glossary
 
 ## Acronyms and Definitions
 
