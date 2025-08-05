@@ -1,10 +1,12 @@
 ---
-title: "ADR 021: Analytics Tooling Standards"
+title: "ADR 017: Analytics Tooling Standards"
 date: 2025-07-28
 status: Proposed
 tags: [analytics, reporting, quarto]
-related: ["019", "016"]
+related: ["018", "016"]
 ---
+
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
 
 ## Context
 
@@ -32,7 +34,7 @@ Use Quarto for static reporting with Evidence BI for high-interactivity cases on
 
 ### Integration
 
-- **Data Sources**: Connect via [ADR 019: Database Patterns](019-database-patterns.qmd)
+- **Data Sources**: Connect via [ADR 018: Database Patterns](018-database-patterns.qmd)
 - **Deployment**: Use [ADR 016: Web Application Edge Protection](../security/016-edge-protection.qmd) for secure distribution
 
 ## Consequences

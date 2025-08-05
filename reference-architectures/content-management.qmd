@@ -5,6 +5,8 @@ status: Proposed
 tags: [reference, drupal, cms]
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## When to Use This Pattern
 
 Use when building websites, content portals, or applications requiring structured content management with editorial workflows.
@@ -32,7 +34,7 @@ graph TB
 1. **Apply Isolation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd) for CMS service network and runtime separation
 2. **Deploy Infrastructure** - Follow [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd) for CMS container deployment
 3. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as Code](../operations/010-configmgmt.qmd) for reproducible deployments
-4. **Setup Database** - Follow [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for Aurora Serverless v2 content storage
+4. **Setup Database** - Follow [ADR 018: Database Patterns](../operations/018-database-patterns.qmd) for Aurora Serverless v2 content storage
 
 ### Security & Operations
 
@@ -55,7 +57,7 @@ graph TB
 
 - Configure WCAG 2.1 AA accessibility compliance and automated testing
 - Setup jurisdiction-specific compliance requirements (e.g., privacy policies, cookie consent)
-- Implement content governance and retention policies per [ADR 020: Data Governance Standards](../operations/020-data-governance.qmd)
+- Implement content governance and retention policies per [ADR 015: Data Governance Standards](../operations/015-data-governance.qmd)
 - Configure multilingual content management if required
 
 **Performance & SEO:**

@@ -10,6 +10,8 @@ tags:
 - isolation
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 AI tools across all organisational functions process sensitive data and can make automated decisions affecting security, privacy, and compliance. Without governance ensuring human oversight of AI decisions, these tools pose significant risks including unauthorized data exposure, biased decision-making, and compliance violations. The highest risk areas are AI tools that process government data or make decisions without explicit human approval.

@@ -6,6 +6,8 @@ tags: [identity, federation, oidc, saml]
 related: ["007"]
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 Applications need to integrate with multiple identity providers including jurisdiction citizen identity services, enterprise directories, and cloud identity platforms. Current approaches use inconsistent protocols (SAML, OIDC, proprietary) creating integration complexity and security inconsistencies.

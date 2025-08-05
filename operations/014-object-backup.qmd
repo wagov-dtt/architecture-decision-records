@@ -11,6 +11,8 @@ tags:
 related: ["005", "001", "007"]
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 Current backup approaches lack cross-region redundancy and automated lifecycle management, creating single points of failure and compliance risks for government data retention requirements. Traditional storage systems do not provide the durability and geographic distribution needed for critical government systems.

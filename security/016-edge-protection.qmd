@@ -8,6 +8,8 @@ tags:
 - waf
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 Government web applications face heightened security threats including state-sponsored attacks, DDoS campaigns by activist groups, and sophisticated application-layer exploits targeting public services. These attacks can disrupt critical citizen services and damage public trust.

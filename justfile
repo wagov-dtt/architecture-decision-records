@@ -36,6 +36,65 @@ update-chapters:
       done
     fi
     yq eval '.book.chapters += ["CONTRIBUTING.md", "glossary.qmd"]' -i _quarto.yml
+    
+    # Generate ADR index for README.md from frontmatter
+    echo "Generating ADR index for README.md..."
+    
+    # Create markdown table from ADR frontmatter
+    tmp_index=$(mktemp)
+    echo "| ADR | Title | Status |" > "$tmp_index"
+    echo "|-----|-------|--------|" >> "$tmp_index"
+    
+    # Process ADRs by number order
+    for file in $(find . -name "[0-9][0-9][0-9]-*.qmd" | sed 's/.*\/\([0-9][0-9][0-9]\)-\(.*\)/\1 &/' | sort -n | cut -d' ' -f2-); do
+      if [ -f "$file" ]; then
+        number=$(basename "$file" | sed 's/\([0-9][0-9][0-9]\)-.*/\1/')
+        title=$(sed -n '/^title:/p' "$file" | sed 's/title: *"ADR [0-9]*: //' | sed 's/"$//')
+        status=$(sed -n '/^status:/p' "$file" | sed 's/status: *//')
+        relative_path="${file#./}"
+        echo "| [ADR ${number}]($relative_path) | $title | $status |" >> "$tmp_index"
+      fi
+    done
+    
+    # Add Reference Architectures section
+    echo "" >> "$tmp_index"
+    echo "### Reference Architectures" >> "$tmp_index"
+    echo "" >> "$tmp_index"
+    echo "| Reference | Title | Status |" >> "$tmp_index"
+    echo "|-----------|-------|--------|" >> "$tmp_index"
+    
+    for file in $(ls reference-architectures/*.qmd 2>/dev/null | sort); do
+      if [ -f "$file" ]; then
+        title=$(sed -n '/^title:/p' "$file" | sed 's/title: *"Reference Architecture: //' | sed 's/"$//')
+        status=$(sed -n '/^status:/p' "$file" | sed 's/status: *//')
+        basename_title=$(basename "$file" .qmd | tr '-' ' ' | sed 's/.*/\L&/; s/[a-z]*/\u&/g')
+        echo "| [$basename_title]($file) | $title | $status |" >> "$tmp_index"
+      fi
+    done
+    
+    # Update README.md with the generated index  
+    awk '
+    /<!-- ADR_INDEX_START -->/ { 
+        print 
+        print ""
+        while ((getline line < "'"$tmp_index"'") > 0) {
+            print line
+        }
+        print ""
+        in_section = 1
+        next 
+    }
+    /<!-- ADR_INDEX_END -->/ { 
+        in_section = 0 
+        print
+        next
+    }
+    !in_section { print }
+    ' README.md > README.tmp && mv README.tmp README.md
+    
+    # Clean up
+    rm -f "$tmp_index"
+    
     echo "Running markdownlint..."
     markdownlint --fix */*.qmd *.qmd CONTRIBUTING.md AGENT.md README.md || echo "Markdown formatting suggestions found"
 

@@ -8,6 +8,8 @@ tags:
 - isolation
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 Not isolating applications and environments can lead to significant security risks. The risk of lateral movement means threats of vulnerability exposure of a single application can compromise other applications or the entire environment. This lack of isolation can enable the spread of malware, unauthorised access, and data breaches.

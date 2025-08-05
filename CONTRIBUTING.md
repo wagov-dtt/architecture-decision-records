@@ -19,11 +19,11 @@
 ## Quick Workflow
 
 1. **Open in Codespaces** → Automatic tool setup
-2. **Get number** → `just next-number`
-3. **Create file** → `###-short-name.qmd` in correct directory
+2. **Get number** → `just next-number` (provides next sequential number)
+3. **Create file** → `###-short-name.qmd` in correct directory ([see content types](#content-types-when-to-use-what))
 4. **Write content** → Follow template below
 5. **Validate** → `just validate` and fix issues
-6. **Submit PR** → Ready for review
+6. **Submit PR** → Ready for review (chapters auto-update)
 
 ## Directory Structure
 
@@ -34,6 +34,22 @@
 | `security/` | Isolation, secrets, AI governance |
 | `reference-architectures/` | Project kickoff templates |
 
+## Content Types: When to Use What
+
+### ADRs (Architecture Decision Records)
+
+**Purpose**: Document foundational technology decisions that are expensive to change  
+**Format**: `###-decision-name.qmd` in `development/`, `operations/`, or `security/`  
+**Examples**: "AWS EKS for workloads", "Secrets management approach", "API standards"
+
+### Reference Architectures  
+
+**Purpose**: Project kickoff templates that combine multiple existing ADRs  
+**Format**: `descriptive-name.qmd` in `reference-architectures/`  
+**Examples**: "Content Management", "Data Pipelines", "Identity Management"
+
+**Rule**: Reference architectures should only link to existing ADRs, not create new ones.
+
 ## ADR Template
 
 ```markdown
@@ -43,6 +59,8 @@ date: 2025-07-22
 status: Proposed
 tags: [category, technology]
 ---
+
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
 
 ## Context
 What problem are we solving? Include background and constraints.
@@ -64,7 +82,8 @@ What we decided and how to implement it:
 - Risk 2 with mitigation
 ```
 
-**Important**: Tags should NOT be prefixed with # to avoid YAML parsing errors
+**Important**: Tags should NOT be prefixed with # to avoid YAML parsing errors  
+**Note**: ADR numbers are globally unique across all directories (gaps from removed drafts are normal)
 
 ## Reference Architecture Template
 
@@ -107,18 +126,21 @@ graph TB
 **Title Examples:**
 
 - GOOD: "ADR 002: AWS EKS for Cloud Workloads" (concise, ~30 chars)
-- GOOD: "ADR 015: Email Authentication Protocols" (specific, clear)
+- GOOD: "ADR 008: Email Authentication Protocols" (specific, clear)
 - BAD: "ADR 004: Enforce release quality with CI/CD prechecks and build attestation" (too long)
 - BAD: "Container stuff" or "Security improvements" (too vague)
 
 ## Commands
 
 ```bash
-just next-number      # Get next ADR number
-just validate        # Check format + prose quality
-just serve          # Preview website locally
+just next-number      # Get next ADR number (auto-increments from highest)
+just validate        # Check format + prose quality (5 validation tools)
+just serve          # Preview website locally (port 8080)
 just clean          # Remove generated files
+just update-chapters  # Refresh _quarto.yml chapters (auto-runs on build)
 ```
+
+**Validation includes**: markdownlint, Vale style, frontmatter schema, yq parsing, and custom checks
 
 ## Status Guide
 

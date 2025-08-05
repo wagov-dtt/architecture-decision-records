@@ -1,10 +1,12 @@
 ---
-title: "ADR 019: Database Patterns"
+title: "ADR 018: Database Patterns"
 date: 2025-07-28
 status: Proposed
 tags: [infrastructure, database, aurora]
 related: ["005", "014", "007", "012"]
 ---
+
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
 
 ## Context
 

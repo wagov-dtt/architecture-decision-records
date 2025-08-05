@@ -9,6 +9,8 @@ tags:
 related: ["001", "005", "002"]
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 Infrastructure as Code requires security, integrity, and state consistency throughout the deployment lifecycle. Configuration drift from manual changes and missing version control create deployment failures and security vulnerabilities.

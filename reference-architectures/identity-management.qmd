@@ -5,6 +5,8 @@ status: Proposed
 tags: [reference, oidc, identity, federation]
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## When to Use This Pattern
 
 Use when building systems requiring federated identity management, single sign-on across multiple services, or integration with jurisdiction identity providers using OIDC standards.
@@ -48,7 +50,7 @@ The architecture consists of three main layers:
 
 ## Project Kickoff Steps
 
-1. **Infrastructure Foundation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd), [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd), and [ADR 019: Database Patterns](../operations/019-database-patterns.qmd) for identity service deployment and data separation
+1. **Infrastructure Foundation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd), [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd), and [ADR 018: Database Patterns](../operations/018-database-patterns.qmd) for identity service deployment and data separation
 2. **Security & Secrets** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for OIDC client secrets and [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for authentication audit trails
 3. **Identity Federation** - Follow [ADR 013: Identity Federation Standards](../security/013-identity-federation.qmd) for upstream provider integration and downstream consumer configuration
 4. **Privileged Administration** - Follow [ADR 012: Privileged Remote Access](../security/012-privileged-remote-access.qmd) for identity service administration access

@@ -9,6 +9,8 @@ tags:
 - change
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 To ensure clear communication of changes and updates to security and infrastructure operations teams, release notes should standardize. The release notes should succinctly capture key information, including new features, improvements, bug fixes, security updates, and infrastructure changes, with links to relevant changelogs.

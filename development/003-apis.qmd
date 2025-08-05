@@ -8,6 +8,8 @@ tags:
 - owasp
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 A secure and maintainable Application Programming Interface (API) framework is key for backends and new capabilities. We need to ensure that our APIs use mature technologies that adhere to industry standards. These include the Australian Cyber Security Centre (ACSC) Information Security Manual (ISM), OpenAPI and Open Web Application Security Project (OWASP). The framework should be low in complexity to reduce maintenance overheads and use burdens. Where an existing mature industry standard exists, that interface may be more suitable than a bespoke Representational State Transfer (REST) API as described here.

@@ -1,10 +1,12 @@
 ---
-title: "ADR 020: Data Governance Standards"
+title: "ADR 015: Data Governance Standards"
 date: 2025-07-28
 status: Proposed
 tags: [data, governance, sqlmesh]
 related: ["007"]
 ---
+
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
 
 ## Context
 

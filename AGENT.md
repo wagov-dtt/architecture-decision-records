@@ -21,14 +21,23 @@
 6. **Preview** - `just serve` to check locally
 7. **Submit PR** - No need to update index files
 
-## ADR Structure
+## Content Organization
+
+### ADRs (Numbered decisions)
 
 ```text
 development/          # API standards, CI/CD, releases
-operations/           # Infrastructure, logging, config
+operations/           # Infrastructure, logging, config  
 security/             # Isolation, secrets, AI governance
-reference-architectures/  # Standard patterns (automatically placed at end)
 ```
+
+### Reference Architectures (Project templates)
+
+```text
+reference-architectures/  # Combine existing ADRs for specific use cases
+```
+
+**Key**: Numbers are globally unique across directories. Gaps (006, 008) are from removed drafts.
 
 ## Template
 
@@ -40,6 +49,8 @@ status: Proposed
 tags: [category, tech]
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 Problem statement and background
 
@@ -50,7 +61,8 @@ What we decided and implementation approach
 Trade-offs, risks, and benefits
 ```
 
-**Important**: Tags should NOT be prefixed with # to avoid YAML parsing errors
+**Important**: Tags should NOT be prefixed with # to avoid YAML parsing errors  
+**Numbering**: Use `just next-number` to get next sequential ADR number (gaps from removed drafts are normal)
 
 ## Writing Guidelines
 
@@ -123,6 +135,7 @@ Trade-offs, risks, and benefits
 - **Chapter ordering** - Files sorted numerically by ADR number
 - **Index updates** - Executive summaries automatically generated
 - **Auto-add directories** - `just update-chapters` automatically adds any top-level directory containing `.qmd` files to book structure
+- **README index** - `just update-chapters` automatically generates ADR index in README.md for GitHub navigation
 
 ## Quarto Project Notes
 

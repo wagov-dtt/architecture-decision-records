@@ -9,6 +9,8 @@ tags:
 - infrastructure
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 Security logs should be centrally collected to support monitoring, detection, and response capabilities across workloads. Sensitive information logging must minimize to follow data protection regulations and reduce the risk of data breaches. Audit and authentication logs are critical for security monitoring and should collect by default.

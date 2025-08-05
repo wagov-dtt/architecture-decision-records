@@ -9,6 +9,8 @@ tags:
 - infrastructure
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 The challenge is to efficiently manage and scale bespoke workloads in a secure and scalable manner. Traditional server management can be cumbersome and inefficient for dynamic workloads. Provider specific control planes can result in lock-in and artificial constraints limiting technology options.

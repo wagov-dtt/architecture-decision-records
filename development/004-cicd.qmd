@@ -9,6 +9,8 @@ tags:
 related: ["010", "003"]
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 The goal is to ensure the security and integrity of containerised applications throughout the development lifecycle. Threat actors exploit vulnerabilities in code, software dependencies, build tooling, container images, misconfigurations, and exposed secrets.

@@ -8,6 +8,8 @@ tags:
 - zero-trust
 ---
 
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
 ## Context
 
 Traditional privileged access methods using jump boxes, bastion hosts, and shared credentials create security risks through persistent network connections and broad administrative access. Modern cloud-native alternatives provide better security controls and audit capabilities for administrative tasks.

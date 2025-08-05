@@ -1,11 +1,13 @@
 ---
-title: "ADR 015: Email Authentication Protocols"
+title: "ADR 008: Email Authentication Protocols"
 date: 2025-07-22
 status: Proposed
 tags:
 - email
 - security
 ---
+
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
 
 ## Context
 
