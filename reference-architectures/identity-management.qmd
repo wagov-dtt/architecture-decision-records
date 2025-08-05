@@ -1,0 +1,80 @@
+---
+title: "Reference Architecture: Identity Management"
+date: 2025-07-29
+status: Proposed
+tags: [reference, oidc, identity, federation]
+---
+
+**Status:** {{< meta status >}} | **Date:** {{< meta date >}}
+
+## When to Use This Pattern
+
+Use when building systems requiring federated identity management, single sign-on across multiple services, or integration with jurisdiction identity providers using OIDC standards.
+
+## Overview
+
+Template for implementing OIDC-based identity federation with upstream identity providers (verifiable credentials, Australian Government Digital ID) and downstream identity consumers (AWS Cognito, Microsoft Entra ID) for comprehensive identity management across organisational boundaries.
+
+## Identity Federation Pattern
+
+This pattern implements a **broker-based identity federation** that translates between upstream identity providers (Government Digital ID, verifiable credentials) and downstream identity consumers (AWS Cognito, Microsoft Entra ID).
+
+**Key Benefits:**
+
+- Single integration point for multiple upstream providers
+- Standardised OIDC/SAML interface for downstream consumers  
+- Centralised policy enforcement and audit logging
+- Support for both government and commercial identity ecosystems
+
+## Core Components
+
+The architecture consists of three main layers:
+
+**Upstream Identity Providers** supply user identities through standards-based protocols:
+
+- Government Digital ID for Australian citizens
+- Verifiable Credentials providers for professional credentials
+- External OIDC providers for commercial identity systems
+
+**Identity Broker** acts as the central translation layer that:
+
+- Accepts authentication from multiple upstream providers
+- Normalises identity claims and attributes across providers  
+- Issues standardised tokens to downstream consumers
+
+**Downstream Identity Consumers** consume the normalised identity tokens:
+
+- AWS Cognito for cloud-native applications
+- Microsoft Entra ID for enterprise applications
+- Custom applications using OIDC/SAML protocols
+
+## Project Kickoff Steps
+
+1. **Infrastructure Foundation** - Follow [ADR 001: Application Isolation](../security/001-isolation.qmd), [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.qmd), and [ADR 018: Database Patterns](../operations/018-database-patterns.qmd) for identity service deployment and data separation
+2. **Security & Secrets** - Follow [ADR 005: Secrets Management](../security/005-secrets-management.qmd) for OIDC client secrets and [ADR 007: Centralized Security Logging](../operations/007-logging.qmd) for authentication audit trails
+3. **Identity Federation** - Follow [ADR 013: Identity Federation Standards](../security/013-identity-federation.qmd) for upstream provider integration and downstream consumer configuration
+4. **Privileged Administration** - Follow [ADR 012: Privileged Remote Access](../security/012-privileged-remote-access.qmd) for identity service administration access
+
+## Implementation Considerations
+
+**Privacy & PII Protection (Digital ID Act 2024):**
+
+- **Data minimisation**: Prohibit collection beyond identity verification requirements
+- **No single identifiers**: Prevent tracking across services using persistent identifiers
+- **Marketing restrictions**: Prohibit disclosure of identity information for marketing purposes
+- **Voluntary participation**: Users cannot be required to create Digital ID for service access
+- **Biometric safeguards**: Restrict collection, use, and disclosure of biometric information
+- **Breach notification**: Implement cyber security and fraud incident management processes
+
+**Identity Proofing Level Selection:**
+
+- **IP1-IP2**: Low-risk transactions with minimal personal information exposure
+- **IP2+**: Higher-risk services requiring biometric verification and stronger assurance
+- **Risk assessment**: Match proofing level to transaction risk and data sensitivity
+- **Credential binding**: Ensure authentication levels align with proofing requirements
+
+**Standards Compliance:**
+
+- Verifiable credentials: [ISO/IEC 18013-5:2021](https://www.iso.org/standard/69084.html) and [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
+- Government Digital ID: [Digital ID Act 2024](https://www.digitalidsystem.gov.au/what-is-digital-id/digital-id-act-2024) privacy and security requirements
+- International interoperability: [eIDAS Regulation](https://digital-strategy.ec.europa.eu/en/policies/eidas-regulation) patterns

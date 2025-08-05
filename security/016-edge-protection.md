@@ -1,26 +1,42 @@
 ---
-title: "ADR 016: Web Application Edge Protection"
-date: 2025-07-22
+title: 'ADR 016: Web Application Edge Protection'
+date: 2025-07-22T00:00:00.000Z
 status: Proposed
 tags:
-- #security
-- #cdn
-- #waf
+  - security
+  - cdn
+  - waf
 ---
 
-## Status
 
-Proposed
+**Status:** Proposed \| **Date:** 2025-07-22
 
 ## Context
 
-Public-facing web applications require protection from DDoS attacks, application-layer threats, and malicious traffic. CDNs with integrated WAFs provide essential edge protection, filtering attacks before they reach origin servers.
+Government web applications face heightened security threats including
+state-sponsored attacks, DDoS campaigns by activist groups, and
+sophisticated application-layer exploits targeting public services.
+These attacks can disrupt critical citizen services and damage public
+trust.
 
-- [ACSC Information Security Manual (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
+Traditional perimeter security is insufficient for protecting modern web
+applications that serve millions of citizens. Edge protection through
+CDNs and WAFs provides the first line of defense, filtering malicious
+traffic before it reaches application infrastructure.
+
+References:
+
+- [ACSC Information Security Manual
+  (ISM)](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism)
+- [ACSC Guidelines for System
+  Hardening](https://www.cyber.gov.au/acsc/view-all-content/publications/hardening-linux-workstations-and-servers)
+- [OWASP Web Application Security Testing
+  Guide](https://owasp.org/www-project-web-security-testing-guide/)
 
 ## Decision
 
-All public web applications and APIs must use CDN with integrated WAF protection:
+All public web applications and APIs must use CDN with integrated WAF
+protection:
 
 **CDN Requirements:**
 

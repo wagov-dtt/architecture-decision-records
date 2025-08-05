@@ -1,0 +1,20 @@
+project:
+  output-dir: _site
+
+book:
+  repo-url: https://github.com/wagov-dtt/architecture-decision-records
+  repo-actions: [edit, source]
+
+format:
+  html:
+    toc: true
+    number-sections: false
+    search: true
+  pdf:
+    toc: true
+    toc-depth: 1
+    number-sections: false
+    documentclass: scrbook
+    classoption: [openany, oneside, fontsize=10pt]
+    geometry: [margin=0.75in]
+    colorlinks: true

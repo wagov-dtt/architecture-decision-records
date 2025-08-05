@@ -1,0 +1,29 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/security/001-isolation.md",
+      "/operations/002-workloads.md",
+      "/development/003-apis.md",
+      "/development/004-cicd.md",
+      "/security/005-secrets-management.md",
+      "/operations/006-policy-enforcement.md",
+      "/operations/007-logging.md",
+      "/security/008-email-authentication.md",
+      "/development/009-release.md",
+      "/operations/010-configmgmt.md",
+      "/security/011-ai-governance.md",
+      "/security/012-privileged-remote-access.md",
+      "/security/013-identity-federation.md",
+      "/operations/014-object-backup.md",
+      "/operations/015-data-governance.md",
+      "/security/016-edge-protection.md",
+      "/operations/017-analytics-tooling.md",
+      "/operations/018-database-patterns.md",
+      "/reference-architectures/content-management.md",
+      "/reference-architectures/data-pipelines.md",
+      "/reference-architectures/identity-management.md",
+      "/reference-architectures/openapi-backends.md"
+    ]
+  }
+]

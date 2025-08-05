@@ -25,9 +25,9 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^#[a-z-]+$"
+        "pattern": "^[a-z-]+$"
       },
-      "description": "Tags must start with # and use lowercase with hyphens"
+      "description": "Tags use lowercase with hyphens (no # prefix)"
     },
     "supersedes": {
       "type": "string",

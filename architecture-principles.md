@@ -1,11 +1,6 @@
----
-title: Architecture Principles
-date: 2025-03-07
-status: Accepted
-tags:
-- #architecture
-- #principles
----
+# Architecture Principles
+
+**Status:** Accepted | **Date:** 2025-03-07
 
 ## 1. Establish secure foundations
 

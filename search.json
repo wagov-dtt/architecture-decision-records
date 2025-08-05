@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DGOV DTT Architecture Decision Records",
+    "section": "",
+    "text": "Version: c082a17\nArchitecture records and current decision state to support infrastructure and platform operations for Office of Digital Government (DGOV) Digital Transformation and Technology Unit (DTT). Supporting training material is available at the DGOV Technical - DevSecOps Induction (guided by the WA Cyber Security Policy).\nThe Architecture Principles guide all decisions documented here.\nDownload: PDF Reference Version | Latest Release"
+  },
+  {
+    "objectID": "index.html#contributing",
+    "href": "index.html#contributing",
+    "title": "DGOV DTT Architecture Decision Records",
+    "section": "Contributing",
+    "text": "Contributing\nNew ADRs follow a structured format documenting the context (problem), decision (solution), and consequences (risks).\nSee the Contributing Guide for complete workflow and quality standards."
+  }
+]
