@@ -91,12 +91,6 @@ publish -> create: revision needed
 
 See [templates/adr-template.md](templates/adr-template.md) for the complete template.
 
-**Status Options:**
-- `Accepted` - Decision is final and implemented
-- `Proposed` - Under review or discussion
-- `Rejected` - Decision was declined
-- `Superseded` - Replaced by newer ADR
-
 **Note**: ADR numbers are globally unique across all directories (gaps from removed drafts are normal)
 
 ## Reference Architecture Template
@@ -119,15 +113,7 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 - BAD: "ADR 004: Enforce release quality with CI/CD prechecks and build attestation" (too long)
 - BAD: "Container stuff" or "Security improvements" (too vague)
 
-## Commands
 
-Run `just` to see all available commands.
-
-**Quick setup:**
-
-```bash
-./scripts/setup.sh   # Automated setup script
-```
 
 ## Status Guide
 
@@ -156,21 +142,10 @@ Run `just` to see all available commands.
 - **Include implementation**: How, not just what
 - **Define scope**: What's included and excluded
 - **Reference standards**: Link to external docs
-- **Use Australian English**: "organisation" not "organization", "colour" not "color"
-- **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes (""),  
-  em-dashes (—), and complex symbols for PDF compatibility
-- **Terminology**: Use Australian English ("organisation" not "organization") and "jurisdiction" instead of  
-  "government" for broad applicability
+- **Australian English**: Use "organisation" not "organization", "jurisdiction" not "government"
+- **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes, em-dashes for PDF compatibility
 - **D2 diagrams**: Use D2 format for diagrams with clean syntax and universal compatibility
   - Use when text alone isn't sufficient (system relationships, data flows, workflows)
   - Keep simple: 5-7 components max, clear labels, logical flow, consistent colors
 
-## Reference Architecture Guidelines
 
-**Purpose**: Project kickoff templates that combine existing ADRs
-
-**Rules**:
-- Link to existing ADRs only (don't create new ones)
-- Keep steps focused (9-11 maximum)
-- Include architecture diagram
-- Use "jurisdiction" not "government" for broad applicability

@@ -2,14 +2,27 @@
 
 ## Essential Commands
 
-| Command | Purpose |
-|---------|---------|
-| `just serve` | Preview documentation locally (port 8080) |
-| `just next-number` | Get next ADR number for new files |
-| `just lint` | Run all checks and fixes |
-| `just build` | Build documentation website (includes link checking) |
-| `just setup` | Install required tools and dependencies |
-| `just clean` | Clean generated files |
+```bash
+mise tasks
+    build  Build the book (just build with tool prereqs for CI)
+just --list
+    default       # Show all available commands
+
+    [build]
+    build         # Build documentation website (includes link checking)
+    clean         # Clean generated files
+
+    [development]
+    next-number   # Get next ADR number for new files
+    serve         # Preview documentation locally (port 8080)
+
+    [quality]
+    check-summary # Verify SUMMARY.md includes all markdown files
+    lint          # Run all checks and fixes
+
+    [setup]
+    setup         # Install required tools and dependencies
+```
 
 ## Quick Start
 
@@ -26,16 +39,9 @@
 
 ## Troubleshooting
 
-**Setup Issues:**
-
-- Restart devcontainer if Homebrew fails
-- Run `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"` if commands not found
-- If PDF generation fails, ensure system dependencies are installed: `sudo apt-get install -y chromium`
-
 **Validation Issues:**
 
 - Run `just lint` to check all issues
-- Use `just clean` then `just serve` if preview issues occur
 
 ## Automated Workflows
 
