@@ -5,11 +5,15 @@
 
 ---
 
-# Development ADRs
+# Security ADRs
 
-- [ADR 003: APIs](development/003-apis.md)
-- [ADR 004: CI/CD](development/004-cicd.md)
-- [ADR 009: Release](development/009-release.md)
+- [ADR 001: Isolation](security/001-isolation.md)
+- [ADR 005: Secrets Management](security/005-secrets-management.md)
+- [ADR 008: Email Authentication](security/008-email-authentication.md)
+- [ADR 011: AI Governance](security/011-ai-governance.md)
+- [ADR 012: Privileged Remote Access](security/012-privileged-remote-access.md)
+- [ADR 013: Identity Federation](security/013-identity-federation.md)
+- [ADR 016: Edge Protection](security/016-edge-protection.md)
 
 # Operations ADRs
 
@@ -22,15 +26,11 @@
 - [ADR 017: Analytics Tooling](operations/017-analytics-tooling.md)
 - [ADR 018: Database Patterns](operations/018-database-patterns.md)
 
-# Security ADRs
+# Development ADRs
 
-- [ADR 001: Isolation](security/001-isolation.md)
-- [ADR 005: Secrets Management](security/005-secrets-management.md)
-- [ADR 008: Email Authentication](security/008-email-authentication.md)
-- [ADR 011: AI Governance](security/011-ai-governance.md)
-- [ADR 012: Privileged Remote Access](security/012-privileged-remote-access.md)
-- [ADR 013: Identity Federation](security/013-identity-federation.md)
-- [ADR 016: Edge Protection](security/016-edge-protection.md)
+- [ADR 003: APIs](development/003-apis.md)
+- [ADR 004: CI/CD](development/004-cicd.md)
+- [ADR 009: Release](development/009-release.md)
 
 ---
 

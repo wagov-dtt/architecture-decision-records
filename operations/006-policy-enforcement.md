@@ -14,6 +14,41 @@ accounts and services.
 Implement comprehensive automated policy enforcement using AWS native
 services for governance, network security, and access control.
 
+```d2
+control_tower: AWS Control Tower {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1976d2"
+  }
+}
+
+transit_gw: Transit Gateway {
+  style: {
+    fill: "#e8f5e8"
+    stroke: "#388e3c"
+  }
+}
+
+security_groups: Security Groups {
+  style: {
+    fill: "#f3e5f5"
+    stroke: "#7b1fa2"
+  }
+}
+
+config: AWS Config {
+  style: {
+    fill: "#fff3e0"
+    stroke: "#f57c00"
+  }
+}
+
+control_tower -> config: compliance monitoring
+control_tower -> security_groups: policy enforcement
+transit_gw -> security_groups: network access
+config: - detect drift\n- monitor rules
+```
+
 ### Governance Foundation
 
 - **AWS Control Tower**: Account factory, guardrails, and compliance

@@ -1,0 +1,47 @@
+[tools.cargo-binstall]
+version = "1.14.3"
+backend = "aqua:cargo-bins/cargo-binstall"
+
+[tools."cargo:mdbook"]
+version = "0.4.52"
+backend = "cargo:mdbook"
+
+[tools."cargo:mdbook-d2"]
+version = "0.3.6"
+backend = "cargo:mdbook-d2"
+
+[tools."cargo:mdbook-linkcheck"]
+version = "0.7.7"
+backend = "cargo:mdbook-linkcheck"
+
+[tools."cargo:mdbook-pandoc"]
+version = "0.10.5"
+backend = "cargo:mdbook-pandoc"
+
+[tools.just]
+version = "1.42.4"
+backend = "aqua:casey/just"
+
+[tools.pandoc]
+version = "3.7.0.2"
+backend = "ubi:jgm/pandoc"
+
+[tools.pipx]
+version = "1.7.1"
+backend = "asdf:pipx"
+
+[tools."pipx:rumdl"]
+version = "0.0.106"
+backend = "pipx:rumdl"
+
+[tools.python]
+version = "3.13.5"
+backend = "core:python"
+
+[tools.rust]
+version = "1.88.0"
+backend = "core:rust"
+
+[tools.tinytex]
+version = "2025.08.02"
+backend = "asdf:tinytex"

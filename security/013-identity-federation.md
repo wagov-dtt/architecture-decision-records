@@ -47,23 +47,49 @@ systems that cannot support OIDC.
 
 **Identity Federation Flow:**
 
-```text
-┌─────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────┐
-│   Users     │───▶│    Identity     │───▶│    Managed      │───▶│ Application │
-│ (Citizens/  │    │   Providers     │    │   Platform      │    │   Services  │
-│ Enterprise) │    │                 │    │                 │    │             │
-└─────────────┘    └─────────────────┘    └─────────────────┘    └─────────────┘
-                          │                       │                      │
-                          ▼                       ▼                      ▼
-                   ┌─────────────┐        ┌──────────────┐       ┌─────────────┐
-                   │ • OIDC/SAML │        │ • Token mgmt │       │ • RBAC      │
-                   │ • Verifiable│        │ • Protocol   │       │ • Audit log │
-                   │   Credential│        │   translate  │       │ • Session   │
-                   │ • Legacy IdP│        │ • Audit log  │       │   mgmt      │
-                   └─────────────┘        └──────────────┘       └─────────────┘
+```d2
+Users -> Identity Providers -> Managed Platform
 
-Privileged Domain ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Standard Domain   ────────────────────────────────────────────────────────────
+Identity Providers: {
+  OIDC: {style.fill: "#4caf50"}
+  SAML: {style.fill: "#ff9800"}
+  Legacy: {style.fill: "#757575"}
+}
+
+Managed Platform: {
+  Token Validation
+  Protocol Translation
+  Audit Logging
+}
+
+# Domain Separation
+Managed Platform -> Standard Apps: {
+  style.stroke: "#1565c0"
+  style.stroke-width: 3
+}
+
+Managed Platform -> Admin Apps: {
+  style.stroke: "#c62828"
+  style.stroke-width: 3
+}
+
+Standard Apps: {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1565c0"
+  }
+}
+
+Admin Apps: {
+  style: {
+    fill: "#ffebee"
+    stroke: "#c62828"
+  }
+}
+
+Standard Apps -> User Data
+Admin Apps -> System Data
+Admin Apps -> User Data: admin access
 ```
 
 **Emerging Standards:**

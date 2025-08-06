@@ -20,6 +20,33 @@ administrative tasks.
 Replace traditional bastion hosts and jump boxes with cloud-native
 privileged access solutions:
 
+```d2
+admin: Administrator {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1976d2"
+  }
+}
+
+ssm: AWS Session Manager {
+  style: {
+    fill: "#e8f5e8"
+    stroke: "#388e3c"
+  }
+}
+
+systems: Target Systems {
+  style: {
+    fill: "#f3e5f5"
+    stroke: "#7b1fa2"
+  }
+}
+
+admin -> ssm: authenticated access
+ssm -> systems: temporary sessions
+ssm: - MFA required\n- session recording\n- audit trails
+```
+
 **Prohibited Methods:**
 
 - Bastion hosts and jump boxes with persistent SSH access

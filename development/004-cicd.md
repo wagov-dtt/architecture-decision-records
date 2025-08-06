@@ -23,20 +23,25 @@ Code](../operations/010-configmgmt.md):
 
 **CI/CD Pipeline Flow:**
 
-```text
-┌─────────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
-│   Code      │───▶│    Build     │───▶│   Quality       │───▶│   Release    │
-│   Commit    │    │   & Test     │    │   Assurance     │    │   & Deploy   │
-└─────────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
-                          │                      │                     │
-                          ▼                      ▼                     ▼
-                   ┌─────────────┐    ┌─────────────────┐    ┌─────────────────┐
-                   │  • Semgrep  │    │ • Trivy scan    │    │ • Cosign        │
-                   │  • Playwright│    │ • K6 tests      │    │ • Auto-patch    │
-                   │  • Restish  │    │ • OWASP checks  │    │ • Deployment    │
-                   └─────────────┘    └─────────────────┘    └─────────────────┘
-```
+Code Commit -> Build & Test -> Quality Assurance -> Release
 
+Build & Test: {
+  Compilation
+  Unit Tests
+  Static Analysis
+}
+
+Quality Assurance: {
+  Vulnerability Scan
+  Performance Test
+  Security Check
+}
+
+Release: {
+  Artifact Signing
+  Deployment
+  Monitoring
+}
 - Use [GitHub
   Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
   for CI/CD to **automate building and signing of container images**.

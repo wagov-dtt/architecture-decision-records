@@ -13,11 +13,15 @@ git-repository-url = "https://github.com/wagov-dtt/architecture-decision-records
 edit-url-template = "https://github.com/wagov-dtt/architecture-decision-records/edit/main/{path}"
 
 [output.linkcheck]
+warning-policy = "warn"
 
 [output.pandoc]
 
+[preprocessor.d2]
+inline = false
+
 [output.pandoc.profile.pdf]
-output-file = "adr-guide.pdf"
+output-file = "architecture-decision-records.pdf"
 to = "latex"
 pdf-engine = "lualatex"
 number-sections = false
@@ -26,8 +30,8 @@ number-sections = false
 documentclass = "article"
 papersize = "a4"
 geometry = "margin=2cm"
-mainfont = "DejaVu Sans"
-monofont = "DejaVu Sans Mono"
+mainfont = "TeXGyreHeros"
+monofont = "TeXGyreCursor"
 fontsize = "10pt"
 linkcolor = "blue!70"
 urlcolor = "blue!70"

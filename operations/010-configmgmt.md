@@ -49,33 +49,31 @@ management:
 
 **Infrastructure as Code Workflow:**
 
-```text
-┌───────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
-│    Git    │───▶│   Security   │───▶│   Deployment    │───▶│ Environment  │
-│  Changes  │    │  Validation  │    │   Pipeline      │    │   Update     │
-└───────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
-      │                  │                     │                      │
-      ▼                  ▼                     ▼                      ▼
-┌───────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
-│ • PR      │    │ • Trivy scan │    │ • State lock    │    │ • Dev/Test   │
-│ • Review  │    │ • Drift      │    │ • Plan review   │    │ • Staging    │
-│ • Tag     │    │   detection  │    │ • Apply changes │    │ • Production │
-└───────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+Git Changes -> Security Validation -> Terraform -> Environments
 
-Environment State Storage:
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│     Dev     │    │   Staging   │    │ Production  │
-│   State     │    │    State    │    │    State    │
-│ (Isolated)  │    │ (Isolated)  │    │ (Isolated)  │
-└─────────────┘    └─────────────┘    └─────────────┘
-       │                   │                   │
-       └───────────────────┼───────────────────┘
-                           ▼
-                 ┌─────────────────┐
-                 │   Cross-region  │
-                 │     Backup      │
-                 └─────────────────┘
-```
+Git Changes: {
+  Pull Request
+  Review
+  Merge
+}
+
+Security Validation: {
+  Trivy Scan
+  Drift Detection
+  Policy Check
+}
+
+Terraform: {
+  State Management
+  Infrastructure Provisioning
+  GitOps Deployment
+}
+
+Environments: {
+  Development
+  Staging
+  Production
+}
 
 ### Deployment Consistency
 

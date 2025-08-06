@@ -4,12 +4,12 @@
 
 | Command | Purpose |
 |---------|---------|
-| `just setup` | Install tools and fonts |
-| `just lint` | Lint, format check, SUMMARY.md check, and validate links |
-| `just serve` | Preview website (port 8080) |
-| `just build` | Generate website (includes link checking) |
-| `just clean` | Remove generated files |
-| `just next-number` | Get next ADR number |
+| `just serve` | Preview documentation locally (port 8080) |
+| `just next-number` | Get next ADR number for new files |
+| `just lint` | Run all checks and fixes |
+| `just build` | Build documentation website (includes link checking) |
+| `just setup` | Install required tools and dependencies |
+| `just clean` | Clean generated files |
 
 ## Quick Start
 
@@ -22,7 +22,7 @@
 
 - **Build** - `just build` creates both website and PDF at `book/pandoc/pdf/adr-guide.pdf`
 - **Live PDF** - Available at [book/pandoc/pdf/adr-guide.pdf](book/pandoc/pdf/adr-guide.pdf)
-- **Format** - A4 ISO standard with optimized fonts for ASCII diagrams
+- **Format** - A4 ISO standard with D2 diagrams
 
 ## Troubleshooting
 
@@ -47,4 +47,18 @@
 
 - **Book Format** - Project uses mdBook, navigation defined in `SUMMARY.md`
 - **Manual Updates** - Add new ADR files to `SUMMARY.md` for navigation (required)
-- **Diagram Support** - Use ASCII diagrams in code blocks for universal compatibility
+- **Diagram Support** - Use D2 diagrams in code blocks for universal compatibility
+
+## D2 Diagram Guidelines
+
+**When to use:** System relationships, data flows, workflows, or architecture patterns where text alone isn't sufficient.
+
+**Keep simple:** Maximum 5-7 components, clear labels, logical flow, consistent colors.
+
+**Example:**
+```d2
+user: User -> api: API -> backend: Backend
+api: requests/responses
+```
+
+**Quality check:** Adds value, easy to follow, clear labels, logical connections.

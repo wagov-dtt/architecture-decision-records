@@ -32,6 +32,33 @@ Microsoft Entra ID).
 
 ## Core Components
 
+```d2
+providers: Upstream Identity Providers {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1976d2"
+  }
+}
+
+broker: Identity Broker {
+  style: {
+    fill: "#e8f5e8"
+    stroke: "#388e3c"
+  }
+}
+
+consumers: Downstream Consumers {
+  style: {
+    fill: "#f3e5f5"
+    stroke: "#7b1fa2"
+  }
+}
+
+providers -> broker: authenticate users
+broker -> consumers: issue tokens
+broker: - normalise claims\n- enforce policies\n- audit logging
+```
+
 The architecture consists of three main layers:
 
 **Upstream Identity Providers** supply user identities through

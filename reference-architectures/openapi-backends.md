@@ -15,43 +15,28 @@ separation between user-facing and administrative operations.
 
 ## Core Components
 
-```text
-┌─────────────┐    ┌─────────────────┐
-│ API         │───▶│ Edge Protection │
-│ Clients     │    │                 │
-└─────────────┘    └─────────────────┘
-                            │
-              ┌─────────────┴─────────────┐
-              ▼                           ▼
-    ┌─────────────────┐         ┌─────────────────┐
-    │ Standard Router │         │ Admin Router    │
-    │                 │         │                 │
-    └─────────────────┘         └─────────────────┘
-              ▲                           ▲
-              │                           │
-    ┌─────────────────┐         ┌─────────────────┐
-    │ Standard Realm  │         │ Admin Realm     │
-    │                 │         │                 │
-    └─────────────────┘         └─────────────────┘
+API Clients -> Edge Protection -> Routing
 
-    ╔══════════════════════ AWS EKS Cluster ═══════════════════════╗
-    ║                                                              ║
-    ║  ┌─────────────────┐         ┌─────────────────────────────┐ ║
-    ║  │ Standard APIs   │         │ Admin APIs                  │ ║
-    ║  │ api.domain/     │         │ admin.domain/               │ ║
-    ║  │ api/v1/*        │         │ admin/v1/*                  │ ║
-    ║  └─────────────────┘         └─────────────────────────────┘ ║
-    ║           │                           │                     ║
-    ╚═══════════┼═══════════════════════════┼═════════════════════╝
-                ▼                           ▼
-    ┌─────────────────┐         ┌─────────────────────────────┐
-    │ User Data       │         │ Sensitive / Global Data     │
-    │                 │         │                             │
-    └─────────────────┘         └─────────────────────────────┘
-```
+Routing -> Standard APIs: api.domain
+Routing -> Admin APIs: admin.domain
 
-## API Design Pattern
+Standard APIs: {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1565c0"
+  }
+}
 
+Admin APIs: {
+  style: {
+    fill: "#ffebee"
+    stroke: "#c62828"
+  }
+}
+
+Standard APIs -> User Database
+Admin APIs -> System Database
+Admin APIs -> User Database: admin access
 **Standard APIs** (`/api/v1/*`): Business operations for authenticated
 users
 

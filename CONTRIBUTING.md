@@ -28,18 +28,40 @@
 
 **ADR Creation Workflow:**
 
-```text
-┌─────────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
-│   Setup     │───▶│   Create     │───▶│    Validate     │───▶│   Submit     │
-│ Environment │    │   Content    │    │   & Format      │    │     PR       │
-└─────────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
-      │                    │                      │                     │
-      ▼                    ▼                      ▼                     ▼
-┌─────────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
-│ • Codespace │    │ • Get number │    │ • just lint     │    │ • Add to     │
-│ • Clone     │    │ • Template   │    │ • Format/links  │    │   SUMMARY.md │
-│ • Tools     │    │ • Directory  │    │ • Build test    │    │ • Review     │
-└─────────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+Environment Setup -> Content Creation -> Validation -> Publication
+
+Environment Setup: {
+  Codespace
+  Git Clone
+  Tool Setup
+}
+
+Content Creation: {
+  Get ADR Number
+  Choose Template
+  Write Content
+}
+
+Validation: {
+  Lint Check
+  Build Test
+  Link Validation
+}
+
+Publication: {
+  Update SUMMARY.md
+  Create PR
+  Review & Merge
+}
+publication.create-pr -> publication.peer-review: PR submitted
+publication.peer-review -> publication.merge: approval received
+publication.merge: Deploy to GitHub Pages
+
+# Feedback Loops
+publication.peer-review -> creation.write-content: revision needed
+validation.build-test -> creation.write-content: fix issues
+quality-gates.standards -> creation.write-content: improve clarity
+quality-gates.references -> validation.link-validation: update links
 ```
 
 ## Directory Structure
@@ -69,33 +91,9 @@
 
 ## ADR Template
 
-```markdown
-# ADR ###: Specific Decision Title
-
-**Status:** Proposed | **Date:** YYYY-MM-DD
-
-## Context
-What problem are we solving? Include background and constraints.
-
-## Decision
-What we decided and how to implement it:
-
-- **Requirement 1**: Specific implementation detail
-- **Requirement 2**: Configuration specifics
-- **Requirement 3**: Monitoring approach
-
-## Consequences
-**Positive:**
-- Benefit 1 with explanation
-- Benefit 2 with explanation
-
-**Negative:**
-- Risk 1 with mitigation
-- Risk 2 with mitigation
-```
+See [templates/adr-template.md](templates/adr-template.md) for the complete template.
 
 **Status Options:**
-
 - `Accepted` - Decision is final and implemented
 - `Proposed` - Under review or discussion
 - `Rejected` - Decision was declined
@@ -105,29 +103,7 @@ What we decided and how to implement it:
 
 ## Reference Architecture Template
 
-```markdown
-# Reference Architecture: Pattern Name
-
-**Status:** Proposed | **Date:** YYYY-MM-DD
-
-## When to Use This Pattern
-Clear use case description for when to apply this architecture.
-
-## Overview
-Brief template description focusing on practical implementation.
-
-## Core Components
-┌─────────┐    ┌─────────┐    ┌─────────┐
-│ Source  │───▶│ Process │───▶│ Output  │
-└─────────┘    └─────────┘    └─────────┘
-
-## Project Kickoff Steps
-
-1. **Step Name** - Follow [ADR ###: Title](../category/###-filename.md) for implementation
-2. **Next Step** - *ADR needed for missing standards*
-3. **Final Step** - Reference to existing practices
-
-```
+See [templates/reference-architecture-template.md](templates/reference-architecture-template.md) for the complete template.
 
 ## Quality Standards
 
@@ -183,11 +159,13 @@ Run `just` to see all available commands.
 - **Define scope**: What's included and excluded
 - **Reference standards**: Link to external docs
 - **Use Australian English**: "organisation" not "organization", "colour" not "color"
-- **Character usage**: Use plain-text safe Unicode (box-drawing ┌─┐ is fine) but avoid emoji, smart quotes (""),  
+- **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes (""),  
   em-dashes (—), and complex symbols for PDF compatibility
 - **Terminology**: Use Australian English ("organisation" not "organization") and "jurisdiction" instead of  
   "government" for broad applicability
-- **ASCII diagrams**: Use box drawing characters (┌─┐│└┘) for universal compatibility
+- **D2 diagrams**: Use D2 format for diagrams with clean syntax and universal compatibility
+  - Use when text alone isn't sufficient (system relationships, data flows, workflows)
+  - Keep simple: 5-7 components max, clear labels, logical flow, consistent colors
 
 ## Reference Architecture Guidelines
 

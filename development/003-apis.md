@@ -27,6 +27,33 @@ and behaviour. New APIs should be developed with self-documenting
 frameworks such as [Huma](https://huma.rocks/) or
 [FastAPI](https://fastapi.tiangolo.com/).
 
+```d2
+framework: Self-Documenting Framework {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1976d2"
+  }
+}
+
+openapi: OpenAPI Specification {
+  style: {
+    fill: "#e8f5e8"
+    stroke: "#388e3c"
+  }
+}
+
+testing: Automated Testing {
+  style: {
+    fill: "#f3e5f5"
+    stroke: "#7b1fa2"
+  }
+}
+
+framework -> openapi: generates docs
+framework -> testing: validates behaviour
+openapi -> testing: security checks
+```
+
 ### API requirements
 
 - **Naming Convention**: APIs **must** use a consistent naming

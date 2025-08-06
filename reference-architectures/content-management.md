@@ -14,24 +14,26 @@ jurisdiction compliance requirements.
 
 ## Core Components
 
-```text
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ Content         │───▶│ CMS             │───▶│ Database        │
-│ Editor          │    │ Application     │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                                ├─────────────────────────────────┐
-                                ▼                                 ▼
-                       ┌─────────────────┐            ┌─────────────────┐
-                       │ File Storage    │            │ CDN/Edge Cache  │
-                       │                 │            │                 │
-                       └─────────────────┘            └─────────────────┘
-                                                                 │
-                                                                 ▼
-                                                      ┌─────────────────┐
-                                                      │ End Users       │
-                                                      │                 │
-                                                      └─────────────────┘
+```d2
+Content Editors -> CMS Application -> Database
+CMS Application -> File Storage
+CMS Application -> CDN
+CDN -> End Users
+
+CMS Application: {
+  Core Engine
+  API
+  Authentication
+}
+
+Database: Aurora PostgreSQL
+File Storage: S3 Storage  
+CDN: CloudFront + WAF
+
+End Users: {
+  Public Visitors
+  Authenticated Users
+}
 ```
 
 ## Project Kickoff Steps

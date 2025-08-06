@@ -14,5 +14,5 @@
 	"hostRequirements": {
 		"memory": "16gb"
 	},
-	"postCreateCommand": "echo 'eval \"$(mise activate bash)\"' >> ~/.bashrc"
+	"postCreateCommand": "mise activate bash >> ~/.bashrc"
 }

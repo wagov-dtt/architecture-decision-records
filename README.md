@@ -19,17 +19,17 @@ This project uses [mdBook](https://rust-lang.github.io/mdBook/) to generate docu
 ## Quick Start
 
 ```bash
-./scripts/setup.sh  # One-time setup
-just serve          # Preview locally (port 8080)
+just setup    # One-time setup
+just serve    # Preview locally (port 8080)
 ```
 
 Run `just` to see all available commands.
 
-**[View as PDF](book/pandoc/pdf/adr-guide.pdf)** | **[Browse online](https://wagov-dtt.github.io/architecture-decision-records/)**
+**[View as PDF](https://wagov-dtt.github.io/architecture-decision-records/architecture-decision-records.pdf)** | **[Browse online](https://wagov-dtt.github.io/architecture-decision-records/)**
 
 ## Development
 
-First time setup requires installing tools - use the setup script for automated installation.
+First time setup requires installing tools - run `just setup` for automated installation.
 
 ## Contributing
 

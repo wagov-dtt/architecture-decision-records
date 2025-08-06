@@ -16,23 +16,32 @@ analytics engines (DuckDB/DuckLake) or legacy engines
 
 ## Core Components
 
-```text
-┌─────────────┐    ┌─────────────────────┐    ┌─────────────────────┐
-│ Data        │───▶│ SQLMesh            │───▶│ Aurora PostgreSQL  │
-│ Sources     │    │ Orchestration      │    │ Schema & Metadata   │
-└─────────────┘    └─────────────────────┘    └─────────────────────┘
-                            │                            │
-                            ▼                            ▼
-                   ┌─────────────────────┐    ┌─────────────────────┐
-                   │ S3 Object Storage   │───▶│ DuckDB/DuckLake     │
-                   │ Data Files          │    │                     │
-                   └─────────────────────┘    └─────────────────────┘
-                                                         │
-                                                         ▼
-                                              ┌─────────────────────┐
-                                              │ Static Reports      │
-                                              └─────────────────────┘
-```
+Data Sources -> SQLMesh -> S3 Storage
+SQLMesh -> Aurora PostgreSQL
+S3 Storage -> Analytics Engine
+Analytics Engine -> Reports
+
+Data Sources: {
+  Databases
+  APIs
+  Files
+}
+
+SQLMesh: {
+  Orchestration
+  Transformation
+  Quality Checks
+}
+
+S3 Storage: Raw & Processed Data
+Aurora PostgreSQL: Metadata & Schema
+Analytics Engine: DuckDB/Athena
+
+Reports: {
+  Quarto
+  Evidence BI
+  Data API
+}
 
 ## Project Kickoff Steps
 
