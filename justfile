@@ -8,7 +8,7 @@ default:
 # === Build Commands ===
 
 # Build documentation website (includes link checking)
-build:
+build: setup
     mdbook build
 
 # Serve documentation locally (port 8080)
@@ -33,9 +33,10 @@ lint:
 
 # === Setup Commands ===
 
-# Install required tools (first time)
+# Install required tools (first time) 
 setup:
-    cargo install rumdl mdbook mdbook-pandoc mdbook-linkcheck
+    mise install
+    mise exec tinytex -- tlmgr install dejavu
 
 # === Development Commands ===
 

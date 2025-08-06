@@ -4,8 +4,7 @@
 
 | Command | Purpose |
 |---------|---------|
-| `./scripts/setup.sh` | Automated setup (first time) |  
-| `just setup` | Install tools (rumdl, mdbook, linkcheck) |
+| `just setup` | Install tools and fonts |
 | `just lint` | Lint, format check, SUMMARY.md check, and validate links |
 | `just serve` | Preview website (port 8080) |
 | `just build` | Generate website (includes link checking) |
@@ -14,10 +13,10 @@
 
 ## Quick Start
 
-1. **Open in Codespaces** - Automatic setup with all tools
-2. **Get ADR number** - `just next-number`
-3. **Create file** - Use pattern `###-short-name.md` in correct directory
-4. **Follow workflow** - See [CONTRIBUTING.md](CONTRIBUTING.md) for complete workflow, templates, and writing guidelines
+### Workflow
+1. **Get ADR number** - `just next-number`
+2. **Create file** - Use pattern `###-short-name.md` in correct directory
+3. **Follow workflow** - See [CONTRIBUTING.md](CONTRIBUTING.md) for complete workflow, templates, and writing guidelines
 
 ## PDF Generation
 

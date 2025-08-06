@@ -1,5 +1,6 @@
 # mdBook build outputs
 /book/
+/book-temp/
 
 # Vale style downloads
 /.vale/styles/

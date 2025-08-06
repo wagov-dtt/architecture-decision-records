@@ -1,15 +1,18 @@
 {
 	"name": "ADR Development Environment",
 	"image": "mcr.microsoft.com/devcontainers/base:bookworm",
+	"features": {
+    	"ghcr.io/devcontainers-extra/features/mise:1": {}
+	},
+	"customizations": {
+		"vscode": {
+		"extensions": [
+			"hverlin.mise-vscode"
+		]
+		}
+	},
 	"hostRequirements": {
 		"memory": "16gb"
 	},
-	"onCreateCommand": "scripts/setup.sh",
-	"forwardPorts": [8080],
-	"portsAttributes": {
-		"8080": {
-			"label": "Quarto Preview",
-			"onAutoForward": "openBrowser"
-		}
-	}
+	"postCreateCommand": "echo 'eval \"$(mise activate bash)\"' >> ~/.bashrc"
 }
