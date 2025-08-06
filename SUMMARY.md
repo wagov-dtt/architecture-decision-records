@@ -43,5 +43,12 @@
 
 ---
 
+# Templates
+
+- [ADR Template](templates/adr-template.md)
+- [Reference Architecture Template](templates/reference-architecture-template.md)
+
+---
+
 - [Contributing](CONTRIBUTING.md)
 - [Glossary](glossary.md)

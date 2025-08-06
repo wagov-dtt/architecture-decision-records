@@ -28,40 +28,38 @@
 
 **ADR Creation Workflow:**
 
-Environment Setup -> Content Creation -> Validation -> Publication
-
-Environment Setup: {
-  Codespace
-  Git Clone
-  Tool Setup
+```d2
+setup: Environment Setup {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1976d2"
+  }
 }
 
-Content Creation: {
-  Get ADR Number
-  Choose Template
-  Write Content
+create: Content Creation {
+  style: {
+    fill: "#e8f5e8"
+    stroke: "#388e3c"
+  }
 }
 
-Validation: {
-  Lint Check
-  Build Test
-  Link Validation
+validate: Validation {
+  style: {
+    fill: "#f3e5f5"
+    stroke: "#7b1fa2"
+  }
 }
 
-Publication: {
-  Update SUMMARY.md
-  Create PR
-  Review & Merge
+publish: Publication {
+  style: {
+    fill: "#fff3e0"
+    stroke: "#f57c00"
+  }
 }
-publication.create-pr -> publication.peer-review: PR submitted
-publication.peer-review -> publication.merge: approval received
-publication.merge: Deploy to GitHub Pages
 
-# Feedback Loops
-publication.peer-review -> creation.write-content: revision needed
-validation.build-test -> creation.write-content: fix issues
-quality-gates.standards -> creation.write-content: improve clarity
-quality-gates.references -> validation.link-validation: update links
+setup -> create -> validate -> publish
+validate -> create: fix issues
+publish -> create: revision needed
 ```
 
 ## Directory Structure
