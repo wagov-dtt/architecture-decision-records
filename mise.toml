@@ -1,17 +1,10 @@
 [tools]
-just = "latest"
-rust = "latest"
-cargo-binstall = "latest"
-"cargo:mdbook" = "latest"
 "cargo:mdbook-pandoc" = "latest"
 "cargo:mdbook-linkcheck" = "latest"
 "cargo:mdbook-d2" = "latest"
 
 pandoc = "latest"
 tinytex = "latest"
-python = "latest"
-pipx = "latest"
-"pipx:rumdl" = "latest"
 
 [tasks.build]
 description = "Build the book"

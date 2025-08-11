@@ -1,6 +1,11 @@
 [tools.cargo-binstall]
-version = "1.14.3"
+version = "1.14.4"
 backend = "aqua:cargo-bins/cargo-binstall"
+
+[tools.cargo-binstall.platforms.linux-x64]
+checksum = "blake3:b2a4a55c83830ef20d2024c5d7394df9571fecd06c24e5f99568899dc507ace0"
+size = 6715267
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.14.4/cargo-binstall-x86_64-unknown-linux-musl.tgz"
 
 [tools."cargo:mdbook"]
 version = "0.4.52"
@@ -26,21 +31,20 @@ backend = "aqua:casey/just"
 version = "3.7.0.2"
 backend = "ubi:jgm/pandoc"
 
+[tools.pandoc.platforms.linux-x64-pandoc]
+checksum = "blake3:d771aa2a0fa9e958f70ebac4511251433a5798129e4ae8b56a4a29876add0a30"
+
 [tools.pipx]
 version = "1.7.1"
 backend = "asdf:pipx"
 
 [tools."pipx:rumdl"]
-version = "0.0.106"
+version = "0.0.113"
 backend = "pipx:rumdl"
 
 [tools.python]
-version = "3.13.5"
+version = "3.13.6"
 backend = "core:python"
-
-[tools.rust]
-version = "1.88.0"
-backend = "core:rust"
 
 [tools.tinytex]
 version = "2025.08.02"

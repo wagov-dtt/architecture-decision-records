@@ -1,18 +1,7 @@
 {
-	"name": "ADR Development Environment",
-	"image": "mcr.microsoft.com/devcontainers/base:bookworm",
-	"features": {
-    	"ghcr.io/devcontainers-extra/features/mise:1": {}
-	},
-	"customizations": {
-		"vscode": {
-		"extensions": [
-			"hverlin.mise-vscode"
-		]
-		}
-	},
-	"hostRequirements": {
-		"memory": "16gb"
-	},
-	"postCreateCommand": "mise activate bash >> ~/.bashrc"
+  "name": "architecture-decision-records",
+  "image": "ghcr.io/wagov-dtt/devcontainer-base",
+  "privileged": true,
+  "mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
+  "remoteUser": "vscode"
 }
