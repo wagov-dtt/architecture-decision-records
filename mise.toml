@@ -5,6 +5,9 @@
 
 pandoc = "latest"
 tinytex = "latest"
+just = "latest"
+"cargo:mdbook" = "latest"
+"github:terrastruct/d2" = "latest"
 
 [tasks.build]
 description = "Build the book"

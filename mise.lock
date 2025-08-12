@@ -23,6 +23,15 @@ backend = "cargo:mdbook-linkcheck"
 version = "0.10.5"
 backend = "cargo:mdbook-pandoc"
 
+[tools."github:terrastruct/d2"]
+version = "0.7.0"
+backend = "github:terrastruct/d2"
+
+[tools."github:terrastruct/d2".platforms.linux-x64]
+checksum = "blake3:fbd86f8e52714daffde5b0eb746653c869ec5f3af34deda0c184ef1aaa76a251"
+size = 20550305
+url = "https://github.com/terrastruct/d2/releases/download/v0.7.0/d2-v0.7.0-linux-amd64.tar.gz"
+
 [tools.just]
 version = "1.42.4"
 backend = "aqua:casey/just"

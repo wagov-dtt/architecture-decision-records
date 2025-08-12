@@ -61,5 +61,4 @@ setup:
     mise install
     mise exec tinytex -- tlmgr install svg
     which rsvg-convert || sudo apt-get -y update && sudo apt-get install -y librsvg2-bin
-    which d2 || curl -fsSL https://d2lang.com/install.sh | sh -s --
 
