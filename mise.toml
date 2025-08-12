@@ -8,6 +8,7 @@ tinytex = "latest"
 just = "latest"
 "cargo:mdbook" = "latest"
 "github:terrastruct/d2" = "latest"
+cargo-binstall = "latest"
 
 [tasks.build]
 description = "Build the book"
