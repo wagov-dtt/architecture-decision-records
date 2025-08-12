@@ -4,8 +4,11 @@
 
 ## Context
 
-The goal is to ensure the security and integrity of containerised
-applications throughout the development lifecycle. Threat actors exploit
+The goal is to ensure the security and integrity of software and
+Infrastructure as Code (IAC) artifacts throughout the development
+lifecycle. This ADR focuses on building, testing, and assuring software
+artifacts that are then deployed via [ADR 010: Infrastructure as
+Code](../operations/010-configmgmt.md). Threat actors exploit
 vulnerabilities in code, software dependencies, build tooling, container
 images, misconfigurations, and exposed secrets.
 
@@ -17,9 +20,10 @@ images, misconfigurations, and exposed secrets.
 ## Decision
 
 To address these risks, use a CI/CD pipeline with the following
-standardised practices (or similar equivalents) before releasing code
-and build artifacts to release via [ADR 010: Infrastructure as
-Code](../operations/010-configmgmt.md):
+standardised practices (or similar equivalents) for building software
+and IAC artifacts. Infrastructure orchestration repositories should
+consume these static, built, signed, and assured artifacts per [ADR 010:
+Infrastructure as Code](../operations/010-configmgmt.md):
 
 **CI/CD Pipeline Flow:**
 
@@ -47,9 +51,14 @@ Release: {
   for CI/CD to **automate building and signing of container images**.
 - Use [Justfiles](https://just.systems/man/en/) to **manage development
   tasks**.
-- **Sign container images** with
-  [Cosign](https://github.com/sigstore/cosign) to ensure integrity and
-  authenticity.
+- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base)
+  for **standardized development environments** with pre-configured
+  tooling including Docker, Trivy, Semgrep, and cloud CLIs.
+- **Build container images** with [Docker
+  Bake](https://docs.docker.com/build/bake/) for declarative,
+  multi-platform builds with [provenance attestations and
+  SBOM](https://docs.docker.com/build/attestations/) for supply chain
+  security.
 - Integrate
   [Trivy](https://trivy.dev/latest/docs/target/container_image/) for
   **vulnerability scanning of container images**.

@@ -4,98 +4,57 @@
 
 ## Context
 
-Infrastructure as Code requires security, integrity, and state
-consistency throughout the deployment lifecycle. Configuration drift
-from manual changes and missing version control create deployment
-failures and security vulnerabilities.
+All environments must be reproducible from source to minimize drift and security risk. Manual changes and missing version control create deployment failures and vulnerabilities.
 
-- [Open Web Application Security Project (OWASP) Infrastructure as Code
-  Security
-  Guidance](https://cheatsheetseries.owasp.org/cheatsheets/Infrastructure_as_Code_Security_Cheat_Sheet.html)
-- [Australian Cyber Security Centre (ACSC) Guidelines for System
-  Hardening](https://www.cyber.gov.au/resources-business-and-government/essential-cybersecurity/ism/cybersecurity-guidelines/guidelines-system-hardening)
-- [Terraform Best
-  Practices](https://developer.hashicorp.com/terraform/cloud-docs/recommended-practices)
+**Compliance Requirements:**
+- [OWASP IaC Security](https://cheatsheetseries.owasp.org/cheatsheets/Infrastructure_as_Code_Security_Cheat_Sheet.html)
+- [ACSC System Hardening](https://www.cyber.gov.au/resources-business-and-government/essential-cybersecurity/ism/cybersecurity-guidelines/guidelines-system-hardening)
 
 ## Decision
 
-Use Infrastructure as Code with git-based workflows and state
-management:
+### Golden Path
 
-### Security & Configuration
+1. **Git Repository Structure**: Single repo per application with `environments/{dev,staging,prod}` folders matching AWS account names (e.g., `app-a-infra` repo → `app-a-dev`, `app-a-staging`, `app-a-prod` accounts)
+2. **State Management**: Terraform remote state with locking, separate state per environment
+3. **CI Pipeline**:
+   - **Validate**: Trivy scan + `terraform plan`/`kubectl diff` drift check
+   - **Plan**: Show proposed changes on PR
+   - **Apply**: Deploy on tagged release only
+4. **Versioning**: Git tags = semantic versions (x.y.z) deployable to any environment
+5. **Disaster Recovery**: Checkout tag + run `just deploy --env=prod` with static artifacts from [ADR 004](../development/004-cicd.md)
 
-- Use [Trivy](https://trivy.dev/latest/docs/configuration/) for
-  vulnerability and misconfiguration scanning
-- Use [kubectl &
-  kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/)
-  or [Terraform](https://trivy.dev/latest/docs/coverage/iac/) for
-  configuration management
-- Use [Justfiles](https://just.systems/man/en/) for operations task
-  automation
-- Follow [ADR 001: Application Isolation](../security/001-isolation.md)
-  and [ADR 005: Secrets
-  Management](../security/005-secrets-management.md)
+### Required Tools & Practices
 
-### State Management & Git Workflow
-
-- Single repository for all environment configurations with
-  environment-specific directories
-- Git tags must correspond to deployed infrastructure versions using
-  semantic versioning
-- Remote state storage with locking for Terraform, GitOps for Kubernetes
-- Environment isolation with separate state storage and cross-region
-  backup
-- Branch protection rules and required reviews for configuration changes
+| Tool | Purpose | Stage | Mandatory |
+|------|---------|-------|-----------|
+| [Trivy](https://trivy.dev/latest/docs/configuration/) | Vulnerability scanning | Validate | Yes |
+| [Terraform](https://trivy.dev/latest/docs/coverage/iac/) or [kubectl/kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) | Configuration management | Deploy | Yes |
+| [Justfiles](https://just.systems/man/en/) | Task automation | All | Recommended |
+| [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) | Dev environment | Local | Recommended |
+| [k3d](https://k3d.io/stable/) | Local testing | Dev | Optional |
 
 **Infrastructure as Code Workflow:**
 
-Git Changes -> Security Validation -> Terraform -> Environments
+```d2
+artifacts: "Static Artifacts\n(ADR 004)"
+infra_repo: "Infrastructure Repo\napp-x-infra"
+environments: "AWS Accounts\napp-x-{dev,staging,prod}"
 
-Git Changes: {
-  Pull Request
-  Review
-  Merge
-}
+artifacts -> infra_repo: "Consume"
+infra_repo -> environments: "Deploy via\nTerraform/K8s"
 
-Security Validation: {
-  Trivy Scan
-  Drift Detection
-  Policy Check
-}
-
-Terraform: {
-  State Management
-  Infrastructure Provisioning
-  GitOps Deployment
-}
-
-Environments: {
-  Development
-  Staging
-  Production
-}
-
-### Deployment Consistency
-
-- Each environment deployable from specific git tag
-- Automated drift detection and configuration validation before
-  deployment
-- Test releases locally with [k3d](https://k3d.io/stable/) and on EKS
-  per [ADR 002: AWS EKS for Cloud
-  Workloads](../operations/002-workloads.md)
+infra_repo.note: "Git tags = versions\nFolders = environments"
+environments.note: "Consistent naming\nSeparate state storage"
+```
 
 ## Consequences
 
-### Risks of not implementing
+**Without this approach**: Configuration drift, security vulnerabilities, failed rollbacks, and inconsistent environments.
 
-- Known vulnerabilities and misconfigurations deployed to production
-- Configuration drift causing deployment failures and inconsistent
-  environments
-- Exposed secrets and compliance violations
-- Failed rollbacks due to state inconsistencies
+**With this approach**: Secure, reproducible deployments with reliable disaster recovery and automated drift prevention.
 
-### Benefits
+## References
 
-- Secure, consistent infrastructure deployments
-- Reliable environment recreation from git tags
-- Automated vulnerability detection and drift prevention
+- [ADR 001: Application Isolation](../security/001-isolation.md)
+- [ADR 002: AWS EKS for Cloud Workloads](../operations/002-workloads.md)
+- [ADR 005: Secrets Management](../security/005-secrets-management.md)
