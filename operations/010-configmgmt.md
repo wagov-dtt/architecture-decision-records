@@ -36,12 +36,13 @@ All environments must be reproducible from source to minimize drift and security
 **Infrastructure as Code Workflow:**
 
 ```d2
+direction: right
+
 artifacts: "Static Artifacts\n(ADR 004)"
 infra_repo: "Infrastructure Repo\napp-x-infra"
 environments: "AWS Accounts\napp-x-{dev,staging,prod}"
 
-artifacts -> infra_repo: "Consume"
-infra_repo -> environments: "Deploy via\nTerraform/K8s"
+artifacts -> infra_repo -> environments
 
 infra_repo.note: "Git tags = versions\nFolders = environments"
 environments.note: "Consistent naming\nSeparate state storage"

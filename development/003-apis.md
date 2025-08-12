@@ -4,89 +4,51 @@
 
 ## Context
 
-A secure and maintainable Application Programming Interface (API)
-framework is key for backends and new capabilities. We need to ensure
-that our APIs use mature technologies that adhere to industry standards.
-These include the Australian Cyber Security Centre (ACSC) Information
-Security Manual (ISM), OpenAPI and Open Web Application Security Project
-(OWASP). The framework should be low in complexity to reduce maintenance
-overheads and use burdens. Where an existing mature industry standard
-exists, that interface may be more suitable than a bespoke
-Representational State Transfer (REST) API as described here.
+Secure, maintainable APIs require mature frameworks with low complexity and industry standard compliance. Where existing standards exist, prefer them over bespoke REST APIs.
 
-- [ACSC ISM Guidelines for Software
-  Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
+**Compliance Requirements:**
+- [ACSC Software Development Guidelines](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
 - [OWASP API Security](https://owasp.org/www-project-api-security/)
 - [OpenAPI Specification](https://spec.openapis.org/)
 
 ## Decision
 
-Ensure all APIs have OpenAPI documentation and
-[Restish](https://rest.sh/#/openapi) test scripts validating security
-and behaviour. New APIs should be developed with self-documenting
-frameworks such as [Huma](https://huma.rocks/) or
-[FastAPI](https://fastapi.tiangolo.com/).
+### API Requirements
+
+| Requirement | Standard | Mandatory |
+|-------------|----------|-----------|
+| **Documentation** | [OpenAPI Specification](https://spec.openapis.org/) | Yes |
+| **Testing** | [Restish CLI](https://rest.sh/#/openapi) scripts | Yes |
+| **Framework** | [Huma](https://huma.rocks/) or [FastAPI](https://fastapi.tiangolo.com/) | Recommended |
+| **Naming** | Consistent convention | Yes |
+| **Security** | OWASP API security coverage | Yes |
+| **Exposure** | No admin APIs on Internet | Yes |
+
+### Development Guidelines
+
+- **Self-Documenting**: Use frameworks that auto-generate OpenAPI specs
+- **Data Types**: Prefer standard types over custom formats
+- **Segregation**: Separate APIs by purpose
+- **Testing**: Include security vulnerability checks in test scripts
+
+**API Development Flow:**
 
 ```d2
-framework: Self-Documenting Framework {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1976d2"
-  }
-}
+direction: right
 
-openapi: OpenAPI Specification {
-  style: {
-    fill: "#e8f5e8"
-    stroke: "#388e3c"
-  }
-}
+framework: "Self-Documenting\nFramework"
+openapi: "OpenAPI\nSpecification" 
+testing: "Automated\nTesting"
 
-testing: Automated Testing {
-  style: {
-    fill: "#f3e5f5"
-    stroke: "#7b1fa2"
-  }
-}
+framework -> openapi -> testing
+framework -> testing
 
-framework -> openapi: generates docs
-framework -> testing: validates behaviour
-openapi -> testing: security checks
+openapi.note: "Auto-generated docs"
+testing.note: "Security & behaviour checks"
 ```
-
-### API requirements
-
-- **Naming Convention**: APIs **must** use a consistent naming
-  convention.
-- **Documentation**: APIs **must** be documented via the [OpenAPI
-  specification](https://spec.openapis.org/). APIs **should** have
-  test-cases developed for quality assurance and annotations documented
-  for better clarity.
-- **Automated Testing**: APIs **must** include automated test scripts
-  (preferably based on [Restish CLI](https://rest.sh/)) with coverage
-  for basic required behaviour and common API security flaws (refer
-  [OWASP API Security](https://owasp.org/www-project-api-security/)).
-- **Exposure Control**: Ensure administration/management APIs are not
-  exposed to the Internet.
-- **Frameworks:** New APIs **should** be developed with self-documenting
-  frameworks such as Huma or FastAPI.
-- **Data Types**: APIs **should** use standard data types and formats
-  where possible, avoiding custom data types.
-- **API Segregation**: APIs **should** segregate by purpose.
 
 ## Consequences
 
-If we do not develop and test APIs using the above standards we risk:
+**Without this approach**: Security vulnerabilities, documentation drift, poor quality APIs, and increased maintenance overhead.
 
-- **Security Vulnerabilities**: Using less mature programming languages
-  or less guided frameworks could lead to unintended security
-  vulnerabilities being introduced.
-- **Poor Quality**: Any manually updated specifications or test scripts
-  can drift from the primary codebase resulting in issues and system
-  faults.
-- **Poor Documentation**: Not using a framework with automated
-  documentation generation can result in documentation and tests getting
-  out of sync.
-- **Increased Maintenance**: Higher complexity frameworks would increase
-  the third party dependencies and the effort required to maintain and
-  update our APIs.
+**With this approach**: Secure, well-documented APIs with automated testing and reduced maintenance burden.
