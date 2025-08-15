@@ -47,13 +47,14 @@ cases only.
 
 ## Consequences
 
-### Benefits
+**Benefits:**
 
-- **Low Maintenance**: Static reports reduce operational overhead
-- **Security**: Reduced attack surface vs dynamic dashboards
-- **Git Integration**: Version-controlled reports ensure consistency
+- Static reports with minimal operational maintenance overhead
+- Enhanced security posture with reduced attack surface
+- Version-controlled analytics ensuring reproducible results
 
-### Trade-offs
+**Risks if not implemented:**
 
-- **Limited Interactivity**: Static reports lack real-time exploration
-- **Learning Curve**: Teams need Quarto knowledge
+- High operational overhead maintaining dynamic dashboard infrastructure
+- Security vulnerabilities from complex interactive analytics platforms
+- Inconsistent analytics outputs affecting decision making

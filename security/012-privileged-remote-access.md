@@ -1,6 +1,6 @@
 # ADR 012: Privileged Remote Access
 
-**Status:** Proposed | **Date:** 2025-07-22
+**Status:** Accepted | **Date:** 2025-08-15
 
 ## Context
 
@@ -21,6 +21,8 @@ Replace traditional bastion hosts and jump boxes with cloud-native
 privileged access solutions:
 
 ```d2
+direction: right
+
 admin: Administrator {
   style: {
     fill: "#e3f2fd"
@@ -68,29 +70,28 @@ ssm: - MFA required\n- session recording\n- audit trails
 **Access Controls:**
 
 - Multi-factor authentication for all access
-- Time-limited sessions (maximum 4 hours)
+- Time-limited sessions
 - Identity-based access through cloud IAM
 - Approval workflows for privileged access
-- Session recording and audit logging
+- Session recording and audit logging per [ADR 007: Centralised Security Logging](../operations/007-logging.md)
 
 **Implementation:**
 
 - All sessions initiated through APIs only
-- Short-lived credentials (maximum 1-hour validity)
+- Short-lived credentials
 - Real-time monitoring and alerting
 - Integration with SIEM systems
-- Emergency break-glass procedures with full audit
 
 ## Consequences
 
-**Risks of not implementing:**
-
-- Unauthorized lateral movement through network connections
-- Persistent access leading to prolonged breaches
-- Non-compliance with zero-trust principles
-
 **Benefits:**
 
-- Significantly reduced attack surface
-- Enhanced audit capabilities and compliance
-- Better credential security through short-lived tokens
+- Zero-trust network access with session recording
+- Enhanced audit capabilities through centralised logging
+- Short-lived credential security reducing persistent threats
+
+**Risks if not implemented:**
+
+- Unauthorised lateral movement across network systems
+- Prolonged security breaches from persistent access
+- Non-compliance with government zero-trust requirements

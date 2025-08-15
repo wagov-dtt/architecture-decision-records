@@ -36,16 +36,14 @@ dual backup strategy.
 
 ## Consequences
 
-### Benefits
+**Benefits:**
 
-- **Cost Efficiency**: Serverless scaling reduces costs during low usage
-- **Low Maintenance**: Managed service with automatic scaling and high
-  availability
-- **Compliance**: Dual backup strategy meets jurisdiction requirements
+- Serverless scaling reducing operational costs during low usage periods
+- Automated high availability with managed backup strategies per [ADR 014: Object Backup](014-object-backup.md)
+- Compliance with jurisdiction requirements through dual backup approach
 
-### Trade-offs
+**Risks if not implemented:**
 
-- **Vendor Lock-in**: AWS-specific (consider [Percona
-  Everest](https://www.percona.com/software/percona-everest) or
-  [Pigsty](https://pigsty.io/) for development/non-AWS)
-- **Cold Start**: Brief delays when scaling from zero
+- High operational overhead managing database infrastructure
+- Inconsistent backup strategies across database systems
+- Cost inefficiency from overprovisioned database resources

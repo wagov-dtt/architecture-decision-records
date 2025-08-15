@@ -39,19 +39,14 @@ and product boundaries.
 
 ## Consequences
 
-If applications and environments are not isolated by default, the
-following consequences may arise:
+**Benefits:**
 
-1. **Increased Risk of Compromise**: A vulnerability in one application
-    can lead to the compromise of other applications or the entire
-    environment.
-2. **Difficulty in Incident Response**: Without isolation, it becomes
-    challenging to contain and mitigate security incidents.
-3. **Compliance Issues**: Failure to isolate environments may lead to
-    non-compliance with regulatory requirements and industry standards.
-4. **Data Breaches**: Sensitive data may expose or stolen due to
-    unauthorised access from the lack of isolation.
+- Network microsegmentation preventing lateral movement
+- Simplified incident containment and forensic analysis
+- Compliance with regulatory isolation requirements
 
-By adopting this decision, we aim to enhance the security posture of our
-systems, reduce the risk of security incidents, and ensure compliance
-with relevant standards and regulations.
+**Risks if not implemented:**
+
+- Single vulnerability compromising multiple applications
+- Difficult incident response across shared environments
+- Data breaches through unauthorised cross-system access
