@@ -35,15 +35,16 @@ storage and AWS load balancers for traffic management.
 
 ## Consequences
 
-If we do not adopt this approach, we risk the following:
+**Benefits:**
 
-- **Inefficient Resource Usage**: Manual scaling and management can lead
-  to over-provisioning or under-provisioning of resources.
-- **Increased Operational Overhead**: Managing bespoke workload tooling
-  or kubernetes clusters and underlying infrastructure manually can be
-  time-consuming and error-prone.
-- **Security Risks**: Operating system, network and workload
-  orchestration updates and patches can lead to security vulnerabilities
-  if not managed.
-- **Reduced Availability**: Self managing storage and nodepools , the
-  system may not handle traffic spikes, leading to downtime.
+- Efficient resource utilisation through managed scaling
+- Reduced operational overhead via managed services
+- Enhanced security through automatic updates and patches
+- Improved availability with managed storage and node pools
+
+**Risks if not implemented:**
+
+- Resource inefficiency from manual scaling
+- High operational overhead managing custom infrastructure
+- Security vulnerabilities from delayed updates
+- Service downtime during traffic spikes

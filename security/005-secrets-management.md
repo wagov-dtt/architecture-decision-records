@@ -53,25 +53,18 @@ to store and manage secrets.
 
 ## Consequences
 
-Positive:
+**Benefits:**
 
-- **Automated Management**: Reduces human error and ensures consistent
-  updates.
-- **Compliance**: Meets auditing and compliance requirements.
+- Automated secret rotation reduces human error
+- Meets compliance and auditing requirements
+- Enhanced security through centralized management
 
-Negative:
+**Risks if not implemented:**
 
-- **Dependency on AWS**: Using AWS Secrets Manager for all secrets could
-  make future migrations of AWS difficult. Ensuring secret rotation is
-  straightforward and documented should minimise this consequence.
+- Security exposure from manual secret handling
+- Operational overhead and error-prone processes
+- Non-compliance with security requirements
 
-Risks of not implementing:
+**Trade-offs:**
 
-- **Security Risk**: Regular handling or manual handling of secrets
-  increases exposure risk.
-- **Operational Overhead**: Manual processes for configuring and
-  rotating secrets can be error-prone and inefficient.
-
-By implementing this decision, we aim to enhance the security and
-efficiency of our secret management processes, ensuring that sensitive
-information is handled securely and automatically.
+- AWS vendor dependency may complicate future migrations

@@ -79,14 +79,14 @@ For any questions or issues, please contact [Contact Information].
 
 ## Consequences
 
-**Risks of not implementing**:
+**Benefits:**
 
-- Miscommunication between teams.
-- Loss of context leading to weakened decision making procedures.
+- Standardised release communication improving cross-team coordination
+- Comprehensive change tracking supporting [ADR 007: Centralised Security Logging](../operations/007-logging.md)
+- Enhanced collaboration through consistent documentation processes
 
-**Positive Consequences**:
+**Risks if not implemented:**
 
-- Improved clarity and consistency in communicating release updates.
-- Consistent tracking of changes and updates for security and
-  infrastructure teams.
-- Enhanced collaboration and understanding across teams.
+- Critical release information lost between development teams
+- Poor decision making from insufficient release context
+- Security incidents from undocumented system changes

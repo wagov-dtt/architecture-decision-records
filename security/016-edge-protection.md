@@ -1,6 +1,6 @@
 # ADR 016: Web Application Edge Protection
 
-**Status:** Proposed | **Date:** 2025-07-22
+**Status:** Accepted | **Date:** 2025-08-15
 
 ## Context
 
@@ -29,11 +29,32 @@ References:
 All public web applications and APIs must use CDN with integrated WAF
 protection:
 
+```d2
+direction: right
+
+Internet: Internet/Users
+CDN: CDN Edge Servers
+WAF: Web Application Firewall
+LoadBalancer: Load Balancer
+App1: Web App 1
+App2: Web App 2
+Shield: DDoS Protection
+SIEM: SIEM System
+
+Internet -> CDN -> WAF -> LoadBalancer
+LoadBalancer -> App1
+LoadBalancer -> App2
+CDN -> Shield: monitors
+WAF -> SIEM: logs
+
+
+```
+
 **CDN Requirements:**
 
 - Geographic distribution with SSL/TLS termination at edge
 - Cache optimization and origin shielding
-- IPv6 dual-stack support
+- IPv6 dual-stack support on edge (internal use of IPv4 allowed)
 
 **WAF Protection:**
 
@@ -57,14 +78,16 @@ protection:
 
 ## Consequences
 
-**Risks of not implementing:**
-
-- Service disruption from DDoS attacks
-- Exploitation of web application vulnerabilities
-- Poor performance and user experience
-
 **Benefits:**
 
-- Significant reduction in successful attacks
-- Improved application performance and availability
-- Enhanced security posture at network edge
+- Automated threat detection and mitigation at network edge
+- Global content delivery and caching capabilities
+- Comprehensive attack surface reduction through filtering
+- Real-time traffic analysis and bot management
+
+**Risks if not implemented:**
+
+- Critical citizen services disrupted by attacks
+- Direct server exposure to malicious traffic
+- Slow response times affecting user adoption
+- No early warning of emerging attack patterns

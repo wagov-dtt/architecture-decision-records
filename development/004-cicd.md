@@ -48,9 +48,18 @@ release.note: "Consumed by\nADR 010 (Infrastructure)"
 
 ## Consequences
 
-**Without this approach**: Vulnerable containers deployed, exposed secrets, compromised application integrity, and compliance violations.
+**Benefits:**
 
-**With this approach**: Secure, tested artifacts with automated vulnerability remediation and compliance alignment.
+- Automated security scanning and vulnerability remediation
+- Standardised artifact integrity and compliance alignment
+- Consistent deployment pipelines with audit trails
+
+**Risks if not implemented:**
+
+- Vulnerable containers deployed to production
+- Exposed secrets in application artifacts
+- Manual security processes prone to human error
+- Compliance violations and audit failures
 
 ## References
 

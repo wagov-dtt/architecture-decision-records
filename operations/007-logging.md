@@ -41,18 +41,14 @@ CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatI
 
 ## Consequences
 
-Risks of not implementing:
+**Benefits:**
 
-- Decentralized logs may lead to delayed detection and response to
-  security incidents.
-- Increased risk of sensitive information exposure leading to potential
-  data breaches and non-compliance with regulations.
-- Incomplete audit trails may hinder forensic investigations and
-  compliance audits.
+- Faster incident detection and response
+- Simplified compliance with data protection regulations
+- Centralised security log management reduces operational overhead
 
-Benefits:
+**Risks if not implemented:**
 
-- Improved incident detection and response times.
-- Simplified compliance with data protection regulations.
-- Centralized management of security logs, reducing operational
-  overhead.
+- Delayed security incident detection from decentralised logs
+- Sensitive information exposure leading to data breaches
+- Incomplete audit trails hindering forensic investigations

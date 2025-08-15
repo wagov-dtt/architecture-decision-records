@@ -72,16 +72,14 @@ systems and data.
 
 ## Consequences
 
-**Risks of not implementing:**
+**Benefits:**
 
-- Permanent data loss from single point of failure
-- Extended recovery times during disasters
-- Compliance violations from inadequate data retention
-- Regional outages affecting backup availability
-
-**Benefits of implementation:**
-
-- Automated recovery capabilities meeting defined RTO/RPO objectives
+- Automated disaster recovery meeting defined RTO/RPO objectives
+- Geographic redundancy protecting against regional outages
 - Compliance with government data retention requirements
-- Geographic redundancy protecting against regional disasters
-- Reduced operational overhead through automated lifecycle management
+
+**Risks if not implemented:**
+
+- Permanent data loss from infrastructure failures
+- Extended service recovery times affecting citizen services
+- Regulatory violations from inadequate data protection

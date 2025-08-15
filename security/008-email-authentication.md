@@ -1,6 +1,6 @@
 # ADR 008: Email Authentication Protocols
 
-**Status:** Proposed | **Date:** 2025-07-22
+**Status:** Accepted | **Date:** 2025-08-15
 
 ## Context
 
@@ -43,14 +43,14 @@ Implement email authentication standards for all government domains:
 
 ## Consequences
 
-**Risks of not implementing:**
-
-- Email spoofing and phishing attacks using government domains
-- Brand reputation damage and reduced email deliverability
-- Compliance violations with security requirements
-
 **Benefits:**
 
-- Significant reduction in email-based attacks
-- Enhanced brand protection and email trust
-- Improved compliance and threat visibility
+- Automated email authentication blocking domain spoofing
+- Enhanced brand protection and citizen trust
+- Comprehensive threat visibility through DMARC reporting
+
+**Risks if not implemented:**
+
+- Phishing attacks exploiting government domain reputation
+- Reduced email deliverability affecting citizen communications
+- Non-compliance with government security requirements

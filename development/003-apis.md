@@ -49,6 +49,14 @@ testing.note: "Security & behaviour checks"
 
 ## Consequences
 
-**Without this approach**: Security vulnerabilities, documentation drift, poor quality APIs, and increased maintenance overhead.
+**Benefits:**
 
-**With this approach**: Secure, well-documented APIs with automated testing and reduced maintenance burden.
+- Standardised API documentation automatically generated from code
+- Enhanced security through consistent validation patterns
+- Reduced maintenance overhead via automated testing integration
+
+**Risks if not implemented:**
+
+- Documentation drift creating integration difficulties
+- Security vulnerabilities from inconsistent API patterns
+- Increased development time debugging undocumented APIs
