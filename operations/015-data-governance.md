@@ -35,14 +35,14 @@ git-based workflows.
 
 ## Consequences
 
-### Benefits
+**Benefits:**
 
-- **Automated Governance**: SQLMesh reduces manual governance overhead
-- **Git-Based Workflow**: Familiar version control approach
-- **Built-in Validation**: Immediate feedback on quality and contract
-  violations
+- Automated data quality validation and contract enforcement
+- Git-based workflow with familiar version control processes
+- Immediate feedback preventing data governance violations
 
-### Trade-offs
+**Risks if not implemented:**
 
-- **SQLMesh Dependency**: Governance tied to SQLMesh framework
-- **Learning Curve**: Teams need SQLMesh knowledge
+- Manual data governance creating operational overhead
+- Inconsistent data quality across analytics pipelines
+- Undetected contract violations affecting downstream systems

@@ -64,7 +64,7 @@ config: - detect drift\n- monitor rules
   via security groups
 - **Security Group References**: Use security group IDs instead of
   hardcoded IP addresses for dynamic, maintainable access policies
-- **Shield Advanced**: DDoS protection and egress intrusion detection
+- **Shield Advanced**: DDoS protection per [ADR 016: Web Application Edge Protection](../security/016-edge-protection.md) and egress intrusion detection
   for public-facing resources
 - **VPC Flow Logs**: Complete egress traffic monitoring and analysis per
   [WA SOC Cyber Network Management
@@ -89,29 +89,22 @@ capabilities.
 - **Network Segmentation**: Security group-based micro-segmentation over
   IP-based rules
 
+**Implementation Requirements:**
+
+- Implement policy validation in CI/CD pipelines following [ADR 010: Infrastructure as Code](010-configmgmt.md)
+- Use security group references over hardcoded IP addresses for maintainable policies
+- Monitor VPC Flow Logs for egress traffic analysis and anomaly detection
+
 ## Consequences
 
 **Benefits:**
 
-- Proactive prevention of security misconfigurations through Control
-  Tower guardrails
-- Complete egress traffic visibility and monitoring capabilities
-- Dynamic, maintainable access policies using security group references
-- Centralised network access management via Transit Gateway
-- Automated compliance with jurisdiction requirements
-- DDoS protection for critical public resources
+- Proactive security misconfiguration prevention through automated guardrails
+- Comprehensive egress traffic visibility via [ADR 007: Centralised Security Logging](007-logging.md)
+- Centralised network access management reducing operational complexity
 
-**Risks:**
+**Risks if not implemented:**
 
-- Dependency on AWS native services for policy enforcement
-- Complexity in multi-account Transit Gateway routing
-- Potential performance impact from comprehensive logging
-
-**Mitigation:**
-
-- Implement policy validation in CI/CD pipelines following [ADR 010:
-  Infrastructure as Code](010-configmgmt.md)
-- Use security group references over hardcoded IPs for maintainable
-  policies
-- Monitor VPC Flow Logs for egress traffic analysis and anomaly
-  detection
+- Security misconfigurations deploying to production environments
+- Unmonitored egress traffic enabling data exfiltration
+- Fragmented access policies creating security gaps

@@ -50,9 +50,17 @@ environments.note: "Consistent naming\nSeparate state storage"
 
 ## Consequences
 
-**Without this approach**: Configuration drift, security vulnerabilities, failed rollbacks, and inconsistent environments.
+**Benefits:**
 
-**With this approach**: Secure, reproducible deployments with reliable disaster recovery and automated drift prevention.
+- Reproducible infrastructure deployments with version control
+- Automated drift detection and prevention mechanisms
+- Reliable disaster recovery through infrastructure as code
+
+**Risks if not implemented:**
+
+- Configuration drift creating security vulnerabilities
+- Failed rollbacks during critical incident recovery
+- Inconsistent environments affecting application reliability
 
 ## References
 

@@ -1,6 +1,6 @@
 # ADR 013: Identity Federation Standards
 
-**Status:** Proposed | **Date:** 2025-07-29
+**Status:** Accepted | **Date:** 2025-08-15
 
 ## Context
 
@@ -37,13 +37,13 @@ systems that cannot support OIDC.
 
 **Architecture Requirements:**
 
-- Applications must integrate through managed identity platforms, not
+- Applications should integrate through managed identity platforms, not
   directly with identity providers
 - Separate privileged and standard user domains for clear administrative
   access isolation
 - Support multiple upstream identity providers per application
 - Maintain audit trails distinguishing privileged from standard user
-  activities
+  activities per [ADR 007: Centralised Security Logging](../operations/007-logging.md)
 
 **Identity Federation Flow:**
 
@@ -98,6 +98,12 @@ Admin Apps -> User Data: admin access
   verifiable credentials to simplify adoption of federated identity with
   jurisdiction providers
 
+**Implementation Requirements:**
+
+- Implement fallback authentication mechanisms for critical systems
+- Choose identity platforms with high availability and data export capabilities
+- Maintain audit trails following [ADR 007: Centralised Security Logging](../operations/007-logging.md)
+
 ## Consequences
 
 **Benefits:**
@@ -108,16 +114,10 @@ Admin Apps -> User Data: admin access
 - Simplified integration with jurisdiction citizen identity services
 - Clear separation of administrative and standard user access
 
-**Risks:**
+**Risks if not implemented:**
 
-- Legacy systems may require SAML-to-OIDC translation overhead
-- Dependency on external identity provider availability
-- Additional complexity from managed identity platform requirements
+- Fragmented authentication systems across applications
+- Legacy SAML limitations hindering citizen service integration
+- Inconsistent security posture across identity touchpoints
 
-**Mitigation:**
 
-- Implement fallback authentication mechanisms for critical systems
-- Choose identity platforms with high availability and data export
-  capabilities
-- Maintain audit trails following [ADR 007: Centralized Security
-  Logging](../operations/007-logging.md)
