@@ -4,7 +4,7 @@
 
 ## Context
 
-Generative AI tool use for development and operation functinos process sensitive data and
+Generative AI tool use for development and operation functions process sensitive data and
 can make automated decisions affecting security, privacy, and
 compliance. Without governance ensuring human oversight of AI decisions,
 these tools pose significant risks including unauthorized data exposure,
