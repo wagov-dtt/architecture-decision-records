@@ -73,7 +73,7 @@ Any generative AI tools must not:
 
 - AI tools must run in isolated or local environments (refer to [ADR 001: Application Isolation](001-isolation.md)) with minimal permissions
 - No network access to internal systems or databases
-- Techinical guardrails to protect against exfiltration and malicious commands
+- Technical guardrails to protect against exfiltration and malicious commands
 
 ## Consequences
 
