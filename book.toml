@@ -23,7 +23,7 @@ inline = false
 [output.pandoc.profile.pdf]
 output-file = "architecture-decision-records.pdf"
 to = "latex"
-pdf-engine = "lualatex"
+pdf-engine = "pdflatex"
 number-sections = false
 
 [output.pandoc.profile.pdf.variables]

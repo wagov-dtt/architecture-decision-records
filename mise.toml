@@ -2,9 +2,6 @@
 "cargo:mdbook-pandoc" = "latest"
 "cargo:mdbook-linkcheck" = "latest"
 "cargo:mdbook-d2" = "latest"
-
-pandoc = "latest"
-tinytex = "latest"
 just = "latest"
 "cargo:mdbook" = "latest"
 "github:terrastruct/d2" = "latest"

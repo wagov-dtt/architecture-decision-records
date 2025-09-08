@@ -36,25 +36,10 @@ url = "https://github.com/terrastruct/d2/releases/download/v0.7.0/d2-v0.7.0-linu
 version = "1.42.4"
 backend = "aqua:casey/just"
 
-[tools.pandoc]
-version = "3.7.0.2"
-backend = "ubi:jgm/pandoc"
-
-[tools.pandoc.platforms.linux-x64-pandoc]
-checksum = "blake3:d771aa2a0fa9e958f70ebac4511251433a5798129e4ae8b56a4a29876add0a30"
-
 [tools.pipx]
 version = "1.7.1"
 backend = "asdf:pipx"
 
-[tools."pipx:rumdl"]
-version = "0.0.113"
-backend = "pipx:rumdl"
-
 [tools.python]
 version = "3.13.6"
 backend = "core:python"
-
-[tools.tinytex]
-version = "2025.08.02"
-backend = "asdf:tinytex"

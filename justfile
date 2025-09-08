@@ -59,6 +59,5 @@ clean:
 [group('setup')]
 setup:
     mise install
-    mise exec tinytex -- tlmgr install svg
-    which rsvg-convert || sudo apt-get -y update && sudo apt-get install -y librsvg2-bin
+    which pandoc || sudo apt-get -y update && sudo apt-get install -y pandoc texlive texlive-pictures librsvg2-bin
 
