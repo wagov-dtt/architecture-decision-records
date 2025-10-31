@@ -19,7 +19,7 @@ Secure, maintainable APIs require mature frameworks with low complexity and indu
 |-------------|----------|-----------|
 | **Documentation** | [OpenAPI Specification](https://spec.openapis.org/) | Yes |
 | **Testing** | [Restish CLI](https://rest.sh/#/openapi) scripts | Yes |
-| **Framework** | [Huma](https://huma.rocks/) or [FastAPI](https://fastapi.tiangolo.com/) | Recommended |
+| **Framework** | [Huma](https://huma.rocks/) or [Litestar](https://litestar.dev/) | Recommended |
 | **Naming** | Consistent convention | Yes |
 | **Security** | OWASP API security coverage | Yes |
 | **Exposure** | No admin APIs on Internet | Yes |
