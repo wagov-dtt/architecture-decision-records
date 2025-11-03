@@ -32,6 +32,7 @@ storage and AWS load balancers for traffic management.
 - **Managed Storage and NodePools**: Ensure that the underlying
   infrastructure is maintained and updated by AWS.
 - **Load Balancers**: Standardise ingress and traffic management.
+- **Persistent Storage** Databases and object storage should be DBaaS to enable higher resilience for PITR/backups with lower overheads as per [ADR 018: Database Patterns](../operations/018-database-patterns.md)
 
 ## Consequences
 
@@ -51,14 +52,13 @@ storage and AWS load balancers for traffic management.
 
 ## Strategic Research
 
-Analysis like [Cloud services and government digital sovereignty in Australia and beyond. / Mitchell, Andrew D.; Samlidis, Theodore.](https://research.monash.edu/en/publications/cloud-services-and-government-digital-sovereignty-in-australia-an/) in the [International Journal of Law and Information Technology, Vol. 29, No. 4, 2021, p. 364-394](https://academic.oup.com/ijlit/issue/29/4) highlights the ongoing issues with depending on hyperscalers in a single country. Based on this changing landscape, exploring simplified options for
-secure sovereign owned hosting options such as [Australian Dedicated Servers](https://www.micron21.com/enterprise/dedicated-servers) and [local colo](https://www.hostingcertification.gov.au/certified-service-providers) in Tier 3+ datacentres (designed for 99.98% uptime) is warranted and touched on below.
+Analysis like [Cloud services and government digital sovereignty in Australia and beyond. / Mitchell, Andrew D.; Samlidis, Theodore.](https://research.monash.edu/en/publications/cloud-services-and-government-digital-sovereignty-in-australia-an/) in the [International Journal of Law and Information Technology, Vol. 29, No. 4, 2021, p. 364-394](https://academic.oup.com/ijlit/issue/29/4) highlights the ongoing issues with depending on hyperscalers in a single foreign jurisdiction. Based on this changing landscape, exploring simplified options for secure sovereign owned hosting options such as [Australian Dedicated Servers](https://www.micron21.com/enterprise/dedicated-servers) and [local colo](https://www.hostingcertification.gov.au/certified-service-providers) in Tier 3+ datacentres (designed for 99.98% uptime) is warranted and touched on below.
 
 ### Bare metal management
 
 Use a platform like [Proxmox VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) to run standalone clusters at multiple facilities with multiple 2U servers per location. Example hardware (starts approx $15k AUD per server) - [Dell PowerEdge R7725](https://www.dell.com/en-au/shop/cty/pdp/spd/poweredge-r7725), [HPE ProLiant DL385 Gen11](https://www.hpe.com/au/en/hpe-proliant-dl385-gen11.html), [Lenovo ThinkSystem SR665 V3](https://www.lenovo.com/au/en/p/servers-storage/servers/racks/thinksystem-sr665-v3/len21ts0009)
 
 Year 1 estimated costs:
-- Hardware: $156,000–$180,000
-- Colo (2 sites, Tier 3+): $26,400–$36,000
-- Total: $182,400–$216,000 for 1.5TB ram, 288cores across 2 clusters and 30TB disk (3 replicas)
+- Hardware: ~$200k for 6x ~$33k servers
+- Colo (2 sites, Tier 3+): [~$50k for 2x 5kw racks](https://www.micron21.com/enterprise/colocation-full-rack-pricing) with 1 Gbit IP Transit
+- Total: $250k for ~2-3TB ram, ~500 cores, 100TB disk across 2 sites (reduce by a factor of 2-3 for redundancy)
