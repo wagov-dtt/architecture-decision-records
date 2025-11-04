@@ -19,7 +19,7 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 | Stage | Tools | Purpose | Mandatory |
 |-------|-------|---------|-----------|
 | **Build** | [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
-| **Scan** | [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Vulnerability scanning | Yes |
+| **Scan** | [scc](https://github.com/boyter/scc), [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Complexity & Vulnerability scanning | Yes |
 | **Analysis** | [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) | Static code analysis | Yes |
 | **Test** | [Playwright](https://playwright.dev/docs/intro) | End-to-end testing | Recommended |
 | **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
