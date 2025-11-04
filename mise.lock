@@ -1,4 +1,4 @@
-[tools.cargo-binstall]
+[[tools.cargo-binstall]]
 version = "1.14.4"
 backend = "aqua:cargo-bins/cargo-binstall"
 
@@ -7,39 +7,42 @@ checksum = "blake3:b2a4a55c83830ef20d2024c5d7394df9571fecd06c24e5f99568899dc507a
 size = 6715267
 url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.14.4/cargo-binstall-x86_64-unknown-linux-musl.tgz"
 
-[tools."cargo:mdbook"]
+[[tools."cargo:mdbook"]]
 version = "0.4.52"
 backend = "cargo:mdbook"
 
-[tools."cargo:mdbook-d2"]
+[[tools."cargo:mdbook-d2"]]
 version = "0.3.6"
 backend = "cargo:mdbook-d2"
 
-[tools."cargo:mdbook-linkcheck"]
+[[tools."cargo:mdbook-linkcheck"]]
 version = "0.7.7"
 backend = "cargo:mdbook-linkcheck"
 
-[tools."cargo:mdbook-pandoc"]
+[[tools."cargo:mdbook-pandoc"]]
 version = "0.10.5"
 backend = "cargo:mdbook-pandoc"
 
-[tools."github:terrastruct/d2"]
-version = "0.7.0"
-backend = "github:terrastruct/d2"
-
-[tools."github:terrastruct/d2".platforms.linux-x64]
-checksum = "blake3:fbd86f8e52714daffde5b0eb746653c869ec5f3af34deda0c184ef1aaa76a251"
-size = 20550305
-url = "https://github.com/terrastruct/d2/releases/download/v0.7.0/d2-v0.7.0-linux-amd64.tar.gz"
-
-[tools.just]
+[[tools.just]]
 version = "1.42.4"
 backend = "aqua:casey/just"
 
-[tools.pipx]
+[tools.just.platforms.linux-x64]
+checksum = "sha256:678efc1cfbd5fa5a88375daa7e2f3864a049d6d63a0296df925a2ae5f516cb56"
+size = 2003117
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-x86_64-unknown-linux-musl.tar.gz"
+
+[[tools.pipx]]
 version = "1.7.1"
 backend = "asdf:pipx"
 
-[tools.python]
+[[tools.python]]
 version = "3.13.6"
 backend = "core:python"
+
+[[tools."ubi:terrastruct/d2"]]
+version = "0.7.1"
+backend = "ubi:terrastruct/d2"
+
+[tools."ubi:terrastruct/d2".platforms.linux-x64-d2]
+checksum = "blake3:9db74292c0d7bac851e0e0a27cd713a2318d521925bcb01651db489aa8eb07c8"
