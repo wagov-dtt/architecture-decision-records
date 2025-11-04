@@ -18,8 +18,8 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 
 | Stage | Tools | Purpose | Mandatory |
 |-------|-------|---------|-----------|
-| **Build** | [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
-| **Scan** | [scc](https://github.com/boyter/scc), [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Complexity & Vulnerability scanning | Yes |
+| **Build** | [Railpack](https://railpack.com/getting-started) and [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
+| **Scan** | [scc](https://github.com/boyter/scc) and [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Complexity and Vulnerability scanning | Yes |
 | **Analysis** | [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) | Static code analysis | Yes |
 | **Test** | [Playwright](https://playwright.dev/docs/intro) | End-to-end testing | Recommended |
 | **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
@@ -28,6 +28,7 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 ### Development Environment
 
 - Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) for standardized tooling
+- Use [Railpack](https://railpack.com/getting-started) and [Docker Bake](https://docs.docker.com/build/bake/) to define and standardise build processes
 - Use [Justfiles](https://just.systems/man/en/) for task automation  
 - Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) for CI/CD automation
 
