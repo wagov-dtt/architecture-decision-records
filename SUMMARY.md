@@ -52,3 +52,4 @@
 
 - [Contributing](CONTRIBUTING.md)
 - [Glossary](glossary.md)
+- [AI Agents](AGENTS.md)

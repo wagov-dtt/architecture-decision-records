@@ -15,6 +15,7 @@ separation between user-facing and administrative operations.
 
 ## Core Components
 
+```d2
 API Clients -> Edge Protection -> Routing
 
 Routing -> Standard APIs: api.domain
@@ -37,6 +38,8 @@ Admin APIs: {
 Standard APIs -> User Database
 Admin APIs -> System Database
 Admin APIs -> User Database: admin access
+```
+
 **Standard APIs** (`/api/v1/*`): Business operations for authenticated
 users
 

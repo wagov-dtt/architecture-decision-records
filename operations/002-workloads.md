@@ -52,6 +52,20 @@ storage and AWS load balancers for traffic management.
 
 ## Strategic Research
 
+### CNCF Kubernetes AI Conformance
+
+The [CNCF Kubernetes AI Conformance Program](https://www.cncf.io/blog/2025/01/15/introducing-the-kubernetes-ai-conformance-program/) establishes standards for AI/ML workload portability across Kubernetes platforms. Only platforms meeting these standards should be supported, ensuring workloads can interoperate as flexible nodes within a broader state/federal ecosystem.
+
+**Current Platform Conformance:**
+
+- AWS EKS meets proposed standards: [k8s-ai-conformance EKS](https://github.com/cncf-ai/k8s-ai-conformance/blob/main/v1.34/eks/PRODUCT.yaml), [AI on EKS](https://awslabs.github.io/data-on-eks/docs/ai-ml/trainium)
+
+**HPC Requirements:**
+
+Physical infrastructure for HPC projects must meet CNCF Kubernetes AI Conformance capabilities. This ensures models developed on local compute can scale to centralised HPC facilities without environment mismatches. Target sovereign Australian platforms meeting security and privacy requirements (ASD IRAP, PRIS).
+
+### Digital Sovereignty
+
 Analysis like [Cloud services and government digital sovereignty in Australia and beyond. / Mitchell, Andrew D.; Samlidis, Theodore.](https://research.monash.edu/en/publications/cloud-services-and-government-digital-sovereignty-in-australia-an/) in the [International Journal of Law and Information Technology, Vol. 29, No. 4, 2021, p. 364-394](https://academic.oup.com/ijlit/issue/29/4) highlights the ongoing issues with depending on hyperscalers in a single foreign jurisdiction. Based on this changing landscape, exploring simplified options for secure sovereign owned hosting options such as [Australian Dedicated Servers](https://www.micron21.com/enterprise/dedicated-servers) and [local colo](https://www.hostingcertification.gov.au/certified-service-providers) in Tier 3+ datacentres (designed for 99.98% uptime) is warranted and touched on below.
 
 ### Bare metal management

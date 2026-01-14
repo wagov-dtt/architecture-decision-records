@@ -20,7 +20,7 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 |-------|-------|---------|-----------|
 | **Build** | [Railpack](https://railpack.com/getting-started) and [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
 | **Scan** | [scc](https://github.com/boyter/scc) and [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Complexity and Vulnerability scanning | Yes |
-| **Analysis** | [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) | Static code analysis | Yes |
+| **Analysis** | [GitHub CodeQL](https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql) | Static code analysis | Yes |
 | **Test** | [Playwright](https://playwright.dev/docs/intro) | End-to-end testing | Recommended |
 | **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
 | **API** | [Restish](https://rest.sh/#/guide) | API validation per [ADR 003](../development/003-apis.md) | Optional |
@@ -39,7 +39,7 @@ direction: right
 
 code: "Code Commit"
 build: "Build & Test\nDocker Bake + SBOM"
-qa: "Quality Assurance\nTrivy + Semgrep"
+qa: "Quality Assurance\nTrivy + CodeQL"
 release: "Release\nStatic Artifacts"
 
 code -> build -> qa -> release

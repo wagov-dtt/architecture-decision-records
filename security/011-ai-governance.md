@@ -31,6 +31,7 @@ References:
   Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)
 - [Privacy Act 1988](https://www.legislation.gov.au/Series/C2004A03712)
 - [WA Government Artificial Intelligence Policy and Assurance Framework](https://www.wa.gov.au/government/publications/wa-government-artificial-intelligence-policy-and-assurance-framework)
+- [Linux Foundation Agentic AI Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation)
 
 ## Decision
 
@@ -74,6 +75,16 @@ Any generative AI tools must not:
 - AI tools must run in isolated or local environments (refer to [ADR 001: Application Isolation](001-isolation.md)) with minimal permissions
 - No network access to internal systems or databases
 - Technical guardrails to protect against exfiltration and malicious commands
+
+## Strategic Research
+
+The following AI-assisted security tools are under investigation for potential future adoption:
+
+| Tool | Purpose | Status | Links |
+|------|---------|--------|-------|
+| [ZeroPath](https://zeropath.com/) | AI-powered security code review and vulnerability detection | Under Investigation | [Documentation](https://docs.zeropath.com/), [GitHub](https://github.com/zeropath-ai) |
+
+These tools are being evaluated for alignment with the human oversight requirements outlined in this ADR. Any adoption will require demonstrated compliance with mandatory requirements above.
 
 ## Consequences
 

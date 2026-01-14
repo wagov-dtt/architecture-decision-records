@@ -16,6 +16,7 @@ analytics engines (DuckDB/DuckLake) or legacy engines
 
 ## Core Components
 
+```d2
 Data Sources -> SQLMesh -> S3 Storage
 SQLMesh -> Aurora PostgreSQL
 S3 Storage -> Analytics Engine
@@ -42,6 +43,7 @@ Reports: {
   Evidence BI
   Data API
 }
+```
 
 ## Project Kickoff Steps
 

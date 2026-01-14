@@ -1,4 +1,22 @@
-# Development Guide
+# AI Agent Guide
+
+This repository is designed for use by AI coding agents (primarily [Goose](https://github.com/block/goose))
+to assist with architecture decisions and implementation.
+
+## Philosophy
+
+This guide aligns with pragmatic engineering principles:
+
+- **[The Grug Brained Developer](https://grugbrain.dev/)**: Prefer simplicity over complexity. "Complexity very bad."
+  Choose boring technology, avoid over-engineering, and make systems easy to understand and debug.
+- **[CNCF](https://www.cncf.io/) / [Linux Foundation](https://www.linuxfoundation.org/)**: Preference for open-source,
+  cloud-native technologies with strong community governance. Avoid vendor lock-in where practical.
+
+## Getting Started
+
+1. **Review the [Architecture Principles](architecture-principles.md)** - Foundation for all decisions
+2. **Browse [Reference Architectures](reference-architectures/)** - Project kickoff templates combining multiple ADRs
+3. **Search ADRs by domain** - `security/`, `operations/`, `development/`
 
 ## Essential Commands
 
@@ -24,9 +42,8 @@ just --list
     setup         # Install required tools and dependencies
 ```
 
-## Quick Start
+## Workflow
 
-### Workflow
 1. **Get ADR number** - `just next-number`
 2. **Create file** - Use pattern `###-short-name.md` in correct directory
 3. **Follow workflow** - See [CONTRIBUTING.md](CONTRIBUTING.md) for complete workflow, templates, and writing guidelines
@@ -46,7 +63,7 @@ just --list
 ## Automated Workflows
 
 - **Website deployment** - Automatically builds and deploys to GitHub Pages on push to `main`
-- **PDF generation** - Automatically creates and attaches PDFs to GitHub releases  
+- **PDF generation** - Automatically creates and attaches PDFs to GitHub releases
 - **Chapter ordering** - Files sorted numerically by ADR number
 
 ## mdBook Project Notes
@@ -62,6 +79,7 @@ just --list
 **Keep simple:** Maximum 5-7 components, clear labels, logical flow, consistent colors.
 
 **Example:**
+
 ```d2
 user: User -> api: API -> backend: Backend
 api: requests/responses
