@@ -23,9 +23,22 @@ platform](https://www.cncf.io/training/certification/software-conformance/#logos
 with automatically managed infrastructure resources. Due to hyperscaler
 availability and size [AWS EKS (Elastic Kubernetes
 Service)](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
-in auto mode is the preferred option. This leverages Kubernetes for orchestration, AWS
-EKS for managed Kubernetes services, AWS Elastic Block Store (EBS) for
-storage and AWS load balancers for traffic management.
+in auto mode is the preferred option.
+
+```d2
+direction: right
+
+users: Users
+lb: Load Balancer
+eks: EKS Cluster
+db: DBaaS
+
+users -> lb -> eks -> db
+```
+
+This leverages Kubernetes for orchestration, AWS EKS for managed
+Kubernetes services, AWS Elastic Block Store (EBS) for storage and AWS
+load balancers for traffic management.
 
 - **AWS EKS Auto Mode**: Provide a managed Kubernetes service, that
   automatically scales the infrastructure based on workload demands.

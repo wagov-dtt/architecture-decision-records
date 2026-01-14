@@ -19,7 +19,7 @@ Adopt a standardised release notes template in
 [Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 format. Brief descriptions should include the security implications and
 operational impacts of changes such as vulnerability fixes, compliance
-improvements, or changes to authentication and authorization mechanisms.
+improvements, or changes to authentication and authorisation mechanisms.
 Descriptions should also detail operational aspects, including
 deployment processes, logging & monitoring considerations, and any
 modifications to Infrastructure as Code (IaC).

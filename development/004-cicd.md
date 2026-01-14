@@ -28,7 +28,7 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 
 ### Development Environment
 
-- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) for standardized tooling
+- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) for standardised tooling
 - Use [Railpack](https://railpack.com/getting-started) and [Docker Bake](https://docs.docker.com/build/bake/) to define and standardise build processes
 - Use [Justfiles](https://just.systems/man/en/) for task automation  
 - Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) for CI/CD automation

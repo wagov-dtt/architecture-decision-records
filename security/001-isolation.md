@@ -19,8 +19,19 @@ enable the spread of malware, unauthorised access, and data breaches.
 ## Decision
 
 To mitigate the risks associated with shared environments, all
-applications and environments should isolate by default. This isolation
-can be achieved through the following approaches (strongest to weakest):
+applications and environments should isolate by default.
+
+```d2
+direction: right
+
+account: Cloud Account
+cluster: K8s Cluster
+namespace: Namespace
+
+account -> cluster -> namespace: nested isolation
+```
+
+This isolation can be achieved through the following approaches (strongest to weakest):
 
 1. **Dedicated Accounts**: Use separate cloud accounts / resource
     groups for different environments (for example, development,

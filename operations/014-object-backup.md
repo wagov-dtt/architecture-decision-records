@@ -27,9 +27,33 @@ References:
 
 ## Decision
 
-Implement standardized object storage backup solution with automated
+Implement standardised object storage backup solution with automated
 cross-region replication and lifecycle management for all critical
 systems and data.
+
+```d2
+direction: down
+
+workloads: Workloads
+
+primary_s3: Primary S3 Buckets (versioned)
+dbaas: DBaaS
+backup_s3: Backup S3 Bucket
+
+workloads -> primary_s3
+workloads -> dbaas
+dbaas -> backup_s3: automated exports
+
+replica_s3: Replica S3 Bucket (Cross-Region)
+primary_s3 -> replica_s3: S3 replication
+backup_s3 -> replica_s3: S3 replication
+```
+
+All storage (primary, backup, and replica) uses S3 buckets with
+versioning and immutable retention policies. Primary S3 buckets use
+native versioning for point-in-time recovery. DBaaS exports to backup
+buckets. Both primary and backup buckets replicate cross-region for
+geographic redundancy.
 
 **Storage Requirements:**
 

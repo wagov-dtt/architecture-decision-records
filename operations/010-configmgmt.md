@@ -4,7 +4,7 @@
 
 ## Context
 
-All environments must be reproducible from source to minimize drift and security risk. Manual changes and missing version control create deployment failures and vulnerabilities.
+All environments must be reproducible from source to minimise drift and security risk. Manual changes and missing version control create deployment failures and vulnerabilities.
 
 **Compliance Requirements:**
 

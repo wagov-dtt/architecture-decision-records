@@ -56,7 +56,7 @@ The architecture consists of three layers:
     identity service deployment and data separation
 2. **Security & Secrets** - Follow [ADR 005: Secrets
     Management](../security/005-secrets-management.md) for OIDC client
-    secrets and [ADR 007: Centralized Security
+    secrets and [ADR 007: Centralised Security
     Logging](../operations/007-logging.md) for authentication audit
     trails
 3. **Identity Federation** - Follow [ADR 013: Identity Federation

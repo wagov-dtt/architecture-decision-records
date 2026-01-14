@@ -54,5 +54,5 @@ The two endpoints use separate authentication realms per [ADR 013: Identity Fede
 5. **Database & Secrets** - Follow [ADR 018: Database
     Patterns](../operations/018-database-patterns.md) and [ADR 005:
     Secrets Management](../security/005-secrets-management.md)
-6. **Logging & Monitoring** - Follow [ADR 007: Centralized Security
+6. **Logging & Monitoring** - Follow [ADR 007: Centralised Security
     Logging](../operations/007-logging.md) for audit trails

@@ -54,7 +54,7 @@ cdn -> users: deliver
 1. **Configure Secrets Management** - Follow [ADR 005: Secrets
     Management](../security/005-secrets-management.md) for database
     credentials and API keys
-2. **Setup Logging** - Follow [ADR 007: Centralized Security
+2. **Setup Logging** - Follow [ADR 007: Centralised Security
     Logging](../operations/007-logging.md) for audit trails and
     editorial tracking
 3. **Setup Backup Strategy** - Follow [ADR 014: Object Storage
@@ -90,7 +90,7 @@ cdn -> users: deliver
 **Performance & SEO:**
 
 - Setup SEO metadata management and structured data (JSON-LD)
-- Implement content performance monitoring per [ADR 007: Centralized
+- Implement content performance monitoring per [ADR 007: Centralised
   Security Logging](../operations/007-logging.md)
 - Configure CDN caching strategies and cache invalidation
-- Setup content analytics and user behavior tracking
+- Setup content analytics and user behaviour tracking

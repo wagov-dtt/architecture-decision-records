@@ -25,7 +25,7 @@ enterprise systems.
 
 ## Decision
 
-Standardize on OpenID Connect (OIDC) as the primary federation protocol
+Standardise on OpenID Connect (OIDC) as the primary federation protocol
 for all new identity integrations, with SAML 2.0 support only for legacy
 systems that cannot support OIDC.
 

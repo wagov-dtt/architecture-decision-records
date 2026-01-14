@@ -8,10 +8,10 @@ Per the [Open Web Application Security Project (OWASP) Secrets
 Management Cheat
 Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html):
 
-> Organizations face a growing need to centralize the storage,
+> Organisations face a growing need to centralise the storage,
 > provisioning, auditing, rotation and management of secrets to control
 > access to secrets and prevent them from leaking and compromising the
-> organization. Often, services share the same secrets, which makes
+> organisation. Often, services share the same secrets, which makes
 > identifying the source of compromise or leak challenging.
 
 To address these challenges, we need a standardised, auditable approach
@@ -61,7 +61,7 @@ to store and manage secrets.
 
 - Automated secret rotation reduces human error
 - Meets compliance and auditing requirements
-- Enhanced security through centralized management
+- Enhanced security through centralised management
 
 **Risks if not implemented:**
 
