@@ -4,15 +4,13 @@
 
 ## Context
 
-Generative AI tool use for development and operation functions process sensitive data and
-can make automated decisions affecting security, privacy, and
-compliance. Without governance ensuring human oversight of AI decisions,
-these tools pose significant risks including unauthorized data exposure,
-biased decision-making, and compliance violations. The highest risk
-areas are AI tools that process sensitive data or make decisions
-without explicit human approval.
+Generative AI tools used for development and operations can process
+sensitive data and make automated decisions affecting security, privacy,
+and compliance. Without governance ensuring human oversight, these tools
+pose significant risks including unauthorized data exposure, biased
+decision-making, and compliance violations.
 
-Current high-risk scenarios include:
+High-risk scenarios include:
 
 - **Automated Decision-Making**: AI tools making policy, approval, or
   resource allocation decisions without human review
@@ -30,8 +28,13 @@ References:
 - [WA Cyber Security
   Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy)
 - [Privacy Act 1988](https://www.legislation.gov.au/Series/C2004A03712)
-- [WA Government Artificial Intelligence Policy and Assurance Framework](https://www.wa.gov.au/government/publications/wa-government-artificial-intelligence-policy-and-assurance-framework)
-- [Linux Foundation Agentic AI Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation)
+- [WA Government Artificial Intelligence Policy and Assurance
+  Framework](https://www.wa.gov.au/government/publications/wa-government-artificial-intelligence-policy-and-assurance-framework)
+- [Linux Foundation Agentic AI
+  Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation)
+- [Oxide RFD 576: Using LLMs at
+  Oxide](https://rfd.shared.oxide.computer/rfd/0576) - values-based
+  approach to AI tool governance
 
 ## Decision
 
@@ -41,10 +44,13 @@ generate outputs used in official capacity.
 
 **Human Oversight Requirements:**
 
-All AI tools must ensure:
+Adopt a values-based approach to AI governance (per [Oxide RFD
+576](https://rfd.shared.oxide.computer/rfd/0576)):
 
-- **Human-in-the-Loop**: No automated AI decisions without explicit
-  human review and approval
+- **Responsibility**: Humans bear responsibility for AI-generated
+  artifacts - the tool acts at human behest
+- **Rigor**: AI should promote and reinforce rigorous thinking, not
+  replace it with generated content
 - **Output Validation**: All AI-generated content must be reviewed by
   qualified humans before use
 - **Decision Accountability**: Clear human responsibility for all
@@ -52,29 +58,36 @@ All AI tools must ensure:
 
 **Covered AI Tools:**
 
+This ADR applies to all AI tools including:
+
 - Development and coding assistance tools
 - Content generation and writing assistants
 - Data analysis and business intelligence platforms
+- Automated testing and code review tools
+
+**Requirements:**
+
+AI tools must not:
+
+- Automatically perform actions in customer-facing environments or on
+  production infrastructure
+- Process sensitive data with third parties without a formal
+  contractual arrangement
+- Automatically merge or release changes without human review
+
+AI tools must:
+
+- Run in isolated or local environments (refer to [ADR 001: Application
+  Isolation](001-isolation.md)) with minimal permissions
+- Have no direct network access to internal systems or databases
+- Include technical guardrails against data exfiltration
 
 **Implementation Examples:**
 
-- **Endorsed**: Independently assured developer tooling with human code review processes for all generated code
-- **Rejected**: Automated bug fixing tools that merge pull requests or push releases
-  without human review
-
-**Mandatory Requirements:**
-
-Any generative AI tools must not:
-
-- Automatically perform actions in customer facing environments or on production infrastructure.
-- Process sensitive data with third parties that are not governed by a formal contractual arrangement.
-- Automatically merge or release changes without human review and approval.
-
-**Technical Implementation:**
-
-- AI tools must run in isolated or local environments (refer to [ADR 001: Application Isolation](001-isolation.md)) with minimal permissions
-- No network access to internal systems or databases
-- Technical guardrails to protect against exfiltration and malicious commands
+- **Endorsed**: Developer tooling with human code review for all
+  generated code before merge
+- **Rejected**: Automated tools that merge pull requests or deploy
+  without human approval
 
 ## Strategic Research
 

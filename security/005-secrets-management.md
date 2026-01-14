@@ -33,23 +33,27 @@ to store and manage secrets.
 
 - Secrets should be fetched and securely injected into AWS resources at
   runtime.
-- The secret rotation period (lifetime) must be captured in the system
-  design.
-  - Rotate secrets automatically where possible, or ensure that a manual
-    rotation process is documented and followed.
+- The secret rotation period must be captured in the system design.
+  Recommended rotation periods:
+  - **Database credentials**: 30-90 days (automate via Secrets Manager)
+  - **API keys**: 90 days or on suspected compromise
+  - **Certificates**: Before expiry (automate via ACM where possible)
+- Rotate secrets automatically where possible, or ensure that a manual
+  rotation process is documented and followed.
 - [Use Identity and Access Management (IAM) policy
   statements](https://docs.aws.amazon.com/secretsmanager/latest/userguide/best-practices.html#w21aab9c19)
-  to use least-privilege access to secrets.
+  to enforce least-privilege access to secrets.
+
+**Kubernetes Integration:**
+
 - [ADR 002: AWS EKS for Cloud
   Workloads](../operations/002-workloads.md) kubernetes workloads
   should use [EKS Key Management Service (KMS) secrets
   encryption](https://docs.aws.amazon.com/eks/latest/userguide/enable-kms.html)
-  with namespace local secrets by default.
-
-  - If secrets need to be accessed by several clusters, use [External
-    Secrets Operator](https://external-secrets.io/latest/) to
-    synchronise them from the primary secret store in AWS Secrets
-    Manager.
+  with namespace-local secrets by default.
+- If secrets need to be accessed by multiple clusters, use [External
+  Secrets Operator](https://external-secrets.io/latest/) to
+  synchronise them from AWS Secrets Manager.
 
 ## Consequences
 

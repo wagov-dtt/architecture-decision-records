@@ -6,9 +6,10 @@
 
 Security logs should be centrally collected to support monitoring,
 detection, and response capabilities across workloads. Sensitive
-information logging must minimize to follow data protection regulations
-and reduce the risk of data breaches. Audit and authentication logs are
-critical for security monitoring and should collect by default.
+information logging must be minimised to follow data protection
+regulations and reduce the risk of data breaches. Audit and
+authentication logs are critical for security monitoring and should be
+collected by default.
 
 - [Open Web Application Security Project (OWASP) Logging Cheat
   Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
@@ -19,25 +20,29 @@ critical for security monitoring and should collect by default.
 
 ## Decision
 
-Use centralized logging using [Microsoft
+Use centralised logging using [Microsoft
 Sentinel](https://soc.cyber.wa.gov.au/onboarding/sentinel-guidance/) and
 [Amazon
 CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 
+**Configuration:**
+
 - Configure default collection for audit and authentication logs to
   simplify security investigations.
 - Container workloads should configure [Container insights with enhanced
-  observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-EKS.html) +
-  [EKS control plane
+  observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-EKS.html)
+  and [EKS control plane
   logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
-  of audit and authentication logs by default.
-- Logging should configure to avoid capturing and exposing Personally
+  for audit and authentication logs by default.
+- Configure logging to avoid capturing and exposing Personally
   Identifiable Information (PII).
-- Review and update logging configurations to ensure coverage and
-  privacy requirements meet.
-- Log information used during an investigation should extract and
-  archive to an appropriate location (in alignment with record keeping
-  requirements).
+
+**Operations:**
+
+- Review and update logging configurations regularly to ensure coverage
+  and privacy requirements are met.
+- Extract and archive log information used during investigations to an
+  appropriate location (in alignment with record keeping requirements).
 
 ## Consequences
 

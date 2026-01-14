@@ -23,31 +23,16 @@ privileged access solutions:
 ```d2
 direction: right
 
-admin: Administrator {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1976d2"
-  }
-}
+admin: Administrator
+ssm: Session Manager
+systems: Target Systems
 
-ssm: AWS Session Manager {
-  style: {
-    fill: "#e8f5e8"
-    stroke: "#388e3c"
-  }
-}
-
-systems: Target Systems {
-  style: {
-    fill: "#f3e5f5"
-    stroke: "#7b1fa2"
-  }
-}
-
-admin -> ssm: authenticated access
-ssm -> systems: temporary sessions
-ssm: - MFA required\n- session recording\n- audit trails
+admin -> ssm: MFA + identity
+ssm -> systems: temporary session
 ```
+
+Session Manager provides MFA enforcement, session recording, and audit
+trails without persistent network access.
 
 **Prohibited Methods:**
 
@@ -64,8 +49,9 @@ ssm: - MFA required\n- session recording\n- audit trails
   (replaces persistent VPN)  
 - **Kubernetes Access**: kubectl with IAM authentication (replaces
   cluster SSH)
-- **Infrastructure Deployment**: Terraform Cloud with audit trails
-  (replaces manual deployment)
+- **Infrastructure Deployment**: Infrastructure as Code with audit
+  trails per [ADR 010: Infrastructure as
+  Code](../operations/010-configmgmt.md) (replaces manual deployment)
 
 **Access Controls:**
 

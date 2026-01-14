@@ -25,14 +25,26 @@ Implement email authentication standards for all government domains:
 
 **Required Standards:**
 
-- **SPF**: Publish records defining authorized mail servers with strict
-  policies (“~all” or “-all”)
+- **SPF**: Publish records defining authorized mail servers. Use "-all"
+  (hard fail) for domains with well-defined mail infrastructure; use
+  "~all" (soft fail) only during initial rollout or when third-party
+  senders are being onboarded.
 - **DKIM**: Sign all outbound email with minimum 2048-bit RSA keys,
-  rotate annually
-- **DMARC**: Progress from “p=none” to “p=reject” with subdomain
-  policies and reporting
+  rotate annually.
+- **DMARC**: Implement with a progression timeline:
+  1. Start with "p=none" to collect reports (2-4 weeks)
+  2. Move to "p=quarantine" once legitimate sources are aligned (4-8
+      weeks)
+  3. Progress to "p=reject" when reports show minimal false positives
+  - Include "rua=" for aggregate reports and "ruf=" for forensic reports
+  - Apply same policy to subdomains with "sp=reject"
+- **MTA-STS**: Publish MTA-STS policy to enforce TLS for inbound mail
+  transport.
+
+**Recommended:**
+
 - **BIMI**: Implement verified brand logos with Verified Mark
-  Certificates (VMCs)
+  Certificates (VMCs) for high-profile citizen-facing domains.
 
 **Implementation:**
 

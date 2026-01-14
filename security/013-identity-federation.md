@@ -17,6 +17,11 @@ enterprise systems.
 - [Digital ID Act 2024](https://www.legislation.gov.au/Details/C2024A00069)
 - [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)
 - [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- [EU Digital Identity Wallet Architecture and Reference Framework
+  (ARF)](https://eudi.dev/) - European digital wallet standards
+- [ISO/IEC 18013-5:2021 Mobile Driving
+  Licence](https://www.iso.org/standard/69084.html) - mobile document
+  (mDL) standard for verifiable credentials
 
 ## Decision
 
@@ -37,79 +42,57 @@ systems that cannot support OIDC.
 
 **Architecture Requirements:**
 
-- Applications should integrate through managed identity platforms, not
-  directly with identity providers
-- Separate privileged and standard user domains for clear administrative
-  access isolation
+- Applications should integrate through managed identity platforms (AWS
+  Cognito, Microsoft Entra ID), not directly with identity providers
+- Separate privileged and standard user domains for administrative
+  access isolation (see [Reference Architecture: OpenAPI
+  Backend](../reference-architectures/openapi-backends.md))
 - Support multiple upstream identity providers per application
-- Maintain audit trails distinguishing privileged from standard user
-  activities per [ADR 007: Centralised Security Logging](../operations/007-logging.md)
+- Maintain audit trails per [ADR 007: Centralised Security
+  Logging](../operations/007-logging.md)
 
 **Identity Federation Flow:**
 
 ```d2
-Users -> Identity Providers -> Managed Platform
+direction: right
 
-Identity Providers: {
-  OIDC: {style.fill: "#4caf50"}
-  SAML: {style.fill: "#ff9800"}
-  Legacy: {style.fill: "#757575"}
-}
+users: Users
+providers: Identity Providers
+platform: Managed Platform
+apps: Applications
 
-Managed Platform: {
-  Token Validation
-  Protocol Translation
-  Audit Logging
-}
-
-# Domain Separation
-Managed Platform -> Standard Apps: {
-  style.stroke: "#1565c0"
-  style.stroke-width: 3
-}
-
-Managed Platform -> Admin Apps: {
-  style.stroke: "#c62828"
-  style.stroke-width: 3
-}
-
-Standard Apps: {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1565c0"
-  }
-}
-
-Admin Apps: {
-  style: {
-    fill: "#ffebee"
-    stroke: "#c62828"
-  }
-}
-
-Standard Apps -> User Data
-Admin Apps -> System Data
-Admin Apps -> User Data: admin access
+users -> providers: authenticate
+providers -> platform: OIDC/SAML tokens
+platform -> apps: validated claims
 ```
+
+The managed platform handles protocol translation between OIDC and SAML
+providers, token validation, and audit logging.
 
 **Emerging Standards:**
 
-- Client applications can leverage emerging OIDC standards around
-  verifiable credentials to simplify adoption of federated identity with
-  jurisdiction providers
+- Support [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
+  for jurisdiction identity services as they mature
+- Plan for [OpenID4VC](https://openid.net/openid4vc/) wallet-based
+  authentication patterns
+- Align with [EU Digital Identity Wallet
+  (EUDI)](https://eudi.dev/) architecture for international
+  interoperability
+- Support [ISO/IEC 18013-5](https://www.iso.org/standard/69084.html)
+  mobile document (mDL) credentials for government-issued identity
 
 **Implementation Requirements:**
 
 - Implement fallback authentication mechanisms for critical systems
-- Choose identity platforms with high availability and data export capabilities
-- Maintain audit trails following [ADR 007: Centralised Security Logging](../operations/007-logging.md)
+- Choose identity platforms with high availability and data export
+  capabilities
 
 ## Consequences
 
 **Benefits:**
 
 - Consistent modern federation standard across all applications
-- Better security through OIDC’s improved token handling and PKCE
+- Better security through OIDC's improved token handling and PKCE
   support
 - Simplified integration with jurisdiction citizen identity services
 - Clear separation of administrative and standard user access

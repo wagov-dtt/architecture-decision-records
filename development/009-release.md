@@ -5,10 +5,10 @@
 ## Context
 
 To ensure clear communication of changes and updates to security and
-infrastructure operations teams, release notes should standardize. The
-release notes should succinctly capture key information, including new
-features, improvements, bug fixes, security updates, and infrastructure
-changes, with links to relevant changelogs.
+infrastructure operations teams, release notes should be standardised.
+The release notes should succinctly capture key information, including
+new features, improvements, bug fixes, security updates, and
+infrastructure changes, with links to relevant changelogs.
 
 - [Australian Cyber Security Centre (ACSC) Guidelines for Software
   Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
@@ -28,13 +28,13 @@ modifications to Infrastructure as Code (IaC).
 
 - Create a git tag for each release following semantic versioning
   (v1.0.0, v1.1.0, etc.)
-- Tags must annotate with release notes summary
-- Tags should create after all ADR acceptance and README updates
+- Tags must be annotated with release notes summary
+- Tags should be created after all ADR acceptance and README updates
 - Tag message should reference the release documentation
 
-A template provide below that can tailor per project. A completed
-release notes Markdown document should provide with all proposed
-changes.
+A template is provided below that can be tailored per project. A
+completed release notes Markdown document should be provided with all
+proposed changes.
 
 ``` markdown
 ## Release Notes

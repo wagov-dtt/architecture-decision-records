@@ -29,7 +29,7 @@ All environments must be reproducible from source to minimize drift and security
 | Tool | Purpose | Stage | Mandatory |
 |------|---------|-------|-----------|
 | [Trivy](https://trivy.dev/latest/docs/configuration/) | Vulnerability scanning | Validate | Yes |
-| [Terraform](https://trivy.dev/latest/docs/coverage/iac/) or [kubectl/kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) | Configuration management | Deploy | Yes |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) or [kubectl/kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) | Configuration management | Deploy | Yes |
 | [Justfiles](https://just.systems/man/en/) | Task automation | All | Recommended |
 | [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) | Dev environment | Local | Recommended |
 | [k3d](https://k3d.io/stable/) | Local testing | Dev | Optional |
@@ -39,15 +39,17 @@ All environments must be reproducible from source to minimize drift and security
 ```d2
 direction: right
 
-artifacts: "Static Artifacts\n(ADR 004)"
-infra_repo: "Infrastructure Repo\napp-x-infra"
-environments: "AWS Accounts\napp-x-{dev,staging,prod}"
+artifacts: Static Artifacts
+repo: Infrastructure Repo
+envs: AWS Accounts
 
-artifacts -> infra_repo -> environments
-
-infra_repo.note: "Git tags = versions\nFolders = environments"
-environments.note: "Consistent naming\nSeparate state storage"
+artifacts -> repo: versioned
+repo -> envs: deploy
 ```
+
+Git tags represent deployable versions. Environment folders
+(`environments/{dev,staging,prod}`) map to separate AWS accounts with
+isolated state storage.
 
 ## Consequences
 

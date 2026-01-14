@@ -20,7 +20,7 @@ Secure, maintainable APIs require mature frameworks with low complexity and indu
 |-------------|----------|-----------|
 | **Documentation** | [OpenAPI Specification](https://spec.openapis.org/) | Yes |
 | **Testing** | [Restish CLI](https://rest.sh/#/openapi) scripts | Yes |
-| **Framework** | [Huma](https://huma.rocks/) or [Litestar](https://litestar.dev/) | Recommended |
+| **Framework** | [Huma](https://huma.rocks/) (Go), [Litestar](https://litestar.dev/) (Python), or equivalent | Recommended |
 | **Naming** | Consistent convention | Yes |
 | **Security** | OWASP API security coverage | Yes |
 | **Exposure** | No admin APIs on Internet | Yes |
@@ -29,7 +29,8 @@ Secure, maintainable APIs require mature frameworks with low complexity and indu
 
 - **Self-Documenting**: Use frameworks that auto-generate OpenAPI specs
 - **Data Types**: Prefer standard types over custom formats
-- **Segregation**: Separate APIs by purpose
+- **Segregation**: Separate APIs by purpose (see [Reference Architecture:
+  OpenAPI Backend](../reference-architectures/openapi-backends.md))
 - **Testing**: Include security vulnerability checks in test scripts
 
 **API Development Flow:**
@@ -37,16 +38,16 @@ Secure, maintainable APIs require mature frameworks with low complexity and indu
 ```d2
 direction: right
 
-framework: "Self-Documenting\nFramework"
-openapi: "OpenAPI\nSpecification" 
-testing: "Automated\nTesting"
+framework: Framework
+openapi: OpenAPI Spec
+testing: Automated Tests
 
-framework -> openapi -> testing
-framework -> testing
-
-openapi.note: "Auto-generated docs"
-testing.note: "Security & behaviour checks"
+framework -> openapi: generates
+openapi -> testing: validates
 ```
+
+Use self-documenting frameworks that generate OpenAPI specifications,
+then validate with automated security and behaviour tests.
 
 ## Consequences
 

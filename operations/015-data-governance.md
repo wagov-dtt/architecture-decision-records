@@ -11,7 +11,12 @@ Data pipelines require governance to ensure quality and compliance. Modern appro
 
 ## Decision
 
-Use code-based data governance with git workflows. Data transformations written in [Ibis](https://ibis-project.org/) are version-controlled, testable, and provide implicit lineage through code dependencies.
+Use code-based data governance with git workflows. Data transformations
+written in [Ibis](https://ibis-project.org/) are version-controlled,
+testable, and provide implicit lineage through code dependencies. See
+[Reference Architecture: Data
+Pipelines](../reference-architectures/data-pipelines.md) for full
+implementation patterns.
 
 ### Priority Focus Areas
 

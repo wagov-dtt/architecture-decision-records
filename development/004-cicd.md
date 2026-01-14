@@ -38,15 +38,17 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 ```d2
 direction: right
 
-code: "Code Commit"
-build: "Build & Test\nDocker Bake + SBOM"
-qa: "Quality Assurance\nTrivy + CodeQL"
-release: "Release\nStatic Artifacts"
+code: Code Commit
+build: Build
+scan: Scan + Analyse
+release: Release
 
-code -> build -> qa -> release
-
-release.note: "Consumed by\nADR 010 (Infrastructure)"
+code -> build -> scan -> release
 ```
+
+Build produces container images with SBOM/provenance. Scan runs
+vulnerability and static analysis. Release produces static artifacts
+consumed by [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
 
 ## Consequences
 

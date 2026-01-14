@@ -15,39 +15,18 @@ Implement comprehensive automated policy enforcement using AWS native
 services for governance, network security, and access control.
 
 ```d2
-control_tower: AWS Control Tower {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1976d2"
-  }
-}
+direction: right
 
-transit_gw: Transit Gateway {
-  style: {
-    fill: "#e8f5e8"
-    stroke: "#388e3c"
-  }
-}
+governance: Governance
+network: Network Security
+workloads: Workloads
 
-security_groups: Security Groups {
-  style: {
-    fill: "#f3e5f5"
-    stroke: "#7b1fa2"
-  }
-}
-
-config: AWS Config {
-  style: {
-    fill: "#fff3e0"
-    stroke: "#f57c00"
-  }
-}
-
-control_tower -> config: compliance monitoring
-control_tower -> security_groups: policy enforcement
-transit_gw -> security_groups: network access
-config: - detect drift\n- monitor rules
+governance -> network: policies
+network -> workloads: access control
 ```
+
+Governance (Control Tower, Config) enforces policies on network security
+(Transit Gateway, Security Groups), which controls access to workloads.
 
 ### Governance Foundation
 
@@ -64,8 +43,9 @@ config: - detect drift\n- monitor rules
   via security groups
 - **Security Group References**: Use security group IDs instead of
   hardcoded IP addresses for dynamic, maintainable access policies
-- **Shield Advanced**: DDoS protection per [ADR 016: Web Application Edge Protection](../security/016-edge-protection.md) and egress intrusion detection
-  for public-facing resources
+- **Shield Advanced**: DDoS protection for public-facing resources per
+  [ADR 016: Web Application Edge
+  Protection](../security/016-edge-protection.md)
 - **VPC Flow Logs**: Complete egress traffic monitoring and analysis per
   [WA SOC Cyber Network Management
   Guideline](https://soc.cyber.wa.gov.au/guidelines/network-management/)

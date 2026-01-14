@@ -19,7 +19,20 @@ jurisdiction-compliant backup strategies.
 Use [Aurora Serverless
 v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
 outside EKS clusters with automated scaling, multi-AZ deployment, and
-dual backup strategy. For datalakes, use SQL engines over object storage like [DuckLake](https://ducklake.select/) over [AWS S3](https://ducklake.select/docs/stable/duckdb/usage/choosing_storage) or [Trino](https://trino.io/docs/current/connector/iceberg.html) over [S3 tables](https://aws.amazon.com/blogs/storage/query-amazon-s3-tables-from-open-source-trino-using-apache-iceberg-rest-endpoint/)
+dual backup strategy.
+
+**Datalakes:** Use SQL engines over object storage:
+
+- [DuckLake](https://ducklake.select/) over [AWS
+  S3](https://ducklake.select/docs/stable/duckdb/usage/choosing_storage)
+  for simpler analytical workloads
+- [Trino](https://trino.io/docs/current/connector/iceberg.html) over [S3
+  Tables](https://aws.amazon.com/blogs/storage/query-amazon-s3-tables-from-open-source-trino-using-apache-iceberg-rest-endpoint/)
+  for larger-scale data processing
+
+See [Reference Architecture: Data
+Pipelines](../reference-architectures/data-pipelines.md) for full
+datalake patterns.
 
 ### Implementation
 
@@ -32,7 +45,7 @@ dual backup strategy. For datalakes, use SQL engines over object storage like [D
   credential management
 - **Backup**: Follow [ADR 014: Object Storage
   Backups](014-object-backup.md) plus AWS automated snapshots
-- **Security**: Follow [ADR 007: Centralized Security
+- **Security**: Follow [ADR 007: Centralised Security
   Logging](007-logging.md) and [ADR 012: Privileged Remote
   Access](../security/012-privileged-remote-access.md)
 

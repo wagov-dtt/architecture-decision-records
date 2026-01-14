@@ -32,23 +32,16 @@ protection:
 ```d2
 direction: right
 
-Internet: Internet/Users
-CDN: CDN Edge Servers
-WAF: Web Application Firewall
-LoadBalancer: Load Balancer
-App1: Web App 1
-App2: Web App 2
-Shield: DDoS Protection
-SIEM: SIEM System
+users: Internet Users
+cdn: CDN + WAF
+apps: Applications
 
-Internet -> CDN -> WAF -> LoadBalancer
-LoadBalancer -> App1
-LoadBalancer -> App2
-CDN -> Shield: monitors
-WAF -> SIEM: logs
-
-
+users -> cdn: requests
+cdn -> apps: filtered traffic
 ```
+
+The CDN edge handles SSL termination, caching, WAF filtering, and DDoS
+mitigation before traffic reaches application infrastructure.
 
 **CDN Requirements:**
 
@@ -71,7 +64,8 @@ WAF -> SIEM: logs
 
 **Implementation:**
 
-- WAF logs integrated with SIEM systems
+- WAF logs integrated with SIEM per [ADR 007: Centralised Security
+  Logging](../operations/007-logging.md)
 - Fail-secure configuration (no fail-open)
 - Regular penetration testing and rule tuning
 - CI/CD integration for automated deployments

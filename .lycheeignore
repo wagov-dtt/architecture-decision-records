@@ -12,4 +12,6 @@ digitalidsystem.gov.au
 hostingcertification.gov.au
 finance.gov.au
 dta.gov.au
+
+# CI/build tool sites that timeout
 kubectl.docs.kubernetes.io

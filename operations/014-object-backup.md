@@ -49,10 +49,10 @@ systems and data.
 
 **Geographic Distribution:**
 
-- Cross-region replication within Australia
-- Multi-cloud backup for critical systems
+- Cross-region replication within Australia (e.g., ap-southeast-2 to
+  ap-southeast-4)
 - Monitoring integration per [ADR 007: Centralised Security
-  Logging](../operations/007-logging.md)
+  Logging](007-logging.md)
 
 **Lifecycle Management:**
 

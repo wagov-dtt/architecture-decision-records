@@ -6,7 +6,7 @@
 
 Organisations want to efficiently manage and scale bespoke workloads in a
 secure and scalable manner. Traditional server management can be
-cumbersome and inefficient for dynamic workloads. Provider specific
+cumbersome and inefficient for dynamic workloads. Provider-specific
 control planes can result in lock-in and artificial constraints limiting
 technology options.
 
@@ -32,7 +32,10 @@ storage and AWS load balancers for traffic management.
 - **Managed Storage and NodePools**: Ensure that the underlying
   infrastructure is maintained and updated by AWS.
 - **Load Balancers**: Standardise ingress and traffic management.
-- **Persistent Storage** Databases and object storage should be DBaaS to enable higher resilience for PITR/backups with lower overheads as per [ADR 018: Database Patterns](../operations/018-database-patterns.md)
+- **Persistent Storage:** Databases and object storage should use
+  Database-as-a-Service (DBaaS) to enable higher resilience for
+  point-in-time recovery (PITR) and backups with lower overheads as per
+  [ADR 018: Database Patterns](018-database-patterns.md)
 
 ## Consequences
 
@@ -62,7 +65,12 @@ The [CNCF Kubernetes AI Conformance Program](https://www.cncf.io/blog/2025/11/11
 
 **HPC Requirements:**
 
-Physical infrastructure for HPC projects must meet CNCF Kubernetes AI Conformance capabilities. This ensures models developed on local compute can scale to centralised HPC facilities without environment mismatches. Target sovereign Australian platforms meeting security and privacy requirements (ASD IRAP, PRIS).
+Physical infrastructure for HPC (High-Performance Computing) projects
+must meet CNCF Kubernetes AI Conformance capabilities. This ensures
+models developed on local compute can scale to centralised HPC
+facilities without environment mismatches. Target sovereign Australian
+platforms meeting security and privacy requirements (ASD IRAP assessed,
+PRIS compliant).
 
 ### Digital Sovereignty
 

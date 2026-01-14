@@ -32,7 +32,10 @@ Use [Quarto](https://quarto.org/) for analytics and reporting.
 
 ### Integration
 
-- **Data Sources**: Query via [Ibis](https://ibis-project.org/) or DuckDB per [ADR 018: Database Patterns](018-database-patterns.md)
+- **Data Sources**: Query via [Ibis](https://ibis-project.org/) or
+  DuckDB per [ADR 018: Database Patterns](018-database-patterns.md) and
+  [Reference Architecture: Data
+  Pipelines](../reference-architectures/data-pipelines.md)
 - **Deployment**: Static HTML hosted per [ADR 016: Web Application Edge Protection](../security/016-edge-protection.md)
 - **CI/CD**: Automated report generation per [ADR 004: CI/CD Quality Assurance](../development/004-cicd.md)
 
