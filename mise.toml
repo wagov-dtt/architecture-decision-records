@@ -5,7 +5,7 @@
 just = "latest"
 "cargo:mdbook" = "latest"
 cargo-binstall = "latest"
-"ubi:terrastruct/d2" = "latest"
+"github:terrastruct/d2" = "latest"
 
 [tasks.build]
 description = "Build the book"

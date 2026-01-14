@@ -51,5 +51,6 @@
 ---
 
 - [Contributing](CONTRIBUTING.md)
+- [Compliance Mapping](compliance-mapping.md)
 - [Glossary](glossary.md)
 - [AI Agents](AGENTS.md)
