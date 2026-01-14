@@ -4,57 +4,48 @@
 
 ## Context
 
-Organisations need simple, secure reporting that avoids complex
-JavaScript toolchains. Static reports reduce maintenance and security
-overhead.
+Organisations need simple, secure reporting with reproducible outputs. Reports should be version-controlled alongside the data transformations that produce them.
 
 - [Quarto Documentation](https://quarto.org/)
-- [Evidence BI Documentation](https://evidence.dev/)
-- [Government Digital Service Design
-  Standards](https://www.dta.gov.au/help-and-advice/about-digital-service-standard)
+- [Government Digital Service Design Standards](https://www.dta.gov.au/help-and-advice/about-digital-service-standard)
 
 ## Decision
 
-Use Quarto for static reporting with Evidence BI for high-interactivity
-cases only.
+Use [Quarto](https://quarto.org/) for analytics and reporting.
 
-### Primary: Quarto Framework
+### Why Quarto
 
-- **Static Reports**:
-  [Markdown-based](https://quarto.org/docs/authoring/markdown-basics.html)
-  with embedded visualizations
-- **Multi-format**: [HTML, PDF
-  outputs](https://quarto.org/docs/output-formats/html-basics.html) from
-  single source
-- **Git Integration**: Reports alongside code in version control
-- **Compliance Ready**:
-  [Accessibility](https://quarto.org/docs/authoring/) and professional
-  formatting
+- **Multi-format**: Same source produces HTML, PDF, Word, presentations
+- **Version-controlled**: Reports live alongside data transformation code in git
+- **Open source**: Markdown-based, portable, no vendor lock-in
+- **Accessible**: Built-in support for WCAG compliance
 
-### Secondary: [Evidence BI](https://evidence.dev/)
+### Capabilities
 
-- **Limited Use**: Only useful for interactive drilldown reporting
-  (simpler to host than e.g. PowerBI)
-- **SQL-based**: Minimal JavaScript complexity
+| Need | Quarto Feature |
+|------|----------------|
+| Static reports | [Markdown + code blocks](https://quarto.org/docs/authoring/markdown-basics.html) |
+| PDF documents | [PDF output](https://quarto.org/docs/output-formats/pdf-basics.html) with professional formatting |
+| Interactive charts | [Observable JS](https://quarto.org/docs/interactive/ojs/) for client-side interactivity |
+| Dashboards | [Quarto Dashboards](https://quarto.org/docs/dashboards/) for layout and filtering |
+| Parameterised reports | [Parameters](https://quarto.org/docs/computations/parameters.html) for automated report generation |
 
 ### Integration
 
-- **Data Sources**: Connect via [ADR 018: Database
-  Patterns](018-database-patterns.md)
-- **Deployment**: Use [ADR 016: Web Application Edge
-  Protection](../security/016-edge-protection.md) for secure
-  distribution
+- **Data Sources**: Query via [Ibis](https://ibis-project.org/) or DuckDB per [ADR 018: Database Patterns](018-database-patterns.md)
+- **Deployment**: Static HTML hosted per [ADR 016: Web Application Edge Protection](../security/016-edge-protection.md)
+- **CI/CD**: Automated report generation per [ADR 004: CI/CD Quality Assurance](../development/004-cicd.md)
 
 ## Consequences
 
 **Benefits:**
 
-- Static reports with minimal operational maintenance overhead
-- Enhanced security posture with reduced attack surface
-- Version-controlled analytics ensuring reproducible results
+- Version-controlled, reproducible analytics outputs
+- Static hosting with minimal operational overhead
+- Consistent tooling across reports, dashboards, and documents
 
 **Risks if not implemented:**
 
-- High operational overhead maintaining dynamic dashboard infrastructure
-- Security vulnerabilities from complex interactive analytics platforms
-- Inconsistent analytics outputs affecting decision making
+- Inconsistent reporting approaches across teams
+- Reports not tracked in version control
+- Difficulty reproducing historical analytics outputs

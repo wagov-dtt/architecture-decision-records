@@ -37,7 +37,6 @@ storage: Storage {
 
 output: Output {
   Quarto Reports
-  Evidence BI
   Data API
 }
 
