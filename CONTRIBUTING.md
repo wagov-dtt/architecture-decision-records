@@ -131,4 +131,6 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 - **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes, em-dashes for PDF compatibility
 - **D2 diagrams**: Use D2 format for diagrams with clean syntax and universal compatibility
   - Use when text alone isn't sufficient (system relationships, data flows, workflows)
-  - Keep simple: 5-7 components max, clear labels, logical flow, consistent colors
+  - Keep simple: 5-7 components max, clear labels, logical flow
+  - Use `direction: down` for compact layouts, `direction: right` for flows
+  - No color styling, no `.note` suffix, no `\n` in labels

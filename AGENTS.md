@@ -76,13 +76,46 @@ just --list
 
 **When to use:** System relationships, data flows, workflows, or architecture patterns where text alone isn't sufficient.
 
-**Keep simple:** Maximum 5-7 components, clear labels, logical flow, consistent colors.
+**Keep simple:** Maximum 5-7 components, clear labels, logical flow.
+
+**Syntax rules:**
+
+- Use `direction: down` for compact/square layouts, `direction: right` for flows
+- No color styling (remove `style.fill`, `style.stroke` etc.)
+- No `.note` suffix on nodes
+- No `\n` in labels (use shorter text or separate nodes)
+- Use containers with `{}` for grouping related items
 
 **Example:**
 
 ```d2
-user: User -> api: API -> backend: Backend
-api: requests/responses
+direction: down
+
+workloads: Workloads
+storage: Primary Storage
+backup: Backup Storage
+
+workloads -> storage: data
+storage -> backup: replication
 ```
 
 **Quality check:** Adds value, easy to follow, clear labels, logical connections.
+
+## Writing Style
+
+- **Australian English**: Use `organisation`, `centralised`, `standardised`, `minimise`, `authorisation`, `behaviour`
+- **Plain text safe**: Avoid smart quotes (`'` `"` `'` `"`), use straight quotes (`'` `"`)
+- **Expand acronyms**: Define on first use (e.g., "Recovery Time Objective (RTO)")
+- **Active voice**: "Configure logging" not "Logging should be configured"
+- **Cross-references**: Link related ADRs, add references to reference-architectures where helpful
+
+## Common Fixes
+
+When reviewing ADRs, check for:
+
+1. **Unicode issues**: Replace curly quotes with straight quotes
+2. **US spelling**: Fix to Australian English (but preserve external URLs)
+3. **Diagram complexity**: Simplify to 5-7 nodes, use `direction: down` for compactness
+4. **Missing links**: Add cross-references between related ADRs
+5. **Vague guidance**: Add specific values (e.g., rotation periods, timeframes)
+6. **Broken links**: Run `just lint` to catch 404s
