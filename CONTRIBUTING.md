@@ -9,7 +9,7 @@
 - Security frameworks and compliance requirements
 - Infrastructure patterns that affect multiple teams
 
-**Don't create ADRs for:**
+**Do not create ADRs for:**
 
 - Implementation details (use documentation)
 - Project-specific configurations
@@ -18,48 +18,35 @@
 
 ## Quick Workflow
 
-1. **Open in Codespaces** → Automatic tool setup
-2. **Get number** → `just next-number`
-3. **Create file** → `###-short-name.md` in correct directory ([see content types](#content-types-when-to-use-what))
-4. **Write content** → Follow template below
-5. **Lint** → `just lint` to fix formatting, check SUMMARY.md, and validate links
-6. **Add to SUMMARY.md** → Include new ADR in navigation (required for mdBook)
-7. **Submit PR** → Ready for review
-
-**ADR Creation Workflow:**
+1. **Open in Codespaces** - Automatic tool setup
+2. **Get number** - `just next-number`
+3. **Create file** - `###-short-name.md` in correct directory ([see content types](#content-types-when-to-use-what))
+4. **Write content** - Follow template below
+5. **Lint** - `just lint` to fix formatting, check SUMMARY.md, and validate links
+6. **Add to SUMMARY.md** - Include new ADR in navigation (required for mdBook)
+7. **Submit PR** - Ready for review
 
 ```d2
+direction: right
+
 setup: Environment Setup {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1976d2"
-  }
+  style.fill: "#e3f2fd"
 }
 
 create: Content Creation {
-  style: {
-    fill: "#e8f5e8"
-    stroke: "#388e3c"
-  }
+  style.fill: "#e8f5e8"
 }
 
 validate: Validation {
-  style: {
-    fill: "#f3e5f5"
-    stroke: "#7b1fa2"
-  }
+  style.fill: "#f3e5f5"
 }
 
 publish: Publication {
-  style: {
-    fill: "#fff3e0"
-    stroke: "#f57c00"
-  }
+  style.fill: "#fff3e0"
 }
 
 setup -> create -> validate -> publish
 validate -> create: fix issues
-publish -> create: revision needed
 ```
 
 ## Directory Structure

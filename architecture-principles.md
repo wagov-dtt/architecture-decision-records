@@ -2,6 +2,8 @@
 
 **Status:** Accepted | **Date:** 2025-03-07
 
+These six principles guide all architecture decisions in this repository. Each ADR should align with one or more of these principles.
+
 ## 1. Establish secure foundations
 
 Integrate security practices **from the outset**, and throughout the design, development and deployment of products and
@@ -16,13 +18,13 @@ throughout information lifecycles.
 
 ## 3. Prioritise user experience
 
-Apply user-centered design principles to simplify tasks and establish intuitive mappings between user intentions and
+Apply user-centred design principles to simplify tasks and establish intuitive mappings between user intentions and
 system responses. Involve users throughout design and development to iteratively evaluate and refine product goals and
 requirements.
 
 ## 4. Preference tried and tested approaches
 
-Adopt sustainable [opensource](https://opensource.org/osd) software, and mature managed services where capabilities closely
+Adopt sustainable [open source](https://opensource.org/osd) software, and mature managed services where capabilities closely
 match business needs. When necessary, bespoke service development should be **led by internal technical capabilities**
 to ensure appropriate risk ownership. Bespoke software should **preference open standards and code** to avoid vendor
 lock-in.
