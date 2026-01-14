@@ -12,9 +12,6 @@ no-section-label = true
 git-repository-url = "https://github.com/wagov-dtt/architecture-decision-records"
 edit-url-template = "https://github.com/wagov-dtt/architecture-decision-records/edit/main/{path}"
 
-[output.linkcheck]
-warning-policy = "warn"
-
 [output.pandoc]
 
 [preprocessor.d2]

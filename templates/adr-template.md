@@ -17,9 +17,11 @@ What we decided and how to implement it:
 ## Consequences
 
 **Positive:**
+
 - Benefit 1 with explanation
 - Benefit 2 with explanation
 
 **Negative:**
+
 - Risk 1 with mitigation
 - Risk 2 with mitigation

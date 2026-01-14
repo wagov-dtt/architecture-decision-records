@@ -100,8 +100,6 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 - BAD: "ADR 004: Enforce release quality with CI/CD prechecks and build attestation" (too long)
 - BAD: "Container stuff" or "Security improvements" (too vague)
 
-
-
 ## Status Guide
 
 | Status | Meaning |
@@ -134,5 +132,3 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 - **D2 diagrams**: Use D2 format for diagrams with clean syntax and universal compatibility
   - Use when text alone isn't sufficient (system relationships, data flows, workflows)
   - Keep simple: 5-7 components max, clear labels, logical flow, consistent colors
-
-

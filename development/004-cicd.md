@@ -7,6 +7,7 @@
 Ensure security and integrity of software artifacts that are consumed by infrastructure repositories per [ADR 010](../operations/010-configmgmt.md). Threat actors exploit vulnerabilities in code, dependencies, container images, and exposed secrets.
 
 **Compliance Requirements:**
+
 - [OWASP CI/CD Security](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)
 - [ACSC Software Development Guidelines](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
 

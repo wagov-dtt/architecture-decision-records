@@ -15,29 +15,25 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "pages-${{ github.ref }}"
+  cancel-in-progress: true
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v4
+      - uses: actions/configure-pages@v5
       - uses: jdx/mise-action@v3
-      - run: mise run build
+      - run: just build
       - name: Upload release PDF
         if: github.event_name == 'release'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./book/pandoc/pdf/architecture-decision-records.pdf
-          asset_name: architecture-decision-records.pdf
-          asset_content_type: application/pdf
+        run: gh release upload ${{ github.event.release.tag_name }} ./book/pandoc/pdf/architecture-decision-records.pdf
       - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./book/html

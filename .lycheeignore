@@ -1,0 +1,15 @@
+# Sites that block bots or have slow/flaky responses
+academic.oup.com
+micron21.com
+hpe.com
+lenovo.com
+dell.com
+
+# Government sites that timeout in CI
+cyber.gov.au
+digital.gov.au
+digitalidsystem.gov.au
+hostingcertification.gov.au
+finance.gov.au
+dta.gov.au
+kubectl.docs.kubernetes.io

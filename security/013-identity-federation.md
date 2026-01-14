@@ -119,5 +119,3 @@ Admin Apps -> User Data: admin access
 - Fragmented authentication systems across applications
 - Legacy SAML limitations hindering citizen service integration
 - Inconsistent security posture across identity touchpoints
-
-

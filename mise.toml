@@ -1,11 +1,12 @@
 [tools]
 "cargo:mdbook-pandoc" = "latest"
-"cargo:mdbook-linkcheck" = "latest"
 "cargo:mdbook-d2" = "latest"
 just = "latest"
 "cargo:mdbook" = "latest"
 cargo-binstall = "latest"
-"github:terrastruct/d2" = "latest"
+d2 = "latest"
+lychee = "latest"
+rumdl = "latest"
 
 [tasks.build]
 description = "Build the book"

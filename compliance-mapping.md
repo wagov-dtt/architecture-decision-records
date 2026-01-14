@@ -7,7 +7,7 @@ This table maps ADRs to specific controls and requirements in Western Australian
 | ADR | Topic | ISM Guidelines & Control IDs | Key Controls |
 |-----|-------|------------------------------|--------------|
 | [001 Isolation](security/001-isolation.md) | Application isolation | [Guidelines for Networking](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-networking) **(ISM-1182, ISM-0535, ISM-1277, ISM-1517)** | Network segmentation, micro-segmentation, preventing bypass of controls |
-| [002 Workloads](operations/002-workloads.md) | Cloud workloads | [Guidelines for Cloud Services](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-cloud-services) **(ISM-1588, ISM-1589, ISM-1452, ISM-0499)** | Cloud security assessment, multi-tenant isolation, virtualisation hardening |
+| [002 Workloads](operations/002-workloads.md) | Cloud workloads | [Cloud Computing Security](https://www.cyber.gov.au/resources-business-and-government/maintaining-devices-and-systems/cloud-security-guidance) **(ISM-1588, ISM-1589, ISM-1452, ISM-0499)** | Cloud security assessment, multi-tenant isolation, virtualisation hardening |
 | [004 CI/CD](development/004-cicd.md) | Build and release | [Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development) **(ISM-1256, ISM-0400, ISM-1419, ISM-2032)** | Secure development lifecycle, environment segregation, automated testing |
 | [005 Secrets](security/005-secrets-management.md) | Secrets management | [Guidelines for Cryptography](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-cryptography) **(ISM-0507, ISM-0488, ISM-0518, ISM-1090)** | Key management, secure storage of secrets, key rotation |
 | [007 Logging](operations/007-logging.md) | Security logging | [Guidelines for System Monitoring](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-system-monitoring) **(ISM-0580, ISM-1405, ISM-1985, ISM-0988)** | Event logging policy, centralised logging, log protection, time synchronisation |
@@ -37,7 +37,6 @@ The [2024 WA Government Cyber Security Policy](https://www.wa.gov.au/government/
 
 - [1.1 Accountable Authority](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy) - See Policy Implementation section
 - [1.3 Cyber Security Operations](https://soc.cyber.wa.gov.au/) - WA SOC Guidelines
-- [1.5 Data Offshoring Governance](https://www.wa.gov.au/government/publications/data-offshoring-position)
 
 ## WA Government AI Policy
 
@@ -83,5 +82,5 @@ The [Digital ID Act 2024](https://www.digitalidsystem.gov.au/what-is-digital-id/
 
 - [ACSC Essential Eight](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight)
 - [WA SOC Cyber Security Guidelines](https://soc.cyber.wa.gov.au/)
-- [WA Government Data Offshoring Position](https://www.wa.gov.au/government/publications/data-offshoring-position)
-- [National Framework for AI Assurance in Government](https://www.digital.gov.au/policy/ai-in-government)
+- [WA Government Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy) - includes Data Offshoring Position
+- [National Framework for AI Assurance in Government](https://www.digital.gov.au/ai/ai-in-government-policy)

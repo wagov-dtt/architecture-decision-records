@@ -1,13 +1,4 @@
 # rumdl configuration for ADR project
 [global]
 exclude = ["SUMMARY.md"]
-
-# Stricter linting - only disable what's absolutely necessary
-disabled-rules = []
-
-# Configure line length rule
-[MD013]
-line-length = 120
-code-blocks = false  # Don't check line length in code blocks (ASCII diagrams)
-
-# Allow multiple top-level headings only in SUMMARY.md (handled by exclude)
+disable = ["MD013"]  # Line length disabled - tables need wide lines

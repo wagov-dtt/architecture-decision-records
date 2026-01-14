@@ -7,7 +7,7 @@ default:
 
 # Preview documentation locally (port 8080)
 [group('development')]
-serve:
+serve: lint
     mdbook serve --port 8080
 
 # Get next ADR number for new files
@@ -26,27 +26,16 @@ next-number:
 lint:
     rumdl check --fix .
     just check-summary
-    @echo "Checking links (via build)..."
-    @mdbook build
+    lychee '*.md' '**/*.md' --exclude-path book
 
 # Verify SUMMARY.md includes all markdown files
 [group('quality')]
 check-summary:
-    #!/usr/bin/env python3
-    import glob, sys
-    
-    files = sum([glob.glob(f"{d}/**/*.md", recursive=True) 
-                for d in ["development", "operations", "security", "reference-architectures"]], [])
-    summary = open("SUMMARY.md").read()
-    missing = [f for f in files if f not in summary]
-    
-    if missing:
-        print("Missing from SUMMARY.md:", *missing, sep="\n  ")
-        sys.exit(1)
+    python3 -c "import glob, sys; files = sum([glob.glob(f'{d}/**/*.md', recursive=True) for d in ['development', 'operations', 'security', 'reference-architectures']], []); summary = open('SUMMARY.md').read(); missing = [f for f in files if f not in summary]; print('Missing from SUMMARY.md:', *missing, sep='\n  ') or sys.exit(1) if missing else None"
 
 # Build documentation website (includes link checking)
 [group('build')]
-build: setup
+build: setup lint
     mdbook build
     cp book/pandoc/pdf/architecture-decision-records.pdf book/html/architecture-decision-records.pdf
 
@@ -60,4 +49,3 @@ clean:
 setup:
     mise install
     which pandoc || sudo apt-get -y update && sudo apt-get install -y pandoc texlive texlive-pictures librsvg2-bin
-

@@ -54,11 +54,11 @@ storage and AWS load balancers for traffic management.
 
 ### CNCF Kubernetes AI Conformance
 
-The [CNCF Kubernetes AI Conformance Program](https://www.cncf.io/blog/2025/01/15/introducing-the-kubernetes-ai-conformance-program/) establishes standards for AI/ML workload portability across Kubernetes platforms. Only platforms meeting these standards should be supported, ensuring workloads can interoperate as flexible nodes within a broader state/federal ecosystem.
+The [CNCF Kubernetes AI Conformance Program](https://www.cncf.io/blog/2025/11/11/cncf-launches-certified-kubernetes-ai-conformance-program-to-standardize-ai-workloads-on-kubernetes/) establishes standards for AI/ML workload portability across Kubernetes platforms. Only platforms meeting these standards should be supported, ensuring workloads can interoperate as flexible nodes within a broader state/federal ecosystem.
 
 **Current Platform Conformance:**
 
-- AWS EKS meets proposed standards: [k8s-ai-conformance EKS](https://github.com/cncf-ai/k8s-ai-conformance/blob/main/v1.34/eks/PRODUCT.yaml), [AI on EKS](https://awslabs.github.io/data-on-eks/docs/ai-ml/trainium)
+- AWS EKS meets proposed standards: [ai-conformance EKS](https://github.com/cncf/ai-conformance/blob/main/v1.34/eks/PRODUCT.yaml), [AI on EKS](https://awslabs.github.io/ai-on-eks/docs/blueprints)
 
 **HPC Requirements:**
 
@@ -73,6 +73,7 @@ Analysis like [Cloud services and government digital sovereignty in Australia an
 Use a platform like [Proxmox VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) to run standalone clusters at multiple facilities with multiple 2U servers per location. Example hardware (starts approx $15k AUD per server) - [Dell PowerEdge R7725](https://www.dell.com/en-au/shop/cty/pdp/spd/poweredge-r7725), [HPE ProLiant DL385 Gen11](https://www.hpe.com/au/en/hpe-proliant-dl385-gen11.html), [Lenovo ThinkSystem SR665 V3](https://www.lenovo.com/au/en/p/servers-storage/servers/racks/thinksystem-sr665-v3/len21ts0009)
 
 Year 1 estimated costs:
+
 - Hardware: ~$200k for 6x ~$33k servers
 - Colo (2 sites, Tier 3+): [~$50k for 2x 5kw racks](https://www.micron21.com/enterprise/colocation-full-rack-pricing) with 1 Gbit IP Transit
 - Total: $250k for ~2-3TB ram, ~500 cores, 100TB disk across 2 sites (reduce by a factor of 2-3 for redundancy)

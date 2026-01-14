@@ -82,7 +82,7 @@ The following AI-assisted security tools are under investigation for potential f
 
 | Tool | Purpose | Status | Links |
 |------|---------|--------|-------|
-| [ZeroPath](https://zeropath.com/) | AI-powered security code review and vulnerability detection | Under Investigation | [Documentation](https://docs.zeropath.com/), [GitHub](https://github.com/zeropath-ai) |
+| [ZeroPath](https://zeropath.com/) | AI-powered security code review and vulnerability detection | Under Investigation | [Documentation](https://docs.zeropath.com/) |
 
 These tools are being evaluated for alignment with the human oversight requirements outlined in this ADR. Any adoption will require demonstrated compliance with mandatory requirements above.
 

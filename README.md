@@ -14,10 +14,7 @@ These patterns help you build secure, compliant digital services faster. Instead
    - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
    - [Identity Management](reference-architectures/identity-management.md) - User authentication and single sign-on
    - [OpenAPI Backends](reference-architectures/openapi-backends.md) - Backend services and integrations
-3. **Explore individual ADRs** - Detailed decisions organised by domain:
-   - [Security](security/) - Isolation, secrets, identity, edge protection
-   - [Operations](operations/) - Workloads, logging, backups, databases
-   - [Development](development/) - APIs, CI/CD, releases
+3. **Check the [Compliance Mapping](compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
 
 ### Compliance Alignment
 
