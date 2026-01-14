@@ -4,14 +4,15 @@
 
 ## When to Use This Pattern
 
-Use when you need clear separation between user-facing and
-administrative operations in REST APIs requiring structured
-documentation and testing.
+Use when building:
+
+- Backend services that other applications consume via API
+- Systems requiring clear separation between public and administrative operations
+- Services needing auto-generated API documentation
 
 ## Overview
 
-Template for implementing OpenAPI-first API services with complete
-separation between user-facing and administrative operations.
+This template implements OpenAPI-first API services with complete separation between user-facing operations (`api.domain`) and administrative operations (`admin.domain`). The separation provides network and authentication isolation for privileged functions.
 
 ## Core Components
 

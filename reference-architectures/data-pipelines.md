@@ -4,15 +4,15 @@
 
 ## When to Use This Pattern
 
-Use when building data processing systems for analytics, ETL workloads,
-or real-time data transformation across organisational systems.
+Use when building:
+
+- Analytics and business intelligence reporting
+- Data integration between organisational systems
+- Automated data processing and transformation workflows
 
 ## Overview
 
-Template for implementing scalable data pipelines using SQLMesh
-framework with S3 object storage, Aurora database patterns, and modern
-analytics engines (DuckDB/DuckLake) or legacy engines
-(Iceberg/Trino/Athena) based on existing data lake alignment.
+This template implements scalable data pipelines using SQLMesh for orchestration, S3 for storage, and modern analytics engines (DuckDB/DuckLake) for querying. Suitable for both new data platforms and migration from legacy tools.
 
 ## Core Components
 

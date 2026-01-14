@@ -4,17 +4,15 @@
 
 ## When to Use This Pattern
 
-Use when building systems requiring federated identity management,
-single sign-on across multiple services, or integration with
-jurisdiction identity providers using OIDC standards.
+Use when building:
+
+- Applications requiring user login via government or enterprise identity providers
+- Single sign-on across multiple services
+- Integration with Australian Government Digital ID or verifiable credentials
 
 ## Overview
 
-Template for implementing OIDC-based identity federation with upstream
-identity providers (verifiable credentials, Australian Government
-Digital ID) and downstream identity consumers (AWS Cognito, Microsoft
-Entra ID) for comprehensive identity management across organisational
-boundaries.
+This template implements OIDC-based identity federation using a broker pattern. A central identity broker translates between upstream providers (Government Digital ID, enterprise directories) and downstream applications (your services), providing a single integration point with centralised policy enforcement.
 
 ## Identity Federation Pattern
 

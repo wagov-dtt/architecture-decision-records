@@ -50,8 +50,8 @@ just --list
 
 ## PDF Generation
 
-- **Build** - `just build` creates both website and PDF at `book/pandoc/pdf/adr-guide.pdf`
-- **Live PDF** - Available at [book/pandoc/pdf/adr-guide.pdf](book/pandoc/pdf/adr-guide.pdf)
+- **Build** - `just build` creates both website and PDF at `book/pandoc/pdf/architecture-decision-records.pdf`
+- **Live PDF** - Available at [architecture-decision-records.pdf](https://wagov-dtt.github.io/architecture-decision-records/architecture-decision-records.pdf)
 - **Format** - A4 ISO standard with D2 diagrams
 
 ## Troubleshooting

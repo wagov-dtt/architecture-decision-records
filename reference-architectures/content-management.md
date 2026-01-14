@@ -4,13 +4,15 @@
 
 ## When to Use This Pattern
 
-Use when building websites, content portals, or applications requiring
-structured content management with editorial workflows.
+Use when building:
+
+- Public websites and intranets
+- Content portals with editorial workflows
+- Headless CMS backends for mobile apps or multi-channel publishing
 
 ## Overview
 
-Template for implementing content management systems to meet
-jurisdiction compliance requirements.
+This template implements content management systems meeting WA Government compliance requirements, combining security isolation, managed infrastructure, and edge protection.
 
 ## Core Components
 
