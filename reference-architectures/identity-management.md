@@ -31,53 +31,21 @@ Microsoft Entra ID).
 ## Core Components
 
 ```d2
-providers: Upstream Identity Providers {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1976d2"
-  }
-}
+direction: right
 
-broker: Identity Broker {
-  style: {
-    fill: "#e8f5e8"
-    stroke: "#388e3c"
-  }
-}
+providers: Identity Providers
+broker: Identity Broker
+apps: Your Applications
 
-consumers: Downstream Consumers {
-  style: {
-    fill: "#f3e5f5"
-    stroke: "#7b1fa2"
-  }
-}
-
-providers -> broker: authenticate users
-broker -> consumers: issue tokens
-broker: - normalise claims\n- enforce policies\n- audit logging
+providers -> broker: authenticate
+broker -> apps: issue tokens
 ```
 
-The architecture consists of three main layers:
+The architecture consists of three layers:
 
-**Upstream Identity Providers** supply user identities through
-standards-based protocols:
-
-- Government Digital ID for Australian citizens
-- Verifiable Credentials providers for professional credentials
-- External OIDC providers for commercial identity systems
-
-**Identity Broker** acts as the central translation layer that:
-
-- Accepts authentication from multiple upstream providers
-- Normalises identity claims and attributes across providers  
-- Issues standardised tokens to downstream consumers
-
-**Downstream Identity Consumers** consume the normalised identity
-tokens:
-
-- AWS Cognito for cloud-native applications
-- Microsoft Entra ID for enterprise applications
-- Custom applications using OIDC/SAML protocols
+- **Identity Providers**: Government Digital ID, enterprise directories, verifiable credentials
+- **Identity Broker**: Normalises claims, enforces policies, provides audit logging
+- **Applications**: Consume standardised OIDC/SAML tokens via AWS Cognito or Entra ID
 
 ## Project Kickoff Steps
 

@@ -19,28 +19,14 @@ This template implements scalable data pipelines using [Ibis](https://ibis-proje
 ```d2
 direction: right
 
-sources: Data Sources {
-  Databases
-  APIs
-  Files
-}
+sources: Data Sources
+transform: Ibis + DuckDB
+storage: DuckLake on S3
+output: Reports & APIs
 
-transform: Transformation {
-  Ibis
-  DuckDB
-}
-
-storage: Storage {
-  DuckLake
-  S3
-}
-
-output: Output {
-  Quarto Reports
-  Data API
-}
-
-sources -> transform -> storage -> output
+sources -> transform: extract
+transform -> storage: load
+storage -> output: serve
 ```
 
 **Key Technologies:**

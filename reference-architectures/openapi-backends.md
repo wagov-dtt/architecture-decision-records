@@ -17,48 +17,26 @@ This template implements OpenAPI-first API services with complete separation bet
 ## Core Components
 
 ```d2
-API Clients -> Edge Protection -> Routing
+direction: right
 
-Routing -> Standard APIs: api.domain
-Routing -> Admin APIs: admin.domain
+clients: API Clients
+edge: Edge Protection
+api: Standard API
+admin: Admin API
+db: Database
 
-Standard APIs: {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1565c0"
-  }
-}
+clients -> edge -> api
+clients -> edge -> admin
 
-Admin APIs: {
-  style: {
-    fill: "#ffebee"
-    stroke: "#c62828"
-  }
-}
-
-Standard APIs -> User Database
-Admin APIs -> System Database
-Admin APIs -> User Database: admin access
+api -> db: user data
+admin -> db: system config
 ```
 
-**Standard APIs** (`/api/v1/*`): Business operations for authenticated
-users
+**Standard APIs** (`api.example.com/v1/*`): Business operations for authenticated users
 
-- Examples: `/api/v1/users/profile`, `/api/v1/orders`,
-  `/api/v1/documents`
-- Domain: `api.domain` with Standard Realm authentication
+**Admin APIs** (`admin.example.com/v1/*`): System management for privileged users
 
-**Administrative APIs** (`/admin/v1/*`): System management for
-privileged users
-
-- Examples: `/admin/v1/users`, `/admin/v1/system/config`,
-  `/admin/v1/audit-logs`
-- Domain: `admin.domain` with Admin Realm authentication
-
-**Complete Separation**: Two separate routers provide full network and
-authentication isolation between standard and administrative operations
-per [ADR 013: Identity Federation
-Standards](../security/013-identity-federation.md).
+The two endpoints use separate authentication realms per [ADR 013: Identity Federation Standards](../security/013-identity-federation.md), providing network and authentication isolation.
 
 ## Project Kickoff Steps
 

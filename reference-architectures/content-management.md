@@ -17,25 +17,20 @@ This template implements content management systems meeting WA Government compli
 ## Core Components
 
 ```d2
-Content Editors -> CMS Application -> Database
-CMS Application -> File Storage
-CMS Application -> CDN
-CDN -> End Users
+direction: right
 
-CMS Application: {
-  Core Engine
-  API
-  Authentication
-}
+editors: Content Editors
+cms: CMS Application
+db: PostgreSQL
+storage: S3 Storage
+cdn: CDN + WAF
+users: End Users
 
-Database: Aurora PostgreSQL
-File Storage: S3 Storage  
-CDN: CloudFront + WAF
-
-End Users: {
-  Public Visitors
-  Authenticated Users
-}
+editors -> cms: create content
+cms -> db: store data
+cms -> storage: upload media
+cms -> cdn: publish
+cdn -> users: deliver
 ```
 
 ## Project Kickoff Steps
