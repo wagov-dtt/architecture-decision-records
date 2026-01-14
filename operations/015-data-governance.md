@@ -4,45 +4,47 @@
 
 ## Context
 
-Data transformation pipelines require basic governance to ensure quality
-and compliance. [SQLMesh](https://sqlmesh.com/) provides built-in
-capabilities for contracts and lineage that reduce governance overhead.
+Data pipelines require governance to ensure quality and compliance. Modern approaches use code-based validation and version control rather than separate governance tools.
 
-- [SQLMesh Documentation](https://sqlmesh.readthedocs.io/)
-- [Australian Government Data Governance
-  Framework](https://www.finance.gov.au/government/public-data/public-data-policy/data-governance-framework)
+- [Ibis Project Documentation](https://ibis-project.org/)
+- [Australian Government Data Governance Framework](https://www.finance.gov.au/government/public-data/public-data-policy/data-governance-framework)
 
 ## Decision
 
-Use SQLMesh’s semantic understanding for automated data governance with
-git-based workflows.
+Use code-based data governance with git workflows. Data transformations written in [Ibis](https://ibis-project.org/) are version-controlled, testable, and provide implicit lineage through code dependencies.
 
 ### Priority Focus Areas
 
-- **Data Contracts**: [SQLMesh model
-  definitions](https://sqlmesh.readthedocs.io/en/stable/concepts/models/overview/)
-  serve as schema contracts with automatic breaking change detection
-- **Column-Level Lineage**: Automatic lineage tracking through [SQLMesh
-  semantic
-  analysis](https://sqlmesh.readthedocs.io/en/stable/concepts/overview/)
-- **Quality Validation**: [SQLMesh unit
-  tests](https://sqlmesh.readthedocs.io/en/stable/concepts/tests/) and
-  [data
-  diff](https://sqlmesh.readthedocs.io/en/stable/concepts/plans/#data-diff)
-  for transformation validation
-- **Audit Integration**: Follow [ADR 007: Centralized Security
-  Logging](007-logging.md) for transformation logs
+- **Schema Contracts**: Define expected schemas in code, validate in CI/CD pipeline
+- **Data Lineage**: Track through transformation code history in git
+- **Quality Validation**: Use Ibis expressions for data validation checks, run as automated tests
+- **Audit Integration**: Follow [ADR 007: Centralised Security Logging](007-logging.md) for transformation logs
+
+### Implementation
+
+```python
+# Example: Schema validation with Ibis
+import ibis
+
+def validate_customers(table: ibis.Table) -> ibis.Table:
+    """Validate customer data before processing."""
+    return table.filter(
+        table.email.notnull() &
+        table.created_at.notnull() &
+        (table.status.isin(['active', 'inactive', 'pending']))
+    )
+```
 
 ## Consequences
 
 **Benefits:**
 
-- Automated data quality validation and contract enforcement
-- Git-based workflow with familiar version control processes
-- Immediate feedback preventing data governance violations
+- Data quality validation as code, testable in CI/CD
+- Lineage tracked through git history and code dependencies
+- No separate governance infrastructure to maintain
 
 **Risks if not implemented:**
 
-- Manual data governance creating operational overhead
-- Inconsistent data quality across analytics pipelines
-- Undetected contract violations affecting downstream systems
+- Data quality issues reaching downstream systems
+- Unable to trace data issues back to source transformations
+- Compliance gaps from undocumented data handling
