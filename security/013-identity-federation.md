@@ -54,16 +54,27 @@ systems that cannot support OIDC.
 **Identity Federation Flow:**
 
 ```d2
-direction: right
+direction: down
 
-users: Users
-providers: Identity Providers
+standard: Standard User Domain {
+  users: Users
+  idp: Identity Providers
+}
+
+privileged: Privileged User Domain {
+  admins: Administrators
+  pim: Privileged Identity Management
+}
+
 platform: Managed Platform
-apps: Applications
 
-users -> providers: authenticate
-providers -> platform: OIDC/SAML tokens
+standard.users -> standard.idp: authenticate
+standard.idp -> platform: OIDC/SAML tokens
+privileged.admins -> privileged.pim: authenticate
+privileged.pim -> platform: elevated claims
 platform -> apps: validated claims
+
+apps: Applications
 ```
 
 The managed platform handles protocol translation between OIDC and SAML

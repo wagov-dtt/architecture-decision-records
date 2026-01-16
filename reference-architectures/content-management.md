@@ -71,12 +71,12 @@ cdn -> users: deliver
 
 **Content Workflows & Editorial:**
 
-- Configure content workflows and editorial approval processes
+- Configure editorial workflows with role-based stages (draft, review, approve, publish)
 - Setup media asset management and CDN integration per [ADR 016: Web
   Application Edge Protection](../security/016-edge-protection.md)
 - Implement headless CMS API following [ADR 003: API Documentation
   Standards](../development/003-apis.md)
-- Configure content moderation and approval workflows
+- Configure scheduled publishing and content expiry rules
 
 **Compliance & Accessibility:**
 

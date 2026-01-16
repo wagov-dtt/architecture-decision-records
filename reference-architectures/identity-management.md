@@ -31,20 +31,34 @@ Microsoft Entra ID).
 ## Core Components
 
 ```d2
-direction: right
+direction: down
 
-providers: Identity Providers
+standard: Standard User Domain {
+  users: Users
+  providers: Identity Providers
+}
+
+privileged: Privileged User Domain {
+  admins: Administrators
+  pim: Privileged Identity Management
+}
+
 broker: Identity Broker
-apps: Your Applications
 
-providers -> broker: authenticate
+standard.users -> standard.providers: authenticate
+standard.providers -> broker: OIDC/SAML
+privileged.admins -> privileged.pim: authenticate
+privileged.pim -> broker: elevated claims
 broker -> apps: issue tokens
+
+apps: Your Applications
 ```
 
-The architecture consists of three layers:
+The architecture consists of three layers with domain separation:
 
-- **Identity Providers**: Government Digital ID, enterprise directories, verifiable credentials
-- **Identity Broker**: Normalises claims, enforces policies, provides audit logging
+- **Standard User Domain**: Government Digital ID, enterprise directories, verifiable credentials for end users
+- **Privileged User Domain**: Separate authentication path with Privileged Identity Management (PIM) for administrators
+- **Identity Broker**: Normalises claims, enforces policies, provides audit logging for both domains
 - **Applications**: Consume standardised OIDC/SAML tokens via AWS Cognito or Entra ID
 
 ## Project Kickoff Steps
