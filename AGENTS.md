@@ -1,7 +1,11 @@
 # AI Agent Guide
 
-This repository is designed for use by AI coding agents (primarily [Goose](https://github.com/block/goose))
-to assist with architecture decisions and implementation.
+This repository is designed for use by AI coding agents to assist with architecture decisions and implementation.
+
+## Supported AI Agents
+
+- **[OpenCode](https://github.com/wagov-dtt/tutorials-and-workshops/blob/main/README.md#opencode-ai-agent)** - Recommended AI coding assistant with CLI integration
+- **[Goose](https://github.com/block/goose)** - Alternative AI coding agent
 
 ## Philosophy
 

@@ -84,7 +84,7 @@ AI tools must:
 
 **Implementation Examples:**
 
-- **Endorsed**: Developer tooling with human code review for all
+- **Endorsed**: Developer tooling (e.g., [OpenCode](https://github.com/wagov-dtt/tutorials-and-workshops/blob/main/README.md#opencode-ai-agent)) with human code review for all
   generated code before merge
 - **Rejected**: Automated tools that merge pull requests or deploy
   without human approval
@@ -96,6 +96,17 @@ The following AI-assisted security tools are under investigation for potential f
 | Tool | Purpose | Status | Links |
 |------|---------|--------|-------|
 | [ZeroPath](https://zeropath.com/) | AI-powered security code review and vulnerability detection | Under Investigation | [Documentation](https://docs.zeropath.com/) |
+| [Strix](https://github.com/usestrix/strix) | Open-source AI penetration testing agents (self-hostable) | Under Investigation | [Documentation](https://docs.strix.ai/) |
+
+**Model Preferences:**
+
+Where possible, preference should be given to tools using [open weights models](https://artificialanalysis.ai/models/open-source) to support transparency, auditability, and reduced vendor lock-in. Open-source and self-hostable tools (such as Strix) are particularly valuable as they enable:
+
+- Independent security audits of model behaviour and tool functionality
+- Local deployment options for sensitive workloads with full data sovereignty
+- Greater control over data processing and privacy
+- Community-driven improvements and customisation
+- Reduced dependency on proprietary third-party services
 
 These tools are being evaluated for alignment with the human oversight requirements outlined in this ADR. Any adoption will require demonstrated compliance with mandatory requirements above.
 
