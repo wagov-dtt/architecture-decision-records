@@ -1,7 +1,13 @@
 {
   "name": "architecture-decision-records",
   "image": "ghcr.io/wagov-dtt/devcontainer-base",
-  "privileged": true,
-  "mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "moby": false
+    }
+  },
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
   "remoteUser": "vscode"
 }
