@@ -1,11 +1,10 @@
 {
   "name": "architecture-decision-records",
   "image": "ghcr.io/wagov-dtt/devcontainer-base",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-      "moby": false
-    }
-  },
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "onCreateCommand": "docker-init.sh && mise install",
   "remoteEnv": {
     "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
   },

@@ -2,6 +2,7 @@
 version = "1.16.6"
 backend = "aqua:cargo-bins/cargo-binstall"
 "platforms.linux-arm64" = { checksum = "sha256:b556421835ba67fa98ca1570c85b5511457956b7836ce938b47d3f73899517a3", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
+"platforms.linux-x64" = { checksum = "sha256:3225eea8041c30d7462761a481883e3aa8fe31c58def4b6c8dd91b7c80973df0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
 
 [[tools."cargo:mdbook"]]
 version = "0.5.2"
@@ -23,6 +24,7 @@ backend = "cargo:mdbook-pandoc"
 version = "0.7.1"
 backend = "aqua:terrastruct/d2"
 "platforms.linux-arm64" = { checksum = "sha256:ce3a0b985a8f91335a826c254b3a88736fd81afcdd08b58f6c749d2add6864b0", url = "https://github.com/terrastruct/d2/releases/download/v0.7.1/d2-v0.7.1-linux-arm64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:eb172adf59f38d1e5a70ab177591356754ffaf9bebb84e0ca8b767dfb421dad7", url = "https://github.com/terrastruct/d2/releases/download/v0.7.1/d2-v0.7.1-linux-amd64.tar.gz"}
 
 [[tools."github:terrastruct/d2"]]
 version = "0.7.1"
@@ -46,3 +48,4 @@ backend = "aqua:lycheeverse/lychee"
 version = "0.0.216"
 backend = "github:rvben/rumdl"
 "platforms.linux-arm64" = { checksum = "sha256:4fc199c9b2845b306da920d126eb071edd99384230af189b2ddf71b84984dbf6", url = "https://github.com/rvben/rumdl/releases/download/v0.0.216/rumdl-v0.0.216-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/339886285"}
+"platforms.linux-x64" = { checksum = "sha256:e4b96d6e54fcfe031171563049b00a15df8456883ec4e56da18565f8969cda3a", url = "https://github.com/rvben/rumdl/releases/download/v0.0.216/rumdl-v0.0.216-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/339886280"}
