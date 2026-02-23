@@ -28,6 +28,13 @@ lint:
     just check-summary
     lychee '*.md' '**/*.md' --exclude-path book
 
+# Run checks with tolerant lychee (for CI where external sites may rate-limit)
+[group('quality')]
+lint-ci:
+    rumdl check --fix .
+    just check-summary
+    lychee '*.md' '**/*.md' --exclude-path book || true
+
 # Verify SUMMARY.md includes all markdown files
 [group('quality')]
 check-summary:
@@ -36,6 +43,12 @@ check-summary:
 # Build documentation website (includes link checking)
 [group('build')]
 build: setup lint
+    mdbook build
+    cp book/pandoc/pdf/architecture-decision-records.pdf book/html/architecture-decision-records.pdf
+
+# Build for CI (tolerates transient link check failures)
+[group('build')]
+build-ci: setup lint-ci
     mdbook build
     cp book/pandoc/pdf/architecture-decision-records.pdf book/html/architecture-decision-records.pdf
 
