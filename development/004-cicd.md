@@ -19,7 +19,7 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 
 | Stage | Tools | Purpose | Mandatory |
 |-------|-------|---------|-----------|
-| **Build** | [Railpack](https://railpack.com/getting-started) and [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
+| **Build** | [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
 | **Scan** | [scc](https://github.com/boyter/scc) and [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Complexity and Vulnerability scanning | Yes |
 | **Analysis** | [GitHub CodeQL](https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql) | Static code analysis | Yes |
 | **Test** | [Playwright](https://playwright.dev/docs/intro) | End-to-end testing | Recommended |
@@ -29,7 +29,7 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 ### Development Environment
 
 - Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) for standardised tooling
-- Use [Railpack](https://railpack.com/getting-started) and [Docker Bake](https://docs.docker.com/build/bake/) to define and standardise build processes
+- Use [Docker Bake](https://docs.docker.com/build/bake/) to define and standardise build processes
 - Use [Justfiles](https://just.systems/man/en/) for task automation  
 - Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) for CI/CD automation
 
