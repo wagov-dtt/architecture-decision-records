@@ -34,7 +34,7 @@ Supporting training: [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa
 
 New ADRs document the **context** (problem), **decision** (solution), and **consequences** (trade-offs). See the [Contributing Guide](CONTRIBUTING.md) for workflow and templates.
 
-For AI agent assistance, see [AGENTS.md](AGENTS.md).
+For AI-assisted contributions, see the guidance in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Repository Structure
 
