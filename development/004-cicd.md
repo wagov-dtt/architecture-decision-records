@@ -4,7 +4,10 @@
 
 ## Context
 
-Ensure security and integrity of software artifacts that are consumed by infrastructure repositories per [ADR 010](../operations/010-configmgmt.md). Threat actors exploit vulnerabilities in code, dependencies, container images, and exposed secrets.
+Ensure security and integrity of software artifacts that are consumed by
+infrastructure repositories per [ADR 010](../operations/010-configmgmt.md).
+Threat actors exploit vulnerabilities in code, dependencies, container
+images, and exposed secrets.
 
 **Compliance Requirements:**
 
@@ -26,12 +29,47 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 | **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
 | **API** | [Restish](https://rest.sh/#/guide) | API validation per [ADR 003](../development/003-apis.md) | Optional |
 
-### Development Environment
+### Execution Environment Requirements
 
-- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) for standardised tooling
-- Use [Docker Bake](https://docs.docker.com/build/bake/) to define and standardise build processes
-- Use [Justfiles](https://just.systems/man/en/) for task automation  
-- Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) for CI/CD automation
+- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base)
+  for standardised tooling
+- Use [Docker Bake](https://docs.docker.com/build/bake/) to define and
+  standardise build processes
+- Use [Justfiles](https://just.systems/man/en/) for task automation
+- Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
+  for repository-hosted CI checks that do not require privileged access
+  into AWS environments
+- Where CI/CD automation must operate within an AWS context using an AWS
+  role, [Woodpecker CI](https://woodpecker-ci.org/) may be used from an
+  operations workstation or operations-controlled environment
+- Woodpecker runners and agents must run in an isolated, strictly
+  controlled environment with strong access control, audit logging, and
+  minimal administrative access
+- Do not place AWS-privileged CI/CD automation in low-control
+  environments such as GitHub-hosted execution where the organisation
+  does not control the runtime boundary
+
+### Operations-Controlled Automation
+
+Use operations-controlled automation only where deployment or release
+steps need AWS credentials or direct access to AWS-hosted systems.
+Preferred controls:
+
+- Assume AWS roles at runtime rather than storing long-lived cloud
+  credentials in pipeline systems
+- Run [Woodpecker agents](https://woodpecker-ci.org/docs/administration/configuration/agent)
+  only on dedicated hosts or workloads managed by operations
+- Configure Woodpecker using its documented
+  [GitHub forge integration](https://woodpecker-ci.org/docs/administration/configuration/forges/github)
+  only as the source control integration point, not as the privileged
+  execution environment
+- Deploy and maintain Woodpecker using a controlled installation method
+  such as the documented
+  [Docker Compose installation](https://woodpecker-ci.org/docs/administration/installation/docker-compose)
+  or equivalent platform-managed deployment
+- Restrict network paths from the automation environment to only the AWS
+  services and internal systems required for the job
+- Keep build, release, and deployment logs for audit and incident review
 
 **CI/CD Pipeline:**
 
@@ -49,6 +87,9 @@ code -> build -> scan -> release
 Build produces container images with SBOM/provenance. Scan runs
 vulnerability and static analysis. Release produces static artifacts
 consumed by [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
+Where release automation needs AWS access, run it from an
+operations-controlled environment rather than a low-control external
+runtime.
 
 ## Consequences
 
@@ -57,11 +98,13 @@ consumed by [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
 - Automated security scanning and vulnerability remediation
 - Standardised artifact integrity and compliance alignment
 - Consistent deployment pipelines with audit trails
+- Clearer separation between general CI checks and AWS-privileged
+  automation
 
 **Risks if not implemented:**
 
 - Vulnerable containers deployed to production
-- Exposed secrets in application artifacts
+- Exposed secrets or excessive cloud privilege in automation systems
 - Manual security processes prone to human error
 - Compliance violations and audit failures
 
