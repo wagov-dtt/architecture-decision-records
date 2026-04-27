@@ -34,18 +34,18 @@ account -> cluster -> namespace: nested isolation
 This isolation can be achieved through the following approaches (strongest to weakest):
 
 1. **Dedicated Accounts**: Use separate cloud accounts / resource
-    groups for different environments (for example, development,
-    testing, production) to ensure complete isolation of resources and
-    data. *Strongest isolation - use for production and sensitive data.*
+   groups for different environments (for example, development,
+   testing, production) to ensure complete isolation of resources and
+   data. *Strongest isolation - use for production and sensitive data.*
 2. **Kubernetes Clusters**: Deploy separate Kubernetes clusters for
-    different applications or environments to isolate workloads and
-    manage resources independently. *Strong isolation - use for
-    distinct products or security domains.*
+   different applications or environments to isolate workloads and
+   manage resources independently. *Strong isolation - use for
+   distinct products or security domains.*
 3. **Kubernetes Namespaces**: Within a Kubernetes cluster, use
-    namespaces to logically separate different applications or
-    environments, providing a level of isolation for network traffic,
-    resource quotas, and access controls. *Moderate isolation - use for
-    related services within a product.*
+   namespaces to logically separate different applications or
+   environments, providing a level of isolation for network traffic,
+   resource quotas, and access controls. *Moderate isolation - use for
+   related services within a product.*
 
 The preferred approach for isolation should be driven by data sensitivity
 and product boundaries.

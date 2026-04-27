@@ -6,15 +6,11 @@
 
 Release notes should be standardised so security and infrastructure
 operations teams can quickly understand what changed, why it changed,
-and what action is required. Each release should provide a concise,
-reliable record of new features, improvements, bug fixes, security
-updates, infrastructure changes, and links to relevant changelogs.
+and what action is required.
 
 Release standards also need a clear promotion model. Without one,
-integrated code can reach `main` before a release has completed testing,
-and release evidence can become detached from the state that was
-actually deployed. The release process should therefore cover both
-release documentation and release promotion.
+integrated code can reach `main` before testing is complete, and release
+evidence can become detached from the deployed version.
 
 **Compliance Requirements:**
 
@@ -24,62 +20,34 @@ release documentation and release promotion.
 
 ## Decision
 
-Use a standardised release notes template in
-[Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
-format and a Gitflow-based release model to document and promote
-releases.
+Use Markdown release notes and a Gitflow-based release model.
 
-**Release Content:**
+**Release notes must include:**
 
-- Each release should summarise new features, improvements, bug fixes,
-  security updates, and infrastructure changes
-- Release descriptions should include security implications and
-  operational impacts such as deployment considerations, logging and
-  monitoring impacts, and modifications to Infrastructure as Code (IaC)
-- Release documentation should link to relevant changelogs, test
-  results, security scans, and approval records
+- Summary of features, fixes, security updates, and infrastructure
+  changes
+- Security and operational impacts, including deployment, logging,
+  monitoring, and Infrastructure as Code (IaC) changes
+- Links to changelogs, test results, security scans, and approvals
 
-**Release Workflow:**
+**Release workflow:**
 
-- Use `develop` as the integration branch for ongoing work
-- Use `main` as the release branch and release history
-- Do not merge ongoing integration work directly from `develop` to
-  `main`
-- Create `release/*` branches from `develop` when a release candidate is
-  ready for stabilisation and final testing
+- `develop` is the integration branch
+- `main` is the tested release history
+- Create `release/*` branches from `develop` for release candidates
 - Create `hotfix/*` branches from `main` for urgent production fixes
-- Merge to `main` only when a release or hotfix has completed required
-  testing and approval
-- Create fixed semantic version tags on `main` only after the release
-  has passed testing
+- Merge to `main` only after required testing and approval
+- Tag releases on `main` using annotated semantic version tags such as
+  `v1.0.0`
 
-**Environment Boundaries:**
+**Environment promotion:**
 
-- Developers work in DEV and INT
-- Operators collaborate with developers in INT during release
-  validation, then promote to UAT and PROD
-- DEV and INT may deploy approved branch refs directly
+- DEV and INT may deploy approved branch refs
 - UAT and PROD must deploy immutable tagged releases only
-- Operators must promote the same tested tag from UAT to PROD without
-  rebuilding, moving, or recreating the tag
-
-**Release Evidence and Tag Rules:**
-
-- Record test results, security scan links, and approval evidence on
-  pull requests or GitHub Releases
-- Update release notes and release evidence on pull requests or GitHub
-  Releases without changing an existing tag
-- Tags must remain immutable and must not be reused to represent a
-  different tested state
-- Tag annotations should reference the release documentation location
-
-**Git Tagging Requirements:**
-
-- Create an annotated git tag for each release following semantic
-  versioning (`v1.0.0`, `v1.1.0`, etc.)
-- Tags must be created from commits on `main` only
-- Tags should be created after the release has passed testing and the
-  corresponding release documentation is complete
+- Promote the same tested tag from UAT to PROD without rebuilding,
+  moving, or recreating the tag
+- Record evidence on pull requests or GitHub Releases; update evidence
+  without changing existing tags
 
 A template is provided below that can be tailored per project. A
 completed release notes Markdown document should be provided with all
@@ -89,6 +57,7 @@ proposed changes.
 ## Release Notes
 
 ### Overview
+
 - **Name:** Name
 - **Version:** [Version Number](#)
 - **Previous Version:** [Version Number](#)
@@ -98,10 +67,12 @@ proposed changes.
 High level summary
 
 **New Features & Improvements**:
+
 - [Feature/Improvement 1]: Brief description including testing.
 - [Feature/Improvement 2]: Brief description including testing.
 
 **Bug Fixes & Security Updates**:
+
 - [Bug Fix/Security Update 1]: Brief description with severity level and response timeline.
 - [Bug Fix/Security Update 2]: Brief description with severity level and response timeline.
 - **Response Timelines**: Critical (24h), High (7d), Medium (30d), Low (90d)
@@ -115,14 +86,17 @@ High level summary
 - **Configuration & Secrets**: Brief description.
 
 ### Known Issues
+
 - [Known Issue 1]: Brief description.
 - [Known Issue 2]: Brief description.
 
 ### Action Required
+
 - [Action 1]: Brief description of any action required by users or stakeholders.
 - [Action 2]: Brief description of any action required by users or stakeholders.
 
 ### Contact
+
 For any questions or issues, please contact [Contact Information].
 ```
 
@@ -130,20 +104,15 @@ For any questions or issues, please contact [Contact Information].
 
 **Benefits:**
 
-- Standardised release communication improves cross-team coordination
-- `main` reflects tested release history rather than day-to-day
-  integration state
-- UAT and PROD promotion is more reliable because it uses immutable
-  release tags
+- Release communication is consistent across teams
+- `main` reflects tested release history, not day-to-day integration
+- UAT and PROD promotion uses immutable release tags
 - Change tracking supports [ADR 007: Centralised Security Logging](../operations/007-logging.md)
-- Documentation and release handoff are clearer for both developers and
-  operators
 
 **Risks if not implemented:**
 
 - Critical release information may be lost between teams
 - Integration changes may be promoted before release validation is
   complete
-- Decision making may suffer from incomplete release context
 - Security or operational issues may be introduced through undocumented
   system changes

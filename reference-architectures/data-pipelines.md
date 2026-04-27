@@ -57,7 +57,7 @@ storage -> output: serve
 ### Development Process
 
 1. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality Assurance](../development/004-cicd.md) for automated testing
-2. **Setup Releases** - Follow [ADR 009: Release Standards](../development/009-release.md) for release documentation, branching, promotion, and versioning
+2. **Setup Releases** - Follow [ADR 009: Release Standards](../development/009-release.md) for release notes, promotion, and versioning
 3. **Analytics Tools** - Follow [ADR 017: Analytics Tooling Standards](../operations/017-analytics-tooling.md) for Quarto integration
 
 ## Implementation Details

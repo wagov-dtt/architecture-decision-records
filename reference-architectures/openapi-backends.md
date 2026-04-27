@@ -41,18 +41,18 @@ The two endpoints use separate authentication realms per [ADR 013: Identity Fede
 ## Project Kickoff Steps
 
 1. **Infrastructure Foundation** - Follow [ADR 001: Application
-    Isolation](../security/001-isolation.md) and [ADR 002: AWS EKS for
-    Cloud Workloads](../operations/002-workloads.md)
+   Isolation](../security/001-isolation.md) and [ADR 002: AWS EKS for
+   Cloud Workloads](../operations/002-workloads.md)
 2. **API Standards** - Follow [ADR 003: API Documentation
-    Standards](../development/003-apis.md) for OpenAPI specification
+   Standards](../development/003-apis.md) for OpenAPI specification
 3. **Identity Federation** - Follow [ADR 013: Identity Federation
-    Standards](../security/013-identity-federation.md) for domain
-    separation
+   Standards](../security/013-identity-federation.md) for domain
+   separation
 4. **Edge Protection** - Follow [ADR 016: Web Application Edge
-    Protection](../security/016-edge-protection.md) for rate limiting
-    and security
+   Protection](../security/016-edge-protection.md) for rate limiting
+   and security
 5. **Database & Secrets** - Follow [ADR 018: Database
-    Patterns](../operations/018-database-patterns.md) and [ADR 005:
-    Secrets Management](../security/005-secrets-management.md)
+   Patterns](../operations/018-database-patterns.md) and [ADR 005:
+   Secrets Management](../security/005-secrets-management.md)
 6. **Logging & Monitoring** - Follow [ADR 007: Centralised Security
-    Logging](../operations/007-logging.md) for audit trails
+   Logging](../operations/007-logging.md) for audit trails

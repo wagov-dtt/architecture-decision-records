@@ -38,34 +38,34 @@ cdn -> users: deliver
 ### Foundation Setup
 
 1. **Apply Isolation** - Follow [ADR 001: Application
-    Isolation](../security/001-isolation.md) for CMS service network
-    and runtime separation
+   Isolation](../security/001-isolation.md) for CMS service network
+   and runtime separation
 2. **Deploy Infrastructure** - Follow [ADR 002: AWS EKS for Cloud
-    Workloads](../operations/002-workloads.md) for CMS container
-    deployment
+   Workloads](../operations/002-workloads.md) for CMS container
+   deployment
 3. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as
-    Code](../operations/010-configmgmt.md) for reproducible deployments
+   Code](../operations/010-configmgmt.md) for reproducible deployments
 4. **Setup Database** - Follow [ADR 018: Database
-    Patterns](../operations/018-database-patterns.md) for Aurora
-    Serverless v2 content storage
+   Patterns](../operations/018-database-patterns.md) for Aurora
+   Serverless v2 content storage
 
 ### Security & Operations
 
 1. **Configure Secrets Management** - Follow [ADR 005: Secrets
-    Management](../security/005-secrets-management.md) for database
-    credentials and API keys
+   Management](../security/005-secrets-management.md) for database
+   credentials and API keys
 2. **Setup Logging** - Follow [ADR 007: Centralised Security
-    Logging](../operations/007-logging.md) for audit trails and
-    editorial tracking
+   Logging](../operations/007-logging.md) for audit trails and
+   editorial tracking
 3. **Setup Backup Strategy** - Follow [ADR 014: Object Storage
-    Backups](../operations/014-object-backup.md) for content and media
-    backup
+   Backups](../operations/014-object-backup.md) for content and media
+   backup
 4. **Configure Edge Protection** - Follow [ADR 016: Web Application
-    Edge Protection](../security/016-edge-protection.md) for CDN and
-    WAF setup
+   Edge Protection](../security/016-edge-protection.md) for CDN and
+   WAF setup
 5. **Identity Integration** - Follow [ADR 012: Privileged Remote
-    Access](../security/012-privileged-remote-access.md) for editorial
-    authentication
+   Access](../security/012-privileged-remote-access.md) for editorial
+   authentication
 
 ### Implementation Details
 

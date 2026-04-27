@@ -29,46 +29,34 @@ images, and exposed secrets.
 | **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
 | **API** | [Restish](https://rest.sh/#/guide) | API validation per [ADR 003](../development/003-apis.md) | Optional |
 
-### Execution Environment Requirements
+### Execution Environment
 
 - Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base)
   for standardised tooling
-- Use [Docker Bake](https://docs.docker.com/build/bake/) to define and
-  standardise build processes
+- Use [Docker Bake](https://docs.docker.com/build/bake/) to standardise
+  builds
 - Use [Justfiles](https://just.systems/man/en/) for task automation
 - Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
-  for repository-hosted CI checks that do not require privileged access
-  into AWS environments
-- Where CI/CD automation must operate within an AWS context using an AWS
-  role, [Woodpecker CI](https://woodpecker-ci.org/) may be used from an
-  operations workstation or operations-controlled environment
-- Woodpecker runners and agents must run in an isolated, strictly
-  controlled environment with strong access control, audit logging, and
-  minimal administrative access
-- Do not place AWS-privileged CI/CD automation in low-control
-  environments such as GitHub-hosted execution where the organisation
-  does not control the runtime boundary
+  for repository-hosted CI work that does not need AWS access, including
+  lengthy builds, tests, and scans
+- Run only AWS-privileged release or deployment automation from an
+  operations-controlled environment, such as controlled
+  [Woodpecker CI](https://woodpecker-ci.org/) runners
 
-### Operations-Controlled Automation
+### AWS-Privileged Automation
 
-Use operations-controlled automation only where deployment or release
+Use operations-controlled automation only where release or deployment
 steps need AWS credentials or direct access to AWS-hosted systems.
-Preferred controls:
 
-- Assume AWS roles at runtime rather than storing long-lived cloud
-  credentials in pipeline systems
-- Run [Woodpecker agents](https://woodpecker-ci.org/docs/administration/configuration/agent)
-  only on dedicated hosts or workloads managed by operations
-- Configure Woodpecker using its documented
-  [GitHub forge integration](https://woodpecker-ci.org/docs/administration/configuration/forges/github)
-  only as the source control integration point, not as the privileged
-  execution environment
-- Deploy and maintain Woodpecker using a controlled installation method
-  such as the documented
-  [Docker Compose installation](https://woodpecker-ci.org/docs/administration/installation/docker-compose)
-  or equivalent platform-managed deployment
-- Restrict network paths from the automation environment to only the AWS
-  services and internal systems required for the job
+Required controls:
+
+- Assume AWS roles at runtime; do not store long-lived cloud credentials
+  in pipeline systems
+- Run automation on dedicated, operations-managed hosts or workloads
+- Limit network access to the AWS services and internal systems required
+  for the job
+- Apply strong access control, audit logging, and minimal administrative
+  access
 - Keep build, release, and deployment logs for audit and incident review
 
 **CI/CD Pipeline:**
@@ -87,9 +75,9 @@ code -> build -> scan -> release
 Build produces container images with SBOM/provenance. Scan runs
 vulnerability and static analysis. Release produces static artifacts
 consumed by [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
-Where release automation needs AWS access, run it from an
-operations-controlled environment rather than a low-control external
-runtime.
+Keep unprivileged build, test, and scan work on repository-hosted CI,
+including long-running jobs. Move only AWS-privileged release or
+deployment steps to an operations-controlled environment.
 
 ## Consequences
 
@@ -98,7 +86,7 @@ runtime.
 - Automated security scanning and vulnerability remediation
 - Standardised artifact integrity and compliance alignment
 - Consistent deployment pipelines with audit trails
-- Clearer separation between general CI checks and AWS-privileged
+- Clear separation between general CI checks and AWS-privileged
   automation
 
 **Risks if not implemented:**
