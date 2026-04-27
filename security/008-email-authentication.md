@@ -34,7 +34,7 @@ Implement email authentication standards for all government domains:
 - **DMARC**: Implement with a progression timeline:
   1. Start with "p=none" to collect reports (2-4 weeks)
   2. Move to "p=quarantine" once legitimate sources are aligned (4-8
-      weeks)
+     weeks)
   3. Progress to "p=reject" when reports show minimal false positives
   - Include "rua=" for aggregate reports and "ruf=" for forensic reports
   - Apply same policy to subdomains with "sp=reject"

@@ -40,6 +40,7 @@ proposed changes.
 ## Release Notes
 
 ### Overview
+
 - **Name:** Name
 - **Version:** [Version Number](#)
 - **Previous Version:** [Version Number](#)
@@ -49,10 +50,12 @@ proposed changes.
 High level summary
 
 **New Features & Improvements**:
+
 - [Feature/Improvement 1]: Brief description including testing.
 - [Feature/Improvement 2]: Brief description including testing.
 
 **Bug Fixes & Security Updates**:
+
 - [Bug Fix/Security Update 1]: Brief description with severity level and response timeline.
 - [Bug Fix/Security Update 2]: Brief description with severity level and response timeline.
 - **Response Timelines**: Critical (24h), High (7d), Medium (30d), Low (90d)
@@ -66,14 +69,17 @@ High level summary
 - **Configuration & Secrets**: Brief description.
 
 ### Known Issues
+
 - [Known Issue 1]: Brief description.
 - [Known Issue 2]: Brief description.
 
 ### Action Required
+
 - [Action 1]: Brief description of any action required by users or stakeholders.
 - [Action 2]: Brief description of any action required by users or stakeholders.
 
 ### Contact
+
 For any questions or issues, please contact [Contact Information].
 ```
 

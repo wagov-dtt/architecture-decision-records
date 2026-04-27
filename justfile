@@ -61,4 +61,4 @@ clean:
 [group('setup')]
 setup:
     mise install
-    which pandoc || sudo apt-get -y update && sudo apt-get install -y pandoc texlive texlive-pictures librsvg2-bin
+    bash -eu -c 'missing=""; for tool in pandoc pdflatex rsvg-convert; do command -v "$tool" >/dev/null || missing="$missing $tool"; done; if [ -z "$missing" ]; then exit 0; fi; if command -v brew >/dev/null; then brew install pandoc texlive librsvg; elif command -v apt-get >/dev/null; then sudo apt-get -y update && sudo apt-get install -y pandoc texlive texlive-pictures librsvg2-bin; else echo "Missing required tools:$missing" >&2; exit 1; fi'

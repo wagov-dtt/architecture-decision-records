@@ -10,9 +10,15 @@ Use when building:
 - Content portals with editorial workflows
 - Headless CMS backends for mobile apps or multi-channel publishing
 
+Do not use this pattern for simple static sites that can be generated at
+build time without editorial workflows.
+
 ## Overview
 
-This template implements content management systems meeting WA Government compliance requirements, combining security isolation, managed infrastructure, and edge protection.
+Build content platforms with a small CMS runtime, managed database,
+object-backed media storage, and CDN/WAF delivery. Keep authoring,
+storage, and delivery concerns separate so content editors can work
+safely while public users only reach cached, protected endpoints.
 
 ## Core Components
 
@@ -21,15 +27,16 @@ direction: right
 
 editors: Content Editors
 cms: CMS Application
-db: PostgreSQL
-storage: S3 Storage
+db: Content Database
+media: Object Storage
 cdn: CDN + WAF
 users: End Users
 
-editors -> cms: create content
-cms -> db: store data
-cms -> storage: upload media
-cms -> cdn: publish
+editors -> cms: author + approve
+cms -> db: content metadata
+cms -> media: media assets
+media -> cdn: origin
+cms -> cdn: publish / invalidate
 cdn -> users: deliver
 ```
 
@@ -38,59 +45,69 @@ cdn -> users: deliver
 ### Foundation Setup
 
 1. **Apply Isolation** - Follow [ADR 001: Application
-    Isolation](../security/001-isolation.md) for CMS service network
-    and runtime separation
-2. **Deploy Infrastructure** - Follow [ADR 002: AWS EKS for Cloud
-    Workloads](../operations/002-workloads.md) for CMS container
-    deployment
+   Isolation](../security/001-isolation.md) for CMS service network,
+   runtime, and environment separation
+2. **Deploy CMS Runtime** - Follow [ADR 002: AWS EKS for Cloud
+   Workloads](../operations/002-workloads.md) for the CMS application and
+   background workers
 3. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as
-    Code](../operations/010-configmgmt.md) for reproducible deployments
-4. **Setup Database** - Follow [ADR 018: Database
-    Patterns](../operations/018-database-patterns.md) for Aurora
-    Serverless v2 content storage
+   Code](../operations/010-configmgmt.md) for reproducible database,
+   storage, CDN, and runtime deployments
+4. **Setup Storage** - Follow [ADR 018: Database
+   Patterns](../operations/018-database-patterns.md) for the content
+   database and [ADR 019: Shared File
+   Access](../operations/019-shared-file-access.md) when editorial or
+   processing workloads need shared file access to media assets
 
 ### Security & Operations
 
 1. **Configure Secrets Management** - Follow [ADR 005: Secrets
-    Management](../security/005-secrets-management.md) for database
-    credentials and API keys
+   Management](../security/005-secrets-management.md) for database,
+   CMS, identity, and API credentials
 2. **Setup Logging** - Follow [ADR 007: Centralised Security
-    Logging](../operations/007-logging.md) for audit trails and
-    editorial tracking
+   Logging](../operations/007-logging.md) for audit trails, publishing
+   events, and administrative actions
 3. **Setup Backup Strategy** - Follow [ADR 014: Object Storage
-    Backups](../operations/014-object-backup.md) for content and media
-    backup
+   Backups](../operations/014-object-backup.md) for content database,
+   media asset, and configuration recovery
 4. **Configure Edge Protection** - Follow [ADR 016: Web Application
-    Edge Protection](../security/016-edge-protection.md) for CDN and
-    WAF setup
-5. **Identity Integration** - Follow [ADR 012: Privileged Remote
-    Access](../security/012-privileged-remote-access.md) for editorial
-    authentication
+   Edge Protection](../security/016-edge-protection.md) for CDN, WAF,
+   origin protection, and cache rules
+5. **Identity Integration** - Follow [ADR 013: Identity Federation
+   Standards](../security/013-identity-federation.md) and [ADR 012:
+   Privileged Remote Access](../security/012-privileged-remote-access.md)
+   for editorial and administrative access
 
 ### Implementation Details
 
-**Content Workflows & Editorial:**
+**Content Model & Editorial:**
 
-- Configure editorial workflows with role-based stages (draft, review, approve, publish)
-- Setup media asset management and CDN integration per [ADR 016: Web
-  Application Edge Protection](../security/016-edge-protection.md)
-- Implement headless CMS API following [ADR 003: API Documentation
-  Standards](../development/003-apis.md)
-- Configure scheduled publishing and content expiry rules
+- Define content types, ownership, approval stages, and publishing rules
+  before selecting CMS plugins or custom fields
+- Use role-based editorial workflows for draft, review, approval, and
+  publishing steps
+- Keep administrative CMS endpoints separate from public delivery paths
+- Implement headless CMS APIs following [ADR 003: API Documentation
+  Standards](../development/003-apis.md) where content is consumed by
+  other applications
 
-**Compliance & Accessibility:**
+**Media & Delivery:**
 
-- Configure WCAG 2.1 AA accessibility compliance and automated testing
-- Setup jurisdiction-specific compliance requirements (e.g., privacy
-  policies, cookie consent)
-- Implement content governance and retention policies per [ADR 015: Data
-  Governance Standards](../operations/015-data-governance.md)
-- Configure multilingual content management if required
+- Store media assets in object storage as the source of truth
+- Use [ADR 019: Shared File
+  Access](../operations/019-shared-file-access.md) only when authoring,
+  processing, or migration tools need file-system semantics
+- Serve public media through CDN/WAF per [ADR 016: Web Application Edge
+  Protection](../security/016-edge-protection.md)
+- Configure cache keys, TTLs, and invalidation for publishing workflows
 
-**Performance & SEO:**
+**Compliance & Quality:**
 
-- Setup SEO metadata management and structured data (JSON-LD)
-- Implement content performance monitoring per [ADR 007: Centralised
-  Security Logging](../operations/007-logging.md)
-- Configure CDN caching strategies and cache invalidation
-- Setup content analytics and user behaviour tracking
+- Test WCAG 2.1 AA accessibility before publishing templates or major
+  content changes
+- Apply content retention, disposal, and ownership rules per [ADR 015:
+  Data Governance Standards](../operations/015-data-governance.md)
+- Configure privacy notices, cookie consent, and multilingual content
+  where required
+- Monitor content performance, broken links, publishing failures, and CDN
+  cache effectiveness

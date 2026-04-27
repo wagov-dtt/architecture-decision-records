@@ -58,6 +58,8 @@ geographic redundancy.
 **Storage Requirements:**
 
 - Object storage with versioning and immutable storage capabilities
+- Shared file stores that use object storage per [ADR 019: Shared File
+  Access](019-shared-file-access.md)
 - Database, application data, and infrastructure configuration backups
 - Encryption at rest and in transit per [ADR 005: Secrets
   Management](../security/005-secrets-management.md)
@@ -67,6 +69,7 @@ geographic redundancy.
 **Critical Systems Definition:**
 
 - Production databases containing citizen or business data
+- Shared content, media, and file assets required to restore services
 - Application source code and deployment configurations
 - Security logs and audit trails
 - Infrastructure as Code templates and state files

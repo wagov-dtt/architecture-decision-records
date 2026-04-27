@@ -6,27 +6,37 @@
 
 Use when building:
 
-- Applications requiring user login via government or enterprise identity providers
+- Applications requiring user login via government or enterprise identity
+  providers
 - Single sign-on across multiple services
-- Integration with Australian Government Digital ID or verifiable credentials
+- Integration with Australian Government Digital ID or verifiable
+  credentials
+- Services that need separate standard-user and privileged-user access
+  paths
+
+Do not use this pattern to create a new identity provider when a managed
+identity platform can meet the need.
 
 ## Overview
 
-This template implements OIDC-based identity federation using a broker pattern. A central identity broker translates between upstream providers (Government Digital ID, enterprise directories) and downstream applications (your services), providing a single integration point with centralised policy enforcement.
+Use a managed identity platform as the relying-party integration point
+for applications. Add a broker layer only when the service must normalise
+multiple upstream identity providers, verifiable credentials, or policy
+requirements that applications should not implement directly.
 
 ## Identity Federation Pattern
 
-This pattern implements a **broker-based identity federation** that
-translates between upstream identity providers (Government Digital ID,
-verifiable credentials) and downstream identity consumers (AWS Cognito,
-Microsoft Entra ID).
+The pattern separates standard user authentication from privileged
+administration. Both paths issue standard OIDC/SAML claims to downstream
+applications, with audit logging and policy enforcement at the managed
+platform or broker layer.
 
 **Key Benefits:**
 
 - Single integration point for multiple upstream providers
-- Standardised OIDC/SAML interface for downstream consumers  
+- Standard OIDC/SAML interface for downstream applications
+- Separate privileged and standard user domains
 - Centralised policy enforcement and audit logging
-- Support for both government and commercial identity ecosystems
 
 ## Core Components
 
@@ -43,70 +53,70 @@ privileged: Privileged User Domain {
   pim: Privileged Identity Management
 }
 
-broker: Identity Broker
+platform: Managed Identity Platform / Broker
+apps: Applications
 
 standard.users -> standard.providers: authenticate
-standard.providers -> broker: OIDC/SAML
-privileged.admins -> privileged.pim: authenticate
-privileged.pim -> broker: elevated claims
-broker -> apps: issue tokens
-
-apps: Your Applications
+standard.providers -> platform: OIDC/SAML claims
+privileged.admins -> privileged.pim: elevate
+privileged.pim -> platform: privileged claims
+platform -> apps: validated tokens
 ```
-
-The architecture consists of three layers with domain separation:
-
-- **Standard User Domain**: Government Digital ID, enterprise directories, verifiable credentials for end users
-- **Privileged User Domain**: Separate authentication path with Privileged Identity Management (PIM) for administrators
-- **Identity Broker**: Normalises claims, enforces policies, provides audit logging for both domains
-- **Applications**: Consume standardised OIDC/SAML tokens via AWS Cognito or Entra ID
 
 ## Project Kickoff Steps
 
-1. **Infrastructure Foundation** - Follow [ADR 001: Application
-    Isolation](../security/001-isolation.md), [ADR 002: AWS EKS for
-    Cloud Workloads](../operations/002-workloads.md), and [ADR 018:
-    Database Patterns](../operations/018-database-patterns.md) for
-    identity service deployment and data separation
-2. **Security & Secrets** - Follow [ADR 005: Secrets
-    Management](../security/005-secrets-management.md) for OIDC client
-    secrets and [ADR 007: Centralised Security
-    Logging](../operations/007-logging.md) for authentication audit
-    trails
-3. **Identity Federation** - Follow [ADR 013: Identity Federation
-    Standards](../security/013-identity-federation.md) for upstream
-    provider integration and downstream consumer configuration
-4. **Privileged Administration** - Follow [ADR 012: Privileged Remote
-    Access](../security/012-privileged-remote-access.md) for identity
-    service administration access
+1. **Define Trust Boundaries** - Follow [ADR 001: Application
+   Isolation](../security/001-isolation.md) to separate identity runtime,
+   application runtime, and administrative access paths
+2. **Deploy Runtime** - Follow [ADR 002: AWS EKS for Cloud
+   Workloads](../operations/002-workloads.md) only for broker components
+   that cannot be provided by a managed platform
+3. **Configure Identity Federation** - Follow [ADR 013: Identity
+   Federation Standards](../security/013-identity-federation.md) for
+   OIDC-first integration, SAML fallback, claim mapping, and downstream
+   consumer configuration
+4. **Configure Persistence** - Follow [ADR 018: Database
+   Patterns](../operations/018-database-patterns.md) for broker state,
+   session metadata, and configuration storage where required
+5. **Secure Secrets and Logs** - Follow [ADR 005: Secrets
+   Management](../security/005-secrets-management.md) for OIDC client
+   secrets and [ADR 007: Centralised Security
+   Logging](../operations/007-logging.md) for authentication audit trails
+6. **Privileged Administration** - Follow [ADR 012: Privileged Remote
+   Access](../security/012-privileged-remote-access.md) for break-glass
+   and administrator access
 
 ## Implementation Considerations
 
-**Privacy & PII Protection (Digital ID Act 2024):**
+**Provider and Claim Design:**
 
-- **Data minimisation**: Prohibit collection beyond identity
-  verification requirements
-- **No single identifiers**: Prevent tracking across services using
-  persistent identifiers
-- **Marketing restrictions**: Prohibit disclosure of identity
-  information for marketing purposes
-- **Voluntary participation**: Users cannot be required to create
-  Digital ID for service access
-- **Biometric safeguards**: Restrict collection, use, and disclosure of
-  biometric information
-- **Breach notification**: Implement cyber security and fraud incident
-  management processes
+- Prefer OIDC for new integrations; use SAML only where the upstream
+  provider cannot support OIDC
+- Define required claims, optional claims, and claim transformation rules
+  before application integration
+- Avoid persistent cross-service identifiers unless there is a lawful and
+  documented need
+- Keep application authorization decisions close to the application while
+  centralising authentication and identity proofing
 
-**Identity Proofing Level Selection:**
+**Privacy & PII Protection:**
 
-- **IP1-IP2**: Low-risk transactions with minimal personal information
-  exposure
-- **IP2+**: Higher-risk services requiring biometric verification and
-  stronger assurance
-- **Risk assessment**: Match proofing level to transaction risk and data
-  sensitivity
-- **Credential binding**: Ensure authentication levels align with
-  proofing requirements
+- Minimise collected identity attributes to what each service needs
+- Prevent tracking across services using persistent identifiers unless
+  explicitly justified
+- Prohibit disclosure of identity information for marketing purposes
+- Ensure voluntary Digital ID participation where legislation requires it
+- Define breach notification and fraud incident response processes
+
+**Assurance and Administration:**
+
+- Match identity proofing and authentication levels to transaction risk
+  and data sensitivity
+- Separate standard user login from privileged administration and support
+  step-up authentication for high-risk actions
+- Maintain audit trails for login, consent, claim release, privilege
+  elevation, and administrative configuration changes
+- Implement fallback authentication for critical services
 
 **Standards Compliance:**
 

@@ -45,10 +45,11 @@ load balancers for traffic management.
 - **Managed Storage and NodePools**: Ensure that the underlying
   infrastructure is maintained and updated by AWS.
 - **Load Balancers**: Standardise ingress and traffic management.
-- **Persistent Storage:** Databases and object storage should use
-  Database-as-a-Service (DBaaS) to enable higher resilience for
-  point-in-time recovery (PITR) and backups with lower overheads as per
-  [ADR 018: Database Patterns](018-database-patterns.md)
+- **Persistent Storage:** Keep durable state in managed services outside
+  the cluster. Use [ADR 018: Database
+  Patterns](018-database-patterns.md) for databases and datalakes, and
+  [ADR 019: Shared File Access](019-shared-file-access.md) when
+  workloads need shared file-system access.
 
 ## Consequences
 
