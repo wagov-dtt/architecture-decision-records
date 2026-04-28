@@ -60,7 +60,7 @@ cdn -> users: deliver
   lifecycle policies, and backups per [ADR 014](014-object-backup.md)
 - Use managed shared file access for workloads that need paths, folders,
   and ordinary file operations
-- Scope working sets and least-privilege access with bucket prefixes,
+- Scope working sets and least-privilege access with bucket prefixes, policy,
   access points, or equivalent storage boundaries
 - Publish public assets through a CDN and WAF per [ADR 016](../security/016-edge-protection.md)
 - Use workload identity and scoped IAM permissions for EKS access per
