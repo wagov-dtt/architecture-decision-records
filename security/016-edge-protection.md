@@ -47,6 +47,9 @@ mitigation before traffic reaches application infrastructure.
 
 - Geographic distribution with SSL/TLS termination at edge
 - Cache optimization and origin shielding
+- Object-backed origins for static and media assets, using [ADR 019:
+  Shared File Access](../operations/019-shared-file-access.md) when
+  authoring or processing workloads need file-system access
 - IPv6 dual-stack support on edge (internal use of IPv4 allowed)
 
 **WAF Protection:**

@@ -25,6 +25,7 @@
 - [ADR 015: Data Governance](operations/015-data-governance.md)
 - [ADR 017: Analytics Tooling](operations/017-analytics-tooling.md)
 - [ADR 018: Database Patterns](operations/018-database-patterns.md)
+- [ADR 019: Shared File Access](operations/019-shared-file-access.md)
 
 # Development ADRs
 
