@@ -1,6 +1,6 @@
 # ADR 019: Shared File Access
 
-**Status:** Proposed | **Date:** 2026-04-27
+**Status:** Accepted | **Date:** 2026-04-27
 
 ## Context
 
