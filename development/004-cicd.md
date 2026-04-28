@@ -4,7 +4,10 @@
 
 ## Context
 
-Ensure security and integrity of software artifacts that are consumed by infrastructure repositories per [ADR 010](../operations/010-configmgmt.md). Threat actors exploit vulnerabilities in code, dependencies, container images, and exposed secrets.
+Ensure security and integrity of software artifacts that are consumed by
+infrastructure repositories per [ADR 010](../operations/010-configmgmt.md).
+Threat actors exploit vulnerabilities in code, dependencies, container
+images, and exposed secrets.
 
 **Compliance Requirements:**
 
@@ -26,12 +29,35 @@ Ensure security and integrity of software artifacts that are consumed by infrast
 | **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
 | **API** | [Restish](https://rest.sh/#/guide) | API validation per [ADR 003](../development/003-apis.md) | Optional |
 
-### Development Environment
+### Execution Environment
 
-- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) for standardised tooling
-- Use [Docker Bake](https://docs.docker.com/build/bake/) to define and standardise build processes
-- Use [Justfiles](https://just.systems/man/en/) for task automation  
-- Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) for CI/CD automation
+- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base)
+  for standardised tooling
+- Use [Docker Bake](https://docs.docker.com/build/bake/) to standardise
+  builds
+- Use [Justfiles](https://just.systems/man/en/) for task automation
+- Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
+  for repository-hosted CI work that does not need AWS access, including
+  lengthy builds, tests, and scans
+- Run only AWS-privileged release or deployment automation from an
+  operations-controlled environment, such as controlled
+  [Woodpecker CI](https://woodpecker-ci.org/) runners
+
+### AWS-Privileged Automation
+
+Use operations-controlled automation only where release or deployment
+steps need AWS credentials or direct access to AWS-hosted systems.
+
+Required controls:
+
+- Assume AWS roles at runtime; do not store long-lived cloud credentials
+  in pipeline systems
+- Run automation on dedicated, operations-managed hosts or workloads
+- Limit network access to the AWS services and internal systems required
+  for the job
+- Apply strong access control, audit logging, and minimal administrative
+  access
+- Keep build, release, and deployment logs for audit and incident review
 
 **CI/CD Pipeline:**
 
@@ -49,6 +75,9 @@ code -> build -> scan -> release
 Build produces container images with SBOM/provenance. Scan runs
 vulnerability and static analysis. Release produces static artifacts
 consumed by [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
+Keep unprivileged build, test, and scan work on repository-hosted CI,
+including long-running jobs. Move only AWS-privileged release or
+deployment steps to an operations-controlled environment.
 
 ## Consequences
 
@@ -57,11 +86,13 @@ consumed by [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
 - Automated security scanning and vulnerability remediation
 - Standardised artifact integrity and compliance alignment
 - Consistent deployment pipelines with audit trails
+- Clear separation between general CI checks and AWS-privileged
+  automation
 
 **Risks if not implemented:**
 
 - Vulnerable containers deployed to production
-- Exposed secrets in application artifacts
+- Exposed secrets or excessive cloud privilege in automation systems
 - Manual security processes prone to human error
 - Compliance violations and audit failures
 

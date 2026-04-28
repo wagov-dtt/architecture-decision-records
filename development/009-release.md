@@ -1,36 +1,53 @@
-# ADR 009: Release Documentation Standards
+# ADR 009: Release Standards
 
 **Status:** Accepted | **Date:** 2025-03-04
 
 ## Context
 
-To ensure clear communication of changes and updates to security and
-infrastructure operations teams, release notes should be standardised.
-The release notes should succinctly capture key information, including
-new features, improvements, bug fixes, security updates, and
-infrastructure changes, with links to relevant changelogs.
+Release notes should be standardised so security and infrastructure
+operations teams can quickly understand what changed, why it changed,
+and what action is required.
+
+Release standards also need a clear promotion model. Without one,
+integrated code can reach `main` before testing is complete, and release
+evidence can become detached from the deployed version.
+
+**Compliance Requirements:**
 
 - [Australian Cyber Security Centre (ACSC) Guidelines for Software
   Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development)
+- [Atlassian Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
 
 ## Decision
 
-Adopt a standardised release notes template in
-[Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
-format. Brief descriptions should include the security implications and
-operational impacts of changes such as vulnerability fixes, compliance
-improvements, or changes to authentication and authorisation mechanisms.
-Descriptions should also detail operational aspects, including
-deployment processes, logging & monitoring considerations, and any
-modifications to Infrastructure as Code (IaC).
+Use Markdown release notes and a Gitflow-based release model.
 
-**Git Tagging Requirements:**
+**Release notes must include:**
 
-- Create a git tag for each release following semantic versioning
-  (v1.0.0, v1.1.0, etc.)
-- Tags must be annotated with release notes summary
-- Tags should be created after all ADR acceptance and README updates
-- Tag message should reference the release documentation
+- Summary of features, fixes, security updates, and infrastructure
+  changes
+- Security and operational impacts, including deployment, logging,
+  monitoring, and Infrastructure as Code (IaC) changes
+- Links to changelogs, test results, security scans, and approvals
+
+**Release workflow:**
+
+- `develop` is the integration branch
+- `main` is the tested release history
+- Create `release/*` branches from `develop` for release candidates
+- Create `hotfix/*` branches from `main` for urgent production fixes
+- Merge to `main` only after required testing and approval
+- Tag releases on `main` using annotated semantic version tags such as
+  `v1.0.0`
+
+**Environment promotion:**
+
+- DEV and INT may deploy approved branch refs
+- UAT and PROD must deploy immutable tagged releases only
+- Promote the same tested tag from UAT to PROD without rebuilding,
+  moving, or recreating the tag
+- Record evidence on pull requests or GitHub Releases; update evidence
+  without changing existing tags
 
 A template is provided below that can be tailored per project. A
 completed release notes Markdown document should be provided with all
@@ -87,12 +104,15 @@ For any questions or issues, please contact [Contact Information].
 
 **Benefits:**
 
-- Standardised release communication improving cross-team coordination
-- Comprehensive change tracking supporting [ADR 007: Centralised Security Logging](../operations/007-logging.md)
-- Enhanced collaboration through consistent documentation processes
+- Release communication is consistent across teams
+- `main` reflects tested release history, not day-to-day integration
+- UAT and PROD promotion uses immutable release tags
+- Change tracking supports [ADR 007: Centralised Security Logging](../operations/007-logging.md)
 
 **Risks if not implemented:**
 
-- Critical release information lost between development teams
-- Poor decision making from insufficient release context
-- Security incidents from undocumented system changes
+- Critical release information may be lost between teams
+- Integration changes may be promoted before release validation is
+  complete
+- Security or operational issues may be introduced through undocumented
+  system changes

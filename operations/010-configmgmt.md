@@ -15,13 +15,13 @@ All environments must be reproducible from source to minimise drift and security
 
 ### Golden Path
 
-1. **Git Repository Structure**: Single repo per application with `environments/{dev,staging,prod}` folders matching AWS account names (e.g., `app-a-infra` repo → `app-a-dev`, `app-a-staging`, `app-a-prod` accounts)
+1. **Git Repository Structure**: Single repo per application with `environments/{dev,int,uat,prod}` folders matching AWS account names, for example `app-a-dev`, `app-a-int`, `app-a-uat`, and `app-a-prod`
 2. **State Management**: Terraform remote state with locking, separate state per environment
 3. **CI Pipeline**:
    - **Validate**: Trivy scan + `terraform plan`/`kubectl diff` drift check
    - **Plan**: Show proposed changes on PR
-   - **Apply**: Deploy on tagged release only
-4. **Versioning**: Git tags = semantic versions (x.y.z) deployable to any environment
+   - **Apply**: DEV and INT may deploy approved branch refs; UAT and PROD deploy tagged releases only per [ADR 009](../development/009-release.md)
+4. **Versioning**: Git tags = semantic versions (x.y.z) created on `main` for UAT and PROD
 5. **Disaster Recovery**: Checkout tag + run `just deploy --env=prod` with static artifacts from [ADR 004](../development/004-cicd.md)
 
 ### Required Tools & Practices
@@ -47,9 +47,10 @@ artifacts -> repo: versioned
 repo -> envs: deploy
 ```
 
-Git tags represent deployable versions. Environment folders
-(`environments/{dev,staging,prod}`) map to separate AWS accounts with
-isolated state storage.
+Git tags are immutable release versions for UAT and PROD. DEV and INT
+may deploy approved branch refs per [ADR 009](../development/009-release.md).
+Environment folders (`environments/{dev,int,uat,prod}`) map to separate
+AWS accounts with isolated state storage.
 
 ## Consequences
 

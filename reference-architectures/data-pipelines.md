@@ -86,9 +86,9 @@ access -> output: serve
 1. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality
    Assurance](../development/004-cicd.md) for automated testing and
    deployment
-2. **Setup Releases** - Follow [ADR 009: Release Documentation
+2. **Setup Releases** - Follow [ADR 009: Release
    Standards](../development/009-release.md) for versioned pipeline
-   changes and data-impact notes
+   changes, release notes, promotion, and data-impact notes
 3. **Publish Analytics** - Follow [ADR 017: Analytics Tooling
    Standards](../operations/017-analytics-tooling.md) for Quarto reports
    and dashboards
