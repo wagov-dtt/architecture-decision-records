@@ -64,21 +64,21 @@ The architecture consists of three layers with domain separation:
 ## Project Kickoff Steps
 
 1. **Infrastructure Foundation** - Follow [ADR 001: Application
-    Isolation](../security/001-isolation.md), [ADR 002: AWS EKS for
-    Cloud Workloads](../operations/002-workloads.md), and [ADR 018:
-    Database Patterns](../operations/018-database-patterns.md) for
-    identity service deployment and data separation
+   Isolation](../security/001-isolation.md), [ADR 002: AWS EKS for
+   Cloud Workloads](../operations/002-workloads.md), and [ADR 018:
+   Database Patterns](../operations/018-database-patterns.md) for
+   identity service deployment and data separation
 2. **Security & Secrets** - Follow [ADR 005: Secrets
-    Management](../security/005-secrets-management.md) for OIDC client
-    secrets and [ADR 007: Centralised Security
-    Logging](../operations/007-logging.md) for authentication audit
-    trails
+   Management](../security/005-secrets-management.md) for OIDC client
+   secrets and [ADR 007: Centralised Security
+   Logging](../operations/007-logging.md) for authentication audit
+   trails
 3. **Identity Federation** - Follow [ADR 013: Identity Federation
-    Standards](../security/013-identity-federation.md) for upstream
-    provider integration and downstream consumer configuration
+   Standards](../security/013-identity-federation.md) for upstream
+   provider integration and downstream consumer configuration
 4. **Privileged Administration** - Follow [ADR 012: Privileged Remote
-    Access](../security/012-privileged-remote-access.md) for identity
-    service administration access
+   Access](../security/012-privileged-remote-access.md) for identity
+   service administration access
 
 ## Implementation Considerations
 

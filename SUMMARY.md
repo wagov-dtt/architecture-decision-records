@@ -30,7 +30,7 @@
 
 - [ADR 003: APIs](development/003-apis.md)
 - [ADR 004: CI/CD](development/004-cicd.md)
-- [ADR 009: Release](development/009-release.md)
+- [ADR 009: Release Standards](development/009-release.md)
 
 ---
 
@@ -53,4 +53,3 @@
 - [Contributing](CONTRIBUTING.md)
 - [Compliance Mapping](compliance-mapping.md)
 - [Glossary](glossary.md)
-- [AI Agents](AGENTS.md)

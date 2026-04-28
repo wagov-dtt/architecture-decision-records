@@ -26,6 +26,29 @@
 6. **Add to SUMMARY.md** - Include new ADR in navigation (required for mdBook)
 7. **Submit PR** - Ready for review
 
+## Useful Commands
+
+```bash
+just --list      # Show all available commands
+just next-number # Get next ADR number
+just check-summary # Verify SUMMARY.md includes all markdown files
+just lint        # Run checks and fixes
+just serve       # Preview locally on port 8080
+just build       # Build website and PDF
+```
+
+## AI-Assisted Contributions
+
+AI tools may help draft or review ADRs, but a human contributor remains
+responsible for the final content.
+
+- Prefer isolated or local AI tooling per [ADR 011: AI Governance](security/011-ai-governance.md)
+- Review [architecture-principles.md](architecture-principles.md) before proposing changes
+- Browse [reference-architectures/](reference-architectures/) for project kickoff patterns
+- Check existing ADRs in `development/`, `operations/`, and `security/` before creating new guidance
+- Human review is required for all AI-generated changes before merge
+- Recommended tools include [OpenCode](https://github.com/wagov-dtt/tutorials-and-workshops/blob/main/README.md#opencode-ai-agent) and [Goose](https://github.com/block/goose)
+
 ```d2
 direction: right
 
@@ -48,6 +71,13 @@ publish: Publication {
 setup -> create -> validate -> publish
 validate -> create: fix issues
 ```
+
+## Project Notes
+
+- Documentation is built with [mdBook](https://rust-lang.github.io/mdBook/)
+- Navigation is defined in `SUMMARY.md`; new ADRs must be added there
+- `just build` creates both the website and PDF output
+- Use D2 diagrams where a simple visual explanation is clearer than text alone
 
 ## Directory Structure
 
