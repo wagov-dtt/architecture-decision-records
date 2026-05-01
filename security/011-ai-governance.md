@@ -35,6 +35,10 @@ References:
 - [Oxide RFD 576: Using LLMs at
   Oxide](https://rfd.shared.oxide.computer/rfd/0576) - values-based
   approach to AI tool governance
+- [oy-cli crate documentation](https://docs.rs/oy-cli/latest/oy/) - local AI
+  coding CLI and safety-mode guidance
+- [Exploring the zero operator access design of Mantle](https://aws.amazon.com/blogs/machine-learning/exploring-the-zero-operator-access-design-of-mantle/)
+  - Amazon Bedrock Mantle zero operator access design
 
 ## Decision
 
@@ -81,34 +85,43 @@ AI tools must:
   Isolation](001-isolation.md)) with minimal permissions
 - Have no direct network access to internal systems or databases
 - Include technical guardrails against data exfiltration
+- Enforce explicit workspace, shell/process, network, model-provider,
+  local-state, and approval boundaries
+- Default to read-only or approval-gated modes for untrusted repositories
+  and first-look analysis
 
 **Implementation Examples:**
 
-- **Endorsed**: Developer tooling (e.g., [OpenCode](https://github.com/wagov-dtt/tutorials-and-workshops/blob/main/README.md#opencode-ai-agent)) with human code review for all
-  generated code before merge
-- **Rejected**: Automated tools that merge pull requests or deploy
-  without human approval
+- **Preferred**: [oy-cli](https://docs.rs/oy-cli/latest/oy/) for governed
+  agent-backed development and repository audits
+- **Rejected**: Automated tools that merge, release, or deploy without
+  human approval
 
 ## Strategic Research
 
-The following AI-assisted security tools are under investigation for potential future adoption:
+Future adoption should favour simple agent workflows with strict,
+inspectable boundaries: explicit workspace scope, approval-gated
+mutation, deterministic audits, and minimal platform magic. Tools with a
+similar posture to `oy` are preferred over broad agent platforms that add
+opaque orchestration or unnecessary operational complexity.
 
-| Tool | Purpose | Status | Links |
-|------|---------|--------|-------|
-| [ZeroPath](https://zeropath.com/) | AI-powered security code review and vulnerability detection | Under Investigation | [Documentation](https://docs.zeropath.com/) |
-| [Strix](https://github.com/usestrix/strix) | Open-source AI penetration testing agents (self-hostable) | Under Investigation | [Documentation](https://docs.strix.ai/) |
+`bedrock-mantle` is the preferred execution environment for this research
+where suitable because it enables access to open models through Amazon
+Bedrock and aligns with Mantle's zero operator access design, which AWS
+describes as eliminating technical means for AWS operators to access
+customer data.
 
-**Model Preferences:**
+Model and backend selection must consider:
 
-Where possible, preference should be given to tools using [open weights models](https://artificialanalysis.ai/models/open-source) to support transparency, auditability, and reduced vendor lock-in. Open-source and self-hostable tools (such as Strix) are particularly valuable as they enable:
-
-- Independent security audits of model behaviour and tool functionality
-- Local deployment options for sensitive workloads with full data sovereignty
-- Greater control over data processing and privacy
-- Community-driven improvements and customisation
-- Reduced dependency on proprietary third-party services
-
-These tools are being evaluated for alignment with the human oversight requirements outlined in this ADR. Any adoption will require demonstrated compliance with mandatory requirements above.
+- Evidence of better quality or security on representative development,
+  audit, and operations tasks
+- Data disclosure to the configured model provider, including snippets,
+  command output, tool results, and audit chunks
+- Avoiding lock-in to heavily proprietary platforms such as Bedrock
+  AgentCore or GitHub Copilot unless there is a clear risk or capability
+  justification
+- Compatibility with `oy` approval modes, workspace boundaries, and
+  deterministic no-tools audits
 
 ## Consequences
 
@@ -118,6 +131,8 @@ These tools are being evaluated for alignment with the human oversight requireme
 - Maintains compliance with Privacy Act and data sovereignty requirements
 - Prevents automated actions in production environments without approval
 - Establishes clear audit trail for responsible AI usage
+- Standardises agent-backed development on a local CLI with explicit
+  approval modes, workspace boundaries, and a deterministic audit path
 
 **Risks if not implemented:**
 
