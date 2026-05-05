@@ -13,10 +13,18 @@ This table maps ADRs to specific controls and requirements in Western Australian
 | [007 Logging](operations/007-logging.md) | Security logging | [Guidelines for System Monitoring](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-system-monitoring) **(ISM-0580, ISM-1405, ISM-1985, ISM-0988)** | Event logging policy, centralised logging, log protection, time synchronisation |
 | [008 Email Auth](security/008-email-authentication.md) | Email authentication | [Guidelines for Email](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-email) **(ISM-0574, ISM-1151, ISM-1540, ISM-0259)** | SPF, DKIM, DMARC, email encryption |
 | [010 IaC](operations/010-configmgmt.md) | Infrastructure as code | [Guidelines for System Hardening](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-system-hardening) **(ISM-1211, ISM-1409, ISM-1383)** | Configuration management, automated deployment, drift detection |
-| [011 AI Governance](security/011-ai-governance.md) | AI tool governance | [Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development) **(ISM-2074, ISM-1755, ISM-0226)** | AI usage policy, supply chain risk management, software assessment |
+| [011 AI Tool and Agent Governance](security/011-ai-governance.md) | AI tool and agent governance | [Guidelines for Software Development](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-software-development) **(ISM-2074, ISM-1755, ISM-0226)** | AI usage policy, supply chain risk management, software assessment |
 | [012 Privileged Access](security/012-privileged-remote-access.md) | Privileged access | [Guidelines for System Management](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-system-management) **(ISM-1175, ISM-1507, ISM-1483, ISM-1173)** | Restricting privileged access, JIT access, jump servers, MFA for admins |
 | [013 Identity](security/013-identity-federation.md) | Identity federation | [Guidelines for Personnel Security](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-personnel-security) **(ISM-0418, ISM-1173, ISM-1420, ISM-1505)** | Authentication, MFA, federated identity trust, credential management |
 | [016 Edge Protection](security/016-edge-protection.md) | WAF and CDN | [Guidelines for Gateways](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-gateways) **(ISM-1192, ISM-1262, ISM-1460)** | Web application firewalls, traffic inspection, DDoS protection |
+
+## ACSC Agentic AI Guidance
+
+The [ACSC Careful adoption of agentic AI services](https://www.cyber.gov.au/business-government/secure-design/artificial-intelligence/careful-adoption-of-agentic-ai-services) guidance recommends aligning agentic AI risks with existing security models, avoiding broad access to sensitive data or critical systems, and starting with low-risk, non-sensitive tasks.
+
+| ADR | Guidance Alignment |
+|-----|--------------------|
+| [011 AI Tool and Agent Governance](security/011-ai-governance.md) | Low-risk adoption, least privilege, human approval gates, sandbox testing, monitoring and audit logs, trusted component inventories, isolation of high-risk agents |
 
 ## WA Government Cyber Security Policy (WA CSP)
 
@@ -29,7 +37,7 @@ The [2024 WA Government Cyber Security Policy](https://www.wa.gov.au/government/
 | [005 Secrets](security/005-secrets-management.md) | Information security (Cryptography) | 3.1 |
 | [006 Policy Enforcement](operations/006-policy-enforcement.md) | Cyber security governance | 1.4 |
 | [007 Logging](operations/007-logging.md) | Continuous monitoring | 4.2 |
-| [011 AI Governance](security/011-ai-governance.md) | Supply chain risk management | 2.3 |
+| [011 AI Tool and Agent Governance](security/011-ai-governance.md) | Supply chain risk management | 2.3 |
 | [012 Privileged Access](security/012-privileged-remote-access.md) | Identity and access management | 3.6 |
 | [013 Identity](security/013-identity-federation.md) | Identity and access management | 3.6 |
 
@@ -44,7 +52,7 @@ The [WA Government AI Policy and Assurance Framework](https://www.wa.gov.au/gove
 
 | ADR | WA AI Policy Requirement |
 |-----|-------------------------|
-| [011 AI Governance](security/011-ai-governance.md) | AI Accountable Officer, AI Assurance Framework self-assessment |
+| [011 AI Tool and Agent Governance](security/011-ai-governance.md) | AI Accountable Officer, AI Assurance Framework self-assessment |
 | [015 Data Governance](operations/015-data-governance.md) | Data quality validation for AI systems |
 
 **Key Requirements:**

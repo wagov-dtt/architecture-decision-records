@@ -10,7 +10,7 @@
 - [ADR 001: Isolation](security/001-isolation.md)
 - [ADR 005: Secrets Management](security/005-secrets-management.md)
 - [ADR 008: Email Authentication](security/008-email-authentication.md)
-- [ADR 011: AI Governance](security/011-ai-governance.md)
+- [ADR 011: AI Tool and Agent Governance](security/011-ai-governance.md)
 - [ADR 012: Privileged Remote Access](security/012-privileged-remote-access.md)
 - [ADR 013: Identity Federation](security/013-identity-federation.md)
 - [ADR 016: Edge Protection](security/016-edge-protection.md)
