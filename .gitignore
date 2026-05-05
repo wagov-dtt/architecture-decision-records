@@ -1,7 +1,8 @@
-# mdBook build outputs
-/book/
-/book-temp/
-/d2/
+# Hugo build outputs
+/public/
+/resources/_gen/
+/.hugo_build.lock
+/assets/jsconfig.json
 
 # Vale style downloads
 /.vale/styles/

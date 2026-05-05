@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Title }} | {{ site.Title }}</title>
+  <link rel="stylesheet" href="{{ "css/printable.css" | relURL }}">
+</head>
+<body class="printable-page">
+  <header class="printable-header">
+    <p><a href="{{ "docs/" | relURL }}">← Documentation</a></p>
+    <h1>{{ site.Title }}</h1>
+    <p>Single-page printable view. Use your browser print command to save as PDF.</p>
+    <p><button type="button" onclick="window.print()">Print / Save as PDF</button></p>
+  </header>
+
+  <nav class="printable-toc" aria-label="Printable table of contents">
+    <h2>Contents</h2>
+    <ol>
+      {{ range where site.RegularPages.ByWeight "Section" "docs" }}
+        {{ if not (in .RelPermalink "/templates/") }}
+          <li><a href="#{{ .File.UniqueID }}">{{ .Title }}</a></li>
+        {{ end }}
+      {{ end }}
+    </ol>
+  </nav>
+
+  <main>
+    {{ range where site.RegularPages.ByWeight "Section" "docs" }}
+      {{ if not (in .RelPermalink "/templates/") }}
+        <article id="{{ .File.UniqueID }}" class="printable-article">
+          {{ .Content }}
+        </article>
+      {{ end }}
+    {{ end }}
+  </main>
+</body>
+</html>

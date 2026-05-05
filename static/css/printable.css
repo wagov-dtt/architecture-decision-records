@@ -1,0 +1,76 @@
+.printable-page {
+  color: #1f2933;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: 2rem;
+}
+
+.printable-page a {
+  color: #005ea8;
+}
+
+.printable-header,
+.printable-toc,
+.printable-article {
+  margin-bottom: 2.5rem;
+}
+
+.printable-article {
+  border-top: 1px solid #d8dde3;
+  padding-top: 2rem;
+}
+
+.printable-page pre {
+  background: #f5f7fa;
+  border: 1px solid #d8dde3;
+  border-radius: 0.35rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.printable-page code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.printable-page table {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.printable-page th,
+.printable-page td {
+  border: 1px solid #d8dde3;
+  padding: 0.4rem 0.6rem;
+  vertical-align: top;
+}
+
+.printable-page blockquote {
+  border-left: 0.25rem solid #d8dde3;
+  margin-left: 0;
+  padding-left: 1rem;
+}
+
+@media print {
+  .printable-page {
+    max-width: none;
+    padding: 0;
+  }
+
+  .printable-header button,
+  .printable-header a {
+    display: none;
+  }
+
+  .printable-article {
+    break-before: page;
+  }
+
+  .printable-page a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

@@ -1,18 +1,13 @@
 [tools]
-"cargo:mdbook-pandoc" = "latest"
-"cargo:mdbook-d2" = "latest"
+go = "latest"
 just = "latest"
-"cargo:mdbook" = "latest"
-cargo-binstall = "latest"
-d2 = "latest"
 lychee = "latest"
 rumdl = "latest"
 
 [tasks.build]
-description = "Build the book"
+description = "Build the documentation site"
 run = "just build"
 
 [settings]
-cargo.binstall = true
 experimental = true
 lockfile = true
