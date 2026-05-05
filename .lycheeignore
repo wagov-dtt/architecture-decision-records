@@ -15,3 +15,6 @@ dta.gov.au
 
 # CI/build tool sites that timeout
 kubectl.docs.kubernetes.io
+
+# New Hugo printable route exists after this branch deploys
+adr.dtt.digital.wa.gov.au/printable

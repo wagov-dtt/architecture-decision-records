@@ -8,13 +8,13 @@ These patterns help you build secure, compliant digital services faster. Instead
 
 ### Getting Started
 
-1. **Review the [Architecture Principles](architecture-principles.md)** - Six guiding principles for all technology decisions
+1. **Review the [Architecture Principles](content/docs/architecture-principles.md)** - Six guiding principles for all technology decisions
 2. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
-   - [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
-   - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
-   - [Identity Management](reference-architectures/identity-management.md) - User authentication and single sign-on
-   - [OpenAPI Backends](reference-architectures/openapi-backends.md) - Backend services and integrations
-3. **Check the [Compliance Mapping](compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
+   - [Content Management](content/docs/reference-architectures/content-management.md) - Websites, intranets, and content portals
+   - [Data Pipelines](content/docs/reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
+   - [Identity Management](content/docs/reference-architectures/identity-management.md) - User authentication and single sign-on
+   - [OpenAPI Backends](content/docs/reference-architectures/openapi-backends.md) - Backend services and integrations
+3. **Check the [Compliance Mapping](content/docs/compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
 
 ### Compliance Alignment
 
@@ -26,26 +26,26 @@ These ADRs align with:
 
 Supporting training: [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/)
 
-**[Browse online](https://wagov-dtt.github.io/architecture-decision-records/)** | **[Download PDF](https://wagov-dtt.github.io/architecture-decision-records/architecture-decision-records.pdf)**
+**[Browse online](https://adr.dtt.digital.wa.gov.au/)** | **[Printable view](https://adr.dtt.digital.wa.gov.au/printable/)**
 
 ---
 
 ## Contributing
 
-New ADRs document the **context** (problem), **decision** (solution), and **consequences** (trade-offs). See the [Contributing Guide](CONTRIBUTING.md) for workflow and templates.
+New ADRs document the **context** (problem), **decision** (solution), and **consequences** (trade-offs). See the [Contributing Guide](content/docs/contributing.md) for workflow and templates.
 
-For AI-assisted contributions, see the guidance in [CONTRIBUTING.md](CONTRIBUTING.md).
+For AI-assisted contributions, see the guidance in [CONTRIBUTING.md](content/docs/contributing.md).
 
 ## Repository Structure
 
-This project uses [mdBook](https://rust-lang.github.io/mdBook/) to generate documentation:
+This project uses [Hugo](https://gohugo.io/) and [Hinode](https://gethinode.com/) to generate documentation:
 
-- `development/`, `operations/`, `security/` - ADRs by domain
-- `reference-architectures/` - Project kickoff templates
-- `SUMMARY.md` - Navigation structure
+- `content/docs/development/`, `content/docs/operations/`, `content/docs/security/` - ADRs by domain
+- `content/docs/reference-architectures/` - Project kickoff templates
+- Hugo front matter - Navigation structure
 
 ```bash
 just setup    # One-time tool installation
 just serve    # Preview locally (port 8080)
-just build    # Build website and PDF
+just build    # Build website and printable view
 ```

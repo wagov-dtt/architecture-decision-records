@@ -1,4 +1,4 @@
 # rumdl configuration for ADR project
 [global]
-exclude = ["SUMMARY.md"]
+exclude = ["public", "resources/_gen"]
 disable = ["MD013"]  # Line length disabled - tables need wide lines

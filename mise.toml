@@ -1,15 +1,14 @@
 [tools]
-"cargo:mdbook-pandoc" = "latest"
-"cargo:mdbook-d2" = "latest"
-just = "latest"
-"cargo:mdbook" = "latest"
-cargo-binstall = "latest"
-d2 = "latest"
-lychee = "latest"
-rumdl = "latest"
+go = "1.26.2"
+cargo-binstall = "1.19.0"
+hugo-extended = "0.161.1"
+just = "1.50.0"
+lychee = "0.24.1"
+"cargo:rumdl" = "0.1.83"
+"npm:sass-embedded" = "1.99.0"
 
 [tasks.build]
-description = "Build the book"
+description = "Build the documentation site"
 run = "just build"
 
 [settings]

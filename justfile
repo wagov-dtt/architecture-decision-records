@@ -7,58 +7,59 @@ default:
 
 # Preview documentation locally (port 8080)
 [group('development')]
-serve: lint
-    mdbook serve --port 8080
+serve: precheck
+    mise exec -- hugo server --bind 0.0.0.0 --port 8080 --buildDrafts
 
 # Get next ADR number for new files
 [group('development')]
 next-number:
     #!/usr/bin/env python3
     import glob, re
-    
-    numbers = [int(m.group()) for d in ["development", "operations", "security"] 
+
+    numbers = [int(m.group()) for d in ["content/docs/development", "content/docs/operations", "content/docs/security"]
                for f in glob.glob(f"{d}/**/*.md", recursive=True)
                if (m := re.search(r'\d+', f))]
     print(f"{max(numbers, default=0) + 1:03d}")
 
 # Run all checks and fixes
 [group('quality')]
-lint:
-    rumdl check --fix .
-    just check-summary
-    lychee '*.md' '**/*.md' --exclude-path book
+lint: precheck
+    lychee --root-dir public '*.md' 'content/**/*.md' --exclude-path public --exclude-path resources/_gen
 
 # Run checks with tolerant lychee (for CI where external sites may rate-limit)
 [group('quality')]
-lint-ci:
-    rumdl check --fix .
-    just check-summary
-    lychee '*.md' '**/*.md' --exclude-path book || true
+lint-ci: precheck
+    lychee --root-dir public '*.md' 'content/**/*.md' --exclude-path public --exclude-path resources/_gen || true
 
-# Verify SUMMARY.md includes all markdown files
+# Verify docs content has Hugo front matter and no D2 blocks
 [group('quality')]
-check-summary:
-    python3 -c "import glob, sys; files = sum([glob.glob(f'{d}/**/*.md', recursive=True) for d in ['development', 'operations', 'security', 'reference-architectures']], []); summary = open('SUMMARY.md').read(); missing = [f for f in files if f not in summary]; print('Missing from SUMMARY.md:', *missing, sep='\n  ') or sys.exit(1) if missing else None"
+check-content:
+    python3 scripts/check-content.py
+
+# Format and validate local content
+[group('quality')]
+precheck:
+    rumdl check --fix .
+    just check-content
 
 # Build documentation website (includes link checking)
 [group('build')]
-build: setup lint
-    mdbook build
-    cp book/pandoc/pdf/architecture-decision-records.pdf book/html/architecture-decision-records.pdf
+build: setup precheck
+    mise exec -- hugo --minify
+    just lint
 
 # Build for CI (tolerates transient link check failures)
 [group('build')]
-build-ci: setup lint-ci
-    mdbook build
-    cp book/pandoc/pdf/architecture-decision-records.pdf book/html/architecture-decision-records.pdf
+build-ci: setup precheck
+    mise exec -- hugo --minify
+    just lint-ci
 
 # Clean generated files
 [group('build')]
 clean:
-    mdbook clean
+    rm -rf public resources/_gen .hugo_build.lock assets/jsconfig.json hugo_stats.json
 
 # Install required tools and dependencies
 [group('setup')]
 setup:
     mise install
-    bash -eu -c 'missing=""; for tool in pandoc pdflatex rsvg-convert; do command -v "$tool" >/dev/null || missing="$missing $tool"; done; if [ -z "$missing" ]; then exit 0; fi; if command -v brew >/dev/null; then brew install pandoc texlive librsvg; elif command -v apt-get >/dev/null; then sudo apt-get -y update && sudo apt-get install -y pandoc texlive texlive-pictures librsvg2-bin; else echo "Missing required tools:$missing" >&2; exit 1; fi'

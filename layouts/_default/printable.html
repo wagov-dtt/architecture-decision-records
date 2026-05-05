@@ -1,0 +1,47 @@
+{{ define "main" -}}
+  {{- $pages := slice -}}
+  {{- with site.GetPage "/docs" }}{{ $pages = $pages | append . }}{{ end -}}
+  {{- with site.GetPage "/docs/architecture-principles" }}{{ $pages = $pages | append . }}{{ end -}}
+  {{- range slice "security" "operations" "development" "reference-architectures" "templates" -}}
+    {{- with site.GetPage (printf "/docs/%s" .) -}}
+      {{- $pages = $pages | append . -}}
+      {{- range .RegularPages.ByWeight -}}
+        {{- $pages = $pages | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range slice "/docs/contributing" "/docs/compliance-mapping" "/docs/glossary" -}}
+    {{- with site.GetPage . }}{{ $pages = $pages | append . }}{{ end -}}
+  {{- end -}}
+
+  <div class="container-xxl flex-fill py-4">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-9">
+        <header class="mb-5">
+          <p class="d-print-none"><a href="{{ "/docs/" | relURL }}">← Documentation</a></p>
+          <h1 class="display-4">{{ .Title }}</h1>
+          {{ with .Description }}<p class="lead text-muted">{{ . }}</p>{{ end }}
+          {{ with .Content }}<div>{{ . }}</div>{{ end }}
+          <p class="d-print-none"><button class="btn btn-primary" type="button" onclick="window.print()">Print / Save as PDF</button></p>
+        </header>
+
+        <nav class="mb-5" aria-label="Printable table of contents">
+          <h2>Contents</h2>
+          <ol>
+            {{- range $pages }}
+              <li><a href="#{{ .File.UniqueID }}">{{ .Title }}</a></li>
+            {{- end }}
+          </ol>
+        </nav>
+
+        <main>
+          {{- range $pages }}
+            <article id="{{ .File.UniqueID }}" class="mb-5 pb-4 border-bottom">
+              {{ partial "utilities/ProcessContent" (dict "page" . "raw" .RawContent) }}
+            </article>
+          {{- end }}
+        </main>
+      </div>
+    </div>
+  </div>
+{{ end -}}

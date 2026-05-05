@@ -1,0 +1,119 @@
+baseURL = "https://adr.dtt.digital.wa.gov.au/"
+title = "WA Government Architecture Decision Records"
+copyright = "© WA Government"
+contentDir = "content"
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+timeZone = "Australia/Perth"
+locale = "en-AU"
+defaultContentLanguage = "en"
+summaryLength = 30
+timeout = "180s"
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.146.0"
+
+  [[module.imports]]
+    path = "github.com/gethinode/hinode/v2"
+
+[build]
+  writeStats = true
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+
+  [markup.goldmark.extensions]
+    definitionList = true
+    footnote = true
+    linkify = true
+    strikethrough = true
+    table = true
+    taskList = true
+    typographer = true
+
+  [markup.goldmark.parser]
+    autoHeadingID = true
+    autoHeadingIDType = "github"
+    wrapStandAloneImageWithinParagraph = false
+
+  [markup.goldmark.parser.attribute]
+    block = true
+
+  [markup.goldmark.renderer]
+    unsafe = true
+
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[params]
+  [params.main]
+    description = "Reusable architecture patterns for WA Government digital services."
+    endorse = false
+    footerBelowFold = false
+    titleCase = false
+
+    [params.main.build]
+      transpiler = "dartsass"
+      silenceDeprecations = true
+
+    [params.main.colorMode]
+      enabled = true
+      modes = ["light", "dark"]
+      toggle = true
+
+    [params.main.externalLinks]
+      cue = true
+      tab = true
+
+  [params.navigation]
+    anchor = true
+    breadcrumb = true
+    fixed = true
+    sidebar = true
+    toc = true
+    startLevel = 2
+    endLevel = 3
+
+    [params.navigation.search]
+      enabled = true
+      modal = true
+
+  [params.style]
+    primary = "#005ea8"
+    secondary = "#6c757d"
+    themeFont = "Inter"
+    themeFontPath = "/fonts"
+    fontSizeBase = "1rem"
+    purge = false
+
+  [params.schema]
+    type = "GovernmentOrganization"
+    name = "WA Government Architecture Decision Records"
+    locale = "en-AU"
+    github = "https://github.com/wagov-dtt/architecture-decision-records"
+    section = "docs"
+
+  [params.docs]
+    github = "https://github.com/wagov-dtt/architecture-decision-records"
+    checkVersion = false
+
+[menu]
+  [[menu.main]]
+    name = "Docs"
+    pageRef = "/docs/"
+    weight = 10
+
+  [[menu.main]]
+    name = "Printable"
+    pageRef = "/printable/"
+    weight = 20
+
+  [[menu.social]]
+    name = "GitHub"
+    pre = "fab fa-github"
+    url = "https://github.com/wagov-dtt/architecture-decision-records"
+    weight = 10

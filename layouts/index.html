@@ -1,0 +1,39 @@
+{{ define "main" -}}
+    {{- $docs := site.GetPage "/docs" -}}
+    {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
+    {{- $padding := partial "utilities/GetPadding.html" -}}
+
+    {{- with $docs -}}
+        {{- $menu := .Scratch.Get "sidebar" -}}
+        {{- if not (reflect.IsSlice $menu) }}{{ $menu = "" }}{{ end }}
+        {{- $version := .Scratch.Get "version" -}}
+        {{- $sidebar := partial "assets/sidebar.html" (dict "page" . "menu" $menu "version" $version "auto-generate" true) -}}
+
+        {{- partial "page/sidebar-offcanvas.html" (dict "section" .Section "raw" $sidebar) -}}
+
+        <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+            <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
+                <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top p-0">
+                    {{ $sidebar | safeHTML }}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
+                    {{ .Scratch.Set "articlesParams" (dict
+                        "sort"         "weight"
+                        "reverse"      false
+                        "class"        "card-emphasize border h-100"
+                        "header-style" "none"
+                        "icon-style"   "text-primary fa-xl"
+                        "padding"      $padding.x
+                    ) }}
+                    {{ partial "page/articles.html" . }}
+
+                    {{ .Render "body" }}
+                    {{ .Render "footer" }}
+                </div>
+                <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block">
+                    {{ .Render "toc" }}
+                </div>
+            </div>
+        </div>
+    {{- end -}}
+{{ end -}}
