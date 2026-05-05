@@ -3,6 +3,7 @@ go = "latest"
 just = "latest"
 lychee = "latest"
 rumdl = "latest"
+"npm:sass" = "latest"
 
 [tasks.build]
 description = "Build the documentation site"

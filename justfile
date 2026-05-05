@@ -64,4 +64,3 @@ clean:
 setup:
     mise install
     scripts/install-hugo-extended.sh
-    scripts/install-dart-sass.sh
