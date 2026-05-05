@@ -31,7 +31,7 @@
                     {{ .Render "footer" }}
                 </div>
                 <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block">
-                    {{ .Render "toc" }}
+                    {{ .Render "toc" | replaceRE `href="/docs/#` `href="/#` | safeHTML }}
                 </div>
             </div>
         </div>

@@ -1,6 +1,10 @@
 ---
 title: "Reference Architecture: Content Management"
 description: "Build content platforms with separated authoring, storage, and delivery using managed databases, object media storage, and CDN/WAF delivery."
+url: "/reference-architectures/content-management.html"
+aliases:
+  - "/docs/reference-architectures/content-management/"
+  - "/reference-architectures/content-management/"
 weight: 10
 toc: true
 ---
@@ -44,37 +48,37 @@ flowchart LR
 #### Foundation Setup
 
 1. **Apply Isolation** - Follow [ADR 001: Application
-   Isolation](/docs/security/001-isolation/) for CMS service network,
+   Isolation](/security/001-isolation.html) for CMS service network,
    runtime, and environment separation
 2. **Deploy CMS Runtime** - Follow [ADR 002: AWS EKS for Cloud
-   Workloads](/docs/operations/002-workloads/) for the CMS application and
+   Workloads](/operations/002-workloads.html) for the CMS application and
    background workers
 3. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as
-   Code](/docs/operations/010-configmgmt/) for reproducible database,
+   Code](/operations/010-configmgmt.html) for reproducible database,
    storage, CDN, and runtime deployments
 4. **Setup Storage** - Follow [ADR 018: Database
-   Patterns](/docs/operations/018-database-patterns/) for the content
+   Patterns](/operations/018-database-patterns.html) for the content
    database and [ADR 019: Shared File
-   Access](/docs/operations/019-shared-file-access/) when editorial or
+   Access](/operations/019-shared-file-access.html) when editorial or
    processing workloads need shared file access to media assets
 
 #### Security & Operations
 
 1. **Configure Secrets Management** - Follow [ADR 005: Secrets
-   Management](/docs/security/005-secrets-management/) for database,
+   Management](/security/005-secrets-management.html) for database,
    CMS, identity, and API credentials
 2. **Setup Logging** - Follow [ADR 007: Centralised Security
-   Logging](/docs/operations/007-logging/) for audit trails, publishing
+   Logging](/operations/007-logging.html) for audit trails, publishing
    events, and administrative actions
 3. **Setup Backup Strategy** - Follow [ADR 014: Object Storage
-   Backups](/docs/operations/014-object-backup/) for content database,
+   Backups](/operations/014-object-backup.html) for content database,
    media asset, and configuration recovery
 4. **Configure Edge Protection** - Follow [ADR 016: Web Application
-   Edge Protection](/docs/security/016-edge-protection/) for CDN, WAF,
+   Edge Protection](/security/016-edge-protection.html) for CDN, WAF,
    origin protection, and cache rules
 5. **Identity Integration** - Follow [ADR 013: Identity Federation
-   Standards](/docs/security/013-identity-federation/) and [ADR 012:
-   Privileged Remote Access](/docs/security/012-privileged-remote-access/)
+   Standards](/security/013-identity-federation.html) and [ADR 012:
+   Privileged Remote Access](/security/012-privileged-remote-access.html)
    for editorial and administrative access
 
 #### Implementation Details
@@ -87,17 +91,17 @@ flowchart LR
   publishing steps
 - Keep administrative CMS endpoints separate from public delivery paths
 - Implement headless CMS APIs following [ADR 003: API Documentation
-  Standards](/docs/development/003-apis/) where content is consumed by
+  Standards](/development/003-apis.html) where content is consumed by
   other applications
 
 **Media & Delivery:**
 
 - Store media assets in object storage as the source of truth
 - Use [ADR 019: Shared File
-  Access](/docs/operations/019-shared-file-access/) only when authoring,
+  Access](/operations/019-shared-file-access.html) only when authoring,
   processing, or migration tools need file-system semantics
 - Serve public media through CDN/WAF per [ADR 016: Web Application Edge
-  Protection](/docs/security/016-edge-protection/)
+  Protection](/security/016-edge-protection.html)
 - Configure cache keys, TTLs, and invalidation for publishing workflows
 
 **Compliance & Quality:**
@@ -105,7 +109,7 @@ flowchart LR
 - Test WCAG 2.1 AA accessibility before publishing templates or major
   content changes
 - Apply content retention, disposal, and ownership rules per [ADR 015:
-  Data Governance Standards](/docs/operations/015-data-governance/)
+  Data Governance Standards](/operations/015-data-governance.html)
 - Configure privacy notices, cookie consent, and multilingual content
   where required
 - Monitor content performance, broken links, publishing failures, and CDN

@@ -1,6 +1,10 @@
 ---
 title: "ADR 007: Centralised Security Logging"
 description: "Collect security logs centrally while minimising sensitive information exposure and preserving incident response evidence."
+url: "/operations/007-logging.html"
+aliases:
+  - "/docs/operations/007-logging/"
+  - "/operations/007-logging/"
 weight: 70
 toc: true
 ---

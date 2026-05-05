@@ -2,6 +2,7 @@
 title: "WA Government Architecture Decision Records"
 description: "Reusable architecture patterns for WA Government digital services, maintained by the Office of Digital Government (DGOV) Digital Transformation and Technology Unit (DTT)."
 weight: 1
+hideBreadcrumb: true
 toc: true
 ---
 
@@ -15,13 +16,13 @@ These patterns help you build secure, compliant digital services faster. Instead
 
 #### Getting Started
 
-1. **Review the [Architecture Principles](/docs/architecture-principles/)** - Six guiding principles for all technology decisions
+1. **Review the [Architecture Principles](/architecture-principles.html)** - Six guiding principles for all technology decisions
 2. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
-   - [Content Management](/docs/reference-architectures/content-management/) - Websites, intranets, and content portals
-   - [Data Pipelines](/docs/reference-architectures/data-pipelines/) - Analytics, reporting, and data processing
-   - [Identity Management](/docs/reference-architectures/identity-management/) - User authentication and single sign-on
-   - [OpenAPI Backends](/docs/reference-architectures/openapi-backends/) - Backend services and integrations
-3. **Check the [Compliance Mapping](/docs/compliance-mapping/)** - Find which ADRs apply to your security and compliance requirements
+   - [Content Management](/reference-architectures/content-management.html) - Websites, intranets, and content portals
+   - [Data Pipelines](/reference-architectures/data-pipelines.html) - Analytics, reporting, and data processing
+   - [Identity Management](/reference-architectures/identity-management.html) - User authentication and single sign-on
+   - [OpenAPI Backends](/reference-architectures/openapi-backends.html) - Backend services and integrations
+3. **Check the [Compliance Mapping](/compliance-mapping.html)** - Find which ADRs apply to your security and compliance requirements
 
 #### Compliance Alignment
 
@@ -39,9 +40,9 @@ Supporting training: [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa
 
 ### Contributing
 
-New ADRs document the **context** (problem), **decision** (solution), and **consequences** (trade-offs). See the [Contributing Guide](/docs/contributing/) for workflow and templates.
+New ADRs document the **context** (problem), **decision** (solution), and **consequences** (trade-offs). See the [Contributing Guide](/CONTRIBUTING.html) for workflow and templates.
 
-For AI-assisted contributions, see the guidance in [CONTRIBUTING.md](/docs/contributing/).
+For AI-assisted contributions, see the guidance in [CONTRIBUTING.md](/CONTRIBUTING.html).
 
 ### Repository Structure
 

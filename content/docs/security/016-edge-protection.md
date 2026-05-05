@@ -1,6 +1,10 @@
 ---
 title: "ADR 016: Web Application Edge Protection"
 description: "Protect public web applications against DDoS, bot, and application-layer attacks at the network edge."
+url: "/security/016-edge-protection.html"
+aliases:
+  - "/docs/security/016-edge-protection/"
+  - "/security/016-edge-protection/"
 weight: 160
 toc: true
 ---
@@ -50,7 +54,7 @@ mitigation before traffic reaches application infrastructure.
 - Geographic distribution with SSL/TLS termination at edge
 - Cache optimization and origin shielding
 - Object-backed origins for static and media assets, using [ADR 019:
-  Shared File Access](/docs/operations/019-shared-file-access/) when
+  Shared File Access](/operations/019-shared-file-access.html) when
   authoring or processing workloads need file-system access
 - IPv6 dual-stack support on edge (internal use of IPv4 allowed)
 
@@ -70,7 +74,7 @@ mitigation before traffic reaches application infrastructure.
 **Implementation:**
 
 - WAF logs integrated with SIEM per [ADR 007: Centralised Security
-  Logging](/docs/operations/007-logging/)
+  Logging](/operations/007-logging.html)
 - Fail-secure configuration (no fail-open)
 - Regular penetration testing and rule tuning
 - CI/CD integration for automated deployments

@@ -1,0 +1,79 @@
+{{/*
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Limits a title to a maximum of 33 runes, adds a "..." suffix otherwise */}}
+{{ define "_partials/inline/short-title.html" }}
+    {{- $title := . -}}
+    {{ if gt (strings.RuneCount $title) 33 }}
+        {{ $title = print (substr $title 0 30) "..." }}
+    {{ end }}
+
+    {{ return $title }}
+{{ end }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "breadcrumb" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict
+        "partial" "assets/breadcrumb.html"
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize local arguments */}}
+{{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
+{{- $breadcrumbBack := partial "utilities/GetThemeIcon.html" (dict "id" "breadcrumbBack" "default" "fas angle-left") -}}
+
+{{/* Include breadcrumb items that have both a title and address */}}
+{{ $items := slice }}
+{{- range $index, $item := $args.page.Ancestors.Reverse -}}
+    {{- $title := .LinkTitle -}}
+    {{- if .IsHome }}{{ $title = T "home" }}{{ end -}}
+    {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
+    {{- $address := or .RelPermalink .Params.Redirect -}}
+    {{ if and $title $address (not .Params.hideBreadcrumb) }}
+        {{ $items = $items | append (dict "title" $title "address" $address) }}
+    {{ end }}
+{{ end }}
+
+{{/* Main code */}}
+{{ if not $error }}
+    <nav aria-label="breadcrumb" class="d-{{ $breakpoint.prev }}-none">
+        <ol class="breadcrumb">
+            {{- $length := len $items -}}
+            {{- if gt $length 0 -}}
+                {{ $item := index $items (sub $length 1) }}
+                <li class="breadcrumb-item">
+                    <a href="{{ $item.address }}">
+                        {{ partial "assets/icon.html" (dict "icon" $breadcrumbBack) }}&nbsp;{{ partial "inline/short-title" $item.title }}
+                    </a>
+                </li>
+            {{- end -}}
+        </ol>
+    </nav>
+
+    <nav aria-label="breadcrumb" class="d-none d-{{ $breakpoint.prev }}-block">
+        <ol class="breadcrumb">
+            {{- $length := len $items }}
+            {{- range $index, $item := $items -}}
+                {{ $title := $item.title }}
+                {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
+                <li class="breadcrumb-item"><a href="{{ $item.address }}">{{ $title }}</a></li>
+            {{- end -}}
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ $title := $args.page.LinkTitle }}
+                {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
+                {{ $title }}
+            </li>
+        </ol>
+    </nav>
+{{ end }}

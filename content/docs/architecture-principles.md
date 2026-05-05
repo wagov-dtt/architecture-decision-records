@@ -1,6 +1,10 @@
 ---
 title: "Architecture Principles"
 description: "These six principles guide all architecture decisions in this repository. Each ADR should align with one or more of these principles."
+url: "/architecture-principles.html"
+aliases:
+  - "/docs/architecture-principles/"
+  - "/architecture-principles/"
 weight: 10
 toc: true
 ---

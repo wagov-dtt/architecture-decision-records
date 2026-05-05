@@ -1,6 +1,10 @@
 ---
 title: "ADR ###: Specific Decision Title"
 description: "What problem are we solving? Include background and constraints."
+url: "/templates/adr-template.html"
+aliases:
+  - "/docs/templates/adr-template/"
+  - "/templates/adr-template/"
 weight: 920
 toc: true
 ---

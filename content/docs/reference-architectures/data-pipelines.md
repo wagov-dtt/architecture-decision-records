@@ -1,6 +1,10 @@
 ---
 title: "Reference Architecture: Data Pipelines"
 description: "Build governed data pipelines for analytics, reporting, and batch processing with reproducible transformations and quality checks."
+url: "/reference-architectures/data-pipelines.html"
+aliases:
+  - "/docs/reference-architectures/data-pipelines/"
+  - "/reference-architectures/data-pipelines/"
 weight: 20
 toc: true
 ---
@@ -46,7 +50,7 @@ flowchart LR
 | **Transformation** | [Ibis](https://ibis-project.org/) | Portable Python dataframe API for transformations across local and cloud engines |
 | **Local Access** | [DuckDB](https://duckdb.org/) + [DuckLake](https://ducklake.select/) | Lightweight client and lakehouse access for development, scheduled jobs, and smaller workloads |
 | **Serverless Tables** | [Amazon S3 Tables](https://aws.amazon.com/s3/features/tables/) | Managed Apache Iceberg table storage and maintenance for AWS workloads |
-| **Distributed Query** | [Trino](https://trino.io/docs/current/connector/iceberg.html) or equivalent | Concurrent and larger-scale SQL access to Iceberg tables |
+| **Distributed Query** | [Trino](https://trino.io/current/connector/iceberg.html) or equivalent | Concurrent and larger-scale SQL access to Iceberg tables |
 | **Reporting** | [Quarto](https://quarto.org/) | Static reports and dashboards from version-controlled notebooks |
 
 ### Project Kickoff Steps
@@ -54,43 +58,43 @@ flowchart LR
 #### Foundation Setup
 
 1. **Apply Isolation** - Follow [ADR 001: Application
-   Isolation](/docs/security/001-isolation/) for data processing network
+   Isolation](/security/001-isolation.html) for data processing network
    and account boundaries
 2. **Deploy Workloads** - Follow [ADR 002: AWS EKS for Cloud
-   Workloads](/docs/operations/002-workloads/) for scheduled pipeline
+   Workloads](/operations/002-workloads.html) for scheduled pipeline
    jobs when local or CI execution is not sufficient
 3. **Configure Infrastructure** - Follow [ADR 010: Infrastructure as
-   Code](/docs/operations/010-configmgmt/) for buckets, table resources,
+   Code](/operations/010-configmgmt.html) for buckets, table resources,
    permissions, and deployment environments
 4. **Setup Storage and Access** - Follow [ADR 018: Database
-   Patterns](/docs/operations/018-database-patterns/) for object storage,
+   Patterns](/operations/018-database-patterns.html) for object storage,
    DuckLake, S3 Tables, and Iceberg-compatible access layers
 
 #### Security & Operations
 
 1. **Configure Secrets** - Follow [ADR 005: Secrets
-   Management](/docs/security/005-secrets-management/) for source system
+   Management](/security/005-secrets-management.html) for source system
    credentials and scoped storage access
 2. **Setup Logging** - Follow [ADR 007: Centralised Security
-   Logging](/docs/operations/007-logging/) for pipeline runs, data access,
+   Logging](/operations/007-logging.html) for pipeline runs, data access,
    and failures
 3. **Setup Backups** - Follow [ADR 014: Object Storage
-   Backups](/docs/operations/014-object-backup/) for datalake backup,
+   Backups](/operations/014-object-backup.html) for datalake backup,
    replication, and recovery objectives
 4. **Apply Data Governance** - Follow [ADR 015: Data Governance
-   Standards](/docs/operations/015-data-governance/) for ownership,
+   Standards](/operations/015-data-governance.html) for ownership,
    quality, classification, and retention
 
 #### Development Process
 
 1. **Configure CI/CD** - Follow [ADR 004: CI/CD Quality
-   Assurance](/docs/development/004-cicd/) for automated testing and
+   Assurance](/development/004-cicd.html) for automated testing and
    deployment
 2. **Setup Releases** - Follow [ADR 009: Release
-   Standards](/docs/development/009-release/) for versioned pipeline
+   Standards](/development/009-release.html) for versioned pipeline
    changes, release notes, promotion, and data-impact notes
 3. **Publish Analytics** - Follow [ADR 017: Analytics Tooling
-   Standards](/docs/operations/017-analytics-tooling/) for Quarto reports
+   Standards](/operations/017-analytics-tooling.html) for Quarto reports
    and dashboards
 
 ### Implementation Details

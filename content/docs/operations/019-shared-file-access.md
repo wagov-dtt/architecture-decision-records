@@ -1,6 +1,10 @@
 ---
 title: "ADR 019: Shared File Access"
 description: "Use shared file access patterns when workloads need both object APIs and file-system semantics for the same data."
+url: "/operations/019-shared-file-access.html"
+aliases:
+  - "/docs/operations/019-shared-file-access/"
+  - "/operations/019-shared-file-access/"
 weight: 190
 toc: true
 ---
@@ -26,10 +30,10 @@ References:
 - [Amazon S3 Files](https://aws.amazon.com/s3/features/files/)
 - [Amazon CloudFront with S3
   origins](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html)
-- [ADR 002: AWS EKS for Cloud Workloads](/docs/operations/002-workloads/)
-- [ADR 014: Object Storage Backups](/docs/operations/014-object-backup/)
+- [ADR 002: AWS EKS for Cloud Workloads](/operations/002-workloads.html)
+- [ADR 014: Object Storage Backups](/operations/014-object-backup.html)
 - [ADR 016: Web Application Edge
-  Protection](/docs/security/016-edge-protection/)
+  Protection](/security/016-edge-protection.html)
 
 ### Decision
 
@@ -57,15 +61,15 @@ flowchart LR
 #### Requirements
 
 - Store canonical files in object storage with versioning, encryption,
-  lifecycle policies, and backups per [ADR 014](/docs/operations/014-object-backup/)
+  lifecycle policies, and backups per [ADR 014](/operations/014-object-backup.html)
 - Use managed shared file access for workloads that need paths, folders,
   and ordinary file operations
 - Scope working sets and least-privilege access with bucket prefixes, policy,
   access points, or equivalent storage boundaries
-- Publish public assets through a CDN and WAF per [ADR 016](/docs/security/016-edge-protection/)
+- Publish public assets through a CDN and WAF per [ADR 016](/security/016-edge-protection.html)
 - Use workload identity and scoped IAM permissions for EKS access per
-  [ADR 002](/docs/operations/002-workloads/) and [ADR 005: Secrets
-  Management](/docs/security/005-secrets-management/)
+  [ADR 002](/operations/002-workloads.html) and [ADR 005: Secrets
+  Management](/security/005-secrets-management.html)
 - Define ownership, lifecycle, retention, and recovery expectations for
   each shared file store
 

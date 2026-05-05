@@ -1,6 +1,10 @@
 ---
 title: "ADR 010: Infrastructure as Code"
 description: "Make environments reproducible from source to minimise drift, deployment failure, and security risk."
+url: "/operations/010-configmgmt.html"
+aliases:
+  - "/docs/operations/010-configmgmt/"
+  - "/operations/010-configmgmt/"
 weight: 100
 toc: true
 ---
@@ -27,15 +31,15 @@ All environments must be reproducible from source to minimise drift and security
 3. **CI Pipeline**:
    - **Validate**: Trivy scan + `terraform plan`/`kubectl diff` drift check
    - **Plan**: Show proposed changes on PR
-   - **Apply**: DEV and INT may deploy approved branch refs; UAT and PROD deploy tagged releases only per [ADR 009](/docs/development/009-release/)
+   - **Apply**: DEV and INT may deploy approved branch refs; UAT and PROD deploy tagged releases only per [ADR 009](/development/009-release.html)
 4. **Versioning**: Git tags = semantic versions (x.y.z) created on `main` for UAT and PROD
-5. **Disaster Recovery**: Checkout tag + run `just deploy --env=prod` with static artifacts from [ADR 004](/docs/development/004-cicd/)
+5. **Disaster Recovery**: Checkout tag + run `just deploy --env=prod` with static artifacts from [ADR 004](/development/004-cicd.html)
 
 #### Required Tools & Practices
 
 | Tool | Purpose | Stage | Mandatory |
 |------|---------|-------|-----------|
-| [Trivy](https://trivy.dev/latest/docs/configuration/) | Vulnerability scanning | Validate | Yes |
+| [Trivy](https://trivy.dev/latest/configuration/) | Vulnerability scanning | Validate | Yes |
 | [Terraform](https://developer.hashicorp.com/terraform/docs) or [kubectl/kustomize](https://kubectl.docs.kubernetes.io/guides/config_management/) | Configuration management | Deploy | Yes |
 | [Justfiles](https://just.systems/man/en/) | Task automation | All | Recommended |
 | [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) | Dev environment | Local | Recommended |
@@ -50,7 +54,7 @@ flowchart LR
 ```
 
 Git tags are immutable release versions for UAT and PROD. DEV and INT
-may deploy approved branch refs per [ADR 009](/docs/development/009-release/).
+may deploy approved branch refs per [ADR 009](/development/009-release.html).
 Environment folders (`environments/{dev,int,uat,prod}`) map to separate
 AWS accounts with isolated state storage.
 
@@ -70,6 +74,6 @@ AWS accounts with isolated state storage.
 
 ### References
 
-- [ADR 001: Application Isolation](/docs/security/001-isolation/)
-- [ADR 002: AWS EKS for Cloud Workloads](/docs/operations/002-workloads/)
-- [ADR 005: Secrets Management](/docs/security/005-secrets-management/)
+- [ADR 001: Application Isolation](/security/001-isolation.html)
+- [ADR 002: AWS EKS for Cloud Workloads](/operations/002-workloads.html)
+- [ADR 005: Secrets Management](/security/005-secrets-management.html)

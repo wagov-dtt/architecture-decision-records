@@ -1,6 +1,10 @@
 ---
 title: "ADR 012: Privileged Remote Access"
 description: "Replace persistent privileged access paths with identity-aware, audited, just-in-time access patterns."
+url: "/security/012-privileged-remote-access.html"
+aliases:
+  - "/docs/security/012-privileged-remote-access/"
+  - "/security/012-privileged-remote-access/"
 weight: 120
 toc: true
 ---
@@ -53,7 +57,7 @@ trails without persistent network access.
   cluster SSH)
 - **Infrastructure Deployment**: Infrastructure as Code with audit
   trails per [ADR 010: Infrastructure as
-  Code](/docs/operations/010-configmgmt/) (replaces manual deployment)
+  Code](/operations/010-configmgmt.html) (replaces manual deployment)
 
 **Access Controls:**
 
@@ -61,7 +65,7 @@ trails without persistent network access.
 - Time-limited sessions
 - Identity-based access through cloud IAM
 - Approval workflows for privileged access
-- Session recording and audit logging per [ADR 007: Centralised Security Logging](/docs/operations/007-logging/)
+- Session recording and audit logging per [ADR 007: Centralised Security Logging](/operations/007-logging.html)
 
 **Implementation:**
 

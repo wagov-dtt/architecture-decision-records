@@ -1,6 +1,10 @@
 ---
 title: "ADR 015: Data Governance Standards"
 description: "Govern data pipelines with code-based validation, version control, quality checks, and compliance controls."
+url: "/operations/015-data-governance.html"
+aliases:
+  - "/docs/operations/015-data-governance/"
+  - "/operations/015-data-governance/"
 weight: 150
 toc: true
 ---
@@ -22,7 +26,7 @@ Use code-based data governance with git workflows. Data transformations
 written in [Ibis](https://ibis-project.org/) are version-controlled,
 testable, and provide implicit lineage through code dependencies. See
 [Reference Architecture: Data
-Pipelines](/docs/reference-architectures/data-pipelines/) for full
+Pipelines](/reference-architectures/data-pipelines.html) for full
 implementation patterns.
 
 #### Priority Focus Areas
@@ -30,7 +34,7 @@ implementation patterns.
 - **Schema Contracts**: Define expected schemas in code, validate in CI/CD pipeline
 - **Data Lineage**: Track through transformation code history in git
 - **Quality Validation**: Use Ibis expressions for data validation checks, run as automated tests
-- **Audit Integration**: Follow [ADR 007: Centralised Security Logging](/docs/operations/007-logging/) for transformation logs
+- **Audit Integration**: Follow [ADR 007: Centralised Security Logging](/operations/007-logging.html) for transformation logs
 
 #### Implementation
 

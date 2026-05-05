@@ -1,6 +1,10 @@
 ---
 title: "Reference Architecture: Pattern Name"
 description: "Clear use case description for when to apply this architecture."
+url: "/templates/reference-architecture-template.html"
+aliases:
+  - "/docs/templates/reference-architecture-template/"
+  - "/templates/reference-architecture-template/"
 weight: 930
 toc: true
 ---

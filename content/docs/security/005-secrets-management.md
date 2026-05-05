@@ -1,6 +1,10 @@
 ---
 title: "ADR 005: Secrets Management"
 description: "Store secrets centrally for administrative use, keep workload secrets local where possible, and define rotation for every system."
+url: "/security/005-secrets-management.html"
+aliases:
+  - "/docs/security/005-secrets-management/"
+  - "/security/005-secrets-management/"
 weight: 50
 toc: true
 ---

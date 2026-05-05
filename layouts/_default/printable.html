@@ -14,11 +14,21 @@
     {{- with site.GetPage . }}{{ $pages = $pages | append . }}{{ end -}}
   {{- end -}}
 
+  <style>
+    @media print {
+      body.navbar-fixed { padding-top: 0 !important; }
+      body > .container-fluid.fixed-top,
+      body > .container-fluid.navbar-overlay,
+      footer.footer,
+      #toast-container { display: none !important; }
+    }
+  </style>
+
   <div class="container-xxl flex-fill py-4">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10 col-xl-9">
         <header class="mb-5">
-          <p class="d-print-none"><a href="{{ "/docs/" | relURL }}">← Documentation</a></p>
+          <p class="d-print-none"><a href="{{ "/" | relURL }}">← Documentation</a></p>
           <h1 class="display-4">{{ .Title }}</h1>
           {{ with .Description }}<p class="lead text-muted">{{ . }}</p>{{ end }}
           {{ with .Content }}<div>{{ . }}</div>{{ end }}

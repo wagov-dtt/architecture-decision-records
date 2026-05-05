@@ -1,6 +1,10 @@
 ---
 title: "Reference Architecture: Identity Management"
 description: "Build identity management integrations using federation, secure privileged access, and approved identity provider patterns."
+url: "/reference-architectures/identity-management.html"
+aliases:
+  - "/docs/reference-architectures/identity-management/"
+  - "/reference-architectures/identity-management/"
 weight: 30
 toc: true
 ---
@@ -72,24 +76,24 @@ flowchart TD
 ### Project Kickoff Steps
 
 1. **Define Trust Boundaries** - Follow [ADR 001: Application
-   Isolation](/docs/security/001-isolation/) to separate identity runtime,
+   Isolation](/security/001-isolation.html) to separate identity runtime,
    application runtime, and administrative access paths
 2. **Deploy Runtime** - Follow [ADR 002: AWS EKS for Cloud
-   Workloads](/docs/operations/002-workloads/) only for broker components
+   Workloads](/operations/002-workloads.html) only for broker components
    that cannot be provided by a managed platform
 3. **Configure Identity Federation** - Follow [ADR 013: Identity
-   Federation Standards](/docs/security/013-identity-federation/) for
+   Federation Standards](/security/013-identity-federation.html) for
    OIDC-first integration, SAML fallback, claim mapping, and downstream
    consumer configuration
 4. **Configure Persistence** - Follow [ADR 018: Database
-   Patterns](/docs/operations/018-database-patterns/) for broker state,
+   Patterns](/operations/018-database-patterns.html) for broker state,
    session metadata, and configuration storage where required
 5. **Secure Secrets and Logs** - Follow [ADR 005: Secrets
-   Management](/docs/security/005-secrets-management/) for OIDC client
+   Management](/security/005-secrets-management.html) for OIDC client
    secrets and [ADR 007: Centralised Security
-   Logging](/docs/operations/007-logging/) for authentication audit trails
+   Logging](/operations/007-logging.html) for authentication audit trails
 6. **Privileged Administration** - Follow [ADR 012: Privileged Remote
-   Access](/docs/security/012-privileged-remote-access/) for break-glass
+   Access](/security/012-privileged-remote-access.html) for break-glass
    and administrator access
 
 ### Implementation Considerations

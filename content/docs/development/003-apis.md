@@ -1,6 +1,10 @@
 ---
 title: "ADR 003: API Documentation Standards"
 description: "Build secure, maintainable APIs with mature frameworks, low complexity, and standards-based interfaces."
+url: "/development/003-apis.html"
+aliases:
+  - "/docs/development/003-apis/"
+  - "/development/003-apis/"
 weight: 30
 toc: true
 ---
@@ -37,7 +41,7 @@ Secure, maintainable APIs require mature frameworks with low complexity and indu
 - **Self-Documenting**: Use frameworks that auto-generate OpenAPI specs
 - **Data Types**: Prefer standard types over custom formats
 - **Segregation**: Separate APIs by purpose (see [Reference Architecture:
-  OpenAPI Backend](/docs/reference-architectures/openapi-backends/))
+  OpenAPI Backend](/reference-architectures/openapi-backends.html))
 - **Testing**: Include security vulnerability checks in test scripts
 
 **API Development Flow:**

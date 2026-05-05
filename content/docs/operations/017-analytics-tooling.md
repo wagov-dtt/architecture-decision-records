@@ -1,6 +1,10 @@
 ---
 title: "ADR 017: Analytics Tooling Standards"
 description: "Use simple, secure analytics tooling with reproducible reports version-controlled alongside their transformations."
+url: "/operations/017-analytics-tooling.html"
+aliases:
+  - "/docs/operations/017-analytics-tooling/"
+  - "/operations/017-analytics-tooling/"
 weight: 170
 toc: true
 ---
@@ -31,20 +35,20 @@ Use [Quarto](https://quarto.org/) for analytics and reporting.
 
 | Need | Quarto Feature |
 |------|----------------|
-| Static reports | [Markdown + code blocks](https://quarto.org/docs/authoring/markdown-basics.html) |
-| PDF documents | [PDF output](https://quarto.org/docs/output-formats/pdf-basics.html) with professional formatting |
-| Interactive charts | [Observable JS](https://quarto.org/docs/interactive/ojs/) for client-side interactivity |
-| Dashboards | [Quarto Dashboards](https://quarto.org/docs/dashboards/) for layout and filtering |
-| Parameterised reports | [Parameters](https://quarto.org/docs/computations/parameters.html) for automated report generation |
+| Static reports | [Markdown + code blocks](https://quarto.org/authoring/markdown-basics.html) |
+| PDF documents | [PDF output](https://quarto.org/output-formats/pdf-basics.html) with professional formatting |
+| Interactive charts | [Observable JS](https://quarto.org/interactive/ojs/) for client-side interactivity |
+| Dashboards | [Quarto Dashboards](https://quarto.org/dashboards/) for layout and filtering |
+| Parameterised reports | [Parameters](https://quarto.org/computations/parameters.html) for automated report generation |
 
 #### Integration
 
 - **Data Sources**: Query via [Ibis](https://ibis-project.org/) or
-  DuckDB per [ADR 018: Database Patterns](/docs/operations/018-database-patterns/) and
+  DuckDB per [ADR 018: Database Patterns](/operations/018-database-patterns.html) and
   [Reference Architecture: Data
-  Pipelines](/docs/reference-architectures/data-pipelines/)
-- **Deployment**: Static HTML hosted per [ADR 016: Web Application Edge Protection](/docs/security/016-edge-protection/)
-- **CI/CD**: Automated report generation per [ADR 004: CI/CD Quality Assurance](/docs/development/004-cicd/)
+  Pipelines](/reference-architectures/data-pipelines.html)
+- **Deployment**: Static HTML hosted per [ADR 016: Web Application Edge Protection](/security/016-edge-protection.html)
+- **CI/CD**: Automated report generation per [ADR 004: CI/CD Quality Assurance](/development/004-cicd.html)
 
 ### Consequences
 

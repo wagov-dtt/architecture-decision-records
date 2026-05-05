@@ -1,6 +1,10 @@
 ---
 title: "ADR 014: Object Storage Backups"
 description: "Back up object storage with cross-region redundancy, lifecycle controls, and recovery validation for government retention needs."
+url: "/operations/014-object-backup.html"
+aliases:
+  - "/docs/operations/014-object-backup/"
+  - "/operations/014-object-backup/"
 weight: 140
 toc: true
 ---
@@ -57,12 +61,12 @@ geographic redundancy.
 
 - Object storage with versioning and immutable storage capabilities
 - Shared file stores that use object storage per [ADR 019: Shared File
-  Access](/docs/operations/019-shared-file-access/)
+  Access](/operations/019-shared-file-access.html)
 - Database, application data, and infrastructure configuration backups
 - Encryption at rest and in transit per [ADR 005: Secrets
-  Management](/docs/security/005-secrets-management/)
+  Management](/security/005-secrets-management.html)
 - Access controls aligned with [ADR 001: Application
-  Isolation](/docs/security/001-isolation/)
+  Isolation](/security/001-isolation.html)
 
 **Critical Systems Definition:**
 
@@ -77,7 +81,7 @@ geographic redundancy.
 - Cross-region replication within Australia (e.g., ap-southeast-2 to
   ap-southeast-4)
 - Monitoring integration per [ADR 007: Centralised Security
-  Logging](/docs/operations/007-logging/)
+  Logging](/operations/007-logging.html)
 
 **Lifecycle Management:**
 

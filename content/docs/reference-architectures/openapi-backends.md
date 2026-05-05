@@ -1,6 +1,10 @@
 ---
 title: "Reference Architecture: OpenAPI Backend"
 description: "Build backend services and integrations with documented OpenAPI contracts, secure delivery, and automated release practices."
+url: "/reference-architectures/openapi-backends.html"
+aliases:
+  - "/docs/reference-architectures/openapi-backends/"
+  - "/reference-architectures/openapi-backends/"
 weight: 40
 toc: true
 ---
@@ -50,24 +54,24 @@ privileged users. Do not expose admin APIs directly to the Internet.
 ### Project Kickoff Steps
 
 1. **Infrastructure Foundation** - Follow [ADR 001: Application
-   Isolation](/docs/security/001-isolation/) and [ADR 002: AWS EKS for
-   Cloud Workloads](/docs/operations/002-workloads/) for runtime and
+   Isolation](/security/001-isolation.html) and [ADR 002: AWS EKS for
+   Cloud Workloads](/operations/002-workloads.html) for runtime and
    environment separation
 2. **API Standards** - Follow [ADR 003: API Documentation
-   Standards](/docs/development/003-apis/) for OpenAPI generation,
+   Standards](/development/003-apis.html) for OpenAPI generation,
    validation, and testing
 3. **Identity Federation** - Follow [ADR 013: Identity Federation
-   Standards](/docs/security/013-identity-federation/) for separate
+   Standards](/security/013-identity-federation.html) for separate
    standard and privileged authentication realms
 4. **Edge Protection** - Follow [ADR 016: Web Application Edge
-   Protection](/docs/security/016-edge-protection/) for WAF, rate
+   Protection](/security/016-edge-protection.html) for WAF, rate
    limiting, TLS, and public API protection
 5. **Database & Secrets** - Follow [ADR 018: Database
-   Patterns](/docs/operations/018-database-patterns/) for managed
+   Patterns](/operations/018-database-patterns.html) for managed
    persistence and [ADR 005: Secrets
-   Management](/docs/security/005-secrets-management/) for runtime secrets
+   Management](/security/005-secrets-management.html) for runtime secrets
 6. **Logging & Monitoring** - Follow [ADR 007: Centralised Security
-   Logging](/docs/operations/007-logging/) for user, system, and admin
+   Logging](/operations/007-logging.html) for user, system, and admin
    audit trails
 
 ### Implementation Details

@@ -1,6 +1,10 @@
 ---
 title: "ADR 013: Identity Federation Standards"
 description: "Use standards-based identity federation to integrate applications with enterprise, citizen, and cloud identity providers."
+url: "/security/013-identity-federation.html"
+aliases:
+  - "/docs/security/013-identity-federation/"
+  - "/security/013-identity-federation/"
 weight: 130
 toc: true
 ---
@@ -53,10 +57,10 @@ systems that cannot support OIDC.
   Cognito, Microsoft Entra ID), not directly with identity providers
 - Separate privileged and standard user domains for administrative
   access isolation (see [Reference Architecture: OpenAPI
-  Backend](/docs/reference-architectures/openapi-backends/))
+  Backend](/reference-architectures/openapi-backends.html))
 - Support multiple upstream identity providers per application
 - Maintain audit trails per [ADR 007: Centralised Security
-  Logging](/docs/operations/007-logging/)
+  Logging](/operations/007-logging.html)
 
 **Identity Federation Flow:**
 

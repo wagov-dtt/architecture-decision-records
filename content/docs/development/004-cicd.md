@@ -1,6 +1,10 @@
 ---
 title: "ADR 004: CI/CD Quality Assurance"
 description: "Protect software artefacts consumed by infrastructure repositories with secure CI/CD quality assurance controls."
+url: "/development/004-cicd.html"
+aliases:
+  - "/docs/development/004-cicd/"
+  - "/development/004-cicd/"
 weight: 40
 toc: true
 ---
@@ -12,7 +16,7 @@ toc: true
 ### Context
 
 Ensure security and integrity of software artifacts that are consumed by
-infrastructure repositories per [ADR 010](/docs/operations/010-configmgmt/).
+infrastructure repositories per [ADR 010](/operations/010-configmgmt.html).
 Threat actors exploit vulnerabilities in code, dependencies, container
 images, and exposed secrets.
 
@@ -30,11 +34,11 @@ images, and exposed secrets.
 | Stage | Tools | Purpose | Mandatory |
 |-------|-------|---------|-----------|
 | **Build** | [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
-| **Scan** | [scc](https://github.com/boyter/scc) and [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Complexity and Vulnerability scanning | Yes |
+| **Scan** | [scc](https://github.com/boyter/scc) and [Trivy](https://trivy.dev/latest/target/container_image/) | Complexity and Vulnerability scanning | Yes |
 | **Analysis** | [GitHub CodeQL](https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql) | Static code analysis | Yes |
-| **Test** | [Playwright](https://playwright.dev/docs/intro) | End-to-end testing | Recommended |
-| **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
-| **API** | [Restish](https://rest.sh/#/guide) | API validation per [ADR 003](/docs/development/003-apis/) | Optional |
+| **Test** | [Playwright](https://playwright.dev/intro) | End-to-end testing | Recommended |
+| **Performance** | [Grafana K6](https://grafana.com/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
+| **API** | [Restish](https://rest.sh/#/guide) | API validation per [ADR 003](/development/003-apis.html) | Optional |
 
 #### Execution Environment
 
@@ -75,7 +79,7 @@ flowchart LR
 
 Build produces container images with SBOM/provenance. Scan runs
 vulnerability and static analysis. Release produces static artifacts
-consumed by [ADR 010: Infrastructure as Code](/docs/operations/010-configmgmt/).
+consumed by [ADR 010: Infrastructure as Code](/operations/010-configmgmt.html).
 Keep unprivileged build, test, and scan work on repository-hosted CI,
 including long-running jobs. Move only AWS-privileged release or
 deployment steps to an operations-controlled environment.
@@ -99,5 +103,5 @@ deployment steps to an operations-controlled environment.
 
 ### References
 
-- [ADR 003: API Documentation Standards](/docs/development/003-apis/)
-- [ADR 010: Infrastructure as Code](/docs/operations/010-configmgmt/)
+- [ADR 003: API Documentation Standards](/development/003-apis.html)
+- [ADR 010: Infrastructure as Code](/operations/010-configmgmt.html)

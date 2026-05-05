@@ -1,5 +1,5 @@
 ---
-title: "Printable ADRs"
+title: "WA Government Architecture Decision Records"
 description: "Single-page printable view of all architecture decision records and reference architectures."
 layout: "printable"
 build:

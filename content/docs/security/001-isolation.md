@@ -1,6 +1,10 @@
 ---
 title: "ADR 001: Application Isolation"
 description: "Isolate applications and environments by default to reduce lateral movement, unauthorised access, and data breach impact."
+url: "/security/001-isolation.html"
+aliases:
+  - "/docs/security/001-isolation/"
+  - "/security/001-isolation/"
 weight: 10
 toc: true
 ---

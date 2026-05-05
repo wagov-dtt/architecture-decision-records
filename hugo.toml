@@ -70,6 +70,8 @@ timeout = "180s"
       tab = true
 
   [params.navigation]
+    logo = ""
+    logo-align = "start"
     anchor = true
     breadcrumb = true
     fixed = true
@@ -101,19 +103,23 @@ timeout = "180s"
     github = "https://github.com/wagov-dtt/architecture-decision-records"
     checkVersion = false
 
+  [params.modules]
+    [params.modules.mermaid]
+      integration = "core"
+      disableTemplate = true
+      enableTemplate = "**/*.mjs"
+      state = "defer"
+      elk = false
+      layout = "dagre"
+      look = "classic"
+
 [menu]
   [[menu.main]]
     name = "Docs"
-    pageRef = "/docs/"
+    pageRef = "/"
     weight = 10
 
   [[menu.main]]
     name = "Printable"
     pageRef = "/printable/"
     weight = 20
-
-  [[menu.social]]
-    name = "GitHub"
-    pre = "fab fa-github"
-    url = "https://github.com/wagov-dtt/architecture-decision-records"
-    weight = 10

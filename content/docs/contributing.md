@@ -1,6 +1,10 @@
 ---
 title: "Contributing Guide"
 description: "Contribution workflow for proposing ADRs, updating guidance, and using AI-assisted drafting responsibly."
+url: "/CONTRIBUTING.html"
+aliases:
+  - "/docs/contributing/"
+  - "/CONTRIBUTING/"
 weight: 70
 toc: true
 ---
@@ -49,9 +53,9 @@ just build       # Build website and printable view
 AI tools may help draft or review ADRs, but a human contributor remains
 responsible for the final content.
 
-- Prefer isolated or local AI tooling per [ADR 011: AI Tool and Agent Governance](/docs/security/011-ai-governance/)
-- Review [Architecture Principles](/docs/architecture-principles/) before proposing changes
-- Browse [Reference Architectures](/docs/reference-architectures/) for project kickoff patterns
+- Prefer isolated or local AI tooling per [ADR 011: AI Tool and Agent Governance](/security/011-ai-governance.html)
+- Review [Architecture Principles](/architecture-principles.html) before proposing changes
+- Browse [Reference Architectures](/reference-architectures/) for project kickoff patterns
 - Check existing ADRs in `content/docs/development/`, `content/docs/operations/`, and `content/docs/security/` before creating new guidance
 - Human review is required for all AI-generated changes before merge
 - Recommended tools include [OpenCode](https://github.com/wagov-dtt/tutorials-and-workshops/blob/main/README.md#opencode-ai-agent) and [Goose](https://github.com/block/goose)
@@ -101,13 +105,13 @@ flowchart LR
 
 ### ADR Template
 
-See [templates/adr-template.md](/docs/templates/adr-template/) for the complete template.
+See [templates/adr-template.md](/templates/adr-template.html) for the complete template.
 
 **Note**: ADR numbers are globally unique across all directories (gaps from removed drafts are normal)
 
 ### Reference Architecture Template
 
-See [templates/reference-architecture-template.md](/docs/templates/reference-architecture-template/) for the complete template.
+See [templates/reference-architecture-template.md](/templates/reference-architecture-template.html) for the complete template.
 
 ### Quality Standards
 
@@ -137,13 +141,13 @@ See [templates/reference-architecture-template.md](/docs/templates/reference-arc
 
 **Reference format:**
 
-- `[ADR 005: Secrets Management](/docs/security/005-secrets-management/)`
+- `[ADR 005: Secrets Management](/security/005-secrets-management.html)`
 - Quick reference: `per ADR 005`
 - Multiple refs: `aligned with ADR 001 and ADR 005`
 
 **Examples:**
 
-- "Encryption handled per [ADR 005: Secrets Management](/docs/security/005-secrets-management/)"
+- "Encryption handled per [ADR 005: Secrets Management](/security/005-secrets-management.html)"
 - "Access controls aligned with ADR 001"
 
 ### Writing Tips

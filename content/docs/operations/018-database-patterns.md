@@ -1,6 +1,10 @@
 ---
 title: "ADR 018: Database Patterns"
 description: "Use managed persistent storage patterns for databases, datalakes, and object stores with compliant backup strategies."
+url: "/operations/018-database-patterns.html"
+aliases:
+  - "/docs/operations/018-database-patterns/"
+  - "/operations/018-database-patterns/"
 weight: 180
 toc: true
 ---
@@ -14,7 +18,7 @@ toc: true
 Applications need managed persistent storage for databases, datalakes,
 and objects with automatic scaling and jurisdiction-compliant backup
 strategies. Workloads that need shared file-system access are covered by
-[ADR 019: Shared File Access](/docs/operations/019-shared-file-access/).
+[ADR 019: Shared File Access](/operations/019-shared-file-access.html).
 
 - [AWS Aurora Serverless v2
   Documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
@@ -48,14 +52,14 @@ dual backup strategy.
   [Apache Iceberg](https://iceberg.apache.org/) tables when workloads
   need AWS-managed table maintenance or multi-engine access
 - **Distributed query access layer**: use
-  [Trino](https://trino.io/docs/current/connector/iceberg.html) or
+  [Trino](https://trino.io/current/connector/iceberg.html) or
   equivalent Iceberg-compatible engines when workloads need concurrent
   or larger-scale querying
 
 DuckLake and S3 Tables are not an either/or decision. Choose the access
 layer per workload while keeping data in object storage and open table
 formats where practical. See [Reference Architecture: Data
-Pipelines](/docs/reference-architectures/data-pipelines/) for full
+Pipelines](/reference-architectures/data-pipelines.html) for full
 datalake patterns.
 
 #### Implementation
@@ -68,24 +72,24 @@ datalake patterns.
   Trino, or equivalent Iceberg-compatible engines for serverless or
   distributed access
 - **Object Storage**: Amazon S3 for files and objects. Use [ADR 019:
-  Shared File Access](/docs/operations/019-shared-file-access/) when workloads need
+  Shared File Access](/operations/019-shared-file-access.html) when workloads need
   file-system access to object-backed files
 - **Deployment**: Outside EKS cluster (handles complexity automatically)
 - **Credentials**: Follow [ADR 005: Secrets
-  Management](/docs/security/005-secrets-management/) for endpoint and
+  Management](/security/005-secrets-management.html) for endpoint and
   credential management
 - **Backup**: Follow [ADR 014: Object Storage
-  Backups](/docs/operations/014-object-backup/) plus AWS automated snapshots
+  Backups](/operations/014-object-backup.html) plus AWS automated snapshots
 - **Security**: Follow [ADR 007: Centralised Security
-  Logging](/docs/operations/007-logging/) and [ADR 012: Privileged Remote
-  Access](/docs/security/012-privileged-remote-access/)
+  Logging](/operations/007-logging.html) and [ADR 012: Privileged Remote
+  Access](/security/012-privileged-remote-access.html)
 
 ### Consequences
 
 **Benefits:**
 
 - Serverless scaling reducing operational costs during low usage periods
-- Automated high availability with managed backup strategies per [ADR 014: Object Backup](/docs/operations/014-object-backup/)
+- Automated high availability with managed backup strategies per [ADR 014: Object Backup](/operations/014-object-backup.html)
 - Compliance with jurisdiction requirements through dual backup approach
 
 **Risks if not implemented:**

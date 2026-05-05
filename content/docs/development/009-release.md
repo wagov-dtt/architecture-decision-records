@@ -1,6 +1,10 @@
 ---
 title: "ADR 009: Release Standards"
 description: "Standardise release notes so security, infrastructure, and operations teams can quickly understand changes and required actions."
+url: "/development/009-release.html"
+aliases:
+  - "/docs/development/009-release/"
+  - "/development/009-release/"
 weight: 90
 toc: true
 ---
@@ -114,7 +118,7 @@ For any questions or issues, please contact [Contact Information].
 - Release communication is consistent across teams
 - `main` reflects tested release history, not day-to-day integration
 - UAT and PROD promotion uses immutable release tags
-- Change tracking supports [ADR 007: Centralised Security Logging](/docs/operations/007-logging/)
+- Change tracking supports [ADR 007: Centralised Security Logging](/operations/007-logging.html)
 
 **Risks if not implemented:**
 

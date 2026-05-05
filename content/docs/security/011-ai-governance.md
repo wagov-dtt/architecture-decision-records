@@ -1,6 +1,10 @@
 ---
 title: "ADR 011: AI Tool and Agent Governance"
 description: "Govern generative and agentic AI tools so they protect sensitive data, require human accountability, and operate within approved boundaries."
+url: "/security/011-ai-governance.html"
+aliases:
+  - "/docs/security/011-ai-governance/"
+  - "/security/011-ai-governance/"
 weight: 110
 toc: true
 ---
@@ -125,7 +129,7 @@ AI tools must:
 - Be limited to low-risk and non-sensitive tasks unless explicitly
   approved through risk assessment and accountable ownership
 - Run in isolated or local environments (refer to [ADR 001: Application
-  Isolation](/docs/security/001-isolation/)) with minimal permissions and bounded blast
+  Isolation](/security/001-isolation.html)) with minimal permissions and bounded blast
   radius
 - Use explicit workspace, shell/process, network, model-provider,
   local-state, and approval boundaries

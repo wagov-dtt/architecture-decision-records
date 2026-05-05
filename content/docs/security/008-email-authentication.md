@@ -1,6 +1,10 @@
 ---
 title: "ADR 008: Email Authentication Protocols"
 description: "Protect government email domains from phishing, business email compromise, and impersonation with SPF, DKIM, and DMARC."
+url: "/security/008-email-authentication.html"
+aliases:
+  - "/docs/security/008-email-authentication/"
+  - "/security/008-email-authentication/"
 weight: 80
 toc: true
 ---

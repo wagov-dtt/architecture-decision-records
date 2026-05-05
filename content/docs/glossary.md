@@ -1,6 +1,10 @@
 ---
 title: "Glossary"
 description: "Definitions of terms, acronyms, and frameworks used throughout the architecture decision records."
+url: "/glossary.html"
+aliases:
+  - "/docs/glossary/"
+  - "/glossary/"
 weight: 90
 toc: true
 ---

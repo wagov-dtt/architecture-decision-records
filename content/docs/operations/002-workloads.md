@@ -1,6 +1,10 @@
 ---
 title: "ADR 002: AWS EKS for Cloud Workloads"
 description: "Run bespoke workloads on managed Kubernetes when teams need scalable, portable application hosting without managing servers directly."
+url: "/operations/002-workloads.html"
+aliases:
+  - "/docs/operations/002-workloads/"
+  - "/operations/002-workloads/"
 weight: 20
 toc: true
 ---
@@ -48,8 +52,8 @@ load balancers for traffic management.
 - **Load Balancers**: Standardise ingress and traffic management.
 - **Persistent Storage:** Keep durable state in managed services outside
   the cluster. Use [ADR 018: Database
-  Patterns](/docs/operations/018-database-patterns/) for databases and datalakes, and
-  [ADR 019: Shared File Access](/docs/operations/019-shared-file-access/) when
+  Patterns](/operations/018-database-patterns.html) for databases and datalakes, and
+  [ADR 019: Shared File Access](/operations/019-shared-file-access.html) when
   workloads need shared file-system access.
 
 ### Consequences
@@ -76,7 +80,7 @@ The [CNCF Kubernetes AI Conformance Program](https://www.cncf.io/blog/2025/11/11
 
 **Current Platform Conformance:**
 
-- AWS EKS meets proposed standards: [ai-conformance EKS](https://github.com/cncf/ai-conformance/blob/main/v1.34/eks/PRODUCT.yaml), [AI on EKS](https://awslabs.github.io/ai-on-eks/docs/blueprints)
+- AWS EKS meets proposed standards: [ai-conformance EKS](https://github.com/cncf/ai-conformance/blob/main/v1.34/eks/PRODUCT.yaml), [AI on EKS](https://awslabs.github.io/ai-on-eks/blueprints)
 
 **HPC Requirements:**
 

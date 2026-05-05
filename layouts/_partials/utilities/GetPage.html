@@ -1,0 +1,33 @@
+{{- $ref := "" -}}
+{{- $url := .url -}}
+{{- $page := .page -}}
+
+{{- if not $url -}}
+  {{- errorf "partial [utilities/GetPage.html] - Expected param 'url'" -}}
+{{- else if not $page -}}
+  {{- errorf "partial [utilities/GetPage.html] - Expected param 'page'" -}}
+{{- else -}}
+  {{- $isExternal := ne (urls.Parse (absURL $url)).Host (urls.Parse site.BaseURL).Host -}}
+  {{- if not $isExternal -}}
+    {{- $ref = $page.GetPage $url -}}
+
+    {{- if not $ref -}}
+      {{- $match := partial "utilities/GetStaticURL" (dict "url" $url) -}}
+      {{- if not (hasSuffix $match "/") }}{{ $match = printf "%s/" $match }}{{ end -}}
+      {{- $matches := where site.Pages "RelPermalink" "like" (printf "%s$" $match) -}}
+      {{- if eq (len $matches) 1 -}}
+        {{- $ref = index $matches 0 -}}
+      {{- else -}}
+        {{- $htmlPath := strings.TrimPrefix "/" (path.Clean $url) -}}
+        {{- if strings.HasSuffix $htmlPath ".html" -}}
+          {{- $matches = where site.Pages "RelPermalink" "eq" (printf "/%s" $htmlPath) -}}
+          {{- if eq (len $matches) 1 -}}
+            {{- $ref = index $matches 0 -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $ref -}}

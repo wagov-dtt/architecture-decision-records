@@ -1,6 +1,10 @@
 ---
 title: "ADR 006: Automated Policy Enforcement"
 description: "Use automated policy enforcement to prevent cloud misconfiguration, maintain compliance, and scale secure network access patterns."
+url: "/operations/006-policy-enforcement.html"
+aliases:
+  - "/docs/operations/006-policy-enforcement/"
+  - "/operations/006-policy-enforcement/"
 weight: 60
 toc: true
 ---
@@ -47,7 +51,7 @@ Governance (Control Tower, Config) enforces policies on network security
   hardcoded IP addresses for dynamic, maintainable access policies
 - **Shield Advanced**: DDoS protection for public-facing resources per
   [ADR 016: Web Application Edge
-  Protection](/docs/security/016-edge-protection/)
+  Protection](/security/016-edge-protection.html)
 - **VPC Flow Logs**: Complete egress traffic monitoring and analysis per
   [WA SOC Cyber Network Management
   Guideline](https://soc.cyber.wa.gov.au/guidelines/network-management/)
@@ -73,7 +77,7 @@ capabilities.
 
 **Implementation Requirements:**
 
-- Implement policy validation in CI/CD pipelines following [ADR 010: Infrastructure as Code](/docs/operations/010-configmgmt/)
+- Implement policy validation in CI/CD pipelines following [ADR 010: Infrastructure as Code](/operations/010-configmgmt.html)
 - Use security group references over hardcoded IP addresses for maintainable policies
 - Monitor VPC Flow Logs for egress traffic analysis and anomaly detection
 
@@ -82,7 +86,7 @@ capabilities.
 **Benefits:**
 
 - Proactive security misconfiguration prevention through automated guardrails
-- Comprehensive egress traffic visibility via [ADR 007: Centralised Security Logging](/docs/operations/007-logging/)
+- Comprehensive egress traffic visibility via [ADR 007: Centralised Security Logging](/operations/007-logging.html)
 - Centralised network access management reducing operational complexity
 
 **Risks if not implemented:**
