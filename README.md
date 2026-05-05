@@ -38,7 +38,7 @@ For AI-assisted contributions, see the guidance in [CONTRIBUTING.md](content/doc
 
 ## Repository Structure
 
-This project uses [Hugo](https://gohugo.io/) and [Lotus Docs](https://lotusdocs.dev/) to generate documentation:
+This project uses [Hugo](https://gohugo.io/) and [Hinode](https://gethinode.com/) to generate documentation:
 
 - `content/docs/development/`, `content/docs/operations/`, `content/docs/security/` - ADRs by domain
 - `content/docs/reference-architectures/` - Project kickoff templates

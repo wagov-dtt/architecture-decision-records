@@ -57,10 +57,11 @@ build-ci: setup precheck
 # Clean generated files
 [group('build')]
 clean:
-    rm -rf public resources/_gen .hugo_build.lock assets/jsconfig.json
+    rm -rf public resources/_gen .hugo_build.lock assets/jsconfig.json hugo_stats.json
 
 # Install required tools and dependencies
 [group('setup')]
 setup:
     mise install
     scripts/install-hugo-extended.sh
+    scripts/install-dart-sass.sh

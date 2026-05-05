@@ -1,26 +1,46 @@
 baseURL = "https://adr.dtt.digital.wa.gov.au/"
-locale = "en-AU"
 title = "WA Government Architecture Decision Records"
+copyright = "© WA Government"
 contentDir = "content"
 enableEmoji = true
 enableGitInfo = true
+enableRobotsTXT = true
 timeZone = "Australia/Perth"
+locale = "en-AU"
+defaultContentLanguage = "en"
+summaryLength = 30
+timeout = "180s"
 
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.140.0"
+    min = "0.146.0"
 
   [[module.imports]]
-    path = "github.com/colinwilson/lotusdocs"
-    disable = false
+    path = "github.com/gethinode/hinode/v2"
 
-  [[module.imports]]
-    path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
-    disable = false
+[build]
+  writeStats = true
 
 [markup]
   defaultMarkdownHandler = "goldmark"
+
+  [markup.goldmark.extensions]
+    definitionList = true
+    footnote = true
+    linkify = true
+    strikethrough = true
+    table = true
+    taskList = true
+    typographer = true
+
+  [markup.goldmark.parser]
+    autoHeadingID = true
+    autoHeadingIDType = "github"
+    wrapStandAloneImageWithinParagraph = false
+
+  [markup.goldmark.parser.attribute]
+    block = true
 
   [markup.goldmark.renderer]
     unsafe = true
@@ -30,36 +50,70 @@ timeZone = "Australia/Perth"
     endLevel = 3
 
 [params]
-  description = "Reusable architecture patterns for WA Government digital services."
-  customCSS = ["css/printable.css"]
+  [params.main]
+    description = "Reusable architecture patterns for WA Government digital services."
+    endorse = false
+    footerBelowFold = false
+    titleCase = false
 
-[params.docs]
-  title = "Architecture Decision Records"
-  pathName = "docs"
-  themeColor = "blue"
-  darkMode = true
-  prism = true
-  sidebarIcons = true
-  titleIcon = true
-  breadcrumbs = true
-  toc = true
-  backToTop = true
-  lastMod = true
-  repoURL = "https://github.com/wagov-dtt/architecture-decision-records"
-  repoBranch = "main"
-  editPage = true
+    [params.main.build]
+      transpiler = "dartsass"
+      silenceDeprecations = true
 
-[params.flexsearch]
-  enabled = true
+    [params.main.colorMode]
+      enabled = true
+      modes = ["light", "dark"]
+      toggle = true
 
-[[menu.primary]]
-  name = "Docs"
-  url = "/docs/"
-  identifier = "docs"
-  weight = 10
+    [params.main.externalLinks]
+      cue = true
+      tab = true
 
-[[menu.primary]]
-  name = "Printable"
-  url = "/printable/"
-  identifier = "printable"
-  weight = 20
+  [params.navigation]
+    anchor = true
+    breadcrumb = true
+    fixed = true
+    sidebar = true
+    toc = true
+    startLevel = 2
+    endLevel = 3
+
+    [params.navigation.search]
+      enabled = true
+      modal = true
+
+  [params.style]
+    primary = "#005ea8"
+    secondary = "#6c757d"
+    themeFont = "Inter"
+    themeFontPath = "/fonts"
+    fontSizeBase = "1rem"
+    purge = false
+
+  [params.schema]
+    type = "GovernmentOrganization"
+    name = "WA Government Architecture Decision Records"
+    locale = "en-AU"
+    github = "https://github.com/wagov-dtt/architecture-decision-records"
+    section = "docs"
+
+  [params.docs]
+    github = "https://github.com/wagov-dtt/architecture-decision-records"
+    checkVersion = false
+
+[menu]
+  [[menu.main]]
+    name = "Docs"
+    pageRef = "/docs/"
+    weight = 10
+
+  [[menu.main]]
+    name = "Printable"
+    pageRef = "/printable/"
+    weight = 20
+
+  [[menu.social]]
+    name = "GitHub"
+    pre = "fab fa-github"
+    url = "https://github.com/wagov-dtt/architecture-decision-records"
+    weight = 10

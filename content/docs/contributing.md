@@ -69,7 +69,7 @@ flowchart LR
 
 ### Project Notes
 
-- Documentation is built with [Hugo](https://gohugo.io/) and [Lotus Docs](https://lotusdocs.dev/)
+- Documentation is built with [Hugo](https://gohugo.io/) and [Hinode](https://gethinode.com/)
 - Navigation is defined by Hugo front matter; new pages need an appropriate `weight`
 - `just build` creates the website, including the single-page printable view
 - Use Mermaid diagrams where a simple visual explanation is clearer than text alone

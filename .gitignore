@@ -3,6 +3,7 @@
 /resources/_gen/
 /.hugo_build.lock
 /assets/jsconfig.json
+/hugo_stats.json
 
 # Vale style downloads
 /.vale/styles/
