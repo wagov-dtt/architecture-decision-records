@@ -1,12 +1,10 @@
 [tools]
-"cargo:mdbook-pandoc" = "latest"
-"cargo:mdbook-d2" = "latest"
-just = "latest"
+"cargo:mdbook-mermaid" = "latest"
+"cargo:just" = "latest"
 "cargo:mdbook" = "latest"
 cargo-binstall = "latest"
-d2 = "latest"
-lychee = "latest"
-rumdl = "latest"
+"cargo:lychee" = "latest"
+"cargo:rumdl" = "latest"
 
 [tasks.build]
 description = "Build the book"

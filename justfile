@@ -44,13 +44,11 @@ check-summary:
 [group('build')]
 build: setup lint
     mdbook build
-    cp book/pandoc/pdf/architecture-decision-records.pdf book/html/architecture-decision-records.pdf
 
 # Build for CI (tolerates transient link check failures)
 [group('build')]
 build-ci: setup lint-ci
     mdbook build
-    cp book/pandoc/pdf/architecture-decision-records.pdf book/html/architecture-decision-records.pdf
 
 # Clean generated files
 [group('build')]
@@ -61,4 +59,4 @@ clean:
 [group('setup')]
 setup:
     mise install
-    bash -eu -c 'missing=""; for tool in pandoc pdflatex rsvg-convert; do command -v "$tool" >/dev/null || missing="$missing $tool"; done; if [ -z "$missing" ]; then exit 0; fi; if command -v brew >/dev/null; then brew install pandoc texlive librsvg; elif command -v apt-get >/dev/null; then sudo apt-get -y update && sudo apt-get install -y pandoc texlive texlive-pictures librsvg2-bin; else echo "Missing required tools:$missing" >&2; exit 1; fi'
+    bash -eu -c 'missing=""; for tool in mdbook-mermaid; do command -v "$tool" >/dev/null || missing="$missing $tool"; done; if [ -z "$missing" ]; then exit 0; fi; echo "Missing required tools:$missing" >&2; echo "Run '\''cargo install mdbook-mermaid'\'' to install." >&2; exit 1;'

@@ -32,137 +32,22 @@ url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.18.1/ca
 checksum = "sha256:89706aa5215c164d8d091597a470fee72308ac87e8553af395ea77db844a888c"
 url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.18.1/cargo-binstall-x86_64-pc-windows-msvc.zip"
 
+[[tools."cargo:just"]]
+version = "1.50.0"
+backend = "cargo:just"
+
+[[tools."cargo:lychee"]]
+version = "0.24.2"
+backend = "cargo:lychee"
+
 [[tools."cargo:mdbook"]]
 version = "0.5.2"
 backend = "cargo:mdbook"
 
-[[tools."cargo:mdbook-d2"]]
-version = "0.3.8"
-backend = "cargo:mdbook-d2"
+[[tools."cargo:mdbook-mermaid"]]
+version = "0.17.0"
+backend = "cargo:mdbook-mermaid"
 
-[[tools."cargo:mdbook-linkcheck"]]
-version = "0.7.7"
-backend = "cargo:mdbook-linkcheck"
-
-[[tools."cargo:mdbook-pandoc"]]
-version = "0.11.0"
-backend = "cargo:mdbook-pandoc"
-
-[[tools.d2]]
-version = "0.7.1"
-backend = "aqua:terrastruct/d2"
-
-[tools.d2."platforms.linux-arm64"]
-checksum = "sha256:ce3a0b985a8f91335a826c254b3a88736fd81afcdd08b58f6c749d2add6864b0"
-url = "https://github.com/terrastruct/d2/releases/download/v0.7.1/d2-v0.7.1-linux-arm64.tar.gz"
-
-[tools.d2."platforms.linux-x64"]
-checksum = "sha256:eb172adf59f38d1e5a70ab177591356754ffaf9bebb84e0ca8b767dfb421dad7"
-url = "https://github.com/terrastruct/d2/releases/download/v0.7.1/d2-v0.7.1-linux-amd64.tar.gz"
-
-[[tools."github:terrastruct/d2"]]
-version = "0.7.1"
-backend = "github:terrastruct/d2"
-
-[tools."github:terrastruct/d2"."platforms.linux-arm64"]
-checksum = "sha256:ce3a0b985a8f91335a826c254b3a88736fd81afcdd08b58f6c749d2add6864b0"
-url = "https://github.com/terrastruct/d2/releases/download/v0.7.1/d2-v0.7.1-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/terrastruct/d2/releases/assets/284023126"
-
-[[tools.just]]
-version = "1.50.0"
-backend = "aqua:casey/just"
-
-[tools.just."platforms.linux-arm64"]
-checksum = "sha256:3beb4967ce05883cf09ac12d6d128166eb4c6d0b03eff74b61018a6880655d7d"
-url = "https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-aarch64-unknown-linux-musl.tar.gz"
-
-[tools.just."platforms.linux-arm64-musl"]
-checksum = "sha256:3beb4967ce05883cf09ac12d6d128166eb4c6d0b03eff74b61018a6880655d7d"
-url = "https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-aarch64-unknown-linux-musl.tar.gz"
-
-[tools.just."platforms.linux-x64"]
-checksum = "sha256:27e011cd6328fadd632e59233d2cf5f18460b8a8c4269acd324c1a8669f34db0"
-url = "https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-x86_64-unknown-linux-musl.tar.gz"
-
-[tools.just."platforms.linux-x64-musl"]
-checksum = "sha256:27e011cd6328fadd632e59233d2cf5f18460b8a8c4269acd324c1a8669f34db0"
-url = "https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-x86_64-unknown-linux-musl.tar.gz"
-
-[tools.just."platforms.macos-arm64"]
-checksum = "sha256:891262207663bff1aa422dbe799a76deae4064eaa445f14eb28aef7a388222cd"
-url = "https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-aarch64-apple-darwin.tar.gz"
-
-[tools.just."platforms.macos-x64"]
-checksum = "sha256:e4fa28fe63381ca32fad101e86d4a1da7cd2d34d1b080985a37ec9dc951922fe"
-url = "https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-x86_64-apple-darwin.tar.gz"
-
-[tools.just."platforms.windows-x64"]
-checksum = "sha256:5dc713f049e174e22de41fd06292a26c9b90f2d37c1be9390d2082fe6928b376"
-url = "https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-x86_64-pc-windows-msvc.zip"
-
-[[tools.lychee]]
-version = "0.24.1"
-backend = "aqua:lycheeverse/lychee"
-
-[tools.lychee."platforms.linux-arm64"]
-checksum = "sha256:55c1af98a86120c8a895323cf38ad4bef59139ed90288636e39c8265181e39ec"
-url = "https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.1/lychee-aarch64-unknown-linux-gnu.tar.gz"
-
-[tools.lychee."platforms.linux-arm64-musl"]
-checksum = "sha256:b93d5b1744ec443574bcd6d55f2268da9f4628a1990213019b2b2289cf894907"
-url = "https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.1/lychee-aarch64-unknown-linux-musl.tar.gz"
-
-[tools.lychee."platforms.linux-x64"]
-checksum = "sha256:5f5e8301bcc3edc0fd5470f1c22fb039a6cc487bf5b788af5e30b6dfbcc5b388"
-url = "https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.1/lychee-x86_64-unknown-linux-musl.tar.gz"
-
-[tools.lychee."platforms.linux-x64-musl"]
-checksum = "sha256:5f5e8301bcc3edc0fd5470f1c22fb039a6cc487bf5b788af5e30b6dfbcc5b388"
-url = "https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.1/lychee-x86_64-unknown-linux-musl.tar.gz"
-
-[[tools.rumdl]]
+[[tools."cargo:rumdl"]]
 version = "0.1.83"
-backend = "github:rvben/rumdl"
-
-[tools.rumdl."platforms.linux-arm64"]
-checksum = "sha256:8281610cf5596edfdb0e2b7ec6b65baa0f2d4c02ed03ba65af2691c812aa465f"
-url = "https://github.com/rvben/rumdl/releases/download/v0.1.83/rumdl-v0.1.83-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/406068228"
-provenance = "github-attestations"
-
-[tools.rumdl."platforms.linux-arm64-musl"]
-checksum = "sha256:0991912871809170a6c780690bac58b22147e210558623e9bcf23fe2a07c603f"
-url = "https://github.com/rvben/rumdl/releases/download/v0.1.83/rumdl-v0.1.83-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/406068237"
-provenance = "github-attestations"
-
-[tools.rumdl."platforms.linux-x64"]
-checksum = "sha256:fe072a2df7857188c8a326b02a13f2942c87cda08fd1a33b9d0d92f1407ce18d"
-url = "https://github.com/rvben/rumdl/releases/download/v0.1.83/rumdl-v0.1.83-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/406068230"
-provenance = "github-attestations"
-
-[tools.rumdl."platforms.linux-x64-musl"]
-checksum = "sha256:5bbe124101d85a75c4ce170dc3bef701205b7c31cb61628d0f0731d5fe43e945"
-url = "https://github.com/rvben/rumdl/releases/download/v0.1.83/rumdl-v0.1.83-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/406068227"
-provenance = "github-attestations"
-
-[tools.rumdl."platforms.macos-arm64"]
-checksum = "sha256:6f853bb7bf1397a490ee382ab22e23cb2d3332037f050ccf6d09028659f7f562"
-url = "https://github.com/rvben/rumdl/releases/download/v0.1.83/rumdl-v0.1.83-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/406068225"
-provenance = "github-attestations"
-
-[tools.rumdl."platforms.macos-x64"]
-checksum = "sha256:217676cbbdff24be588e0dac661918f196a15f8f95d6a3212c46806fce23243d"
-url = "https://github.com/rvben/rumdl/releases/download/v0.1.83/rumdl-v0.1.83-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/406068226"
-provenance = "github-attestations"
-
-[tools.rumdl."platforms.windows-x64"]
-checksum = "sha256:9c585326265ed5591ca543c76d3787eb95a77af812738918f6f5e15b62def161"
-url = "https://github.com/rvben/rumdl/releases/download/v0.1.83/rumdl-v0.1.83-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/406068234"
-provenance = "github-attestations"
+backend = "cargo:rumdl"

@@ -28,15 +28,14 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - run: just build-ci
-      - name: Upload release PDF
-        if: github.event_name == 'release'
-        run: gh release upload ${{ github.event.release.tag_name }} ./book/pandoc/pdf/architecture-decision-records.pdf
       - name: Upload Pages artifact
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: ./book/html
+          path: ./book
 
   deploy:
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'

@@ -61,15 +61,14 @@ Required controls:
 
 **CI/CD Pipeline:**
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    code[Code Commit]
+    build[Build]
+    scan[Scan + Analyse]
+    release[Release]
 
-code: Code Commit
-build: Build
-scan: Scan + Analyse
-release: Release
-
-code -> build -> scan -> release
+    code --> build --> scan --> release
 ```
 
 Build produces container images with SBOM/provenance. Scan runs

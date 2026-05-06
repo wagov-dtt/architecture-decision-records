@@ -24,23 +24,22 @@ and network path.
 
 ## Core Components
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    clients[API Clients]
+    edge[CDN + WAF]
+    api[Standard API]
+    admin[Admin API]
+    db[Managed Database]
+    logs[Security Logs]
+    admins[Administrators]
 
-clients: API Clients
-edge: CDN + WAF
-api: Standard API
-admin: Admin API
-db: Managed Database
-logs: Security Logs
-
-clients -> edge -> api: user operations
-admins: Administrators
-admins -> admin: privileged operations
-api -> db: application data
-admin -> db: configuration
-api -> logs: audit events
-admin -> logs: admin audit events
+    clients --> edge -->|user operations| api
+    admins -->|privileged operations| admin
+    api -->|application data| db
+    admin -->|configuration| db
+    api -->|audit events| logs
+    admin -->|admin audit events| logs
 ```
 
 **Standard APIs** (`api.example.com/v1/*`): Business operations for

@@ -39,19 +39,18 @@ and other file assets that benefit from both object and file access.
 Avoid copying canonical files into separate file systems unless a workload
 has a hard requirement that object-backed file access cannot meet.
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    authors[Authors / EKS Workloads]
+    file_access[Shared File Access]
+    bucket[Object Storage]
+    cdn[CDN + WAF]
+    users[Users]
 
-authors: Authors / EKS Workloads
-file_access: Shared File Access
-bucket: Object Storage
-cdn: CDN + WAF
-users: Users
-
-authors -> file_access: file operations
-file_access -> bucket: object-backed storage
-bucket -> cdn: origin
-cdn -> users: deliver
+    authors -->|file operations| file_access
+    file_access -->|object-backed storage| bucket
+    bucket -->|origin| cdn
+    cdn -->|deliver| users
 ```
 
 ### Requirements

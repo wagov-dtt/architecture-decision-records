@@ -14,15 +14,14 @@ accounts and services.
 Implement comprehensive automated policy enforcement using AWS native
 services for governance, network security, and access control.
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    governance[Governance]
+    network[Network Security]
+    workloads[Workloads]
 
-governance: Governance
-network: Network Security
-workloads: Workloads
-
-governance -> network: policies
-network -> workloads: access control
+    governance -->|policies| network
+    network -->|access control| workloads
 ```
 
 Governance (Control Tower, Config) enforces policies on network security

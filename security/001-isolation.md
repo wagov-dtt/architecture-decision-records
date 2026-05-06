@@ -21,14 +21,13 @@ enable the spread of malware, unauthorised access, and data breaches.
 To mitigate the risks associated with shared environments, all
 applications and environments should isolate by default.
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    account[Cloud Account]
+    cluster[K8s Cluster]
+    namespace[Namespace]
 
-account: Cloud Account
-cluster: K8s Cluster
-namespace: Namespace
-
-account -> cluster -> namespace: nested isolation
+    account -->|nested isolation| cluster -->|nested isolation| namespace
 ```
 
 This isolation can be achieved through the following approaches (strongest to weakest):

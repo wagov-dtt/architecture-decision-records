@@ -34,7 +34,7 @@ just next-number # Get next ADR number
 just check-summary # Verify SUMMARY.md includes all markdown files
 just lint        # Run checks and fixes
 just serve       # Preview locally on port 8080
-just build       # Build website and PDF
+just build       # Build website and print view
 ```
 
 ## AI-Assisted Contributions
@@ -49,35 +49,28 @@ responsible for the final content.
 - Human review is required for all AI-generated changes before merge
 - Recommended tools include [OpenCode](https://github.com/wagov-dtt/tutorials-and-workshops/blob/main/README.md#opencode-ai-agent) and [Goose](https://github.com/block/goose)
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    setup[Environment Setup]
+    create[Content Creation]
+    validate[Validation]
+    publish[Publication]
 
-setup: Environment Setup {
-  style.fill: "#e3f2fd"
-}
+    setup --> create --> validate --> publish
+    validate -->|fix issues| create
 
-create: Content Creation {
-  style.fill: "#e8f5e8"
-}
-
-validate: Validation {
-  style.fill: "#f3e5f5"
-}
-
-publish: Publication {
-  style.fill: "#fff3e0"
-}
-
-setup -> create -> validate -> publish
-validate -> create: fix issues
+    style setup fill:#e3f2fd
+    style create fill:#e8f5e8
+    style validate fill:#f3e5f5
+    style publish fill:#fff3e0
 ```
 
 ## Project Notes
 
 - Documentation is built with [mdBook](https://rust-lang.github.io/mdBook/)
 - Navigation is defined in `SUMMARY.md`; new ADRs must be added there
-- `just build` creates both the website and PDF output
-- Use D2 diagrams where a simple visual explanation is clearer than text alone
+- `just build` creates the website and a single-page print view
+- Use Mermaid diagrams where a simple visual explanation is clearer than text alone
 
 ## Directory Structure
 
@@ -158,9 +151,9 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 - **Define scope**: What's included and excluded
 - **Reference standards**: Link to external docs
 - **Australian English**: Use "organisation" not "organization", "jurisdiction" not "government"
-- **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes, em-dashes for PDF compatibility
-- **D2 diagrams**: Use D2 format for diagrams with clean syntax and universal compatibility
+- **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes, em-dashes for print page compatibility
+- **Mermaid diagrams**: Use Mermaid for diagrams with clean syntax and universal compatibility
   - Use when text alone isn't sufficient (system relationships, data flows, workflows)
   - Keep simple: 5-7 components max, clear labels, logical flow
-  - Use `direction: down` for compact layouts, `direction: right` for flows
-  - No color styling, no `.note` suffix, no `\n` in labels
+  - Use `flowchart TB` for compact layouts, `flowchart LR` for flows
+  - Use `style` directives for color styling, keep labels short
