@@ -35,15 +35,14 @@ Secure, maintainable APIs require mature frameworks with low complexity and indu
 
 **API Development Flow:**
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    framework[Framework]
+    openapi[OpenAPI Spec]
+    testing[Automated Tests]
 
-framework: Framework
-openapi: OpenAPI Spec
-testing: Automated Tests
-
-framework -> openapi: generates
-openapi -> testing: validates
+    framework -->|generates| openapi
+    openapi -->|validates| testing
 ```
 
 Use self-documenting frameworks that generate OpenAPI specifications,

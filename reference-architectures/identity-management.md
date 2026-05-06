@@ -40,27 +40,26 @@ platform or broker layer.
 
 ## Core Components
 
-```d2
-direction: down
+```mermaid
+flowchart TB
+    subgraph standard[Standard User Domain]
+        users[Users]
+        providers[Identity Providers]
+    end
 
-standard: Standard User Domain {
-  users: Users
-  providers: Identity Providers
-}
+    subgraph privileged[Privileged User Domain]
+        admins[Administrators]
+        pim[Privileged Identity Management]
+    end
 
-privileged: Privileged User Domain {
-  admins: Administrators
-  pim: Privileged Identity Management
-}
+    platform[Managed Identity Platform / Broker]
+    apps[Applications]
 
-platform: Managed Identity Platform / Broker
-apps: Applications
-
-standard.users -> standard.providers: authenticate
-standard.providers -> platform: OIDC/SAML claims
-privileged.admins -> privileged.pim: elevate
-privileged.pim -> platform: privileged claims
-platform -> apps: validated tokens
+    users -->|authenticate| providers
+    providers -->|OIDC/SAML claims| platform
+    admins -->|elevate| pim
+    pim -->|privileged claims| platform
+    platform -->|validated tokens| apps
 ```
 
 ## Project Kickoff Steps

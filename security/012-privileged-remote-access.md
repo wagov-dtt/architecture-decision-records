@@ -20,15 +20,14 @@ administrative tasks.
 Replace traditional bastion hosts and jump boxes with cloud-native
 privileged access solutions:
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    admin[Administrator]
+    ssm[Session Manager]
+    systems[Target Systems]
 
-admin: Administrator
-ssm: Session Manager
-systems: Target Systems
-
-admin -> ssm: MFA + identity
-ssm -> systems: temporary session
+    admin -->|MFA + identity| ssm
+    ssm -->|temporary session| systems
 ```
 
 Session Manager provides MFA enforcement, session recording, and audit

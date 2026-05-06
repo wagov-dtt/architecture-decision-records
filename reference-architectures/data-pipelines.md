@@ -24,19 +24,18 @@ requires it.
 
 ## Core Components
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    sources[Data Sources]
+    transform[Ibis Transformations]
+    storage[Object Storage + Open Tables]
+    access[DuckDB / S3 Tables / Trino]
+    output[Reports & APIs]
 
-sources: Data Sources
-transform: Ibis Transformations
-storage: Object Storage + Open Tables
-access: DuckDB / S3 Tables / Trino
-output: Reports & APIs
-
-sources -> transform: extract + validate
-transform -> storage: load curated data
-storage -> access: query
-access -> output: serve
+    sources -->|extract + validate| transform
+    transform -->|load curated data| storage
+    storage -->|query| access
+    access -->|serve| output
 ```
 
 **Key Technologies:**

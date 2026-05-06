@@ -31,22 +31,21 @@ Implement standardised object storage backup solution with automated
 cross-region replication and lifecycle management for all critical
 systems and data.
 
-```d2
-direction: down
+```mermaid
+flowchart TB
+    workloads[Workloads]
 
-workloads: Workloads
+    primary_s3[Primary S3 Buckets versioned]
+    dbaas[DBaaS]
+    backup_s3[Backup S3 Bucket]
 
-primary_s3: Primary S3 Buckets (versioned)
-dbaas: DBaaS
-backup_s3: Backup S3 Bucket
+    workloads --> primary_s3
+    workloads --> dbaas
+    dbaas -->|automated exports| backup_s3
 
-workloads -> primary_s3
-workloads -> dbaas
-dbaas -> backup_s3: automated exports
-
-replica_s3: Replica S3 Bucket (Cross-Region)
-primary_s3 -> replica_s3: S3 replication
-backup_s3 -> replica_s3: S3 replication
+    replica_s3[Replica S3 Bucket Cross-Region]
+    primary_s3 -->|S3 replication| replica_s3
+    backup_s3 -->|S3 replication| replica_s3
 ```
 
 All storage (primary, backup, and replica) uses S3 buckets with

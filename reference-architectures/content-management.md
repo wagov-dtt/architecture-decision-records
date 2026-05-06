@@ -22,22 +22,21 @@ safely while public users only reach cached, protected endpoints.
 
 ## Core Components
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    editors[Content Editors]
+    cms[CMS Application]
+    db[Content Database]
+    media[Object Storage]
+    cdn[CDN + WAF]
+    users[End Users]
 
-editors: Content Editors
-cms: CMS Application
-db: Content Database
-media: Object Storage
-cdn: CDN + WAF
-users: End Users
-
-editors -> cms: author + approve
-cms -> db: content metadata
-cms -> media: media assets
-media -> cdn: origin
-cms -> cdn: publish / invalidate
-cdn -> users: deliver
+    editors -->|author + approve| cms
+    cms -->|content metadata| db
+    cms -->|media assets| media
+    media -->|origin| cdn
+    cms -->|publish / invalidate| cdn
+    cdn -->|deliver| users
 ```
 
 ## Project Kickoff Steps

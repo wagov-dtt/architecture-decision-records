@@ -12,30 +12,18 @@ Brief template description focusing on practical implementation.
 
 ## Core Components
 
-```d2
-source: Data Sources {
-  style: {
-    fill: "#e3f2fd"
-    stroke: "#1976d2"
-  }
-}
+```mermaid
+flowchart LR
+    source[Data Sources]
+    process[Processing Layer]
+    output[Output Systems]
 
-process: Processing Layer {
-  style: {
-    fill: "#e8f5e8"
-    stroke: "#388e3c"
-  }
-}
+    source -->|ingest data| process
+    process -->|deliver results| output
 
-output: Output Systems {
-  style: {
-    fill: "#f3e5f5"
-    stroke: "#7b1fa2"
-  }
-}
-
-source -> process: ingest data
-process -> output: deliver results
+    style source fill:#e3f2fd,stroke:#1976d2
+    style process fill:#e8f5e8,stroke:#388e3c
+    style output fill:#f3e5f5,stroke:#7b1fa2
 ```
 
 ## Project Kickoff Steps

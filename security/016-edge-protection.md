@@ -29,15 +29,14 @@ References:
 All public web applications and APIs must use CDN with integrated WAF
 protection:
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    users[Internet Users]
+    cdn[CDN + WAF]
+    apps[Applications]
 
-users: Internet Users
-cdn: CDN + WAF
-apps: Applications
-
-users -> cdn: requests
-cdn -> apps: filtered traffic
+    users -->|requests| cdn
+    cdn -->|filtered traffic| apps
 ```
 
 The CDN edge handles SSL termination, caching, WAF filtering, and DDoS

@@ -26,7 +26,7 @@ These ADRs align with:
 
 Supporting training: [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa.gov.au/training/devsecops-induction/)
 
-**[Browse online](https://wagov-dtt.github.io/architecture-decision-records/)** | **[Download PDF](https://wagov-dtt.github.io/architecture-decision-records/architecture-decision-records.pdf)**
+**[Browse online](https://wagov-dtt.github.io/architecture-decision-records/)** | **[Printable long view](https://wagov-dtt.github.io/architecture-decision-records/print.html)**
 
 ---
 
@@ -47,5 +47,5 @@ This project uses [mdBook](https://rust-lang.github.io/mdBook/) to generate docu
 ```bash
 just setup    # One-time tool installation
 just serve    # Preview locally (port 8080)
-just build    # Build website and PDF
+just build    # Build website and print view
 ```

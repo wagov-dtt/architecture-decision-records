@@ -25,15 +25,14 @@ availability and size [AWS EKS (Elastic Kubernetes
 Service)](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
 in auto mode is the preferred option.
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    users[Users]
+    lb[Load Balancer]
+    eks[EKS Cluster]
+    db[DBaaS]
 
-users: Users
-lb: Load Balancer
-eks: EKS Cluster
-db: DBaaS
-
-users -> lb -> eks -> db
+    users --> lb --> eks --> db
 ```
 
 This leverages Kubernetes for orchestration, AWS EKS for managed

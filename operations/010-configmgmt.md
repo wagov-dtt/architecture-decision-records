@@ -36,15 +36,14 @@ All environments must be reproducible from source to minimise drift and security
 
 **Infrastructure as Code Workflow:**
 
-```d2
-direction: right
+```mermaid
+flowchart LR
+    artifacts[Static Artifacts]
+    repo[Infrastructure Repo]
+    envs[AWS Accounts]
 
-artifacts: Static Artifacts
-repo: Infrastructure Repo
-envs: AWS Accounts
-
-artifacts -> repo: versioned
-repo -> envs: deploy
+    artifacts -->|versioned| repo
+    repo -->|deploy| envs
 ```
 
 Git tags are immutable release versions for UAT and PROD. DEV and INT
