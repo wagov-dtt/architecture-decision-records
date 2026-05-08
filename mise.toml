@@ -1,7 +1,7 @@
 [tools]
-"cargo:mdbook-mermaid" = "latest"
+"cargo:mdbook-mermaid" = "0.17.0"
 "cargo:just" = "latest"
-"cargo:mdbook" = "latest"
+"cargo:mdbook" = "0.5.0"
 cargo-binstall = "latest"
 "cargo:lychee" = "latest"
 "cargo:rumdl" = "latest"

@@ -41,7 +41,7 @@ version = "0.24.2"
 backend = "cargo:lychee"
 
 [[tools."cargo:mdbook"]]
-version = "0.5.2"
+version = "0.5.0"
 backend = "cargo:mdbook"
 
 [[tools."cargo:mdbook-mermaid"]]

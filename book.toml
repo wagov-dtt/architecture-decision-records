@@ -11,6 +11,7 @@ build-dir = "book"
 no-section-label = true
 git-repository-url = "https://github.com/wagov-dtt/architecture-decision-records"
 edit-url-template = "https://github.com/wagov-dtt/architecture-decision-records/edit/main/{path}"
+additional-js = ["mermaid-init.js"]
 
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
