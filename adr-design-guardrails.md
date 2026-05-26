@@ -1,8 +1,11 @@
-# Architecture Principles
+# ADR Design Guardrails
 
 **Status:** Accepted | **Date:** 2025-03-07
 
-These six principles guide all architecture decisions in this repository. Each ADR should align with one or more of these principles.
+These six guardrails guide day-to-day technical design decisions in this repository. They help teams make consistent
+trade-offs when writing and reviewing Architecture Decision Records (ADRs).
+
+They are not enterprise architecture principles, procurement policies, or technology standards for whole-of-government or agency-level use.
 
 ## 1. Establish secure foundations
 
