@@ -1,7 +1,7 @@
 # Summary
 
 - [Introduction](README.md)
-- [Architecture Principles](architecture-principles.md)
+- [ADR Design Guardrails](adr-design-guardrails.md)
 
 ---
 

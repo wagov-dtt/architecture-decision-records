@@ -8,7 +8,7 @@ These patterns help you build secure, compliant digital services faster. Instead
 
 ### Getting Started
 
-1. **Review the [Architecture Principles](architecture-principles.md)** - Six guiding principles for all technology decisions
+1. **Review the [ADR Design Guardrails](adr-design-guardrails.md)** - Six guiding principles for all technology decisions
 2. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
    - [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
    - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing

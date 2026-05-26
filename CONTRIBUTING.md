@@ -43,7 +43,7 @@ AI tools may help draft or review ADRs, but a human contributor remains
 responsible for the final content.
 
 - Prefer isolated or local AI tooling per [ADR 011: AI Tool and Agent Governance](security/011-ai-governance.md)
-- Review [architecture-principles.md](architecture-principles.md) before proposing changes
+- Review [adr-design-guardrails.md](adr-design-guardrails.md) before proposing changes
 - Browse [reference-architectures/](reference-architectures/) for project kickoff patterns
 - Check existing ADRs in `development/`, `operations/`, and `security/` before creating new guidance
 - Human review is required for all AI-generated changes before merge
