@@ -1,6 +1,6 @@
 # ADR 002: AWS EKS for Cloud Workloads
 
-**Status:** Accepted | **Date:** 2025-02-17
+**Status:** Accepted | **Date:** 2025-02-17 | **Review:** 2026-02-17
 
 ## Context
 

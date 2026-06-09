@@ -1,6 +1,6 @@
 # ADR 014: Object Storage Backups
 
-**Status:** Proposed | **Date:** 2025-07-22
+**Status:** Proposed | **Date:** 2025-07-22 | **Review:** 2026-07-22
 
 ## Context
 

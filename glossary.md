@@ -1,5 +1,7 @@
 # Glossary
 
+**Status:** Accepted | **Date:** 2026-06-09 | **Review:** 2027-06-09
+
 ## Acronyms and Definitions
 
 **ACSC** - Australian Cyber Security Centre  

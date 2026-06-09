@@ -1,6 +1,6 @@
 # ADR Design Guardrails
 
-**Status:** Accepted | **Date:** 2025-03-07
+**Status:** Accepted | **Date:** 2025-03-07 | **Review:** 2026-03-07
 
 These six guardrails guide day-to-day technical design decisions in this repository. They help teams make consistent
 trade-offs when writing and reviewing Architecture Decision Records (ADRs).
@@ -15,8 +15,7 @@ services, per the [ACSC Foundations for modern defensible architecture](https://
 ## 2. Understand and govern data
 
 Use authoritative data sources to ensure data consistency, integrity, and quality. Embed data management and governance
-practices, including [information classification](https://www.wa.gov.au/government/publications/western-australian-information-classification-policy),
-records management, and [Privacy and Responsible Information Sharing](https://www.wa.gov.au/government/privacy-and-responsible-information-sharing),
+practices, including information classification, records management, and [Privacy and Responsible Information Sharing](https://www.wa.gov.au/government/privacy-and-responsible-information-sharing),
 throughout information lifecycles.
 
 ## 3. Prioritise user experience

@@ -1,5 +1,7 @@
 # Contributing Guide
 
+**Status:** Accepted | **Date:** 2026-06-09 | **Review:** 2027-06-09
+
 ## When to Create ADRs
 
 **Create ADRs for foundational decisions only:**
@@ -22,9 +24,10 @@
 2. **Get number** - `just next-number`
 3. **Create file** - `###-short-name.md` in correct directory ([see content types](#content-types-when-to-use-what))
 4. **Write content** - Follow template below
-5. **Lint** - `just lint` to fix formatting, check SUMMARY.md, and validate links
+5. **Set annual review metadata** - `Review` must be one year after `Date`
 6. **Add to SUMMARY.md** - Include new ADR in navigation (required for mdBook)
-7. **Submit PR** - Ready for review
+7. **Lint** - `just lint` to fix formatting, check metadata, check SUMMARY.md, and validate links
+8. **Submit PR** - Ready for review
 
 ## Useful Commands
 
@@ -32,6 +35,7 @@
 just --list      # Show all available commands
 just next-number # Get next ADR number
 just check-summary # Verify SUMMARY.md includes all markdown files
+just check-metadata # Verify status/date/review metadata
 just lint        # Run checks and fixes
 just serve       # Preview locally on port 8080
 just build       # Build website and print view
@@ -71,6 +75,8 @@ flowchart LR
 - Navigation is defined in `SUMMARY.md`; new ADRs must be added there
 - `just build` creates the website and a single-page print view
 - Use Mermaid diagrams where a simple visual explanation is clearer than text alone
+- Each maintained guidance page has `Status`, `Date`, and `Review` metadata
+- Review dates are annual by default: set `Review` exactly one year after `Date`
 
 ## Directory Structure
 
@@ -112,8 +118,11 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 **Before submitting:**
 
 - [ ] Title is concise (under 50 characters) and actionable
+- [ ] Status, date, and annual review metadata are present
 - [ ] All acronyms defined on first use
 - [ ] Active voice (not passive)
+- [ ] Scope, non-goals, and related ADRs are clear
+- [ ] Implementation checklist is specific enough for project kickoff
 - [ ] Passes `just lint` without errors
 
 **Title Examples:**
@@ -130,6 +139,28 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 | `Proposed` | Under review |
 | `Accepted` | Active decision |
 | `Superseded` | Replaced by newer ADR |
+
+Use this metadata line directly below the title:
+
+```markdown
+**Status:** Proposed | **Date:** YYYY-MM-DD | **Review:** YYYY-MM-DD
+```
+
+Set `Review` to the same month and day in the following year. For example,
+`Date: 2026-06-09` uses `Review: 2027-06-09`.
+
+## Annual Review Checklist
+
+Use this checklist for every scheduled review:
+
+- [ ] Status is still correct: Proposed, Accepted, or Superseded
+- [ ] Decision still reflects current WA Government policy and standards
+- [ ] External links still resolve and point to the intended guidance
+- [ ] Related ADR links are current
+- [ ] Compliance mapping is still accurate
+- [ ] Implementation checklist remains practical for new projects
+- [ ] Acronyms, glossary terms, and diagrams remain clear
+- [ ] Review date is advanced by one year after the review is complete
 
 ## ADR References
 
@@ -149,6 +180,8 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 - **Be specific**: "Use AWS EKS auto mode" not "Use containers"
 - **Include implementation**: How, not just what
 - **Define scope**: What's included and excluded
+- **State non-goals**: Help readers avoid using an ADR outside its intended scope
+- **Link by decision**: Prefer ADR links over repeating requirements in multiple places
 - **Reference standards**: Link to external docs
 - **Australian English**: Use "organisation" not "organization", "jurisdiction" not "government"
 - **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes, em-dashes for print page compatibility

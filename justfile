@@ -25,6 +25,7 @@ next-number:
 [group('quality')]
 lint:
     rumdl check --fix .
+    just check-metadata
     just check-summary
     lychee '*.md' '**/*.md' --exclude-path book
 
@@ -32,13 +33,19 @@ lint:
 [group('quality')]
 lint-ci:
     rumdl check --fix .
+    just check-metadata
     just check-summary
     lychee '*.md' '**/*.md' --exclude-path book || true
 
 # Verify SUMMARY.md includes all markdown files
 [group('quality')]
 check-summary:
-    python3 -c "import glob, sys; files = sum([glob.glob(f'{d}/**/*.md', recursive=True) for d in ['development', 'operations', 'security', 'reference-architectures']], []); summary = open('SUMMARY.md').read(); missing = [f for f in files if f not in summary]; print('Missing from SUMMARY.md:', *missing, sep='\n  ') or sys.exit(1) if missing else None"
+    python3 scripts/check_summary.py
+
+# Verify maintained markdown has annual review metadata
+[group('quality')]
+check-metadata:
+    python3 scripts/check_metadata.py
 
 # Build documentation website (includes link checking)
 [group('build')]

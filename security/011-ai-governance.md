@@ -1,6 +1,6 @@
 # ADR 011: AI Tool and Agent Governance
 
-**Status:** Accepted | **Date:** 2025-08-15
+**Status:** Accepted | **Date:** 2025-08-15 | **Review:** 2026-08-15
 
 ## Context
 

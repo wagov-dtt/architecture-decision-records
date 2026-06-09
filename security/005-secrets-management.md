@@ -1,6 +1,6 @@
 # ADR 005: Secrets Management
 
-**Status:** Accepted | **Date:** 2025-02-25
+**Status:** Accepted | **Date:** 2025-02-25 | **Review:** 2026-02-25
 
 ## Context
 

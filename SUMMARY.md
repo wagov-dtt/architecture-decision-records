@@ -2,6 +2,9 @@
 
 - [Introduction](README.md)
 - [ADR Design Guardrails](adr-design-guardrails.md)
+- [Decision Finder](decision-finder.md)
+- [Proposed Decision Backlog](proposed-decision-backlog.md)
+- [Annual Review Schedule](review-schedule.md)
 
 ---
 

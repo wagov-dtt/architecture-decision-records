@@ -1,5 +1,7 @@
 # Compliance Mapping
 
+**Status:** Accepted | **Date:** 2026-06-09 | **Review:** 2027-06-09
+
 This table maps ADRs to specific controls and requirements in Western Australian and Australian compliance frameworks.
 
 ## ACSC Information Security Manual (ISM)

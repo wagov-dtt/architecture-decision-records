@@ -1,6 +1,6 @@
 # ADR 009: Release Standards
 
-**Status:** Accepted | **Date:** 2025-03-04
+**Status:** Accepted | **Date:** 2025-03-04 | **Review:** 2026-03-04
 
 ## Context
 

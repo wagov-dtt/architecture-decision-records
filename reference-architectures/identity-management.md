@@ -1,6 +1,6 @@
 # Reference Architecture: Identity Management
 
-**Status:** Proposed | **Date:** 2025-07-29
+**Status:** Proposed | **Date:** 2025-07-29 | **Review:** 2026-07-29
 
 ## When to Use This Pattern
 

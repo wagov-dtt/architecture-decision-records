@@ -1,6 +1,6 @@
 # ADR 004: CI/CD Quality Assurance
 
-**Status:** Accepted | **Date:** 2025-03-10
+**Status:** Accepted | **Date:** 2025-03-10 | **Review:** 2026-03-10
 
 ## Context
 

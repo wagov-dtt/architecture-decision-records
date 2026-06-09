@@ -1,6 +1,6 @@
 # ADR 006: Automated Policy Enforcement
 
-**Status:** Proposed | **Date:** 2025-07-29
+**Status:** Proposed | **Date:** 2025-07-29 | **Review:** 2026-07-29
 
 ## Context
 

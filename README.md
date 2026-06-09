@@ -1,5 +1,7 @@
 # WA Government Architecture Decision Records
 
+**Status:** Accepted | **Date:** 2026-06-09 | **Review:** 2027-06-09
+
 Reusable architecture patterns for WA Government digital services, maintained by the Office of Digital Government (DGOV) Digital Transformation and Technology Unit (DTT).
 
 ## For WA Public Sector Agencies
@@ -9,12 +11,25 @@ These patterns help you build secure, compliant digital services faster. Instead
 ### Getting Started
 
 1. **Review the [ADR Design Guardrails](adr-design-guardrails.md)** - Six guiding principles for all technology decisions
-2. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
+2. **Use the [Decision Finder](decision-finder.md)** - Match a project need to the right ADRs and reference architectures
+3. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
    - [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
    - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
    - [Identity Management](reference-architectures/identity-management.md) - User authentication and single sign-on
    - [OpenAPI Backends](reference-architectures/openapi-backends.md) - Backend services and integrations
-3. **Check the [Compliance Mapping](compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
+4. **Check the [Compliance Mapping](compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
+
+### Find Guidance by Need
+
+| If you need to... | Start with |
+|-------------------|------------|
+| Launch a public website, intranet, or portal | [Content Management](reference-architectures/content-management.md) |
+| Build reports, analytics, or data processing | [Data Pipelines](reference-architectures/data-pipelines.md) |
+| Add login, single sign-on, or Digital ID | [Identity Management](reference-architectures/identity-management.md) |
+| Build backend services or integrations | [OpenAPI Backends](reference-architectures/openapi-backends.md) |
+| Check controls, standards, and policy coverage | [Compliance Mapping](compliance-mapping.md) |
+| Review proposed guidance before adoption | [Proposed Decision Backlog](proposed-decision-backlog.md) |
+| Review whether guidance is current | [Annual Review Schedule](review-schedule.md) |
 
 ### Compliance Alignment
 
@@ -35,6 +50,8 @@ Supporting training: [DGOV Technical - DevSecOps Induction](https://soc.cyber.wa
 New ADRs document the **context** (problem), **decision** (solution), and **consequences** (trade-offs). See the [Contributing Guide](CONTRIBUTING.md) for workflow and templates.
 
 For AI-assisted contributions, see the guidance in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+All maintained guidance includes a review date. Set review dates one year after the document date unless a shorter review cycle is needed.
 
 ## Repository Structure
 

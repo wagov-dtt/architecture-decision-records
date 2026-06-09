@@ -1,6 +1,6 @@
 # ADR 003: API Documentation Standards
 
-**Status:** Accepted | **Date:** 2025-03-26
+**Status:** Accepted | **Date:** 2025-03-26 | **Review:** 2026-03-26
 
 ## Context
 

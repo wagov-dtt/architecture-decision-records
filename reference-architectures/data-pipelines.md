@@ -1,6 +1,6 @@
 # Reference Architecture: Data Pipelines
 
-**Status:** Proposed | **Date:** 2025-01-28
+**Status:** Proposed | **Date:** 2025-01-28 | **Review:** 2026-01-28
 
 ## When to Use This Pattern
 

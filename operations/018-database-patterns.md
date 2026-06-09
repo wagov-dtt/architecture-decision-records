@@ -1,6 +1,6 @@
 # ADR 018: Database Patterns
 
-**Status:** Proposed | **Date:** 2025-07-28
+**Status:** Proposed | **Date:** 2025-07-28 | **Review:** 2026-07-28
 
 ## Context
 
