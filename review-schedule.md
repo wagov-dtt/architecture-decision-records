@@ -49,3 +49,4 @@ is completed.
 | 2027-06-09 | [Contributing](CONTRIBUTING.md) |
 | 2027-06-09 | [Compliance Mapping](compliance-mapping.md) |
 | 2027-06-09 | [Glossary](glossary.md) |
+| 2027-06-16 | [Reference Architecture: Federated Application Portal](reference-architectures/federated-application-portal.md) |

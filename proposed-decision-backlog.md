@@ -22,6 +22,7 @@ item should move to `Accepted`, stay `Proposed`, or become `Superseded`.
 |----------|----------------|-------------|--------------|
 | [Content Management](reference-architectures/content-management.md) | Proposed | 2026-07-28 | Validate CMS, CDN, WAF, editorial workflow, and media-storage assumptions |
 | [Data Pipelines](reference-architectures/data-pipelines.md) | Proposed | 2026-01-28 | Validate object-storage lakehouse, DuckDB/DuckLake, S3 Tables, and reporting flow |
+| [Federated Application Portal](reference-architectures/federated-application-portal.md) | Proposed | 2027-06-16 | Validate SDK scope, cross-organisation ownership, PWA support, mobile-webview handoff, and central service boundaries |
 | [Identity Management](reference-architectures/identity-management.md) | Proposed | 2026-07-29 | Validate broker pattern, managed identity platform use, and Digital ID assumptions |
 | [OpenAPI Backends](reference-architectures/openapi-backends.md) | Proposed | 2026-07-28 | Validate public/admin API separation, contract testing, and edge controls |
 

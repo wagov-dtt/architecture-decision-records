@@ -15,6 +15,7 @@ These patterns help you build secure, compliant digital services faster. Instead
 3. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
    - [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
    - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
+   - [Federated Application Portal](reference-architectures/federated-application-portal.md) - Standalone apps using shared account, identity, notification, and SDK services
    - [Identity Management](reference-architectures/identity-management.md) - User authentication and single sign-on
    - [OpenAPI Backends](reference-architectures/openapi-backends.md) - Backend services and integrations
 4. **Check the [Compliance Mapping](compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
@@ -24,6 +25,7 @@ These patterns help you build secure, compliant digital services faster. Instead
 | If you need to... | Start with |
 |-------------------|------------|
 | Launch a public website, intranet, or portal | [Content Management](reference-architectures/content-management.md) |
+| Federate multiple standalone apps with shared account, identity, notification, or SDK services | [Federated Application Portal](reference-architectures/federated-application-portal.md) |
 | Build reports, analytics, or data processing | [Data Pipelines](reference-architectures/data-pipelines.md) |
 | Add login, single sign-on, or Digital ID | [Identity Management](reference-architectures/identity-management.md) |
 | Build backend services or integrations | [OpenAPI Backends](reference-architectures/openapi-backends.md) |

@@ -42,6 +42,7 @@
 
 - [Content Management](reference-architectures/content-management.md)
 - [Data Pipelines](reference-architectures/data-pipelines.md)
+- [Federated Application Portal](reference-architectures/federated-application-portal.md)
 - [Identity Management](reference-architectures/identity-management.md)
 - [OpenAPI Backends](reference-architectures/openapi-backends.md)
 
