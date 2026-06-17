@@ -4,103 +4,96 @@
 
 ## Context
 
-WA Government digital services need consistent, accessible, maintainable web
-interfaces across public websites, portals, CMS templates, preview tools,
-widgets, and staff-facing applications. Teams often need to integrate with
-existing CMS platforms, third-party widgets, agency design systems, and
-independently delivered applications.
+WA Government digital services need accessible, consistent web interfaces
+across public sites, portals, CMS templates, preview tools, widgets, and staff
+applications. Teams also need UI patterns that work with agency design systems,
+third-party widgets, and independently delivered applications.
 
-Bespoke component systems can create avoidable maintenance burden, accessibility
-regressions, lock-in to a frontend framework, and integration problems for CMS
-or portal use cases. A mature, standards-based UI foundation helps teams build
-quickly while keeping semantic HTML, progressive enhancement, and WCAG 2.2 AA
-support visible.
-
-Bootstrap 5 is a mature, widely adopted frontend toolkit with documented layout,
-forms, components, helpers, utilities, and accessibility guidance. Its
-documentation notes that accessible outcomes still depend on correct author
-markup, styling, scripting, and colour choices. This makes Bootstrap a useful
-baseline, not a substitute for accessibility testing or design-system review.
+Bootstrap 5 is a mature frontend toolkit with documented layout, forms,
+components, helpers, utilities, and accessibility guidance. It gives teams a
+shared vocabulary for common web UI while still allowing agency design systems
+to theme, wrap, or extend components.
 
 ## Decision
 
-Prefer semantic HTML and Bootstrap 5-compatible component conventions for WA
-Government digital service web interfaces, unless an agency design system or
-product constraint requires a documented alternative.
+Use semantic HTML and Bootstrap 5-compatible component conventions as the
+default frontend foundation for WA Government digital service web interfaces.
 
-This does not require every service to import Bootstrap directly. A service may
-use an agency design system, theme, static-site template, web component, or
-framework-specific wrapper where it preserves Bootstrap-compatible structure,
-behaviour expectations, and accessibility semantics where practical.
-
-Frontend UI foundations must:
+This means teams should:
 
 - Start with semantic HTML, accessible names, keyboard support, and progressive
   enhancement
 - Meet WCAG 2.2 AA for user-facing interfaces
-- Prefer Bootstrap 5-compatible layout, form, navigation, alert, modal, table,
-  and utility conventions where a component is needed
-- Keep CSS and JavaScript scoped to avoid interfering with CMS editors,
-  third-party widgets, portal shells, embedded applications, and preview tools
-- Avoid bespoke component libraries unless there is a documented user,
-  accessibility, brand, or integration need
+- Use Bootstrap 5-compatible layout, forms, navigation, alerts, modals, tables,
+  cards, and utilities where common components are needed
+- Implement agency design systems as themes, wrappers, or extensions over this
+  baseline where practical
+- Scope CSS and JavaScript so shared components work safely in CMS templates,
+  portals, embedded apps, and third-party widget contexts
 - Keep design-system styling separate from business logic and service APIs
 
-## Implementation Guidance
+Teams may use another component library or native platform design system when
+it better fits the product. Record the reason in the project decision log.
 
-Use Bootstrap 5-compatible conventions as a baseline for:
+## Recommended Starting Points
 
-- CMS templates, static previews, and review tooling
-- Portal shells, account widgets, inbox widgets, and SDK-provided UI
-- Standalone staff tools, AI review companions, and administrative interfaces
-- Static sites, generated reports, and file-review outputs where HTML is used
+| Use case | Start with |
+|----------|------------|
+| Public site, CMS template, or static preview | Bootstrap 5-compatible theme and semantic HTML |
+| Technical documentation or review preview | Hugo with a Bootstrap-compatible theme such as Docsy |
+| CMS content preview or review pack | Hugo static build fed by file export, read-only feed, or content adapter |
+| Drupal-backed content platform | Drupal Bootstrap 5 theme or an agency theme aligned to Bootstrap 5 conventions |
+| Portal shell, account widget, inbox widget, or SDK UI | Small scoped Bootstrap-compatible components |
+| Staff tool or admin interface | Bootstrap-compatible forms, tables, alerts, and navigation |
 
-Agency design systems should wrap or theme the baseline rather than force each
-service to create incompatible components. Where a different frontend framework
-is used, keep generated HTML and interaction behaviour compatible with the
-documented design-system components where practical.
+## Hugo for Preview and Review Workflows
 
-For CMS and review workflows, prefer [Hugo](https://gohugo.io/) where a simple,
-reliable static site generator is enough. Hugo provides fast local builds,
-modular themes, and [content
-adapters](https://gohugo.io/content-management/content-adapters/) that can
-dynamically create pages from remote or file-based data sources such as JSON,
-TOML, YAML, or XML. This makes it practical to plug preview and review tools
-into existing content libraries without requiring deep CMS changes.
+Use [Hugo](https://gohugo.io/) when a simple, reliable static site generator is
+enough for previews, documentation, or review packs. Hugo works well for local
+builds, modular themes, and generated static outputs.
 
-[Docsy](https://www.docsy.dev/) is a useful reference implementation for Hugo
-technical documentation and preview sites. It is a Hugo theme designed for
-technical documentation and uses the Hugo module workflow. Use Docsy as a
-reference for modular Hugo site structure, not as a mandatory theme for all
-public services.
+Use [Hugo content
+adapters](https://gohugo.io/content-management/content-adapters/) to create
+pages from existing content libraries or read-only exports such as JSON, TOML,
+YAML, or XML. This lets teams build CMS-aligned previews without changing the
+CMS workflow first.
 
-For Drupal-backed content platforms, the contributed [Bootstrap 5
-theme](https://www.drupal.org/project/bootstrap5) is a useful reference for
-aligning Drupal theme work with Bootstrap 5 conventions. Drupal project pages
-may require browser JavaScript to view, so confirm module status, maintenance,
-and compatibility in the normal Drupal review process before adoption.
+[Docsy](https://www.docsy.dev/) is a useful Hugo reference theme for technical
+documentation and review sites. Use it as a starting point or comparison for
+modular Hugo structure, not as a mandatory theme.
 
-Do not use this ADR to override agency brand, accessibility, or content design
-requirements. Document deviations when another component library, framework,
-or native platform design system is a better fit.
+## Accessibility Expectations
+
+Bootstrap helps with accessible component patterns, but accessibility still
+depends on correct markup, content, colour choices, scripting, and testing.
+Projects must test the finished interface against WCAG 2.2 AA, including:
+
+- Keyboard operation and visible focus
+- Colour contrast and non-colour cues
+- Accessible names, labels, and error messages
+- Heading, landmark, table, and form structure
+- Reduced-motion behaviour where animation is used
+- Screen-reader behaviour for dynamic components such as modals, alerts, and
+  menus
 
 ## Consequences
 
 **Benefits:**
 
-- Reduces bespoke UI and component maintenance
-- Improves portability across CMS, portal, static preview, and standalone tool
-  contexts
+- Gives teams a clear default for common web UI
+- Improves portability across CMS, portal, preview, and standalone tool contexts
 - Supports accessible, semantic, progressively enhanced interfaces
-- Lowers integration risk with third-party widgets and independently owned apps
-- Gives teams a clear default without blocking agency-specific design systems
+- Reduces bespoke component maintenance
+- Keeps agency design systems compatible with a widely understood component
+  model
 
-**Risks if not implemented:**
+**Trade-offs:**
 
-- Inconsistent UI foundations across related services
-- Increased accessibility and regression testing burden
-- Harder CMS, portal, and widget integration
-- More bespoke frontend code to maintain and secure
+- Agency themes still need accessibility and brand review
+- Some products will need documented alternatives for native, highly bespoke, or
+  specialist user interfaces
+- Bootstrap-compatible conventions reduce variation but do not remove the need
+  for user research, content design, or usability testing
 
 ## Related Reference Architectures
 
