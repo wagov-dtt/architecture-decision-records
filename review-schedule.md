@@ -50,3 +50,5 @@ is completed.
 | 2027-06-09 | [Compliance Mapping](compliance-mapping.md) |
 | 2027-06-09 | [Glossary](glossary.md) |
 | 2027-06-16 | [Reference Architecture: Federated Application Portal](reference-architectures/federated-application-portal.md) |
+| 2027-06-17 | [ADR 020: Frontend UI Foundations](development/020-frontend-ui-foundations.md) |
+| 2027-06-17 | [Reference Architecture: AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) |

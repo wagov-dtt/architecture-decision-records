@@ -10,6 +10,7 @@ directly when you need a specific decision or control.
 
 | Project need | Start here | Then check |
 |--------------|------------|------------|
+| AI assistance for drafting, summarising, content review, form help, staff support, or low-risk productivity | [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) | [ADR 011: AI Tool and Agent Governance](security/011-ai-governance.md), [ADR 015: Data Governance](operations/015-data-governance.md), [ADR 007: Logging](operations/007-logging.md) |
 | Public website, intranet, or content portal | [Content Management](reference-architectures/content-management.md) | [ADR 016: Edge Protection](security/016-edge-protection.md), [ADR 013: Identity Federation](security/013-identity-federation.md), [ADR 015: Data Governance](operations/015-data-governance.md) |
 | Multiple standalone web apps sharing central account, identity, notification, SDK, or mobile-webview services | [Federated Application Portal](reference-architectures/federated-application-portal.md) | [Identity Management](reference-architectures/identity-management.md), [OpenAPI Backends](reference-architectures/openapi-backends.md), [ADR 016: Edge Protection](security/016-edge-protection.md) |
 | Data integration, analytics, reporting, or batch processing | [Data Pipelines](reference-architectures/data-pipelines.md) | [ADR 015: Data Governance](operations/015-data-governance.md), [ADR 018: Database Patterns](operations/018-database-patterns.md), [ADR 017: Analytics Tooling](operations/017-analytics-tooling.md) |
@@ -23,7 +24,9 @@ directly when you need a specific decision or control.
 | Application isolation and boundaries | [ADR 001: Isolation](security/001-isolation.md) |
 | Cloud workloads and runtime hosting | [ADR 002: Workloads](operations/002-workloads.md) |
 | API contracts and documentation | [ADR 003: APIs](development/003-apis.md) |
+| AI model access and provider-portable inference | [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md), [ADR 011: AI Tool and Agent Governance](security/011-ai-governance.md) |
 | Build, test, and deployment automation | [ADR 004: CI/CD](development/004-cicd.md), [ADR 009: Release Standards](development/009-release.md) |
+| Frontend UI, design-system components, CMS templates, or portal widgets | [ADR 020: Frontend UI Foundations](development/020-frontend-ui-foundations.md) |
 | Secrets and credential handling | [ADR 005: Secrets Management](security/005-secrets-management.md) |
 | Policy-as-code and guardrails | [ADR 006: Policy Enforcement](operations/006-policy-enforcement.md) |
 | Centralised logging and monitoring | [ADR 007: Logging](operations/007-logging.md) |

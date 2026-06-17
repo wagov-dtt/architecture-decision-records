@@ -70,6 +70,9 @@ privileged users. Do not expose admin APIs directly to the Internet.
 6. **Logging & Monitoring** - Follow [ADR 007: Centralised Security
    Logging](../operations/007-logging.md) for user, system, and admin
    audit trails
+7. **AI Gateway APIs** - Follow [AI-Assisted Digital
+   Services](ai-assisted-digital-services.md) when building model access or
+   inference gateways for application clients
 
 ## Implementation Details
 
@@ -79,6 +82,19 @@ privileged users. Do not expose admin APIs directly to the Internet.
 - Version public routes with stable prefixes such as `/v1`
 - Use standard schema types and consistent error responses
 - Publish documentation from the same specification used for tests
+
+**AI Gateway APIs:**
+
+- Expose AI inference through an internal Open Responses-compatible gateway,
+  not provider-specific Bedrock, OpenAI, Anthropic, or other APIs
+- Keep model-provider credentials, model IDs, backend URLs, and retention
+  settings server-side
+- Separate normal inference APIs from privileged model, provider, prompt, and
+  policy administration APIs
+- Validate request and response schemas, rate limits, token limits, and
+  gateway compatibility in CI where practical
+- Enforce data minimisation and provider privacy controls such as `store:
+  false` at the gateway
 
 **Security Boundaries:**
 

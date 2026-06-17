@@ -15,11 +15,13 @@ item should move to `Accepted`, stay `Proposed`, or become `Superseded`.
 | [ADR 015: Data Governance](operations/015-data-governance.md) | Proposed | 2026-07-28 | Confirm ownership, classification, retention, and AI data-quality obligations |
 | [ADR 017: Analytics Tooling](operations/017-analytics-tooling.md) | Proposed | 2026-07-28 | Confirm Quarto use cases, publishing model, and dashboard boundaries |
 | [ADR 018: Database Patterns](operations/018-database-patterns.md) | Proposed | 2026-07-28 | Confirm managed database, lakehouse, and local development patterns |
+| [ADR 020: Frontend UI Foundations](development/020-frontend-ui-foundations.md) | Proposed | 2027-06-17 | Validate Bootstrap 5-compatible baseline, agency design-system fit, CMS and portal integration assumptions |
 
 ## Proposed Reference Architectures
 
 | Document | Current status | Next review | Review focus |
 |----------|----------------|-------------|--------------|
+| [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) | Proposed | 2027-06-17 | Validate Open Responses gateway, Bedrock Mantle backend, data minimisation, human accountability, and initial CMS authoring use case |
 | [Content Management](reference-architectures/content-management.md) | Proposed | 2026-07-28 | Validate CMS, CDN, WAF, editorial workflow, and media-storage assumptions |
 | [Data Pipelines](reference-architectures/data-pipelines.md) | Proposed | 2026-01-28 | Validate object-storage lakehouse, DuckDB/DuckLake, S3 Tables, and reporting flow |
 | [Federated Application Portal](reference-architectures/federated-application-portal.md) | Proposed | 2027-06-16 | Validate SDK scope, cross-organisation ownership, PWA support, mobile-webview handoff, and central service boundaries |

@@ -13,6 +13,7 @@ These patterns help you build secure, compliant digital services faster. Instead
 1. **Review the [ADR Design Guardrails](adr-design-guardrails.md)** - Six guiding principles for all technology decisions
 2. **Use the [Decision Finder](decision-finder.md)** - Match a project need to the right ADRs and reference architectures
 3. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
+   - [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) - Low-risk AI assistance for services, staff workflows, CMS, and portals
    - [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
    - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
    - [Federated Application Portal](reference-architectures/federated-application-portal.md) - Standalone apps using shared account, identity, notification, and SDK services
@@ -24,6 +25,7 @@ These patterns help you build secure, compliant digital services faster. Instead
 
 | If you need to... | Start with |
 |-------------------|------------|
+| Add AI assistance to a digital service or staff workflow | [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) |
 | Launch a public website, intranet, or portal | [Content Management](reference-architectures/content-management.md) |
 | Federate multiple standalone apps with shared account, identity, notification, or SDK services | [Federated Application Portal](reference-architectures/federated-application-portal.md) |
 | Build reports, analytics, or data processing | [Data Pipelines](reference-architectures/data-pipelines.md) |
