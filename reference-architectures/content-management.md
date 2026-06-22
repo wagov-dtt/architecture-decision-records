@@ -76,6 +76,11 @@ flowchart LR
    Standards](../security/013-identity-federation.md) and [ADR 012:
    Privileged Remote Access](../security/012-privileged-remote-access.md)
    for editorial and administrative access
+6. **Optional AI Review Companion** - Follow [AI-Assisted Digital
+   Services](ai-assisted-digital-services.md) when adding standalone drafting,
+   readability, accessibility, or policy checks around the authoring experience
+7. **Configure Preview and Review Outputs** - Use a simple static preview and
+   file-export path where this reduces impact on existing CMS workflows
 
 ### Implementation Details
 
@@ -90,6 +95,42 @@ flowchart LR
   Standards](../development/003-apis.md) where content is consumed by
   other applications
 
+**Preview & Review Workflow:**
+
+- Use static site generation for preview and review environments where the CMS
+  can export draft content into files or a headless preview feed
+- Prefer [Hugo](https://gohugo.io/) for simple, fast previews that render the
+  same information architecture, templates, and design-system components used
+  by the CMS
+- Keep preview tooling aligned with the CMS design system but outside the core
+  authoring workflow where practical, so CMS upgrades, editorial permissions,
+  and third-party widgets are not tightly coupled to AI tooling
+- Follow [ADR 020: Frontend UI
+  Foundations](../development/020-frontend-ui-foundations.md) for CMS-facing
+  preview templates and review tooling. Prefer Bootstrap 5-compatible semantic
+  HTML and component conventions unless an agency design system or product
+  constraint requires a documented alternative.
+- Generate PDF or DOCX review packs from the same file-based content snapshot
+  when simple document sharing, offline review, or approval evidence is needed
+
+**Optional AI Review Companion:**
+
+- Use [AI-Assisted Digital Services](ai-assisted-digital-services.md) for
+  standalone drafting, readability, accessibility, and policy coaching
+- Prefer copy/paste, file upload, static export, or read-only preview feeds
+  before building CMS plugins or write-back integrations
+- Send only the selected paragraph, page section, metadata field, or exported
+  snapshot needed for the check
+- Run deterministic checks for readability, links, headings, alt text, and
+  required metadata before model calls
+- Return suggestions for authors to accept, edit, reject, or copy back through
+  the existing CMS workflow
+- Do not allow AI assistance to approve content, publish content, move workflow
+  state, bypass reviewer approval, or access privileged CMS administration APIs
+- Prefer standalone preview and file-output workflows for AI-assisted review
+  where this makes the tool usable across multiple CMS, staging, and local
+  environments
+
 **Media & Delivery:**
 
 - Store media assets in object storage as the source of truth
@@ -102,8 +143,13 @@ flowchart LR
 
 **Compliance & Quality:**
 
-- Test WCAG 2.1 AA accessibility before publishing templates or major
+- Test WCAG 2.2 AA accessibility before publishing templates or major
   content changes
+- Shift WA Government Digital Services Policy Framework expectations left into
+  the drafting process where practical, using the [Australian Government Style
+  Manual](https://www.stylemanual.gov.au/) as practical guidance for clear,
+  consistent, accessible, user-centred public content alongside WCAG 2.2 AA
+  checks
 - Apply content retention, disposal, and ownership rules per [ADR 015:
   Data Governance Standards](../operations/015-data-governance.md)
 - Configure privacy notices, cookie consent, and multilingual content

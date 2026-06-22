@@ -91,6 +91,9 @@ flowchart LR
 3. **Publish Analytics** - Follow [ADR 017: Analytics Tooling
    Standards](../operations/017-analytics-tooling.md) for Quarto reports
    and dashboards
+4. **Optional AI Summaries** - Follow [AI-Assisted Digital
+   Services](ai-assisted-digital-services.md) when using AI to draft report
+   commentary, explain curated outputs, or summarise data-quality findings
 
 ## Implementation Details
 
@@ -111,6 +114,11 @@ flowchart LR
 - Run schema and sample-data checks in CI/CD
 - Track lineage through transformation code, table names, and release
   notes
+- Use AI only for summaries, explanations, report commentary, or data-quality
+  notes over curated and classified outputs. Do not give AI broad access to
+  raw datasets or lakehouse storage by default.
+- Prefer aggregated, minimised extracts for AI prompts and log AI-generated
+  report text for human review
 
 **Operations:**
 

@@ -106,6 +106,12 @@ flowchart TB
 - Prohibit disclosure of identity information for marketing purposes
 - Ensure voluntary Digital ID participation where legislation requires it
 - Define breach notification and fraud incident response processes
+- Follow [AI-Assisted Digital Services](ai-assisted-digital-services.md) for
+  any AI support around identity operations. AI must not make authentication,
+  authorisation, identity proofing, entitlement, or fraud decisions.
+- Do not send identity attributes to models unless explicitly justified and
+  approved. Use minimal pseudonymous references where AI-assisted support or
+  audit analysis is required.
 
 **Assurance and Administration:**
 

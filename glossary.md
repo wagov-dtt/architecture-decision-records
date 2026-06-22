@@ -18,6 +18,7 @@
 **DKIM** - DomainKeys Identified Mail  
 **DMARC** - Domain-based Message Authentication, Reporting and Conformance  
 **DNS** - Domain Name System  
+**DSPF** - Digital Services Policy Framework (Western Australian Government)\
 **DTT** - Digital Transformation and Technology Unit  
 **EKS** - Elastic Kubernetes Service (AWS)  
 **ETL** - Extract, Transform, Load  

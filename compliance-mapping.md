@@ -28,6 +28,12 @@ The [ACSC Careful adoption of agentic AI services](https://www.cyber.gov.au/busi
 |-----|--------------------|
 | [011 AI Tool and Agent Governance](security/011-ai-governance.md) | Low-risk adoption, least privilege, human approval gates, sandbox testing, monitoring and audit logs, trusted component inventories, isolation of high-risk agents |
 
+Use [AI-Assisted Digital
+Services](reference-architectures/ai-assisted-digital-services.md) for
+service-facing AI implementations that need an Open Responses-compatible
+gateway, provider portability, data minimisation, and human-in-the-loop
+operation.
+
 ## WA Government Cyber Security Policy (WA CSP)
 
 The [2024 WA Government Cyber Security Policy](https://www.wa.gov.au/government/publications/2024-wa-government-cyber-security-policy) defines baseline cyber security requirements for WA Government entities.

@@ -35,11 +35,13 @@
 - [ADR 003: APIs](development/003-apis.md)
 - [ADR 004: CI/CD](development/004-cicd.md)
 - [ADR 009: Release Standards](development/009-release.md)
+- [ADR 020: Frontend UI Foundations](development/020-frontend-ui-foundations.md)
 
 ---
 
 # Reference Architectures
 
+- [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md)
 - [Content Management](reference-architectures/content-management.md)
 - [Data Pipelines](reference-architectures/data-pipelines.md)
 - [Federated Application Portal](reference-architectures/federated-application-portal.md)

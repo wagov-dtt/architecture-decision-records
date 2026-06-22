@@ -171,14 +171,20 @@ contracts, consent, and data minimisation.
    Standards](../development/004-cicd.md) and [ADR 009: Release
    Standards](../development/009-release.md) for SDK versioning,
    deprecation windows, compatibility matrices, and consumer test fixtures
-6. **Publish the app directory** - Define app icons, descriptions,
+6. **Apply frontend UI foundations** - Follow [ADR 020: Frontend UI
+   Foundations](../development/020-frontend-ui-foundations.md) for portal,
+   widget, SDK-provided UI, and shared service component conventions
+7. **Publish the app directory** - Define app icons, descriptions,
    eligibility rules, launch URLs, OIDC client mappings, and SSO behaviour
    before onboarding applications
-7. **Secure data, secrets, and logs** - Follow [ADR 005: Secrets
+8. **Secure data, secrets, and logs** - Follow [ADR 005: Secrets
    Management](../security/005-secrets-management.md), [ADR 007:
    Centralised Security Logging](../operations/007-logging.md), [ADR 015:
    Data Governance Standards](../operations/015-data-governance.md), and
    [ADR 018: Database Patterns](../operations/018-database-patterns.md)
+9. **Optional AI assistance** - Follow [AI-Assisted Digital
+   Services](ai-assisted-digital-services.md) when exposing shared AI
+   assistance through portal services, central APIs, or the SDK
 
 ## Implementation Notes
 
@@ -193,15 +199,24 @@ contracts, consent, and data minimisation.
   portal widget. Use widget dropdowns or focused overlays for account, inbox,
   notification, and consent actions instead of taking over the federated app
   page.
+- Prefer Bootstrap 5-compatible semantic HTML and component conventions for
+  portal, widget, and SDK-provided UI per [ADR 020: Frontend UI
+  Foundations](../development/020-frontend-ui-foundations.md). Keep shared UI
+  scoped so it does not interfere with independently owned applications.
 - Use PKCE-capable public-client flows. Do not require client secrets in
   browser or PWA code.
 - Participating apps decide when a business notification is needed. The
   central notification service owns delivery preferences, shared inbox
   display, delivery channels, and audit logging.
+- If AI assistance is provided, federated applications should call a central
+  Open Responses-compatible gateway rather than integrating directly with
+  model providers. App owners remain responsible for what context is sent.
+  The portal must not silently collect cross-app context for AI use.
 - Webview handoff must fail closed. Native bridge messages must be
   allow-listed, versioned, origin-bound, and auditable.
 - PWA and webview features must degrade safely when service workers, storage,
-  push notifications, native bridges, or deep links are unavailable
+  push notifications, native bridges, deep links, or AI services are
+  unavailable
 
 ## Implementation Checklist
 
@@ -231,3 +246,5 @@ contracts, consent, and data minimisation.
 - [ADR 015: Data Governance Standards](../operations/015-data-governance.md)
 - [ADR 016: Web Application Edge Protection](../security/016-edge-protection.md)
 - [ADR 018: Database Patterns](../operations/018-database-patterns.md)
+- [ADR 020: Frontend UI Foundations](../development/020-frontend-ui-foundations.md)
+- [AI-Assisted Digital Services](ai-assisted-digital-services.md)

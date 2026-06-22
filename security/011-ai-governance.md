@@ -184,6 +184,14 @@ defaults, and reversible deployment. Tools with a similar posture to `oy`
 are preferred over broad agent platforms that add opaque orchestration,
 implicit trust, or unnecessary operational complexity.
 
+Service-facing AI integrations should follow [Reference Architecture:
+AI-Assisted Digital
+Services](../reference-architectures/ai-assisted-digital-services.md):
+applications call an internal Open Responses-compatible gateway, not model
+providers directly. The gateway should enforce data minimisation, approved
+models, logging, and provider privacy settings such as `store: false` where
+supported.
+
 `bedrock-mantle` is the preferred execution environment for this research
 where suitable because it enables access to open models through Amazon
 Bedrock and aligns with Mantle's zero operator access design, which AWS
