@@ -17,22 +17,23 @@
 - [ADR 012: Privileged Remote Access](security/012-privileged-remote-access.md)
 - [ADR 013: Identity Federation](security/013-identity-federation.md)
 - [ADR 016: Edge Protection](security/016-edge-protection.md)
+- [ADR 021: Workload mTLS](security/021-workload-mtls.md)
 
 # Operations ADRs
 
-- [ADR 002: Workloads](operations/002-workloads.md)
+- [ADR 002: Managed Kubernetes](operations/002-workloads.md)
 - [ADR 006: Policy Enforcement](operations/006-policy-enforcement.md)
 - [ADR 007: Logging](operations/007-logging.md)
-- [ADR 010: Config Management](operations/010-configmgmt.md)
-- [ADR 014: Object Backup](operations/014-object-backup.md)
-- [ADR 015: Data Governance](operations/015-data-governance.md)
-- [ADR 017: Analytics Tooling](operations/017-analytics-tooling.md)
-- [ADR 018: Database Patterns](operations/018-database-patterns.md)
+- [ADR 010: Infrastructure as Code](operations/010-configmgmt.md)
+- [ADR 014: Backups and Recovery](operations/014-object-backup.md)
+- [ADR 015: Data Pipeline Quality](operations/015-data-governance.md)
+- [ADR 017: Analytical Publications](operations/017-analytics-tooling.md)
+- [ADR 018: Databases and Lakehouses](operations/018-database-patterns.md)
 - [ADR 019: Shared File Access](operations/019-shared-file-access.md)
 
 # Development ADRs
 
-- [ADR 003: APIs](development/003-apis.md)
+- [ADR 003: HTTP API Contracts](development/003-apis.md)
 - [ADR 004: CI/CD](development/004-cicd.md)
 - [ADR 009: Release Standards](development/009-release.md)
 - [ADR 020: Frontend UI Foundations](development/020-frontend-ui-foundations.md)
@@ -45,7 +46,7 @@
 - [Content Management](reference-architectures/content-management.md)
 - [Data Pipelines](reference-architectures/data-pipelines.md)
 - [Federated Application Portal](reference-architectures/federated-application-portal.md)
-- [Identity Management](reference-architectures/identity-management.md)
+- [Identity Federation](reference-architectures/identity-management.md)
 - [OpenAPI Backends](reference-architectures/openapi-backends.md)
 
 ---

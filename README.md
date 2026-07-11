@@ -1,24 +1,28 @@
 # WA Government Architecture Decision Records
 
-**Status:** Accepted | **Date:** 2026-06-09 | **Review:** 2027-06-09
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 Reusable architecture patterns for WA Government digital services, maintained by the Office of Digital Government (DGOV) Digital Transformation and Technology Unit (DTT).
 
 ## For WA Public Sector Agencies
 
-These patterns help you build secure, compliant digital services faster. Instead of starting from scratch, use proven approaches that align with WA Government security and compliance requirements.
+These decisions and patterns help agencies design secure digital services without
+starting from scratch. They support WA Government security outcomes but do not by
+themselves prove project or agency compliance.
 
 ### Getting Started
 
 1. **Review the [ADR Design Guardrails](adr-design-guardrails.md)** - Six guiding principles for all technology decisions
 2. **Use the [Decision Finder](decision-finder.md)** - Match a project need to the right ADRs and reference architectures
-3. **Choose a Reference Architecture** - Project kickoff templates combining multiple decisions:
+3. **Evaluate a Reference Architecture** - The current reference architectures
+   are Proposed project-kickoff aids. Approve their use and Proposed dependencies
+   in the project record:
    - [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) - Low-risk AI assistance for services, staff workflows, CMS, and portals
    - [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
    - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
    - [Federated Application Portal](reference-architectures/federated-application-portal.md) - Standalone apps using shared account, identity, notification, and SDK services
-   - [Identity Management](reference-architectures/identity-management.md) - User authentication and single sign-on
-   - [OpenAPI Backends](reference-architectures/openapi-backends.md) - Backend services and integrations
+   - [Identity Federation](reference-architectures/identity-management.md) - OIDC, legacy SAML, and privileged federation
+   - [OpenAPI Backends](reference-architectures/openapi-backends.md) - Agency-controlled HTTP APIs
 4. **Check the [Compliance Mapping](compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
 
 ### Find Guidance by Need
@@ -29,8 +33,8 @@ These patterns help you build secure, compliant digital services faster. Instead
 | Launch a public website, intranet, or portal | [Content Management](reference-architectures/content-management.md) |
 | Federate multiple standalone apps with shared account, identity, notification, or SDK services | [Federated Application Portal](reference-architectures/federated-application-portal.md) |
 | Build reports, analytics, or data processing | [Data Pipelines](reference-architectures/data-pipelines.md) |
-| Add login, single sign-on, or Digital ID | [Identity Management](reference-architectures/identity-management.md) |
-| Build backend services or integrations | [OpenAPI Backends](reference-architectures/openapi-backends.md) |
+| Add OIDC or legacy SAML federation | [Identity Federation](reference-architectures/identity-management.md) |
+| Build an agency-controlled HTTP API | [OpenAPI Backends](reference-architectures/openapi-backends.md) |
 | Check controls, standards, and policy coverage | [Compliance Mapping](compliance-mapping.md) |
 | Review proposed guidance before adoption | [Proposed Decision Backlog](proposed-decision-backlog.md) |
 | Review whether guidance is current | [Annual Review Schedule](review-schedule.md) |

@@ -1,6 +1,6 @@
 # Contributing Guide
 
-**Status:** Accepted | **Date:** 2026-06-09 | **Review:** 2027-06-09
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## When to Create ADRs
 
@@ -20,7 +20,8 @@
 
 ## Quick Workflow
 
-1. **Open in Codespaces** - Automatic tool setup
+1. **Open the repository** - Use Codespaces, a dev container, or an
+   agency-managed workstation with the required tools
 2. **Get number** - `just next-number`
 3. **Create file** - `###-short-name.md` in correct directory ([see content types](#content-types-when-to-use-what))
 4. **Write content** - Follow template below
@@ -93,7 +94,7 @@ flowchart LR
 
 **Purpose**: Document foundational technology decisions that are expensive to change  
 **Format**: `###-decision-name.md` in `development/`, `operations/`, or `security/`  
-**Examples**: "AWS EKS for workloads", "Secrets management approach", "API standards"
+**Examples**: "Managed Kubernetes", "Secrets management", "HTTP API contracts"
 
 ### Reference Architectures  
 
@@ -101,7 +102,17 @@ flowchart LR
 **Format**: `descriptive-name.md` in `reference-architectures/`  
 **Examples**: "Content Management", "Data Pipelines", "Identity Management"
 
-**Rule**: Reference architectures should only link to existing ADRs, not create new ones.
+**Rules**:
+
+- Reference architectures are informative compositions, not a place to create
+  foundational decisions
+- Mandatory statements must trace to Accepted ADRs or authoritative policy
+- Proposed ADR dependencies must be labelled and require project approval
+- Product and provider mappings are non-normative examples unless an Accepted ADR
+  explicitly selects them
+- Add missing foundational decisions to the proposed-decision backlog
+- Include minimum and higher-assurance variants, legacy adoption, required
+  artifacts, operating ownership, acceptance checks, migration, and exit
 
 ## ADR Template
 
@@ -113,6 +124,21 @@ See [templates/adr-template.md](templates/adr-template.md) for the complete temp
 
 See [templates/reference-architecture-template.md](templates/reference-architecture-template.md) for the complete template.
 
+### Reference Architecture Review Checklist
+
+- [ ] Applicability, non-goals, prerequisites, and simpler alternatives are clear
+- [ ] Accepted and Proposed dependencies are distinguished
+- [ ] Every mandatory statement traces to an Accepted ADR or authoritative policy
+- [ ] Minimum, higher-assurance, and legacy-transition variants are practical
+- [ ] Capabilities are provider-neutral; AWS, Azure, Google Cloud, SaaS, and legacy
+      examples are labelled non-equivalent where relevant
+- [ ] OpenTofu or Terraform is the preferred provisionable infrastructure path
+      under ADR 010
+- [ ] Kickoff artifacts, ownership, service levels, support, and cost are explicit
+- [ ] Classification, privacy, sharing, records, offshoring, accessibility,
+      resilience, recovery, migration, rollback, and exit are addressed
+- [ ] Acceptance checks are testable with representative users and journeys
+
 ## Quality Standards
 
 **Before submitting:**
@@ -122,12 +148,15 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 - [ ] All acronyms defined on first use
 - [ ] Active voice (not passive)
 - [ ] Scope, non-goals, and related ADRs are clear
+- [ ] Policy references use authoritative links and durable capability terms
+- [ ] Compliance claims distinguish full, partial, and out-of-scope coverage
 - [ ] Implementation checklist is specific enough for project kickoff
+- [ ] Required evidence and exception handling are explicit
 - [ ] Passes `just lint` without errors
 
 **Title Examples:**
 
-- GOOD: "ADR 002: AWS EKS for Cloud Workloads" (concise, ~30 chars)
+- GOOD: "ADR 002: Managed Kubernetes" (concise and capability-focused)
 - GOOD: "ADR 008: Email Authentication Protocols" (specific, clear)
 - BAD: "ADR 004: Enforce release quality with CI/CD prechecks and build attestation" (too long)
 - BAD: "Container stuff" or "Security improvements" (too vague)
@@ -177,12 +206,21 @@ Use this checklist for every scheduled review:
 
 ## Writing Tips
 
-- **Be specific**: "Use AWS EKS auto mode" not "Use containers"
+- **Be specific about capabilities**: "Use managed Kubernetes only when the
+  workload-fit criteria apply" not "Use containers"
 - **Include implementation**: How, not just what
 - **Define scope**: What's included and excluded
 - **State non-goals**: Help readers avoid using an ADR outside its intended scope
 - **Link by decision**: Prefer ADR links over repeating requirements in multiple places
 - **Reference standards**: Link to external docs
+- **Use durable terms**: Map to capabilities such as `application patching`
+  or `identity and access management`, not policy clause numbers
+- **Separate audit snapshots**: Keep exact policy versions and clauses in
+  agency assurance or risk records where point-in-time traceability is needed
+- **Map honestly**: Say an ADR supports a capability; do not imply that
+  adopting an ADR alone proves compliance
+- **Make controls testable**: Use `must` for mandatory requirements and name
+  the evidence an implementation must retain
 - **Australian English**: Use "organisation" not "organization", "jurisdiction" not "government"
 - **Character usage**: Use plain-text safe Unicode - avoid emoji, smart quotes, em-dashes for print page compatibility
 - **Mermaid diagrams**: Use Mermaid for diagrams with clean syntax and universal compatibility

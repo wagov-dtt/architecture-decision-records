@@ -8,6 +8,20 @@ Set `Review` to one year after `Date`.
 
 What problem are we solving? Include background and constraints.
 
+## Policy and Standards
+
+- Authoritative policy or guidance landing page
+- Durable capability terms supported by this decision
+- External guidance used to implement the decision
+
+Prefer terms such as `multi-factor authentication`, `application patching`,
+or `secure software development` over policy clause numbers. Record exact
+policy versions and clauses in agency assurance records when point-in-time
+traceability is required.
+
+State whether the ADR fully or partially supports each capability. Do not
+claim that use of an ADR proves compliance.
+
 ## Applicability
 
 Use this ADR when:
@@ -33,6 +47,18 @@ What we decided and how to implement it:
 - [ ] Configuration or control 1 is in place
 - [ ] Configuration or control 2 is in place
 - [ ] Logging, monitoring, or review evidence is captured
+
+## Required Evidence
+
+- Configuration or policy export showing the control is enabled
+- Test, monitoring, or review record showing the control is effective
+- Named owner and review date for retained evidence
+
+## Exceptions
+
+Where a mandatory requirement cannot be implemented, record the reason,
+compensating controls, residual risk, accountable executive approval, expiry
+date, and reassessment date in the implementing agency's risk system.
 
 ## Related ADRs
 

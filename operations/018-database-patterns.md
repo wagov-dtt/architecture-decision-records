@@ -1,88 +1,90 @@
-# ADR 018: Database Patterns
+# ADR 018: Managed Relational Databases and Open Lakehouses
 
-**Status:** Proposed | **Date:** 2025-07-28 | **Review:** 2026-07-28
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
-Applications need managed persistent storage for databases, datalakes,
-and objects with automatic scaling and jurisdiction-compliant backup
-strategies. Workloads that need shared file-system access are covered by
-[ADR 019: Shared File Access](019-shared-file-access.md).
-
-- [AWS Aurora Serverless v2
-  Documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
-- [Percona Everest Documentation](https://docs.percona.com/everest/) and
-  [Pigsty Documentation](https://pigsty.io/) for development/non-AWS
-  environments
-- [DuckLake](https://ducklake.select/) for lightweight lakehouse
-  storage over object storage
-- [Amazon S3 Tables](https://aws.amazon.com/s3/features/tables/) for
-  managed [Apache Iceberg](https://iceberg.apache.org/) tables
-- [s3proxy](https://github.com/gaul/s3proxy) and [rclone serve
-  s3](https://rclone.org/commands/rclone_serve_s3/) for
-  development/non-AWS object storage
+Transactional applications and analytical platforms need different data
+patterns. The selection must work across AWS, Azure, Google Cloud, and legacy
+estates without mandating one database product or claiming that a managed
+feature satisfies every operational or compliance control.
 
 ## Decision
 
-Use [Aurora Serverless
-v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
-outside EKS clusters with automated scaling, multi-AZ deployment, and
-dual backup strategy.
+Prefer a supported managed relational database for new transactional workloads
+when it meets functional, security, region, recovery, cost, and exit needs.
+Keep durable database state outside Kubernetes. Existing supported databases
+may remain where migration risk or cost outweighs the benefit and an adequate
+operating and recovery model exists.
 
-**Datalakes:** Separate the storage format from the access layer:
+Select the engine and service using tested requirements for SQL and extension
+compatibility, consistency, availability, maintenance, private connectivity,
+identity, encryption, observability, capacity, latency, Australian-region and
+data-location needs, support, total cost, and data export.
 
-- **Storage layer**: store analytical data in object storage with open
-  table formats
-- **Lightweight access layer**: use [DuckLake](https://ducklake.select/)
-  with a [DuckDB](https://duckdb.org/) client for local development,
-  scheduled jobs, and simpler analytical workloads
-- **Serverless Iceberg access layer**: use [Amazon S3
-  Tables](https://aws.amazon.com/s3/features/tables/) for managed
-  [Apache Iceberg](https://iceberg.apache.org/) tables when workloads
-  need AWS-managed table maintenance or multi-engine access
-- **Distributed query access layer**: use
-  [Trino](https://trino.io/docs/current/connector/iceberg.html) or
-  equivalent Iceberg-compatible engines when workloads need concurrent
-  or larger-scale querying
+Connection pooling is a separate design decision. Use and test a service,
+proxy, or application pool only when workload concurrency requires it; do not
+assume every managed database includes suitable pooling.
 
-DuckLake and S3 Tables are not an either/or decision. Choose the access
-layer per workload while keeping data in object storage and open table
-formats where practical. See [Reference Architecture: Data
-Pipelines](../reference-architectures/data-pipelines.md) for full
-datalake patterns.
+Managed snapshots and point-in-time recovery support operational recovery but
+do not by themselves prove backup or retention compliance. Apply the
+independent-copy and restore-test requirements in [ADR 014](014-object-backup.md).
 
-### Implementation
+### Open Lakehouse Pattern
 
-- **Database**: Aurora Serverless v2 (PostgreSQL/MySQL) with built-in
-  connection pooling and automatic scaling
-- **Datalake Storage**: S3-compatible object storage with open table
-  formats for analytics data
-- **Datalake Access**: DuckDB clients for DuckLake workloads; S3 Tables,
-  Trino, or equivalent Iceberg-compatible engines for serverless or
-  distributed access
-- **Object Storage**: Amazon S3 for files and objects. Use [ADR 019:
-  Shared File Access](019-shared-file-access.md) when workloads need
-  file-system access to object-backed files
-- **Deployment**: Outside EKS cluster (handles complexity automatically)
-- **Credentials**: Follow [ADR 005: Secrets
-  Management](../security/005-secrets-management.md) for endpoint and
-  credential management
-- **Backup**: Follow [ADR 014: Object Storage
-  Backups](014-object-backup.md) plus AWS automated snapshots
-- **Security**: Follow [ADR 007: Centralised Security
-  Logging](007-logging.md) and [ADR 012: Privileged Remote
-  Access](../security/012-privileged-remote-access.md)
+For analytical data, separate object storage, open table format, catalogue,
+governance, and query or processing engines. Prefer open formats, such as
+[Apache Iceberg](https://iceberg.apache.org/), where they meet interoperability
+and lifecycle needs. Select engines by concurrency, update semantics, workload
+size, cost, support, and portability rather than using a transactional database
+as a default data lake.
+
+[DuckLake](https://ducklake.select/) with DuckDB is an option for lightweight,
+local, or scheduled analytical workloads. Distributed or managed engines are
+appropriate when concurrency, scale, governance, or operating support requires
+them.
+
+### Provider Examples
+
+Products are options rather than exact equivalents; validate current region,
+engine, feature, and open-format support.
+
+| Provider | Managed relational examples | Open-lakehouse building blocks |
+|---|---|---|
+| AWS | [Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) or [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html) | Amazon S3 with [S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html) or an approved Iceberg catalogue and query engine |
+| Azure | [Azure SQL Database](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview) or [Azure Database for PostgreSQL](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/overview) | [Azure Data Lake Storage Gen2](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) with an approved open-table catalogue and query engine |
+| Google Cloud | [Cloud SQL](https://cloud.google.com/sql/docs/introduction) or [AlloyDB](https://cloud.google.com/alloydb/docs/overview) | Cloud Storage with [BigLake Iceberg tables](https://cloud.google.com/bigquery/docs/iceberg-tables) or another approved Iceberg-compatible catalogue and engine |
+
+### Migration
+
+Before migration, inventory schemas, data types, extensions, collation, stored
+code, clients, integrations, availability and recovery behaviour, performance,
+and licensing. Pilot representative load; define data reconciliation, cutover,
+rollback, and coexistence; test restore and export; then remove old copies and
+access only after acceptance and retention requirements are met.
+
+## Required Evidence
+
+- Selection record covering requirements, provider and region fit, security,
+  availability, support, total cost, and exit or export path
+- Performance, failover, connection, maintenance, restore, and recovery test
+  results against approved service objectives
+- Backup evidence under ADR 014 rather than reliance on a feature declaration
+- For lakehouses, table-format and catalogue ownership, interoperability and
+  schema-evolution tests, lineage, retention, and engine compatibility
+- Migration reconciliation, rollback test, approvals, and decommission record
+
+## Exceptions
+
+Self-managed databases, closed analytical formats, unavailable independent
+backups, or unmet region and exit requirements need a time-bound exception with
+alternatives, compensating controls, residual risk, owner, approval, expiry,
+and reassessment date.
 
 ## Consequences
 
-**Benefits:**
+**Benefits:** services are selected by workload evidence while open analytical
+formats reduce unnecessary engine coupling.
 
-- Serverless scaling reducing operational costs during low usage periods
-- Automated high availability with managed backup strategies per [ADR 014: Object Backup](014-object-backup.md)
-- Compliance with jurisdiction requirements through dual backup approach
-
-**Risks if not implemented:**
-
-- High operational overhead managing database infrastructure
-- Inconsistent backup strategies across database systems
-- Cost inefficiency from overprovisioned database resources
+**Trade-offs:** portability is not automatic, managed products differ, and
+migration and independent recovery still require engineering and testing.

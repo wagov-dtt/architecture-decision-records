@@ -1,6 +1,6 @@
 # ADR 011: AI Tool and Agent Governance
 
-**Status:** Accepted | **Date:** 2025-08-15 | **Review:** 2026-08-15
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
@@ -40,53 +40,64 @@ References:
 - [Privacy Act 1988](https://www.legislation.gov.au/Series/C2004A03712)
 - [WA Government Artificial Intelligence Policy and Assurance
   Framework](https://www.wa.gov.au/government/publications/wa-government-artificial-intelligence-policy-and-assurance-framework)
+- [WA Data Offshoring Governance](https://www.wa.gov.au/system/files/2025-06/dataoffshoringgovernancewithwadataoffshoringposition.pdf)
+- [WA Information Classification Policy](https://www.wa.gov.au/government/document-collections/western-australian-information-classification-policy)
 - [Linux Foundation Agentic AI
   Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation)
 - [Oxide RFD 576: Using LLMs at
   Oxide](https://rfd.shared.oxide.computer/rfd/0576) - values-based
   approach to AI tool governance
-- [oy-cli crate documentation](https://docs.rs/oy-cli/latest/oy/) - local AI
-  coding CLI and safety-mode guidance
-- [Exploring the zero operator access design of Mantle](https://aws.amazon.com/blogs/machine-learning/exploring-the-zero-operator-access-design-of-mantle/)
-  - Amazon Bedrock Mantle zero operator access design
 
 ## Decision
 
-Implement mandatory human oversight for all AI tool usage, with
-pre-approval for any AI tool that processes organisational data, uses
-agents or external tools, or generates outputs used in an official
-capacity.
+Assign a human owner accountable for every AI-assisted system and decision.
+Governance depth, approval gates, validation, and monitoring must be
+proportionate to risk rather than triggered by AI use alone.
 
 AI security, including agentic AI security, must be managed inside normal
 cyber security governance: secure-by-design, defence in depth, identity
 and access management, monitoring, incident response, and supply chain
 risk management.
 
-**Human Oversight Requirements:**
+**Risk Tiers:**
+
+Assess each use case using the sensitivity and volume of data, consequence
+to people or government, degree of autonomy and privilege, and whether
+effects are detectable and reversible:
+
+| Tier | Typical characteristics | Minimum governance |
+|------|-------------------------|--------------------|
+| Low | Non-sensitive, advisory, reversible | Accountable owner and normal review |
+| Moderate | Organisational data or bounded tools; material but reversible effect | Documented assessment, testing, monitoring, and escalation |
+| High | Sensitive data, significant rights or service effect, high autonomy, privileged access, or hard-to-reverse action | Prior approval, independent assurance, explicit human gates, and continuous monitoring |
+
+Reassess the tier when data, model, tools, autonomy, users, or consequences
+materially change.
+
+**Human Accountability:**
 
 Adopt a values-based approach to AI governance (per [Oxide RFD
 576](https://rfd.shared.oxide.computer/rfd/0576)):
 
 - **Responsibility**: Humans are accountable for AI-generated artifacts
 - **Rigor**: AI should support rigorous thinking, not replace it
-- **Validation**: Qualified humans must review AI-generated content before
-  use
+- **Validation**: Validation must match the risk and intended use
 - **Accountability**: AI-assisted decisions must have a clear human owner
 
-Human approval gates must be set by system designers and operators, not
-by the AI system. Prior human approval is required for high-impact or
-hard-to-reverse actions, including production changes, network egress,
-data or log deletion, releases, deployments, procurement, payments,
-approvals, and customer-facing actions.
+Human approval gates must be set by system designers and operators, not by
+the AI system. Prior human approval is required for high-impact or
+hard-to-reverse actions. Lower-risk, bounded, observable, and reversible
+actions may run under prior system approval with monitoring, limits, and an
+accountable owner.
 
 **Approval Matrix:**
 
 | Use case | Default stance | Approval |
 |----------|----------------|----------|
 | Local or read-only coding help with no sensitive data | Allowed | Normal human review |
-| External AI with organisational data | Restricted | Pre-approval and contract |
-| Agent with shell, network, API, or memory tools | Restricted | Risk assessment and approval gates |
-| Production or customer-facing action | Prohibited by default | Explicit human approval |
+| External AI with organisational data | Risk assessed | Approved service and contract |
+| Agent with shell, network, API, or memory tools | Risk assessed | Bounded permissions and tier-based gates |
+| High-impact or hard-to-reverse action | Prohibited by default | Prior explicit human approval |
 | Delete logs or audit records | Prohibited by default | Separate human approval |
 
 **Covered AI Tools:**
@@ -104,10 +115,12 @@ This ADR applies to all AI tools including:
 
 AI tools must not:
 
-- Automatically act in customer-facing or production environments
+- Receive sensitive, security-classified, personal, or Tier 1 Risk
+  information through public or consumer AI services
+- Take high-impact or hard-to-reverse actions without prior human approval
 - Process sensitive data with third parties without a formal contractual
   arrangement
-- Merge, release, deploy, or alter production state without human review
+- Alter production state outside approved risk-tier controls and rollback
 - Receive broad or unrestricted access to sensitive data, critical
   systems, logs, credentials, networks, or production environments
 - Decide when human approval, escalation, rollback, or audit deletion is
@@ -115,8 +128,8 @@ AI tools must not:
 
 AI tools must:
 
-- Be limited to low-risk and non-sensitive tasks unless explicitly
-  approved through risk assessment and accountable ownership
+- Be risk-tiered, approved for their data and consequence, and assigned an
+  accountable owner before use
 - Run in isolated or local environments (refer to [ADR 001: Application
   Isolation](001-isolation.md)) with minimal permissions and bounded blast
   radius
@@ -133,6 +146,14 @@ AI tools must:
   model-provider disclosures, and official AI-generated outputs
 - Fail safe: stop and escalate when uncertain, rate-limited, degraded, or
   denied by policy
+- Apply information classification before disclosure and minimise prompts,
+  retrieval context, logs, memory, and retained outputs
+- Assess provider processing and support locations, subcontractors,
+  retention, model-training use, deletion, incident notification, and exit
+  arrangements before enterprise use
+- Prevent processing outside approved locations and purposes through
+  contract and technical configuration; assess all offshoring under [WA Data
+  Offshoring Governance](https://www.wa.gov.au/system/files/2025-06/dataoffshoringgovernancewithwadataoffshoringposition.pdf)
 
 **Agentic AI Adoption Controls:**
 
@@ -158,6 +179,8 @@ Approved AI tool use must retain enough evidence for review:
 
 - Approved tool or register entry
 - Data disclosure and model-provider assessment where applicable
+- Information classification, retention, processing-location, and supplier
+  assessment where applicable
 - Risk assessment for agentic workflows
 - Human approval records for high-impact actions
 - Logs of tool calls, denied actions, generated outputs, and approvals
@@ -168,21 +191,26 @@ Exceptions require documented risk acceptance by the accountable owner,
 time-bound approval, and compensating controls. Exceptions must not remove
 human accountability for consequential decisions or high-impact actions.
 
-**Implementation Examples:**
+**Non-Normative Implementation Examples:**
 
-- **Preferred**: [oy-cli](https://docs.rs/oy-cli/latest/oy/) for governed
-  agent-backed development and repository audits
-- **Rejected**: Automated tools that merge, release, deploy, alter
-  production state, or delete audit records without human approval
+Products are options only and require the same agency assessment. Examples
+include [oy-cli](https://docs.rs/oy-cli/latest/oy/) for repository research,
+[Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html),
+[Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry),
+and [Google Vertex AI Model Garden](https://cloud.google.com/vertex-ai/generative-ai/docs/model-garden/explore-models).
+
+Provider statements, model cards, certifications, or assurance features are
+inputs to assessment, not proof that an agency use case is safe, compliant,
+accurate, unbiased, or fit for purpose. Agencies must validate controls and
+outcomes against their own data, threats, users, and consequences.
 
 ## Strategic Research
 
-Future adoption should favour simple agent workflows with inspectable
+Future research may evaluate simple agent workflows with inspectable
 boundaries: explicit workspace scope, approval-gated mutation, least
-privilege, deterministic audits, continuous monitoring, fail-safe
-defaults, and reversible deployment. Tools with a similar posture to `oy`
-are preferred over broad agent platforms that add opaque orchestration,
-implicit trust, or unnecessary operational complexity.
+privilege, deterministic audits, continuous monitoring, fail-safe defaults,
+and reversible deployment. Research involving `oy`, Bedrock, Foundry, or
+Model Garden is non-normative and does not establish a preferred provider.
 
 Service-facing AI integrations should follow [Reference Architecture:
 AI-Assisted Digital
@@ -192,32 +220,25 @@ providers directly. The gateway should enforce data minimisation, approved
 models, logging, and provider privacy settings such as `store: false` where
 supported.
 
-`bedrock-mantle` is the preferred execution environment for this research
-where suitable because it enables access to open models through Amazon
-Bedrock and aligns with Mantle's zero operator access design, which AWS
-describes as eliminating technical means for AWS operators to access
-customer data.
-
 Model and backend selection must consider:
 
 - Evidence of better quality or security on representative development,
   audit, and operations tasks
 - Data disclosure to the configured model provider, including snippets,
   command output, tool results, and audit chunks
-- Avoiding lock-in to heavily proprietary platforms such as Bedrock
-  AgentCore or GitHub Copilot unless there is a clear risk or capability
-  justification
-- Compatibility with `oy` approval modes, workspace boundaries,
-  deterministic no-tools audits, least privilege, audit logging, safe
-  rollback, and human approval gates
+- Portability, exit arrangements, and the justification for proprietary
+  model or agent features
+- Compatibility with required approval modes, workspace boundaries, least
+  privilege, audit logging, safe rollback, and human approval gates
 
 ## Consequences
 
 **Benefits:**
 
 - Ensures human accountability for all AI-assisted decisions
-- Maintains compliance with Privacy Act and data sovereignty requirements
-- Prevents automated production actions without approval
+- Supports applicable privacy, information-classification, and data-location
+  obligations
+- Requires prior approval for high-impact or hard-to-reverse actions
 - Establishes an audit trail for responsible AI usage
 - Aligns agentic AI adoption with ACSC guidance: low-risk initial use,
   least privilege, monitoring, progressive deployment, and human approval

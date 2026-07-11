@@ -1,6 +1,6 @@
 # ADR 004: CI/CD Quality Assurance
 
-**Status:** Accepted | **Date:** 2025-03-10 | **Review:** 2026-03-10
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
@@ -16,48 +16,89 @@ images, and exposed secrets.
 
 ## Decision
 
+### Applicability
+
+This ADR applies to pipelines that build, test, package, release, or deploy agency
+software. Controls should be proportionate to artifact type, exposure, data
+sensitivity, and deployment privilege. Documentation-only repositories and
+short-lived prototypes that cannot be released may use a reduced pipeline approved
+by the repository owner.
+
+It does not mandate a CI/CD platform, cloud provider, container format, or deployment
+service. It controls build-time and released-artifact assurance; it does not replace
+deployed asset discovery, patching, endpoint application control, or operational
+vulnerability management.
+
 ### CI/CD Pipeline Requirements
 
 **Pipeline Flow**: Code Commit → Build & Test → Quality Assurance → Release
 
-| Stage | Tools | Purpose | Mandatory |
-|-------|-------|---------|-----------|
-| **Build** | [Docker Bake](https://docs.docker.com/build/bake/) | Multi-platform builds with SBOM/provenance | Yes |
-| **Scan** | [scc](https://github.com/boyter/scc) and [Trivy](https://trivy.dev/latest/docs/target/container_image/) | Complexity and Vulnerability scanning | Yes |
-| **Analysis** | [GitHub CodeQL](https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql) | Static code analysis | Yes |
-| **Test** | [Playwright](https://playwright.dev/docs/intro) | End-to-end testing | Recommended |
-| **Performance** | [Grafana K6](https://grafana.com/docs/k6/latest/get-started/write-your-first-test/) | Load testing | Optional |
-| **API** | [Restish](https://rest.sh/#/guide) | API validation per [ADR 003](../development/003-apis.md) | Optional |
+| Capability | Requirement | Example tools |
+|------------|-------------|---------------|
+| **Build** | Repeatable builds with integrity information, SBOM, and provenance for released artifacts | [Docker Bake](https://docs.docker.com/build/bake/) |
+| **Security scan** | Automated secret, dependency, artifact, and applicable configuration scanning | [Trivy](https://trivy.dev/latest/docs/) and platform-native scanners |
+| **Analysis** | Automated static analysis and maintainability checks appropriate to the codebase | [GitHub CodeQL](https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql), [scc](https://github.com/boyter/scc) |
+| **Test** | Automated unit and integration tests, plus end-to-end tests for material user journeys | [Playwright](https://playwright.dev/docs/intro) and framework-native tools |
+| **Performance** | Risk-based performance and capacity testing for services with defined performance objectives | [Grafana k6](https://grafana.com/docs/k6/latest/) |
+| **API** | Contract, behaviour, and security testing where [ADR 003](../development/003-apis.md) applies | [Restish](https://rest.sh/#/guide) and equivalent API test tools |
+
+Mandatory security checks must fail the pipeline when an artifact contains an
+unapproved critical finding, a confirmed secret, an applicable unsupported runtime
+or base image, or incomplete provenance. A documented, time-bound exception is
+required before release when a finding cannot be remediated within the applicable
+agency or ACSC timeframe.
 
 ### Execution Environment
 
-- Use [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base)
-  for standardised tooling
-- Use [Docker Bake](https://docs.docker.com/build/bake/) to standardise
-  builds
-- Use [Justfiles](https://just.systems/man/en/) for task automation
-- Use [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
-  for repository-hosted CI work that does not need AWS access, including
-  lengthy builds, tests, and scans
-- Run only AWS-privileged release or deployment automation from an
-  operations-controlled environment, such as controlled
-  [Woodpecker CI](https://woodpecker-ci.org/) runners
+- Pin a consistent local and CI toolchain. The WA Government
+  [devcontainer-base](https://github.com/wagov-dtt/devcontainer-base) is one option.
+- Define repeatable build and task commands. [Docker Bake](https://docs.docker.com/build/bake/)
+  and [Just](https://just.systems/man/en/) are examples.
+- Keep unprivileged build, test, and scan work on an agency-approved CI platform.
+  [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
+  and [Woodpecker CI](https://woodpecker-ci.org/) are examples.
+- Run cloud-privileged release and deployment steps only in an agency-approved
+  trust boundary with protected environments, short-lived identity, and
+  operations-controlled production access.
 
-### AWS-Privileged Automation
+### Cloud-Privileged Automation
 
-Use operations-controlled automation only where release or deployment
-steps need AWS credentials or direct access to AWS-hosted systems.
+Keep privileged steps separate from general CI where release or deployment needs
+cloud credentials or direct access to protected systems. Repository-hosted or
+self-hosted automation may be used where it meets the required trust, identity,
+network, approval, and audit controls.
 
 Required controls:
 
-- Assume AWS roles at runtime; do not store long-lived cloud credentials
-  in pipeline systems
-- Run automation on dedicated, operations-managed hosts or workloads
-- Limit network access to the AWS services and internal systems required
-  for the job
+- Obtain short-lived, least-privilege workload credentials at runtime; do not store
+  long-lived cloud credentials in pipeline systems where federation or managed
+  identity is supported
+- Use dedicated, operations-managed hosts or workloads where the risk assessment
+  requires isolation
+- Limit network access to the cloud services and internal systems required for the
+  job
 - Apply strong access control, audit logging, and minimal administrative
   access
 - Keep build, release, and deployment logs for audit and incident review
+- Separate development, test, release, and production roles; developers
+  must not use standing production deployment credentials
+- Pin and verify third-party actions, dependencies, build images, and release
+  artifacts using immutable versions and integrity information
+- Generate and retain a Software Bill of Materials (SBOM) and build
+  provenance for every released artifact
+- Continuously rescan supported release artifacts and dependencies so newly
+  disclosed vulnerabilities enter the vulnerability-management process
+
+Official cloud-native options include:
+
+| Cloud | Workload identity | Deployment option examples |
+|-------|-------------------|----------------------------|
+| AWS | [IAM OIDC federation and temporary roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) | OpenTofu or Terraform under ADR 010, or [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html) for application deployment |
+| Azure | [Microsoft Entra workload identity federation](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation) or managed identities | OpenTofu or Terraform under ADR 010 |
+| Google Cloud | [Workload Identity Federation](https://cloud.google.com/iam/docs/workload-identity-federation) or service account impersonation | OpenTofu or Terraform under ADR 010, or [Cloud Deploy](https://cloud.google.com/deploy/docs/overview) for application deployment |
+
+These products are examples, not requirements. Equivalent approved services may be
+used when they provide the same identity, approval, integrity, and audit controls.
 
 **CI/CD Pipeline:**
 
@@ -71,12 +112,34 @@ flowchart LR
     code --> build --> scan --> release
 ```
 
-Build produces container images with SBOM/provenance. Scan runs
-vulnerability and static analysis. Release produces static artifacts
-consumed by [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
-Keep unprivileged build, test, and scan work on repository-hosted CI,
-including long-running jobs. Move only AWS-privileged release or
-deployment steps to an operations-controlled environment.
+Build produces release artifacts with SBOM/provenance. Scan runs vulnerability and
+static analysis. Release publishes immutable artifacts consumed by
+[ADR 010: Infrastructure as Code](../operations/010-configmgmt.md).
+Keep unprivileged build, test, and scan work on general CI, including long-running
+jobs. Isolate only the cloud-privileged release or deployment steps that need the
+stronger trust boundary.
+
+### Legacy Adoption
+
+Existing pipelines should first inventory release paths and credentials, remove
+standing production credentials, and protect deployment environments. Introduce
+artifact integrity, security gates, SBOM/provenance, and broader testing in a
+risk-prioritised plan rather than blocking all legacy releases at once.
+
+## Required Evidence
+
+- Pipeline definitions and protected-branch settings
+- Scan, test, secret-detection, SBOM, and provenance results for each release
+- Approval and deployment records demonstrating role and environment
+  separation
+- Linked vulnerability or exception record for any accepted finding
+
+## Exceptions
+
+Bypassing a mandatory security gate requires compensating controls,
+residual risk, accountable executive approval, an expiry date, and a linked
+remediation plan. Emergency releases must run deferred checks immediately
+after deployment.
 
 ## Consequences
 
@@ -85,7 +148,7 @@ deployment steps to an operations-controlled environment.
 - Automated security scanning and vulnerability remediation
 - Standardised artifact integrity and compliance alignment
 - Consistent deployment pipelines with audit trails
-- Clear separation between general CI checks and AWS-privileged
+- Clear separation between general CI checks and cloud-privileged
   automation
 
 **Risks if not implemented:**
@@ -97,5 +160,5 @@ deployment steps to an operations-controlled environment.
 
 ## References
 
-- [ADR 003: API Documentation Standards](../development/003-apis.md)
+- [ADR 003: HTTP API Contract Standards](../development/003-apis.md)
 - [ADR 010: Infrastructure as Code](../operations/010-configmgmt.md)
