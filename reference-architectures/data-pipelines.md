@@ -1,6 +1,6 @@
 # Reference Architecture: Data Pipelines
 
-**Status:** Proposed | **Date:** 2026-07-11 | **Review:** 2027-07-11
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Applicability and Non-Goals
 

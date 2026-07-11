@@ -18,11 +18,8 @@ item should move to `Accepted`, stay `Proposed`, or become `Superseded`.
 | Document | Current status | Next review | Review focus |
 |----------|----------------|-------------|--------------|
 | [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) | Proposed | 2027-07-11 | Pilot low-risk and bounded variants; validate evaluation, human fallback, data handling, accessibility, operations, cost, and provider exit |
-| [Content Management](reference-architectures/content-management.md) | Proposed | 2027-07-11 | Pilot static, SaaS, managed-runtime, and legacy variants; validate editorial usability, accessibility, records, recovery, migration, and export |
-| [Data Pipelines](reference-architectures/data-pipelines.md) | Proposed | 2027-07-11 | Pilot batch and higher-assurance variants; validate contracts, runtime lineage, reconciliation, recovery, cost, interoperability, and exit |
 | [Federated Application Portal](reference-architectures/federated-application-portal.md) | Proposed | 2027-07-11 | Validate selectable shared capabilities, cross-agency governance, direct-access fallback, compatibility, resilience, onboarding, and offboarding |
 | [Identity Federation](reference-architectures/identity-management.md) | Proposed | 2027-07-11 | Validate direct OIDC, justified broker, privileged, and legacy variants; test claims, recovery, accessibility, rollover, migration, and exit |
-| [OpenAPI Backends](reference-architectures/openapi-backends.md) | Proposed | 2027-07-11 | Validate internal, public/partner, and administrative variants; test contracts, exposure, documentation, resilience, migration, and runtime exit |
 
 ## Acceptance Criteria
 

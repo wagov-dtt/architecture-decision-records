@@ -1,6 +1,6 @@
 # Reference Architecture: OpenAPI Backend
 
-**Status:** Proposed | **Date:** 2026-07-11 | **Review:** 2027-07-11
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 This reference architecture is an informative composition for HTTP APIs. It
 does not mandate an API gateway, cloud provider, runtime, database, container

@@ -14,15 +14,15 @@ themselves prove project or agency compliance.
 
 1. **Review the [ADR Design Guardrails](adr-design-guardrails.md)** - Six guiding principles for all technology decisions
 2. **Use the [Decision Finder](decision-finder.md)** - Match a project need to the right ADRs and reference architectures
-3. **Evaluate a Reference Architecture** - The current reference architectures
-   are Proposed project-kickoff aids. Approve their use and Proposed dependencies
-   in the project record:
-   - [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) - Low-risk AI assistance for services, staff workflows, CMS, and portals
-   - [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
-   - [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
-   - [Federated Application Portal](reference-architectures/federated-application-portal.md) - Standalone apps using shared account, identity, notification, and SDK services
-   - [Identity Federation](reference-architectures/identity-management.md) - OIDC, legacy SAML, and privileged federation
-   - [OpenAPI Backends](reference-architectures/openapi-backends.md) - Agency-controlled HTTP APIs
+3. **Choose a Reference Architecture** - Accepted architectures are active
+   project-kickoff guidance. Proposed architectures require project approval and
+   approval of their Proposed dependencies:
+   - **Proposed:** [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) - Low-risk AI assistance for services, staff workflows, CMS, and portals
+   - **Accepted:** [Content Management](reference-architectures/content-management.md) - Websites, intranets, and content portals
+   - **Accepted:** [Data Pipelines](reference-architectures/data-pipelines.md) - Analytics, reporting, and data processing
+   - **Proposed:** [Federated Application Portal](reference-architectures/federated-application-portal.md) - Standalone apps using shared account, identity, notification, and SDK services
+   - **Proposed:** [Identity Federation](reference-architectures/identity-management.md) - OIDC, legacy SAML, and privileged federation
+   - **Accepted:** [OpenAPI Backends](reference-architectures/openapi-backends.md) - Agency-controlled HTTP APIs
 4. **Check the [Compliance Mapping](compliance-mapping.md)** - Find which ADRs apply to your security and compliance requirements
 
 ### Find Guidance by Need

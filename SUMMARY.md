@@ -42,12 +42,17 @@
 
 # Reference Architectures
 
-- [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md)
+## Accepted
+
 - [Content Management](reference-architectures/content-management.md)
 - [Data Pipelines](reference-architectures/data-pipelines.md)
+- [OpenAPI Backends](reference-architectures/openapi-backends.md)
+
+## Proposed
+
+- [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md)
 - [Federated Application Portal](reference-architectures/federated-application-portal.md)
 - [Identity Federation](reference-architectures/identity-management.md)
-- [OpenAPI Backends](reference-architectures/openapi-backends.md)
 
 ---
 
