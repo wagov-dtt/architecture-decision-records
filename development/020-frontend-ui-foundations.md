@@ -1,6 +1,6 @@
 # ADR 020: Frontend UI Foundations
 
-**Status:** Proposed | **Date:** 2026-06-17 | **Review:** 2027-06-17
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
@@ -9,64 +9,78 @@ across public sites, portals, CMS templates, preview tools, widgets, and staff
 applications. Teams also need UI patterns that work with agency design systems,
 third-party widgets, and independently delivered applications.
 
-Bootstrap 5 is a mature frontend toolkit with documented layout, forms,
-components, helpers, utilities, and accessibility guidance. It gives teams a
-shared vocabulary for common web UI while still allowing agency design systems
-to theme, wrap, or extend components.
+Interfaces must reflect applicable agency standards, use the web platform well, and
+be informed by the people who use the service. A component library can support this
+work but cannot establish accessibility, usability, or policy compliance by itself.
 
 ## Decision
 
-Use semantic HTML and Bootstrap 5-compatible component conventions as the
-default frontend foundation for WA Government digital service web interfaces.
+Use the applicable agency or whole-of-government design system as the primary
+frontend foundation. Where no design system is mandated, use semantic HTML and an
+agency-approved component approach. Bootstrap 5 is an approved fallback option, not
+a requirement, where it fits the product and no mandated design system applies.
 
 This means teams should:
 
-- Start with semantic HTML, accessible names, keyboard support, and progressive
-  enhancement
-- Meet WCAG 2.2 AA for user-facing interfaces
-- Use Bootstrap 5-compatible layout, forms, navigation, alerts, modals, tables,
-  cards, and utilities where common components are needed
-- Implement agency design systems as themes, wrappers, or extensions over this
-  baseline where practical
+- Confirm and apply the relevant design system, brand, content, and digital-service
+  requirements before selecting implementation products
+- Start with [semantic HTML](https://html.spec.whatwg.org/multipage/dom.html#semantics),
+  accessible names, keyboard support, and progressive enhancement
+- Meet [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/) for user-facing web interfaces
+- Conduct proportionate user research and usability testing, including people with
+  disability and users at risk of digital exclusion where relevant
+- Reuse approved accessible components before creating new variants
 - Scope CSS and JavaScript so shared components work safely in CMS templates,
   portals, embedded apps, and third-party widget contexts
 - Keep design-system styling separate from business logic and service APIs
 
-Teams may use another component library or native platform design system when
-it better fits the product. Record the reason in the project decision log.
+Record the design-system applicability decision and any approved fallback in the
+project decision log.
 
-## Recommended Starting Points
+### Applicability and Non-Goals
 
-| Use case | Start with |
-|----------|------------|
-| Public site, CMS template, or static preview | Bootstrap 5-compatible theme and semantic HTML |
-| Technical documentation or review preview | Hugo with a Bootstrap-compatible theme such as Docsy |
-| CMS content preview or review pack | Hugo static build fed by file export, read-only feed, or content adapter |
-| Drupal-backed content platform | Drupal Bootstrap 5 theme or an agency theme aligned to Bootstrap 5 conventions |
-| Portal shell, account widget, inbox widget, or SDK UI | Small scoped Bootstrap-compatible components |
-| Staff tool or admin interface | Bootstrap-compatible forms, tables, alerts, and navigation |
+This ADR applies to public and staff-facing web interfaces, including sites,
+portals, CMS templates, previews, and embedded widgets. Research and assurance depth
+should reflect user impact, transaction risk, audience diversity, and change scope.
 
-## Hugo for Preview and Review Workflows
+Native applications should follow the applicable native and agency design system.
+Emails, documents, data visualisations, and vendor interfaces that cannot be changed
+need their own accessibility controls. This ADR does not mandate visual uniformity,
+a JavaScript framework, a static-site generator, or replacement of a functioning
+legacy interface solely to adopt a component library.
 
-Use [Hugo](https://gohugo.io/) when a simple, reliable static site generator is
-enough for previews, documentation, or review packs. Hugo works well for local
-builds, modular themes, and generated static outputs.
+## Implementation Examples
 
-Use [Hugo content
-adapters](https://gohugo.io/content-management/content-adapters/) to create
+| Use case | Possible approach where agency-approved |
+|----------|-----------------------------------------|
+| Public site or CMS template | Applicable agency design system and semantic HTML |
+| Site without a mandated design system | Semantic HTML with an approved fallback such as [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/) |
+| Technical documentation or static review | A static-site generator such as [Hugo](https://gohugo.io/), optionally with [Docsy](https://www.docsy.dev/) |
+| CMS content preview | Static build fed by a file export, read-only feed, or content adapter |
+| Drupal-backed platform | Agency theme or an approved theme such as [Drupal Bootstrap 5](https://www.drupal.org/project/bootstrap5) |
+| Portal, widget, or staff tool | Small, scoped components from the applicable design system or approved fallback |
+
+Products in this table are implementation examples, not standards.
+
+### Static Preview Example
+
+[Hugo](https://gohugo.io/) can provide local builds and generated static outputs
+when a static site generator is sufficient for previews, documentation, or review
+packs.
+
+Its [content adapters](https://gohugo.io/content-management/content-adapters/) can create
 pages from existing content libraries or read-only exports such as JSON, TOML,
 YAML, or XML. This lets teams build CMS-aligned previews without changing the
 CMS workflow first.
 
-[Docsy](https://www.docsy.dev/) is a useful Hugo reference theme for technical
-documentation and review sites. Use it as a starting point or comparison for
-modular Hugo structure, not as a mandatory theme.
+[Docsy](https://www.docsy.dev/) is one optional reference theme for technical
+documentation and review sites.
 
 ## Accessibility Expectations
 
-Bootstrap helps with accessible component patterns, but accessibility still
-depends on correct markup, content, colour choices, scripting, and testing.
-Projects must test the finished interface against WCAG 2.2 AA, including:
+Design systems and component libraries can help with accessible patterns, but the
+finished interface must be tested against WCAG 2.2 AA. Testing should combine
+automated checks with keyboard, browser, and assistive-technology review, including:
 
 - Keyboard operation and visible focus
 - Colour contrast and non-colour cues
@@ -76,24 +90,45 @@ Projects must test the finished interface against WCAG 2.2 AA, including:
 - Screen-reader behaviour for dynamic components such as modals, alerts, and
   menus
 
+## Required Evidence
+
+- Design-system applicability decision and approval for any fallback
+- User-research findings, tested journeys, and resulting design decisions
+- Automated and manual accessibility results for representative pages and states
+- Component, browser, and device test results proportionate to supported users
+- Improvement plan or approved exception for known material gaps
+
+## Exceptions
+
+A deviation from a mandated design system or an unresolved WCAG 2.2 AA issue
+requires documented user impact, policy or legal review where applicable,
+compensating controls or an accessible alternative, accountable approval, an expiry
+date, and a remediation plan. Product limitations alone do not demonstrate
+accessibility.
+
+### Legacy Adoption
+
+Legacy services do not need a wholesale redesign. Inventory templates, components,
+and critical journeys; fix barriers with the greatest user impact first; and require
+new or materially changed interfaces to follow this ADR. Track remaining material
+gaps in a prioritised, time-bound improvement plan informed by user feedback.
+
 ## Consequences
 
 **Benefits:**
 
-- Gives teams a clear default for common web UI
+- Gives teams a clear hierarchy for frontend decisions
 - Improves portability across CMS, portal, preview, and standalone tool contexts
 - Supports accessible, semantic, progressively enhanced interfaces
 - Reduces bespoke component maintenance
-- Keeps agency design systems compatible with a widely understood component
-  model
+- Prioritises agency consistency and evidence from users
 
 **Trade-offs:**
 
-- Agency themes still need accessibility and brand review
+- Design-system components still need accessibility and usability review in context
 - Some products will need documented alternatives for native, highly bespoke, or
   specialist user interfaces
-- Bootstrap-compatible conventions reduce variation but do not remove the need
-  for user research, content design, or usability testing
+- Research, content design, and testing require ongoing delivery effort
 
 ## Related Reference Architectures
 
@@ -105,6 +140,8 @@ Projects must test the finished interface against WCAG 2.2 AA, including:
 
 - [Bootstrap 5 documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 - [Bootstrap 5 accessibility guidance](https://getbootstrap.com/docs/5.3/getting-started/accessibility/)
+- [Digital Service Standard](https://www.digital.gov.au/policy/digital-experience/digital-service-standard)
+- [HTML Standard semantics](https://html.spec.whatwg.org/multipage/dom.html#semantics)
 - [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 - [Hugo content adapters](https://gohugo.io/content-management/content-adapters/)
 - [Docsy Hugo theme](https://www.docsy.dev/)

@@ -1,84 +1,93 @@
 # ADR 019: Shared File Access
 
-**Status:** Accepted | **Date:** 2026-04-27 | **Review:** 2027-04-27
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
-Some workloads need both object APIs and file-system access to the same
-files. Examples include content management systems, media processing,
-shared workspaces, AI/ML tooling, and EKS workloads that expect paths,
-folders, and ordinary file operations.
-
-Without a standard pattern, teams may copy the same files between object
-storage, network file systems, and CDN origins. This creates
-synchronisation risk, extra cost, and unclear backup and retention
-ownership.
-
-References:
-
-- [Amazon S3 Files](https://aws.amazon.com/s3/features/files/)
-- [Amazon CloudFront with S3
-  origins](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html)
-- [ADR 002: AWS EKS for Cloud Workloads](002-workloads.md)
-- [ADR 014: Object Storage Backups](014-object-backup.md)
-- [ADR 016: Web Application Edge
-  Protection](../security/016-edge-protection.md)
+Applications may need object access, file paths, NFS or SMB protocols, or
+specific file-system semantics. Treating an object-backed adapter as a general
+network file system can cause corruption or incompatibility, while copying data
+between object and file stores creates synchronisation and ownership risk.
 
 ## Decision
 
-Use object storage as the source of truth for shared files that also need
-backup, lifecycle management, or CDN delivery. On AWS, use S3 buckets for
-the canonical storage layer.
+Choose between an object-backed file adapter and a true managed NFS or SMB file
+service using tested application semantics.
 
-Use [Amazon S3 Files](https://aws.amazon.com/s3/features/files/) when
-applications, users, or agents need shared file-system access to S3 data
-from AWS compute, including EKS workloads. This is the preferred pattern
-for CMS media libraries, static assets, shared workspaces, AI/ML data,
-and other file assets that benefit from both object and file access.
+Use an object-backed adapter when object storage is the canonical source, the
+application tolerates the adapter's consistency and metadata model, and testing
+confirms its file-operation, concurrency, latency, and failure behaviour. This
+can suit media, static assets, exchange areas, and batch or AI/ML datasets.
 
-Avoid copying canonical files into separate file systems unless a workload
-has a hard requirement that object-backed file access cannot meet.
+Use a managed file service when software requires documented POSIX or Windows
+semantics, file or byte-range locking, atomic operations, in-place writes,
+stable low-latency metadata, protocol-specific ACLs, or vendor-certified NFS or
+SMB storage. Keep a file service as the canonical source unless a tested
+synchronisation design defines otherwise.
 
-```mermaid
-flowchart LR
-    authors[Authors / EKS Workloads]
-    file_access[Shared File Access]
-    bucket[Object Storage]
-    cdn[CDN + WAF]
-    users[Users]
+### Provider Options
 
-    authors -->|file operations| file_access
-    file_access -->|object-backed storage| bucket
-    bucket -->|origin| cdn
-    cdn -->|deliver| users
-```
+These products are not exact equivalents. Protocol versions, POSIX behaviour,
+locking, identity and ACL models, consistency, quotas, performance, Kubernetes
+drivers, regional availability, and object interoperability differ.
 
-### Requirements
+| Provider | Object-backed file option | True managed file-service option |
+|---|---|---|
+| AWS | [Amazon S3 Files](https://aws.amazon.com/s3/features/files/) | [Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html) for NFS or [Amazon FSx for Windows File Server](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html) for SMB |
+| Azure | [NFS 3.0 support for Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/network-file-system-protocol-support) | [Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction) for supported SMB or NFS use cases |
+| Google Cloud | [Cloud Storage FUSE](https://cloud.google.com/storage/docs/cloud-storage-fuse/overview) | [Filestore](https://cloud.google.com/filestore/docs/overview) for managed NFS |
 
-- Store canonical files in object storage with versioning, encryption,
-  lifecycle policies, and backups per [ADR 014](014-object-backup.md)
-- Use managed shared file access for workloads that need paths, folders,
-  and ordinary file operations
-- Scope working sets and least-privilege access with bucket prefixes, policy,
-  access points, or equivalent storage boundaries
-- Publish public assets through a CDN and WAF per [ADR 016](../security/016-edge-protection.md)
-- Use workload identity and scoped IAM permissions for EKS access per
-  [ADR 002](002-workloads.md) and [ADR 005: Secrets
-  Management](../security/005-secrets-management.md)
-- Define ownership, lifecycle, retention, and recovery expectations for
-  each shared file store
+Legacy or on-premises file services may remain when supported and when their
+security, availability, capacity, backup, and recovery controls meet the
+service need.
+
+### Validation Requirements
+
+Test representative clients and concurrent workloads for open, create, close,
+append, overwrite, rename, delete, directory listing, locking, atomicity,
+consistency, links where required, permissions, case handling, file names,
+large and small files, throughput, metadata latency, disconnect and retry,
+capacity limits, and backup or restore behaviour.
+
+Define the canonical store, owner, access boundary, lifecycle, retention,
+recovery objectives, and public-delivery path. Use workload identity and least
+privilege. Publish public assets through an approved CDN and edge control under
+[ADR 016](../security/016-edge-protection.md).
+
+Snapshots, replication, synchronisation, and object versioning are recovery or
+availability features, not automatically independent backups. Immutability can
+protect a retained copy but does not create one. Apply [ADR 014](014-object-backup.md)
+to both object-backed and managed file stores.
+
+### Migration
+
+Inventory required semantics, permissions, ownership, metadata, links, sizes,
+and access patterns before selecting a target. Pilot representative workloads,
+copy with checksums and count reconciliation, preserve required metadata,
+freeze or control writes for cutover, run application acceptance and recovery
+tests, and retain a documented rollback path. Avoid uncontrolled dual writes.
+
+## Required Evidence
+
+- Decision record identifying canonical storage and why the tested adapter or
+  file service meets application semantics and provider or region constraints
+- Functional, concurrency, reconnect, performance, capacity, and recovery test
+  results from representative clients
+- Access, encryption, audit, lifecycle, retention, data-location, RTO, RPO, and
+  independent-backup configuration and restore evidence
+- Migration inventory, checksum and count reconciliation, acceptance, rollback,
+  and source decommission or retention records
+
+## Exceptions
+
+Untested semantics, dual canonical stores, unsupported protocols, or missing
+independent backup require a time-bound exception with compensating controls,
+residual risk, owner, approval, expiry date, and reassessment date.
 
 ## Consequences
 
-**Benefits:**
+**Benefits:** evidence-based selection avoids assuming object and file semantics
+are interchangeable and reduces unnecessary duplication.
 
-- One source of truth for object, file, backup, and CDN access
-- Less data duplication and fewer synchronisation pipelines
-- Familiar file operations for EKS workloads and other AWS compute
-- Clearer ownership for retention, recovery, and public asset delivery
-
-**Risks if not implemented:**
-
-- Teams may duplicate files between object storage and file systems
-- CDN assets may drift from files used by authoring or processing tools
-- Backup, retention, and ownership boundaries may become unclear
+**Trade-offs:** testing and migration take effort, and true file semantics can
+reduce object interoperability or increase cost.

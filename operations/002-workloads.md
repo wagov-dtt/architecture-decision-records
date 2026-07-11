@@ -1,100 +1,98 @@
-# ADR 002: AWS EKS for Cloud Workloads
+# ADR 002: Managed Kubernetes for Compatible Workloads
 
-**Status:** Accepted | **Date:** 2025-02-17 | **Review:** 2026-02-17
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
-Organisations want to efficiently manage and scale bespoke workloads in a
-secure and scalable manner. Traditional server management can be
-cumbersome and inefficient for dynamic workloads. Provider-specific
-control planes can result in lock-in and artificial constraints limiting
-technology options.
+WA public-sector estates span multiple clouds and legacy or on-premises
+platforms. Kubernetes can provide a consistent orchestration API for suitable
+bespoke software, but it adds cost and operational complexity and does not by
+itself make a workload portable.
 
-- [Cloud Native Computing Foundation (CNCF) Cloud Native
-  Landscape](https://landscape.cncf.io/)
-- [AWS EKS
-  Quickstart](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html)
+- [CNCF Certified Kubernetes conformance](https://www.cncf.io/training/certification/software-conformance/)
+- [ACSC Guidelines for Cloud Security](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-cloud-security)
 
 ## Decision
 
-To address these challenges, use a [CNCF Certified
-Kubernetes
-platform](https://www.cncf.io/training/certification/software-conformance/#logos)
-with automatically managed infrastructure resources. Due to hyperscaler
-availability and size [AWS EKS (Elastic Kubernetes
-Service)](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
-in auto mode is the preferred option.
+Use a managed Kubernetes service with provider-managed compute as the default
+Kubernetes pattern only for compatible, containerised bespoke workloads. Do
+not use Kubernetes as the default hosting model for every application.
 
-```mermaid
-flowchart LR
-    users[Users]
-    lb[Load Balancer]
-    eks[EKS Cluster]
-    db[DBaaS]
+A workload is a suitable candidate when it can use supported containers,
+standard health and lifecycle controls, externalised durable state, and the
+service's networking and identity model. The team must also have a justified
+need for Kubernetes scheduling, scaling, or ecosystem capabilities.
 
-    users --> lb --> eks --> db
-```
+Prefer a simpler managed application, container, function, database, virtual
+machine, or existing supported platform when it meets the service need.
 
-This leverages Kubernetes for orchestration, AWS EKS for managed
-Kubernetes services, AWS Elastic Block Store (EBS) for storage and AWS
-load balancers for traffic management.
+### Exclusions
 
-- **AWS EKS Auto Mode**: Provide a managed Kubernetes service, that
-  automatically scales the infrastructure based on workload demands.
-- **Managed Storage and NodePools**: Ensure that the underlying
-  infrastructure is maintained and updated by AWS.
-- **Load Balancers**: Standardise ingress and traffic management.
-- **Persistent Storage:** Keep durable state in managed services outside
-  the cluster. Use [ADR 018: Database
-  Patterns](018-database-patterns.md) for databases and datalakes, and
-  [ADR 019: Shared File Access](019-shared-file-access.md) when
-  workloads need shared file-system access.
+Do not select this pattern without an approved exception for:
+
+- Commercial or legacy software that requires certified hosts, privileged
+  access, unsupported kernels, fixed appliances, or in-place administration
+- Workloads requiring mainframe integration, specialist hardware, disconnected
+  operation, or latency that the managed service cannot meet
+- Stateful software whose locking, storage, clustering, recovery, or licensing
+  requirements have not been validated on the target service
+- Small or stable services for which cluster and platform overhead is not
+  proportionate
+- Workloads whose required service, support tier, data location, or dependency
+  is unavailable in an approved region
+
+Keep durable state in an appropriate managed data service or tested shared
+file service. See [ADR 018](018-database-patterns.md) and [ADR 019](019-shared-file-access.md).
+
+Production application traffic crossing workload boundaries must use authenticated
+workload identity, encryption in transit, and explicit service authorisation where
+the platform supports them. Proposed [ADR 021: Workload mTLS and Service
+Authorisation](../security/021-workload-mtls.md) defines the preferred Linkerd
+implementation profile; a project must approve that Proposed dependency before
+relying on it. Validate sidecar, protocol, probe, capacity, and managed-compute
+compatibility during the workload-fit assessment.
+
+### Provider Options
+
+These are implementation options, not interchangeable mandates:
+
+| Provider | Managed-compute option | Selection notes |
+|---|---|---|
+| AWS | [Amazon EKS Auto Mode](https://docs.aws.amazon.com/eks/latest/userguide/automode.html) | Validate supported instance, networking, storage, add-on, and Australian-region capabilities |
+| Azure | [AKS Automatic](https://learn.microsoft.com/en-us/azure/aks/intro-aks-automatic) | Validate feature, policy, networking, identity, and region support |
+| Google Cloud | [GKE Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview) | Validate workload restrictions, resource model, add-ons, and region support |
+
+For legacy or on-premises estates, retain an existing supported platform when
+migration has no service or risk benefit. A new self-managed Kubernetes
+platform requires a costed operating model for upgrades, security, recovery,
+capacity, and 24-hour support appropriate to service criticality.
+
+### Required Evidence
+
+- Workload-fit assessment covering the exclusions, data classification,
+  dependencies, availability, recovery, support, and team capability
+- Region and feature availability, security assessment, and provider shared
+  responsibility review
+- Total-cost comparison including platform labour, observability, networking,
+  support, data transfer, and minimum or idle capacity
+- Exit assessment identifying provider-specific dependencies, portable images
+  and manifests, data extraction, target platform, time, cost, and a tested
+  redeployment or recovery path
+- Performance, resilience, scaling, and recovery test results before production
+- Service-flow, workload identity, encryption, and authorisation assessment, plus
+  mesh compatibility where the project adopts proposed ADR 021
+
+### Exceptions
+
+Record a time-bound exception when an excluded workload must use this pattern
+or when a compatible workload cannot use managed compute. Include the reason,
+alternatives, compensating controls, residual risk, owner, approval, expiry,
+and reassessment date.
 
 ## Consequences
 
-**Benefits:**
+**Benefits:** managed infrastructure reduces routine node operations while
+standard Kubernetes APIs support common deployment practices.
 
-- Efficient resource utilisation through managed scaling
-- Clear boundaries for shared responsibilities with a small operational overhead
-- Enhanced security through automatic updates and patches
-- Improved availability with managed storage and node pools
-
-**Risks if not implemented:**
-
-- Resource inefficiency from manual scaling
-- High operational overhead managing custom infrastructure
-- Security vulnerabilities from delayed updates
-- Service downtime during traffic spikes
-
-## Strategic Research
-
-### CNCF Kubernetes AI Conformance
-
-The [CNCF Kubernetes AI Conformance Program](https://www.cncf.io/blog/2025/11/11/cncf-launches-certified-kubernetes-ai-conformance-program-to-standardize-ai-workloads-on-kubernetes/) establishes standards for AI/ML workload portability across Kubernetes platforms. Only platforms meeting these standards should be supported, ensuring workloads can interoperate as flexible nodes within a broader state/federal ecosystem.
-
-**Current Platform Conformance:**
-
-- AWS EKS meets proposed standards: [ai-conformance EKS](https://github.com/cncf/ai-conformance/blob/main/v1.34/eks/PRODUCT.yaml), [AI on EKS](https://awslabs.github.io/ai-on-eks/docs/blueprints)
-
-**HPC Requirements:**
-
-Physical infrastructure for HPC (High-Performance Computing) projects
-must meet CNCF Kubernetes AI Conformance capabilities. This ensures
-models developed on local compute can scale to centralised HPC
-facilities without environment mismatches. Target sovereign Australian
-platforms meeting security and privacy requirements (ASD IRAP assessed,
-PRIS compliant).
-
-### Digital Sovereignty
-
-Analysis like [Cloud services and government digital sovereignty in Australia and beyond. / Mitchell, Andrew D.; Samlidis, Theodore.](https://research.monash.edu/en/publications/cloud-services-and-government-digital-sovereignty-in-australia-an/) in the [International Journal of Law and Information Technology, Vol. 29, No. 4, 2021, p. 364-394](https://academic.oup.com/ijlit/issue/29/4) highlights the ongoing issues with depending on hyperscalers in a single foreign jurisdiction. Based on this changing landscape, exploring simplified options for secure sovereign owned hosting options such as [Australian Dedicated Servers](https://www.micron21.com/enterprise/dedicated-servers) and [local colo](https://www.hostingcertification.gov.au/certified-service-providers) in Tier 3+ datacentres (designed for 99.98% uptime) is warranted and touched on below.
-
-### Bare metal management
-
-Use a platform like [Proxmox VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) to run standalone clusters at multiple facilities with multiple 2U servers per location. Example hardware (starts approx $15k AUD per server) - [Dell PowerEdge R7725](https://www.dell.com/en-au/shop/cty/pdp/spd/poweredge-r7725), [HPE ProLiant DL385 Gen11](https://www.hpe.com/au/en/hpe-proliant-dl385-gen11.html), [Lenovo ThinkSystem SR665 V3](https://www.lenovo.com/au/en/p/servers-storage/servers/racks/thinksystem-sr665-v3/len21ts0009)
-
-Year 1 estimated costs:
-
-- Hardware: ~$200k for 6x ~$33k servers
-- Colo (2 sites, Tier 3+): [~$50k for 2x 5kw racks](https://www.micron21.com/enterprise/colocation-full-rack-pricing) with 1 Gbit IP Transit
-- Total: $250k for ~2-3TB ram, ~500 cores, 100TB disk across 2 sites (reduce by a factor of 2-3 for redundancy)
+**Trade-offs:** managed modes impose feature constraints, retain provider
+dependencies, and may cost more than simpler hosting or an existing platform.

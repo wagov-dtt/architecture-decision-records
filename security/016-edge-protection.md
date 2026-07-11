@@ -1,6 +1,6 @@
 # ADR 016: Web Application Edge Protection
 
-**Status:** Accepted | **Date:** 2025-08-15 | **Review:** 2026-08-15
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
@@ -10,10 +10,10 @@ sophisticated application-layer exploits targeting public services.
 These attacks can disrupt critical citizen services and damage public
 trust.
 
-Traditional perimeter security is insufficient for protecting modern web
-applications that serve millions of citizens. Edge protection through
-CDNs and WAFs provides the first line of defense, filtering malicious
-traffic before it reaches application infrastructure.
+Traditional perimeter security is insufficient for modern web services.
+Managed edge, DDoS, and application controls can reduce exposure before
+traffic reaches an origin, but the appropriate services depend on threat,
+availability, performance, architecture, and consequence.
 
 References:
 
@@ -26,59 +26,103 @@ References:
 
 ## Decision
 
-All public web applications and APIs must use CDN with integrated WAF
-protection:
+Internet-facing web applications and APIs must use agency-approved,
+risk-appropriate managed edge and DDoS protection. Use a WAF where HTTP
+threats warrant it. Use a CDN when caching, geographic delivery, origin
+shielding, or edge capacity provides a documented benefit; a CDN is not
+required for every service.
 
 ```mermaid
 flowchart LR
     users[Internet Users]
-    cdn[CDN + WAF]
+    cdn[Managed edge controls]
     apps[Applications]
 
     users -->|requests| cdn
     cdn -->|filtered traffic| apps
 ```
 
-The CDN edge handles SSL termination, caching, WAF filtering, and DDoS
-mitigation before traffic reaches application infrastructure.
+The edge may provide TLS termination, routing, caching, WAF filtering, bot
+controls, and DDoS mitigation before traffic reaches the origin.
 
-**CDN Requirements:**
+**Edge Requirements:**
 
-- Geographic distribution with SSL/TLS termination at edge
-- Cache optimization and origin shielding
-- Object-backed origins for static and media assets, using [ADR 019:
-  Shared File Access](../operations/019-shared-file-access.md) when
+- Size DDoS protection and escalation support for the assessed service
+  availability risk
+- Configure caching and origin shielding only where content and privacy
+  rules permit them
+- Prefer object-backed origins for cacheable static and media assets, using
+  [ADR 019: Shared File Access](../operations/019-shared-file-access.md) when
   authoring or processing workloads need file-system access
-- IPv6 dual-stack support on edge (internal use of IPv4 allowed)
+- Enable IPv6 dual-stack at the edge where the selected service and client
+  compatibility support it; document any material accessibility or transition
+  constraint
+- Prevent clients from bypassing the edge by restricting origins to
+  authenticated edge traffic or an equivalent private path
+- Use agency-approved TLS versions and certificates at the edge and origin
+- Apply appropriate HTTP security headers, including transport security and
+  content-type protection; define Content Security Policy per application
 
 **WAF Protection:**
 
-- OWASP Top 10 protection rules enabled
+- Select managed and custom rules for evidenced threats. WAF rules do not
+  cover all OWASP Top 10 risks and do not fix insecure application design
 - Layer 7 DDoS protection and rate limiting
-- Geo-blocking and bot management
+- Apply geo-blocking and bot management only where justified and tested for
+  service accessibility impacts
 - Custom rules for application-specific threats
+- Introduce new and materially changed rules in log or count mode, review
+  false positives, then progress through sampled or scoped blocking to full
+  enforcement. Urgent threat rules may use expedited approval and review
 
-**DDoS Protection:**
+**Provider Examples:**
 
-- AWS Shield Advanced or equivalent
-- Real-time attack monitoring and alerting
-- DDoS Response Team access
+Options include [AWS WAF and Shield](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html),
+[Azure Web Application Firewall and DDoS Protection](https://learn.microsoft.com/en-us/azure/web-application-firewall/overview),
+and [Google Cloud Armor](https://cloud.google.com/armor/docs). CDN options
+include [Amazon CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html),
+[Azure Front Door](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview),
+and [Cloud CDN](https://cloud.google.com/cdn/docs/overview). These mappings
+are non-exclusive and must meet the same durable controls.
 
 **Implementation:**
 
 - WAF logs integrated with SIEM per [ADR 007: Centralised Security
   Logging](../operations/007-logging.md)
-- Fail-secure configuration (no fail-open)
+- Default to fail secure. Document and pre-approve any emergency failure
+  mode, including who may activate it, service and data scope, compensating
+  monitoring and rate limits, maximum duration, notification, and review
 - Regular penetration testing and rule tuning
 - CI/CD integration for automated deployments
+- Alert on direct-origin attempts, WAF bypass, material rule changes, and
+  sustained blocking or rate-limit events
+
+The WAF and CDN are compensating layers, not substitutes for patching,
+server hardening, application security testing, authentication, or secure
+coding.
+
+## Required Evidence
+
+- Applicable edge, DDoS, WAF, TLS, origin-access, and security-header
+  configuration, including the risk rationale where CDN or WAF is omitted
+- Current Internet-facing service and origin inventory
+- WAF rule tests, penetration-test results, and rule-tuning records
+- Alerts and central logs for blocked traffic and configuration changes
+
+## Exceptions
+
+Any public origin or service without its assessed edge controls, or use of
+an emergency failure mode beyond its approval, needs a time-bound exception
+that records compensating controls, residual risk, executive approval,
+expiry date, and reassessment date.
 
 ## Consequences
 
 **Benefits:**
 
 - Automated threat detection and mitigation at network edge
-- Global content delivery and caching capabilities
-- Comprehensive attack surface reduction through filtering
+- Content delivery and caching where the service needs them
+- Reduced origin exposure through filtering
 - Real-time traffic analysis and bot management
 
 **Risks if not implemented:**

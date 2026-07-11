@@ -1,250 +1,382 @@
 # Reference Architecture: Federated Application Portal
 
-**Status:** Proposed | **Date:** 2026-06-16 | **Review:** 2027-06-16
+**Status:** Proposed | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
-## When to Use This Pattern
+This reference architecture is an informative composition of capabilities and
+ADRs. It does not require every service to adopt a portal, SDK, inbox,
+notification service, or native shell.
 
-Use when building a portfolio of standalone web applications that:
+## Applicability and Non-Goals
 
-- Are operated by multiple agencies, business units, or delivery partners
-- Share central identity, account management, notifications, and common APIs
-- Need an authenticated app directory, shared inbox, or account widget
-- Must work as normal websites, PWAs, and mobile app webviews
+Use this pattern when independently owned applications need one or more shared
+entry, identity, account, messaging, or cross-channel capabilities across WA
+agencies, cloud providers, or legacy estates. It is useful where applications
+must retain independent ownership and release cycles while presenting a
+coherent user journey.
 
-Do not use this pattern to force unrelated applications into one frontend
-runtime. Each federated application remains independently deployable and
-usable without the portal shell.
+This pattern is not intended to:
 
-## Overview
+- Merge unrelated applications into one frontend runtime or data store
+- Make a portal landing page or native application the only route to a service
+- Require JavaScript, a shared SDK, inbox, notifications, personalised app
+  cards, PWA features, or a native shell
+- Centralise business authorisation, case management, records ownership, or
+  application delivery
+- Replace agency identity, privacy, information-sharing, records, procurement,
+  accessibility, security, or continuity decisions
 
-The portal is the central user-facing entry point and shared service
-platform. It provides the authenticated app directory, account experience,
-shared inbox, recommended JavaScript SDK, and common APIs. It does **not**
-host or own each federated application's business logic or release cadence.
+Static public services, a single application with no useful shared capability,
+and machine-to-machine integration normally need simpler patterns.
 
-Federated applications integrate through OIDC, documented APIs, and the
-recommended SDK. The SDK makes hard parts easy: authentication, session
-management, account handoff, inbox and notification integration, PWA support,
-and lightweight mobile-webview handoff.
+## Assumptions and Prerequisites
 
-This design minimises lock-in and integration burden by keeping applications
-independently deployable, using OIDC and documented APIs as the baseline
-contract, and treating the SDK as a convenience layer rather than the only
-integration path.
+Before selecting a variant, establish:
 
-## Simple Architecture
+- Accountable service and information owners for each application and each
+  shared capability
+- User groups, critical journeys, assisted-digital and non-digital channels,
+  and direct application URLs
+- Identity populations, required assurance, recovery and fallback, and the
+  attributes each application is authorised to receive
+- Information classification, privacy impact, records and retention duties,
+  sharing authority, consent model, processing locations, and offshoring
+  assessment
+- Service criticality, availability dependencies, support coverage, recovery
+  time objective (RTO), recovery point objective (RPO), and acceptable degraded
+  modes
+- Current browser, non-JavaScript, legacy, mobile, integration, and network
+  constraints
+- Funding, operating capacity, onboarding demand, and an exit owner for shared
+  services
+
+Use OIDC for new interactive federation in accordance with [ADR 013: Identity
+Federation Standards](../security/013-identity-federation.md). A legacy
+application may use a broker, reverse-proxy integration, SAML where OIDC is
+unavailable, or a documented direct sign-in path rather than a disruptive
+rewrite.
+
+## Selectable Capabilities
+
+Select only capabilities with a user or operational need and an accountable
+owner.
+
+| Capability | Purpose | Required fallback or boundary |
+|------------|---------|-------------------------------|
+| Directory or portal | Discover and launch approved applications | Stable direct URL, meaningful no-JavaScript navigation, and outage communication |
+| Identity and account handoff | Sign in and reach central account functions | App-owned authorisation; critical-service authentication fallback where required |
+| Shared SDK or UI components | Reduce repeated integration work | Versioned documented APIs or protocol integration; SDK must not be the only path |
+| Inbox | Present durable messages or tasks | Source application remains authoritative; define retention, deletion, and direct access |
+| Notifications | Deliver email, SMS, push, or other alerts | Preferences, delivery status, accessible message content, and an alternative for unavailable channels |
+| Native shell or webview bridge | Package selected web journeys or native functions | Direct browser path; allow-listed, versioned, origin-bound bridge messages |
+| Personalised directory state | Show status or recommended actions | Explicit sharing authority, minimised data, freshness semantics, and non-personalised fallback |
+
+The portal, SDK, inbox, notification service, and native shell are separate
+capabilities. Selecting one does not imply selection of the others.
+
+## Assurance Variants
+
+### Minimum: Directory and OIDC
+
+Use for low-complexity federation where discovery and common sign-in provide
+enough value:
+
+- Register accessible metadata, owner, support contact, direct launch URL, and
+  OIDC client
+- Launch the standalone application; the application starts and validates its
+  own OIDC flow and makes its own authorisation decisions
+- Provide server-rendered or progressively enhanced directory navigation that
+  remains useful without JavaScript
+- Do not exchange application status, inbox, or notification data unless later
+  approved under a separate contract
+
+### Standard: Shared SDK or Services
+
+Add only the capabilities justified by common journeys:
+
+- Offer a maintained SDK, web component, or server-side library for selected
+  account, inbox, notification, telemetry, or handoff functions
+- Publish the underlying protocols and APIs so legacy and non-JavaScript
+  applications can integrate without the SDK
+- Version schemas, SDKs, native bridges, and UI components; publish a support
+  matrix, deprecation window, test fixtures, and upgrade path
+- Keep shared UI peripheral to app-owned content and compatible with the
+  applicable agency design system
+
+### Higher-Assurance
+
+Use where sensitive information, high-impact transactions, cross-agency
+sharing, or critical services increase consequence:
+
+- Isolate shared capabilities and administration according to trust,
+  classification, and ownership; require step-up authentication for defined
+  actions
+- Use stronger service and workload identity, explicit audience restrictions,
+  transaction-level authorisation, protected audit trails, and monitored
+  anomaly controls
+- Minimise or avoid central aggregation; use purpose-specific claims or
+  references and short retention where central data is justified
+- Test direct access, identity fallback, central outage, regional or site
+  recovery, key rollover, consent withdrawal, and security incident procedures
+- Establish independent assurance, change approval, out-of-hours escalation,
+  and continuity arrangements proportionate to criticality
+
+Higher assurance strengthens selected capabilities; it does not make every
+optional capability necessary.
+
+## Provider-Neutral Capability Architecture
 
 ```mermaid
 flowchart LR
-    user[User]
-    portal[Portal: directory, account, inbox]
-    app[Federated application]
-    sdk[Recommended JS SDK]
-    services[Central services: identity, notifications, APIs]
+    user[User or assisted channel]
+    directory[Optional directory]
+    app[Independent application]
+    identity[Identity capability]
+    shared[Optional shared capabilities]
+    ops[Operations and audit]
 
-    user --> portal -->|launch URL| app
     user -->|direct URL| app
-    app --> sdk --> services
-    app -->|documented APIs| services
+    user -->|discover and launch| directory
+    directory -->|registered URL| app
+    app -->|OIDC or legacy adapter| identity
+    app -.->|versioned API, SDK, or adapter| shared
+    directory --> ops
+    app --> ops
+    identity --> ops
+    shared --> ops
 ```
 
-## Roles and Responsibilities
+Keep the directory, identity, optional shared services, application runtime,
+and operational plane independently replaceable where practical. Authorise
+network and data flows explicitly; a shared user identity does not grant
+cross-application data access.
 
-| Party | Owns | Does not own |
-|-------|------|--------------|
-| Federated app owner | App UX, business data, app authorisation, OIDC client config, SDK integration | Central account, shared inbox, mobile shell |
-| Portal/mobile owner | Directory, account UI, shared inbox UX, native bridge, mobile shell | Federated app business logic or releases |
-| Platform/SDK team | SDK, common APIs, identity/account/notification integration, compatibility, observability | Federated app delivery |
+## Deployment Options
 
-## Integration Levels
+These are official service examples, not product selections or equivalent
+one-for-one mappings.
 
-| Level | App owner does | User benefit |
-|-------|----------------|--------------|
-| Minimum | Register launch URL and OIDC client | App appears in directory and uses central sign-in |
-| Recommended | Add SDK | Easier sessions, account widget, inbox, notifications, PWA, and webview handoff |
-| Advanced | Add notification events, deep links, and optional app-card state | Richer inbox journeys and contextual app launch |
+| Capability | AWS examples | Azure examples | Google Cloud examples | Legacy or on-premises examples |
+|------------|--------------|----------------|-----------------------|-------------------------------|
+| Web delivery and edge | Amazon CloudFront, AWS WAF, Application Load Balancer | Azure Front Door, Web Application Firewall, Application Gateway | Cloud CDN, Cloud Armor, external Application Load Balancer | Supported reverse proxy, load balancer, WAF, and web server |
+| Runtime | AWS Lambda, AWS App Runner, Amazon ECS or EKS | Azure Functions, App Service, Container Apps or AKS | Cloud Run, App Engine, GKE or Compute Engine | Supported virtual machines, application servers, containers, or existing web platforms |
+| Identity | Amazon Cognito or federation to an approved identity provider | Microsoft Entra External ID or federation to an approved identity provider | Identity Platform or federation to an approved identity provider | Existing OIDC provider, identity broker, or SAML adapter where OIDC is unavailable |
+| Messaging | Amazon SES, SNS or AWS End User Messaging | Azure Communication Services or Notification Hubs | Pub/Sub with approved email, SMS, or push delivery services | Agency mail or SMS gateway, message broker, and supported adapters |
+| Persistence | DynamoDB, RDS or S3 according to access need | Cosmos DB, Azure SQL or Blob Storage | Firestore, Cloud SQL or Cloud Storage | Supported relational database, directory, file, or object service |
 
-## Primary User Journey
+Products differ in identity semantics, regional availability, accessibility,
+delivery guarantees, data location, operational model, quotas, portability,
+and cost. Validate the selected composition against required capabilities;
+do not infer equivalence from a row. Prefer OpenTofu or Terraform for
+infrastructure provisioning under [ADR 010: Infrastructure and Configuration
+as Code](../operations/010-configmgmt.md). Provider-native frameworks are
+exception or bootstrap options under that ADR. Legacy configuration may also
+need versioned configuration-management and image-building tools.
 
-1. User opens the authenticated portal directory
-2. Portal shows approved app cards with icons and short descriptions
-3. User selects an app card
-4. Portal opens the app's registered launch URL
-5. The app starts its own OIDC flow with its registered client
-6. Existing central session enables silent redirect or SSO where possible
-7. User lands in the standalone federated application
+## Kickoff Artifacts
 
-## Experience Mockups
+Create and approve these artifacts before production onboarding:
 
-These lightweight HTML mockups show intent only. They are not final product
-designs.
+- Service brief with applicability decision, selected variant and
+  capabilities, user groups, critical journeys, exclusions, and success
+  measures
+- Capability and dependency map with direct-access paths, trust boundaries,
+  system and information owners, RTO, RPO, and degraded modes
+- Governance charter covering decision rights, RACI, funding or chargeback,
+  product ownership, operational ownership, support hours, and dispute and
+  exception handling
+- Onboarding contract covering eligibility, metadata, identity claims,
+  redirect and logout behaviour, scopes, data flows, SLOs, support,
+  compatibility, security evidence, launch approval, and costs
+- Information schedule covering classification, purpose, sharing authority,
+  consent and withdrawal, notices, minimisation, retention, deletion, export,
+  processing locations, offshoring, breach handling, and records duties
+- Interface pack with OIDC registration, API or event contracts, SDK and native
+  bridge versions if selected, accessibility expectations, test fixtures, and
+  deprecation policy
+- Operational pack with service-level objectives (SLOs), monitoring, alerts,
+  runbooks, contact and escalation paths, capacity assumptions, recovery plans,
+  and incident exercises
+- Lifecycle plan for onboarding, suspension, offboarding, data deletion and
+  export, credential revocation, domain or deep-link changes, and platform
+  replacement
 
-<!-- markdownlint-disable MD033 -->
+## Roles and Operating Model
 
-<div style="border:1px solid var(--quote-border);border-radius:8px;padding:12px;margin:1rem 0;max-width:760px;font-family:system-ui,sans-serif;background:var(--bg);color:var(--fg);">
-  <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--quote-border);padding-bottom:8px;margin-bottom:12px;">
-    <strong>Example Portal</strong>
-    <span style="border:1px solid var(--links);border-radius:999px;padding:4px 10px;background:var(--quote-bg);color:var(--fg);font-weight:600;">Portal · 📥 3 · 👤 Me</span>
-  </div>
-  <div style="margin-bottom:12px;color:var(--fg);">Search services... &nbsp; <button>Filter</button></div>
-  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;">
-    <div style="border:1px solid var(--quote-border);border-radius:8px;padding:10px;background:var(--table-alternate-bg);">
-      <strong>🚗 App A</strong><br />
-      <span>Do a common task</span><br />
-      <small>Recently used</small><br />
-      <button>Open</button>
-    </div>
-    <div style="border:1px solid var(--quote-border);border-radius:8px;padding:10px;background:var(--table-alternate-bg);">
-      <strong>⚠️ App B</strong><br />
-      <span>Check status or alerts</span><br />
-      <small>2 new items</small><br />
-      <button>Open</button>
-    </div>
-    <div style="border:1px solid var(--quote-border);border-radius:8px;padding:10px;background:var(--table-alternate-bg);">
-      <strong>🪪 App C</strong><br />
-      <span>View records</span><br />
-      <small>Action due</small><br />
-      <button>Open</button>
-    </div>
-  </div>
-</div>
+Tailor the RACI to agency arrangements, but assign each accountability once.
 
-App-card state is optional. Start with static metadata such as icon, name,
-blurb, and launch URL. Add personalised state only through explicit
-contracts, consent, and data minimisation.
+| Role | Accountabilities |
+|------|------------------|
+| Sponsoring governance body | Portfolio scope, cross-agency authority, funding model, risk acceptance, prioritisation, and unresolved disputes |
+| Shared capability product owner | Roadmap, SLOs, onboarding policy, compatibility, suppliers, funding forecast, and replacement plan |
+| Shared capability operator | Availability, security operations, releases, capacity, incidents, runbooks, recovery, support, and status communication |
+| Federated application owner | App UX, accessibility, business authorisation, data and records, direct access, integration, support, and offboarding |
+| Identity owner | Federation policy, assurance, claims, keys, recovery, lifecycle, and authentication incident response |
+| Information or privacy owner | Classification, purpose and sharing authority, consent where applicable, privacy assessment, retention, disposal, location, and offshoring approval |
+| Security and assurance | Threat and exposure review, control assurance, testing, exceptions, and incident coordination |
+| Service desk or assisted channel | User support, identity and service triage, accessible alternatives, escalation, and known-outage guidance |
 
-<div style="border:1px solid var(--quote-border);border-radius:8px;padding:12px;margin:1rem 0;max-width:760px;font-family:system-ui,sans-serif;background:var(--bg);color:var(--fg);">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--quote-border);padding-bottom:8px;margin-bottom:12px;">
-    <strong>Example Federated App</strong>
-    <div style="position:relative;text-align:right;">
-      <div style="display:inline-block;border:1px solid var(--links);border-radius:999px;padding:4px 10px;background:var(--quote-bg);color:var(--fg);font-weight:600;">Portal · 📥 3 · 👤 Me</div>
-      <div style="position:absolute;right:0;top:34px;width:250px;text-align:left;border:1px solid var(--quote-border);border-radius:8px;padding:10px;background:var(--bg);box-shadow:0 4px 14px rgba(0,0,0,.18);z-index:1;">
-        <strong>Portal menu</strong>
-        <div style="margin-top:8px;">📥 Inbox <span style="float:right;">3</span></div>
-        <div>👤 Account details</div>
-        <div>🔔 Notification settings</div>
-        <div>✅ Consent and privacy</div>
-      </div>
-    </div>
-  </div>
-  <div style="border:1px dashed var(--quote-border);border-radius:8px;padding:12px;">
-    <p><strong>App-owned service content</strong></p>
-    <p>This area is the federated application's primary user journey.</p>
-    <button>Start task</button> <button>View status</button>
-    <button>Upload evidence</button>
-  </div>
-  <p><small>The app owns the page, journey, data, and authorisation. The portal widget stays peripheral and opens shared account, inbox, notification, or consent actions only when the user asks.</small></p>
-</div>
+The governance body should review SLO performance, onboarding demand, shared
+risk, unresolved compatibility issues, cost allocation, and capability
+retirement on an agreed cadence. Cross-agency operation needs named delegations
+and agreements; technical integration alone does not create authority to share
+information or operate another agency's service.
 
-<div style="border:1px solid var(--quote-border);border-radius:8px;padding:12px;margin:1rem 0;max-width:420px;font-family:system-ui,sans-serif;background:var(--bg);color:var(--fg);">
-  <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--quote-border);padding-bottom:8px;margin-bottom:12px;">
-    <span>Back</span><strong>Mobile shell</strong><span style="border:1px solid var(--links);border-radius:999px;padding:3px 8px;background:var(--quote-bg);color:var(--fg);font-weight:600;">📥 3 · 👤</span>
-  </div>
-  <div style="border:1px solid var(--quote-border);border-radius:8px;padding:10px;background:var(--table-alternate-bg);">
-    <strong>Embedded federated app</strong>
-    <p>App-specific task or status page</p>
-    <button>Continue task</button>
-    <p><small>Account, inbox, directory, and notification actions hand off to native UI through the approved SDK bridge.</small></p>
-  </div>
-</div>
+## Information, Privacy, and Sharing
 
-<!-- markdownlint-enable MD033 -->
+- Classify portal metadata, identity claims, inbox content, notification
+  payloads, usage telemetry, support records, and audit logs before selecting
+  storage or suppliers
+- Document lawful purpose and authority for every cross-agency disclosure;
+  distinguish consent from other sharing authority and do not request consent
+  where it is not the applicable basis
+- Make consent specific, informed, recorded, reviewable, and withdrawable where
+  consent is used; define downstream action after withdrawal
+- Avoid a global cross-service identifier or central activity profile unless a
+  documented purpose and authority require it
+- Put sensitive detail behind authenticated access rather than in email, SMS,
+  push previews, URLs, analytics, or portal card metadata
+- Assess all storage, support, telemetry, backup, content delivery, and supplier
+  processing locations under WA information-classification, privacy, records,
+  procurement, and data-offshoring requirements
+- Define data subject access, correction, complaint, breach, legal hold,
+  retention, deletion, and machine-readable export procedures
 
-## Project Kickoff Steps
+## Accessibility and Channel Support
 
-1. **Define ownership and trust boundaries** - Follow [ADR 001:
-   Application Isolation](../security/001-isolation.md) to separate central
-   platform services, federated app runtimes, tenant data, SDK delivery, and
-   mobile host bridge responsibilities
-2. **Design identity and account flows** - Follow [Identity
-   Management](identity-management.md) and [ADR 013: Identity Federation
-   Standards](../security/013-identity-federation.md) for OIDC-first login,
-   PKCE for browser public clients, claims, consent, step-up authentication,
-   silent SSO, and account-management handoff
-3. **Define API contracts** - Follow [OpenAPI Backend](openapi-backends.md)
-   and [ADR 003: API Documentation Standards](../development/003-apis.md)
-   for central APIs, app APIs, SDK-facing schemas, and compatibility tests
-4. **Protect web entry points** - Follow [ADR 016: Web Application Edge
-   Protection](../security/016-edge-protection.md) for CDN, WAF, TLS, origin
-   protection, rate limits, and browser security headers
-5. **Release the SDK safely** - Follow [ADR 004: CI/CD
-   Standards](../development/004-cicd.md) and [ADR 009: Release
-   Standards](../development/009-release.md) for SDK versioning,
-   deprecation windows, compatibility matrices, and consumer test fixtures
-6. **Apply frontend UI foundations** - Follow [ADR 020: Frontend UI
-   Foundations](../development/020-frontend-ui-foundations.md) for portal,
-   widget, SDK-provided UI, and shared service component conventions
-7. **Publish the app directory** - Define app icons, descriptions,
-   eligibility rules, launch URLs, OIDC client mappings, and SSO behaviour
-   before onboarding applications
-8. **Secure data, secrets, and logs** - Follow [ADR 005: Secrets
-   Management](../security/005-secrets-management.md), [ADR 007:
-   Centralised Security Logging](../operations/007-logging.md), [ADR 015:
-   Data Governance Standards](../operations/015-data-governance.md), and
-   [ADR 018: Database Patterns](../operations/018-database-patterns.md)
-9. **Optional AI assistance** - Follow [AI-Assisted Digital
-   Services](ai-assisted-digital-services.md) when exposing shared AI
-   assistance through portal services, central APIs, or the SDK
+Follow the applicable agency design system and [ADR 020: Frontend UI
+Foundations](../development/020-frontend-ui-foundations.md).
 
-## Implementation Notes
+Meet WCAG 2.2 AA for user-facing web interfaces and test representative portal,
+app launch, sign-in, account, consent, inbox, notification-preference, error,
+and outage states with keyboard and assistive technologies. Use semantic HTML
+and progressive enhancement. Critical discovery, launch, sign-in, and support
+paths must remain usable without client-side JavaScript where the supported
+audience or legacy estate requires it.
 
-- Applications must remain directly reachable by URL and usable without the
-  portal landing page or native mobile app
-- Use registered launch URLs from the authenticated app directory. The app
-  starts its own OIDC flow; the identity platform provides silent redirect or
-  SSO where possible.
-- Recommend the SDK, but keep documented API access available so the SDK does
-  not become a lock-in boundary
-- Keep on-page SDK UI small and consistently branded, such as a top-right
-  portal widget. Use widget dropdowns or focused overlays for account, inbox,
-  notification, and consent actions instead of taking over the federated app
-  page.
-- Prefer Bootstrap 5-compatible semantic HTML and component conventions for
-  portal, widget, and SDK-provided UI per [ADR 020: Frontend UI
-  Foundations](../development/020-frontend-ui-foundations.md). Keep shared UI
-  scoped so it does not interfere with independently owned applications.
-- Use PKCE-capable public-client flows. Do not require client secrets in
-  browser or PWA code.
-- Participating apps decide when a business notification is needed. The
-  central notification service owns delivery preferences, shared inbox
-  display, delivery channels, and audit logging.
-- If AI assistance is provided, federated applications should call a central
-  Open Responses-compatible gateway rather than integrating directly with
-  model providers. App owners remain responsible for what context is sent.
-  The portal must not silently collect cross-app context for AI use.
-- Webview handoff must fail closed. Native bridge messages must be
-  allow-listed, versioned, origin-bound, and auditable.
-- PWA and webview features must degrade safely when service workers, storage,
-  push notifications, native bridges, deep links, or AI services are
-  unavailable
+An accessible journey is concise: a user discovers an application in an
+accessible directory or follows its direct URL, reviews the service and privacy
+information, signs in only if needed, completes the task in the independently
+owned application, and receives status through an available channel. Focus and
+context remain clear at redirects and handoffs. Provide assisted-digital,
+telephone, in-person, or other alternatives where digital exclusion or service
+policy requires them. A native shell or push notification cannot be the only
+way to complete a critical task.
 
-## Implementation Checklist
+## Compatibility and Integration
 
-- [ ] Owners and support responsibilities are documented
-- [ ] App directory metadata, launch URLs, OIDC clients, and SSO behaviour are
-      documented
-- [ ] Browser, PWA, and mobile-webview behaviours are tested for critical
-      journeys
-- [ ] SDK APIs, OpenAPI contracts, TypeScript types, and compatibility
-      guarantees are published
-- [ ] Native bridge actions are allow-listed, versioned, origin-bound, and
-      audited
-- [ ] Identity claims, account attributes, consent records, and notification
-      data flows are minimised and classified
-- [ ] Central services have runbooks, rate limits, audit logs, and fallback
-      behaviours
+- Publish supported browsers, identity providers, protocol and API versions,
+  SDK versions, native-shell versions, and legacy adapters with end-of-support
+  dates
+- Use OIDC Authorization Code flow with PKCE for browser and native public
+  clients; never place client secrets in browser or PWA code
+- Test issuer, audience, state, nonce, redirect URI, session expiry, logout,
+  signing-key rollover, account recovery, and step-up behaviour
+- Keep application sessions and authorisation app-owned. Do not rely on silent
+  authentication where browser privacy controls make it unreliable
+- Keep documented APIs or protocol flows available when an SDK is offered;
+  provide server-side and non-JavaScript paths where needed
+- Version and allow-list native bridge messages, bind them to approved origins,
+  validate payloads, record security-relevant use, and fail closed
+- Define schema compatibility, idempotency, duplicate handling, ordering,
+  freshness, retry, and dead-letter behaviour for messages and notifications
 
-## Related ADRs
+## Resilience and Recovery
+
+Set measurable SLOs for each selected shared capability, including availability,
+latency, support and incident response, notification acceptance or delivery
+where measurable, and recovery. Do not publish one aggregate SLO that hides a
+weaker critical dependency.
+
+- Keep direct application URLs documented, monitored, and tested independently
+  of the portal and native shell
+- Define behaviour when the directory, identity provider, SDK asset host,
+  inbox, notification service, network link, or native bridge is unavailable
+- Avoid runtime loading of an SDK from a central origin when its outage would
+  prevent the application's core journey; package or degrade safely instead
+- Queue and reconcile asynchronous work with bounded retries and visible status;
+  never imply notification delivery proves that a user received or acted on it
+- Back up and restore authoritative data, configuration, keys, consent records,
+  and audit evidence according to approved RTO, RPO, retention, and location
+- Test central outage and direct access, dependency timeout, regional or site
+  recovery where applicable, corrupted data, credential or key recovery, and
+  status communication at least annually and after material architecture
+  changes
+
+[ADR 014: Independent Backups and Recovery](../operations/014-object-backup.md)
+and [ADR 018: Managed Relational Databases and Open
+Lakehouses](../operations/018-database-patterns.md) apply where those capabilities
+are selected.
+
+## Onboarding, Offboarding, and Exit
+
+Onboarding should validate ownership, authority, metadata, identity, direct
+access, accessibility, compatibility, security, operations, data flows, cost,
+and support before production listing. Use a sandbox and conformance tests where
+shared integration is more than a launch URL and OIDC client.
+
+Offboarding must define notice, directory removal, safe redirects, credential
+and scope revocation, queue draining, notification handling, user and support
+communications, retention or transfer of records, verified deletion, export,
+and closure evidence. Emergency suspension needs narrower criteria and a review
+path so a portal decision does not silently remove direct access to a statutory
+or critical service.
+
+Maintain a platform replacement plan with exportable directory metadata,
+configuration, consent and preference records, inbox data where authoritative,
+audit evidence, API contracts, and ownership mappings. Test restoration or
+migration to an independent environment. Avoid provider-specific identifiers or
+SDK-only business logic where they would prevent an application or shared
+capability moving independently.
+
+## Acceptance Checks
+
+- [ ] Applicability, selected variant, selected capabilities, non-goals, owners,
+      funding, RACI, and cross-agency delegations are approved
+- [ ] Onboarding contract, direct URLs, identity registrations, claims, scopes,
+      data flows, support contacts, compatibility matrix, and deprecation policy
+      are published
+- [ ] Classification, privacy, sharing authority, consent where applicable,
+      records, retention, deletion, export, processing location, supplier, and
+      offshoring decisions are recorded
+- [ ] Portal and critical app journeys pass WCAG 2.2 AA, keyboard,
+      assistive-technology, non-JavaScript where required, browser, device,
+      assisted-channel, and handoff testing
+- [ ] Authentication, application authorisation, account recovery, logout,
+      session expiry, step-up, key rollover, and identity fallback tests pass
+- [ ] API, event, SDK, component, legacy adapter, and native bridge contracts
+      pass compatibility and security tests for the selected capabilities
+- [ ] SLOs, dependency monitoring, capacity, alerts, support, escalation,
+      incident, breach, and recovery runbooks are operational
+- [ ] Central outage and direct-access tests show that each critical application
+      remains reachable or has an approved continuity path
+- [ ] Backup and recovery tests meet approved RTO and RPO, including
+      configuration, keys, records, and authoritative data
+- [ ] Onboarding, suspension, offboarding, credential revocation, deletion,
+      export, and platform replacement have named owners and tested procedures
+- [ ] Infrastructure and supported configuration are reproducible using
+      OpenTofu or Terraform as preferred by ADR 010, with justified exceptions
+
+## Related Decisions
+
+Accepted dependencies:
 
 - [ADR 001: Application Isolation](../security/001-isolation.md)
-- [ADR 003: API Documentation Standards](../development/003-apis.md)
+- [ADR 003: HTTP API Contract Standards](../development/003-apis.md)
 - [ADR 004: CI/CD Standards](../development/004-cicd.md)
 - [ADR 005: Secrets Management](../security/005-secrets-management.md)
 - [ADR 007: Centralised Security Logging](../operations/007-logging.md)
 - [ADR 009: Release Standards](../development/009-release.md)
+- [ADR 010: Infrastructure and Configuration as Code](../operations/010-configmgmt.md)
 - [ADR 013: Identity Federation Standards](../security/013-identity-federation.md)
-- [ADR 015: Data Governance Standards](../operations/015-data-governance.md)
 - [ADR 016: Web Application Edge Protection](../security/016-edge-protection.md)
-- [ADR 018: Database Patterns](../operations/018-database-patterns.md)
+- [ADR 014: Independent Backups and Recovery](../operations/014-object-backup.md)
+- [ADR 015: Data Pipeline Contracts, Quality and Lineage](../operations/015-data-governance.md)
+- [ADR 018: Managed Relational Databases and Open Lakehouses](../operations/018-database-patterns.md)
 - [ADR 020: Frontend UI Foundations](../development/020-frontend-ui-foundations.md)
-- [AI-Assisted Digital Services](ai-assisted-digital-services.md)
+
+Proposed dependencies and examples to assess rather than treat as mandates:
+
+- [ADR 021: Workload mTLS and Service Authorisation](../security/021-workload-mtls.md),
+  when shared services run on Kubernetes
+- [Identity Federation](identity-management.md)
+- [OpenAPI Backend](openapi-backends.md)

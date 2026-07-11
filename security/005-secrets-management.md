@@ -1,6 +1,6 @@
 # ADR 005: Secrets Management
 
-**Status:** Accepted | **Date:** 2025-02-25 | **Review:** 2026-02-25
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
@@ -13,90 +13,95 @@ Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_S
 > access to secrets and prevent them from leaking and compromising the
 > organisation.
 
-Secrets should be accessed at runtime by workloads and never be hard-coded
-or stored in plain text. In Kubernetes environments, the principle of
-"local over global" minimises attack surface. Secrets adjacent to their
-workload reduce blast radius. Account-wide secret stores increase exposure.
+Static secrets create disclosure and rotation risk. Location alone does not
+make a secret safe: access policy, identity, encryption, auditability,
+lifetime, and recovery determine the effective control.
 
 ## Decision
 
-Use [AWS Secrets
-Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
-for administrative and CI/CD operations. For Kubernetes workloads, prefer
-namespace-scoped secrets and minimise reliance on account-wide stores.
-
-### Security Hierarchy: Local > Global
-
-| Approach | Blast Radius | Use Case |
-|----------|--------------|----------|
-| Ephemeral (ad-hoc fetch) | None | One-time ops |
-| Kubernetes Secret (namespace-scoped) | Single namespace | Default for app runtime |
-| External Secrets Operator | Namespace (syncs from account-wide) | Bridge existing AWS-managed secrets |
-| AWS Secrets Manager (account-wide) | Entire AWS account | Admin/CI only |
-
-**Principle**: Secrets adjacent to their workload minimise attack surface.
-Account-wide stores increase exposure because any compromised credential in
-that account may gain access to them.
+An agency-approved managed secret service must be the system of record for
+application, automation, and administrative secrets. Segment stores and
+access policies by environment and trust boundary. Workloads should
+authenticate using workload identity and short-lived, dynamically issued
+credentials instead of stored credentials wherever the target service
+supports them.
 
 ### Secret Rotation
 
-Every system design should define secret rotation periods and the
-automation or manual process used to meet them.
+Each secret must have an owner, expiry or review date, and a rotation method
+based on its lifetime, privilege, exposure, service capability, and impact
+of compromise. Revoke and replace secrets immediately after suspected
+disclosure.
 
-- **Database credentials**: 30-90 days (automate via Secrets Manager)
-- **API keys**: 90 days or on suspected compromise
-- **Certificates**: Before expiry (automate via ACM where possible)
+Automate rotation where practical, prioritising high-consequence and
+widely shared secrets. Manual rotation is acceptable when risk-assessed,
+owned, tested, and evidenced; being manual does not by itself require an
+exception.
 
 ### Kubernetes Secrets
 
-Workloads should use namespace-local Kubernetes Secrets, protected at rest
-with [Elastic Kubernetes Service (EKS) envelope encryption using AWS Key
-Management Service (KMS)](https://docs.aws.amazon.com/eks/latest/userguide/envelope-encryption.html).
-This is the default for EKS 1.28+.
+A Kubernetes Secret is a delivery and storage object, not inherently safer
+than a managed secret service. Namespace scoping does not prevent access by
+cluster administrators or a compromised control plane. If used, enable
+encryption at rest, tightly scope RBAC and workload identities, prevent
+logging or environment leakage, and minimise persistence. Direct runtime
+retrieval, a CSI driver, or a synchronisation operator are all acceptable
+when the managed service remains authoritative and the threat model supports
+the delivery method.
 
-#### Ad-hoc Operations
+One-time operations should retrieve secrets only for the task lifetime and
+must not expose them in command arguments, shell history, logs, or temporary
+files. Runtime secrets must not be stored in source repositories; encrypted
+test fixtures must keep decryption identities outside the repository.
 
-For one-time tasks (DB migrations, user creation), fetch secrets ephemerally
-rather than storing them. Use stdin/stdout piping and HereDoc patterns so
-secrets travel via standard input instead of command-line arguments,
-keeping them out of process lists (`ps`). See [detailed examples and
-patterns](https://github.com/wagov-dtt/tutorials-and-workshops/tree/main/secrets).
+### Provider Examples
 
-#### Encrypted Repository Fixtures
+Equivalent managed systems of record include:
 
-For low-sensitivity secrets that must live with source code, such as test
-fixtures, store only encrypted values in the repository using the
-[age CLI](https://github.com/FiloSottile/age). Do not use this for runtime
-application secrets. Never commit the age private key, identity file, or
-passphrase to the repository.
+- [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+- [Azure Key Vault secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
+- [Google Secret Manager](https://cloud.google.com/secret-manager/docs/overview)
 
-#### External Secrets Operator (Fallback)
+### Required Controls
 
-When secrets must live in AWS for organisational reasons, ESO bridges AWS
-Secrets Manager to Kubernetes. It's useful but not the default.
+- Do not hard-code secrets in source code, images, infrastructure
+  definitions, logs, prompts, or configuration files
+- Encrypt secrets in transit and at rest and restrict decryption to the
+  workload or administrator that requires it
+- Prefer short-lived, dynamically issued credentials over static secrets
+- Grant retrieval and management permissions separately and by least
+  privilege
+- Scan repositories, build artifacts, and logs for exposed secrets and
+  revoke exposed credentials immediately
+- Record secret ownership, purpose, consumers, rotation method, and last
+  rotation without recording the secret value
+- Log administrative access, rotation, and failed retrieval without logging
+  secret material
 
-**Why ESO over Sealed Secrets:**
+This ADR covers application secrets, credentials, and their encryption. It
+does not define an agency-wide cryptographic algorithm, key-management,
+certificate-management, or post-quantum transition standard.
 
-- Secrets stay in Secrets Manager (single source of truth, audit logging)
-- Auto-sync to Kubernetes with configurable refresh
-- Uses Pod Identity (no AWS keys in cluster)
-- No encrypted blobs in git (unlike Sealed Secrets)
+## Required Evidence
 
-ESO flow: `AWS Secrets Manager -> ExternalSecret -> Kubernetes Secret`
+- Secret inventory containing owner, consumer, storage location, and
+  rotation requirements
+- Access-policy and encryption configuration
+- Rotation and secret-scanning results
+- Central audit records for administrative access and failed retrieval
 
-### IAM and Access Control
+## Exceptions
 
-[Use IAM policy
-statements](https://docs.aws.amazon.com/secretsmanager/latest/userguide/best-practices.html#w21aab9c19)
-to enforce least-privilege access. Pods should not call AWS Secrets
-Manager directly at runtime. Use namespace-scoped Kubernetes Secrets or
-ESO instead.
+Storage outside an agency-approved system of record, unencrypted secret
+storage, or inability to meet the assessed rotation requirement needs a
+time-bound exception with compensating controls, residual risk, accountable
+executive approval, expiry date, and reassessment date.
 
 ## Consequences
 
 **Benefits:**
 
-- Reduced attack surface through localised storage
+- Consistent access control, audit, and lifecycle management
 - Defined rotation periods and automation where practical reduce human
   error
 - Meets compliance and auditing requirements
@@ -108,5 +113,5 @@ ESO instead.
 
 **Trade-offs:**
 
-- AWS vendor dependency may complicate future migrations
-- ESO adds complexity compared to native K8s Secrets
+- Runtime retrieval and synchronisation components add availability and
+  operational dependencies

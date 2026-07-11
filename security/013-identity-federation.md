@@ -1,6 +1,6 @@
 # ADR 013: Identity Federation Standards
 
-**Status:** Accepted | **Date:** 2025-08-15 | **Review:** 2026-08-15
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 ## Context
 
@@ -10,24 +10,36 @@ directories, and cloud identity platforms. Current approaches use
 inconsistent protocols (SAML, OIDC, proprietary) creating integration
 complexity and security inconsistencies.
 
-Modern identity federation requires support for emerging standards like
-verifiable credentials while maintaining compatibility with legacy
-enterprise systems.
+The controls differ for employees, citizens, administrators, and software.
+Treating them as one identity domain creates inappropriate assurance,
+lifecycle, privacy, and access decisions.
 
-- [Digital ID Act 2024](https://www.legislation.gov.au/Details/C2024A00069)
+- [Digital ID Act 2024](https://www.legislation.gov.au/C2024A00025/latest/text)
 - [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)
 - [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 - [EU Digital Identity Wallet Architecture and Reference Framework
   (ARF)](https://eudi.dev/) - European digital wallet standards
 - [ISO/IEC 18013-5:2021 Mobile Driving
-  Licence](https://www.iso.org/standard/69084.html) - mobile document
-  (mDL) standard for verifiable credentials
+  Licence](https://www.iso.org/standard/69084.html) - mobile identity
+  document standard
 
 ## Decision
 
-Standardise on OpenID Connect (OIDC) as the primary federation protocol
-for all new identity integrations, with SAML 2.0 support only for legacy
-systems that cannot support OIDC.
+Standardise on OpenID Connect (OIDC) as the primary protocol for new
+interactive user federation, with SAML 2.0 support only where an upstream
+provider or legacy relying party cannot support OIDC. Use the applicable
+workload-federation protocol for non-human identities.
+
+Define separate policies and trust boundaries for:
+
+- **Workforce identities**: employees, contractors, and partners, with
+  joiner, mover, leaver and entitlement governance
+- **Customer or citizen identities**: privacy-preserving registration,
+  recovery, consent, fraud controls, and service-specific assurance
+- **Privileged identities**: separate administration identities with JIT
+  elevation and controls from [ADR 012](012-privileged-remote-access.md)
+- **Workload identities**: non-human identities using federation and
+  short-lived tokens instead of user accounts or long-lived keys
 
 **Protocol Standards:**
 
@@ -35,21 +47,39 @@ systems that cannot support OIDC.
   integrations
 - **Legacy Support**: SAML 2.0 only when upstream providers require it
   and OIDC is unavailable
-- **Security**: Implement PKCE for OIDC public clients and proper token
-  validation
-- **Compliance**: Support Digital ID Act 2024 requirements for
-  jurisdiction identity services
+- **Security**: Use the OIDC Authorization Code flow with PKCE for browser,
+  native, and public clients; do not use the implicit flow. Validate issuer,
+  audience, signature, nonce, state, expiry, and authorised redirect URIs.
+- **Compliance**: Assess the Digital ID Act 2024, Accreditation Rules, and
+  Australian Government Digital ID System requirements only where the
+  agency is providing, seeking accreditation for, or participating in a
+  service within their scope. The Act is not a blanket technical mandate
+  for every agency login.
 
 **Architecture Requirements:**
 
-- Applications should integrate through managed identity platforms (AWS
-  Cognito, Microsoft Entra ID), not directly with identity providers
+- Use a managed identity platform where it reduces security and lifecycle
+  risk. Introduce an identity broker only when multiple upstream providers,
+  protocol translation, central policy, or migration needs justify the
+  added dependency and concentration risk
 - Separate privileged and standard user domains for administrative
   access isolation (see [Reference Architecture: OpenAPI
   Backend](../reference-architectures/openapi-backends.md))
-- Support multiple upstream identity providers per application
+- Support the upstream identity providers required by the service without
+  embedding provider-specific identity logic throughout application code
 - Maintain audit trails per [ADR 007: Centralised Security
   Logging](../operations/007-logging.md)
+- Require multi-factor authentication (MFA) for workforce users, remote
+  access, privileged access, and Internet-facing services according to
+  information sensitivity and service risk
+- Prefer phishing-resistant authenticators such as passkeys, security keys,
+  or certificate-backed device authentication; do not use SMS or voice as
+  the target state
+- Disable legacy authentication protocols that bypass MFA
+- Record successful and failed authentication, MFA registration and reset,
+  token anomalies, account recovery, and privileged elevation events
+- Define fallback authentication for critical services without weakening
+  normal MFA requirements or leaving an unmonitored bypass
 
 **Identity Federation Flow:**
 
@@ -75,26 +105,55 @@ flowchart TB
     platform -->|validated claims| apps
 ```
 
-The managed platform handles protocol translation between OIDC and SAML
-providers, token validation, and audit logging.
+Where used, the managed platform handles protocol translation, token
+validation, policy, and audit logging.
 
-**Emerging Standards:**
+**Provider Examples:**
 
-- Support [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
-  for jurisdiction identity services as they mature
-- Plan for [OpenID4VC](https://openid.net/openid4vc/) wallet-based
-  authentication patterns
-- Align with [EU Digital Identity Wallet
-  (EUDI)](https://eudi.dev/) architecture for international
-  interoperability
-- Support [ISO/IEC 18013-5](https://www.iso.org/standard/69084.html)
-  mobile document (mDL) credentials for government-issued identity
+Customer and citizen identity options include [Amazon Cognito user
+pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools.html),
+[Microsoft Entra External ID](https://learn.microsoft.com/en-us/entra/external-id/customers/overview-customers-ciam),
+and [Google Cloud Identity Platform](https://cloud.google.com/identity-platform/docs).
+These examples are not mandated and do not replace assurance, privacy,
+residency, accessibility, recovery, and exit assessments.
+
+**Roadmap:**
+
+- Monitor [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/),
+  [OpenID4VC](https://openid.net/openid4vc/), and
+  [ISO/IEC 18013-5](https://www.iso.org/standard/69084.html). Adopt them
+  only for an approved use case with mature interoperability, privacy,
+  revocation, recovery, and trust-framework support. They are not current
+  federation requirements.
 
 **Implementation Requirements:**
 
-- Implement fallback authentication mechanisms for critical systems
 - Choose identity platforms with high availability and data export
   capabilities
+- Document the required authentication assurance for each relying service
+- Test federation metadata, signing-key rollover, account recovery, and
+  critical-service fallback at least annually
+
+This ADR covers federation and authentication. Detailed identity lifecycle,
+entitlement review, compromised-password filtering, and workload identity
+standards remain agency implementation requirements.
+
+## Required Evidence
+
+- Relying-service register with protocol, MFA, assurance, and fallback
+  requirements
+- Identity-provider policy exports showing MFA and legacy-authentication
+  settings
+- Authentication-event coverage and alert tests in the central logging
+  platform
+- Annual federation, key-rollover, recovery, and fallback test records
+
+## Exceptions
+
+Any service that cannot meet the required MFA or federation controls must
+record compensating controls, affected identities and information, residual
+risk, executive approval, migration date, expiry date, and reassessment
+date.
 
 ## Consequences
 

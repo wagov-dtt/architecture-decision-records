@@ -1,203 +1,266 @@
 # Reference Architecture: AI-Assisted Digital Services
 
-**Status:** Proposed | **Date:** 2026-06-17 | **Review:** 2027-06-17
+**Status:** Proposed | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
-## When to Use This Pattern
+## Purpose
 
-Use this pattern when adding low-risk AI assistance to a digital service, staff
-workflow, content process, portal, CMS, data product, or API-backed
-application.
+This informative reference architecture composes existing ADRs for agencies of
+different sizes and technology estates. It does not approve an AI use case,
+provider, model, or new mandatory control. ADRs identified as Proposed below are
+proposed dependencies, not accepted requirements.
 
-Good first use cases:
+Start with a low-risk, standalone companion. Keep the source system
+authoritative and make a person accountable for every official outcome. Increase
+integration only when evaluation and operational evidence justify it.
 
-- Drafting, summarising, rewriting, and plain-English coaching
-- Content quality, accessibility, and policy checks before formal review
-- Explanations or summaries of curated reports and service information
-- Form-help, search-help, or staff support where humans remain accountable
+## Applicability and Non-Goals
 
-For high-impact decisions, publishing, payments, identity proofing,
-authorisation, fraud decisions, production changes, or agentic tool use, start
-with [ADR 011: AI Tool and Agent
-Governance](../security/011-ai-governance.md) and a separate risk assessment.
+Use this pattern for bounded assistance such as:
 
-## Overview
+- Drafting, summarising, rewriting, translation support, and plain-English
+  coaching
+- Content, form-help, search-help, or staff support over approved information
+- Explanations of curated reports and service information
+- Read-only retrieval or selected-field assistance with a defined human review
 
-Start with a **standalone review companion**. It accepts a minimal content
-snapshot through copy/paste, file upload, static export, or read-only preview
-feed. It returns checks, suggestions, previews, and review packs for humans to
-use in existing workflows.
+This pattern is not approval for automated eligibility, policy, enforcement,
+fraud, identity, payment, publishing, production change, or other consequential
+decisions. It is not a basis for unrestricted agents, broad data access, or
+privileged tools. Assess those uses separately under [ADR 011: AI Tool and Agent
+Governance](../security/011-ai-governance.md).
 
-Keep the source system authoritative. Authors and reviewers apply accepted
-changes through the existing CMS, portal, document, or business workflow.
+AI output can identify possible issues, but cannot prove policy, factual, legal,
+records, privacy, or accessibility compliance. Qualified human review and
+representative testing remain necessary.
 
-Use an internal [Open Responses](https://www.openresponses.org/) compatible AI
-gateway for model access. The gateway owns provider configuration, model
-allow-lists, prompt templates, token limits, logging, and privacy settings.
+## Prerequisites and Assumptions
 
-[Amazon Bedrock Mantle](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-mantle.html)
-is the preferred initial backend where suitable. Use an Australian region where
-available and set `store: false` by default.
+Before implementation, confirm:
 
-## Simple Architecture
+- An accountable service owner and AI accountable officer, a defined use case,
+  excluded uses, users, affected people, and human decision boundary
+- An initial ADR 011 risk tier based on data, consequence, autonomy, privilege,
+  reversibility, and detectability
+- Agency information classification, privacy, records, procurement, security,
+  offshoring, and accessibility owners are available as applicable
+- A source of representative, lawfully usable evaluation material and qualified
+  reviewers exists
+- The source workflow can continue without AI and remains the system of record
+- Identity, logging, support, incident, and supplier-management capabilities are
+  available in proportion to the tier
+
+## Architecture Variants
+
+| Variant | Shape | Appropriate starting point |
+|---------|-------|----------------------------|
+| Minimum: low-risk companion | Copy/paste, approved file upload, or static export; deterministic checks; model call with minimal context; no retrieval, write-back, or tools | Non-sensitive, advisory, reversible work and proofs of value |
+| Higher-assurance: bounded integration | Authenticated read-only feed or selected fields; policy enforcement; approved retrieval corpus where needed; schema-constrained output; explicit human gate; no broad or implicit tool access | Moderate or higher consequence, organisational data, repeated workflows, or deeper integration after assurance |
+
+High-risk use may need an independently assured design rather than either
+variant. Inline write-back, agentic tools, memory, or consequential automation
+are separate scope changes and trigger risk-tier reassessment.
+
+Delivery can progress from manual companion, to file-based review, to read-only
+feed, and then to bounded inline assistance. Start with the least integrated
+level that can test the service outcome.
+
+## Capability View
 
 ```mermaid
 flowchart LR
-    source[CMS, document, report, or service content]
-    snapshot[Minimal content snapshot]
-    companion[AI review companion]
-    checks[Deterministic checks]
-    gateway[Open Responses gateway]
-    model[Bedrock Mantle or provider adapter]
-    output[Suggestions, preview, review pack]
-    workflow[Existing human workflow]
-    logs[Audit and usage logs]
+    user[Author, staff member, or service user]
+    source[Authoritative source and workflow]
+    input[Minimal selected input]
+    assist[Assistance service]
+    rules[Deterministic rules and policy controls]
+    access[Approved model access]
+    model[Managed or local model capability]
+    review[Human review and fallback]
+    evidence[Evaluation, audit, usage, and cost evidence]
 
-    source -->|copy, upload, export, read-only feed| snapshot
-    snapshot --> companion
-    companion --> checks
-    companion -->|minimal context| gateway
-    gateway --> model
-    checks --> output
-    gateway --> output
-    output -->|human applies accepted changes| workflow
-    companion --> logs
-    gateway --> logs
+    user --> source
+    source -->|copy, export, or bounded read| input
+    input --> assist
+    assist --> rules
+    rules -->|approved context only| access
+    access --> model
+    model -->|untrusted output| rules
+    rules --> review
+    review -->|accepted change through normal workflow| source
+    assist --> evidence
+    access --> evidence
+    review --> evidence
 ```
 
-## Delivery Levels
+The model is outside the trust boundary for truth and instructions. Validate
+input and output, keep provider credentials server-side, and do not let content
+supplied by users or retrieval sources redefine system policy or approval gates.
 
-| Level | Build | Use for |
-|-------|-------|---------|
-| 0. Manual companion | Paste text or upload files | Fast proof of value with minimal integration |
-| 1. File-based review | Export Markdown, HTML, JSON, DOCX, CSV, or PDF snapshots | Repeatable checks, previews, and review evidence |
-| 2. Read-only feed | Consume a CMS preview feed, staging URL, report export, or minimal API | Safer integration with existing platforms |
-| 3. Inline assistance | Add selected-field UI integration | Proven workflows that justify deeper integration |
-| 4. Retrieval or tools | Add RAG, tools, or agentic workflows | Separately assessed use cases with stronger controls |
+## Provider, SaaS, and Local Options
 
-Start at level 0 or 1 unless the project has a clear operational reason to do
-more.
+Product links are implementation examples, not preferences or approvals:
 
-## CMS Content Review Journey
+| Option | Official examples | Considerations |
+|--------|-------------------|----------------|
+| AWS managed model access | [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) | Validate model, feature, region, retention, network, logging, and contract fit |
+| Microsoft managed model access | [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry) and [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview) | Foundry capabilities and Azure OpenAI deployments are not interchangeable |
+| Google Cloud managed model access | [Vertex AI generative AI](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/overview) | Validate model availability, data handling, region, safety controls, and quotas |
+| Approved AI SaaS or API | Agency-contracted service with documented enterprise data terms and export/deletion support | Consumer accounts and enterprise services are not equivalent |
+| Local or self-hosted inference | Supported runtimes such as [Ollama](https://docs.ollama.com/) or [vLLM](https://docs.vllm.ai/) | Local processing can reduce disclosure but transfers patching, model provenance, capacity, monitoring, and recovery duties to the agency |
+| Existing or legacy capability | Supported agency inference platform, approved API gateway, or manual workflow | Retain where it meets the same use-case, evidence, support, and exit needs |
 
-1. Author drafts content in the existing CMS or document workflow.
-2. Author copies, uploads, exports, or previews the section for review.
-3. Companion runs deterministic checks for readability, headings, links,
-   metadata, alt text presence, and structure.
-4. Companion sends only the minimum selected context to the AI gateway.
-5. Gateway applies model allow-list, region, prompt template, token limit,
-   `store: false`, and logging rules.
-6. Companion returns plain-English suggestions, likely WCAG 2.2 AA content
-   issues, [Australian Government Style
-   Manual](https://www.stylemanual.gov.au/) prompts, and structure
-   suggestions.
-7. Companion renders a CMS-aligned preview and optional PDF/DOCX review pack.
-8. Author accepts, edits, rejects, or applies suggestions through the existing
-   CMS workflow.
+These options are not equivalent in model behaviour, data processing, location,
+retention, training use, content filtering, identity, private connectivity,
+logging, availability, quotas, cost, or deletion. Evaluate the configured
+service, model, and region rather than relying on a product family statement.
 
-## Reference Implementation
+A client may call one approved managed endpoint through a small server-side
+adapter, or use an internal gateway when central policy, credential isolation,
+multiple applications, or provider portability justify it. An Open
+Responses-compatible interface, [Bedrock
+Mantle](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-mantle.html),
+[Hugo](https://gohugo.io/) previews, and [Bootstrap](https://getbootstrap.com/)
+are optional implementation examples, not defaults. Frontends and previews
+follow the applicable agency design system under proposed ADR 020.
 
-Build a small web application or staff tool with:
+Use OpenTofu, or Terraform where justified, for provisionable infrastructure
+under [ADR 010: Infrastructure and Configuration as
+Code](../operations/010-configmgmt.md). Keep model IDs, prompt versions, limits,
+provider settings, and deployment configuration versioned and reviewable; do not
+place provider credentials in browsers, CMS plugins, or portal widgets.
 
-- Copy/paste and file upload for text, HTML, Markdown, DOCX, PDF, CSV, or JSON
-- Optional import from static CMS export or read-only preview feed
-- Deterministic checks before model calls
-- Open Responses gateway client with `store: false` enforced server-side
-- Prompt template versioning and rollback
-- Preview site generation from the same checked snapshot
-- Exportable before/after suggestions, check results, reviewer notes, and
-  PDF/DOCX review packs
+## Project Kickoff Outputs
 
-Use [Hugo](https://gohugo.io/) for static preview and review sites where
-practical. Use [ADR 020: Frontend UI
-Foundations](../development/020-frontend-ui-foundations.md) for preview UI,
-semantic HTML, and Bootstrap 5-compatible component conventions.
+Produce these before build or procurement is committed:
 
-## Gateway Requirements
+- Service brief with intended users and outcomes, non-goals, human fallback,
+  accountable owners, initial risk tier, and risk-tier change triggers
+- Current and proposed data-flow diagrams showing fields, classification,
+  volumes, prompts, retrieval, outputs, logs, locations, subprocessors, and
+  deletion paths
+- Privacy, information-classification, offshoring, security, records, and
+  supplier assessments proportionate to the use case
+- Architecture variant and build/buy/local selection record, including
+  non-equivalence, accessibility, total cost, support, and exit criteria
+- Evaluation plan with representative corpus, prohibited outcomes, quality and
+  safety measures, reviewer roles, thresholds, and regression cadence
+- Threat model covering prompt injection, adversarial input, retrieval
+  poisoning, data leakage, unsafe output, denial of service, and privilege abuse
+- Service level objectives (SLOs), cost and usage limits, runbook, incident and
+  complaint paths, and launch/rollback criteria
 
-The AI gateway should:
+## Data, Privacy, and Supplier Controls
 
-- Expose an Open Responses-compatible API to companion and application clients
-- Keep model-provider credentials out of browsers, mobile apps, CMS plugins,
-  and portal widgets
-- Keep model IDs, backend URLs, regions, token limits, and provider options in
-  server-side configuration
-- Enforce `store: false` by default for Bedrock Mantle Responses API requests
-- Log model ID, prompt template/version, policy decisions, output summary, user
-  action, and accepted outputs
-- Apply per-route, per-user, token, rate, and cost limits
-- Validate request and response schemas in CI where practical
+- Send selected fields or curated extracts rather than complete records; remove
+  unnecessary personal information, identifiers, comments, attachments, and
+  workflow metadata
+- Record classification at every data-flow boundary, including prompt,
+  retrieval corpus, output, telemetry, support access, and provider abuse logs
+- Assess processing and support locations, subprocessors, cross-border access,
+  model-training use, retention, deletion, legal terms, incidents, and exit;
+  apply [WA Data Offshoring
+  Governance](https://www.wa.gov.au/system/files/2025-06/dataoffshoringgovernancewithwadataoffshoringposition.pdf)
+- Configure no-training and minimum-retention options where supported, but verify
+  contract and observed behaviour rather than assuming a flag proves compliance
+- Keep required agency evidence in agency-controlled systems and avoid logging
+  sensitive prompt or output content unless specifically justified and protected
 
-Example gateway request shape:
+## Evaluation, Safety, and Accessibility
 
-```json
-{
-  "model": "approved-model-id",
-  "input": [
-    {
-      "role": "user",
-      "content": "Rewrite this selected paragraph in plain English."
-    }
-  ],
-  "store": false
-}
-```
+- Freeze a versioned evaluation corpus that represents languages, content
+  types, accessibility needs, edge cases, and affected cohorts without using
+  data unlawfully
+- Record baseline and release results by model, model version, prompt, retrieval
+  version, configuration, and reviewer; investigate subgroup and failure results
+- Test direct and indirect prompt injection, policy override, malicious files,
+  encoded instructions, data exfiltration, unsafe links, denial-of-service
+  inputs, and malformed or deceptive outputs
+- Run deterministic checks before model calls where rules are known and validate
+  schema, citations, claims, links, and actions after model calls as applicable
+- Clearly label assistance, uncertainty, and the human review step; provide a
+  usable non-AI path when the model is unavailable, declined, or inappropriate
+- Test the entire interface and fallback with representative users and
+  assistive technology against WCAG 2.2 AA; generated text or an AI
+  accessibility review is not accessibility evidence
 
-## Data Handling Rules
+## Roles and Operations
 
-- Send selected fields, paragraphs, snippets, or curated extracts rather than
-  full records
-- Remove unnecessary personal information, identifiers, attachments, comments,
-  and workflow metadata before model calls
-- Keep source-system write-back, privileged actions, and tool calls disabled
-  until separately assessed
-- Keep required evidence in agency-controlled logs rather than relying on
-  provider-retained conversation state
-- Escalate when classification, provider, model, region, quota, or policy
-  checks are unclear
+| Role | Operational accountability |
+|------|----------------------------|
+| Service owner | Outcome, risk acceptance, funding, SLO, human fallback, and retirement |
+| AI accountable officer or governance owner | Tier, approval, inventory, reassessment, and escalation |
+| Product, content, or business owner | Source quality, workflow, qualified review, and official use of outputs |
+| Engineering and platform team | Boundaries, deployment, model access, limits, observability, rollback, and recovery |
+| Security, privacy, records, procurement, and data owners | Classification, threats, notices, retention, offshoring, supplier terms, and incidents |
+| Accessibility and user-research leads | Inclusive journeys, non-AI alternative, testing, and remediation |
+| Service desk and operations | User support, complaints, model/provider incidents, and runbook exercises |
 
-## Roles and Responsibilities
+Maintain an inventory of use cases, owners, providers, models and versions,
+prompts and versions, retrieval sources, tools, data classes, locations, expiry
+dates, and approvals. Monitor latency, availability, refusals, harmful or invalid
+outputs, policy denials, injection attempts, token use, spend, user overrides,
+and fallback use. Enforce per-user and service quotas, token ceilings, budget
+alerts, and a tested stop switch.
 
-| Party | Owns |
-|-------|------|
-| Service, CMS, or app owner | Source content, user context, business workflow, final changes |
-| AI companion team | Review UI, deterministic checks, preview/export handling, user experience |
-| AI gateway team | Open Responses API, provider adapters, model allow-list, prompt policy, logging |
-| Content or business reviewer | Standards, acceptance, approval, and official use of outputs |
-| Security and privacy owners | Classification rules, provider approval, retention, and monitoring requirements |
+## Resilience, Recovery, and Exit
 
-## Cross-Reference Use Cases
+Set SLO, RTO, and RPO according to service consequence. Define behaviour for
+model, provider, gateway, network, quota, safety-filter, and logging failure.
+Prefer fail-safe human fallback over silent provider or model substitution;
+re-evaluate before switching because models are not equivalent.
 
-| Reference architecture | AI tie-in |
-|------------------------|-----------|
-| [Content Management](content-management.md) | Content review companion, static preview, file review outputs, and compliance-left drafting checks |
-| [OpenAPI Backend](openapi-backends.md) | Internal Open Responses-compatible gateway and provider abstraction |
-| [Federated Application Portal](federated-application-portal.md) | Optional shared companion entry point through central services or SDK |
-| [Data Pipelines](data-pipelines.md) | Summaries and explanations over curated outputs |
-| [Identity Management](identity-management.md) | Authentication and authorisation boundary; no AI identity decisions |
+Recover versioned prompts, policy, evaluation assets, infrastructure, and
+configuration independently of provider conversation state. Test restore,
+credential rotation, model disablement, and operation without AI.
 
-## Implementation Checklist
+Before production, demonstrate that the agency can export its model/prompt
+inventory, configuration, logs, evaluations, and approved outputs; replace the
+provider or return to the manual workflow; revoke access; and request and verify
+deletion under the contract. Record a timed provider-exit and deletion test,
+including residual backups or legal retention. Avoid proprietary model features
+unless their value and exit impact are accepted.
 
-- [ ] Initial release level is selected and documented
-- [ ] AI Accountable Officer, tool approval, and provider assessment are recorded
-- [ ] Data classification and minimisation rules are implemented
-- [ ] Companion clients call only the internal Open Responses-compatible gateway
-- [ ] Provider credentials and provider options are controlled server-side
-- [ ] `store: false` is enforced by default for Bedrock Mantle requests
-- [ ] Deterministic checks run before model calls where rules are known
-- [ ] Logs capture model ID, prompt template/version, policy decisions, output
-      summary, user action, and accepted outputs
-- [ ] Human review, fallback behaviour, rate limits, and incident response are
-      documented
+## Required Artifacts and Acceptance Checks
+
+To claim adoption of this pattern, retain:
+
+- [ ] Approved use case, owners, risk tier, architecture variant, and excluded
+      actions
+- [ ] Data flow, classification, privacy/offshoring, supplier, records, security,
+      and accessibility assessments applicable to the use case
+- [ ] Representative evaluation corpus, thresholds, baseline, release results,
+      qualified review, and known-limit register
+- [ ] Prompt-injection and adversarial test results with remediated or accepted
+      findings
+- [ ] Tested human fallback, stop switch, incident/complaint route, SLO, alerts,
+      runbook, recovery, and rollback
+- [ ] Enforced rate, token, and cost limits with owner alerts
+- [ ] Current model, prompt, retrieval, tool, provider, region, and approval
+      inventory
+- [ ] Manual and automated accessibility results for the assistance and non-AI
+      journeys; no claim based only on AI output
+- [ ] Provider export, replacement, access-revocation, exit, and deletion-test
+      evidence
+- [ ] Infrastructure plans and apply records using OpenTofu or Terraform where
+      infrastructure is provisioned
 
 ## Related ADRs
 
+Accepted ADRs commonly composed by this pattern:
+
 - [ADR 001: Application Isolation](../security/001-isolation.md)
-- [ADR 003: API Documentation Standards](../development/003-apis.md)
+- [ADR 003: HTTP API Contract Standards](../development/003-apis.md)
 - [ADR 004: CI/CD Quality Assurance](../development/004-cicd.md)
 - [ADR 005: Secrets Management](../security/005-secrets-management.md)
 - [ADR 007: Centralised Security Logging](../operations/007-logging.md)
 - [ADR 009: Release Standards](../development/009-release.md)
+- [ADR 010: Infrastructure and Configuration as Code](../operations/010-configmgmt.md)
 - [ADR 011: AI Tool and Agent Governance](../security/011-ai-governance.md)
 - [ADR 013: Identity Federation Standards](../security/013-identity-federation.md)
-- [ADR 015: Data Governance Standards](../operations/015-data-governance.md)
 - [ADR 020: Frontend UI Foundations](../development/020-frontend-ui-foundations.md)
+
+Proposed dependencies, to apply only if adopted or otherwise approved for the
+project:
+
+- [ADR 021: Workload mTLS and Service Authorisation](../security/021-workload-mtls.md),
+  when agency-managed components run on Kubernetes

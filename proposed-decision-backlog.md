@@ -1,6 +1,6 @@
 # Proposed Decision Backlog
 
-**Status:** Accepted | **Date:** 2026-06-09 | **Review:** 2027-06-09
+**Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
 This backlog tracks guidance that is useful but not yet accepted as an active
 decision. Use it during annual reviews and planning to decide whether each
@@ -10,23 +10,19 @@ item should move to `Accepted`, stay `Proposed`, or become `Superseded`.
 
 | Document | Current status | Next review | Review focus |
 |----------|----------------|-------------|--------------|
-| [ADR 006: Policy Enforcement](operations/006-policy-enforcement.md) | Proposed | 2026-07-29 | Confirm policy-as-code scope, required tools, and enforcement boundaries |
-| [ADR 014: Object Backup](operations/014-object-backup.md) | Proposed | 2026-07-22 | Confirm recovery objectives, object lock posture, and lifecycle guidance |
-| [ADR 015: Data Governance](operations/015-data-governance.md) | Proposed | 2026-07-28 | Confirm ownership, classification, retention, and AI data-quality obligations |
-| [ADR 017: Analytics Tooling](operations/017-analytics-tooling.md) | Proposed | 2026-07-28 | Confirm Quarto use cases, publishing model, and dashboard boundaries |
-| [ADR 018: Database Patterns](operations/018-database-patterns.md) | Proposed | 2026-07-28 | Confirm managed database, lakehouse, and local development patterns |
-| [ADR 020: Frontend UI Foundations](development/020-frontend-ui-foundations.md) | Proposed | 2027-06-17 | Validate Bootstrap 5-compatible baseline, agency design-system fit, CMS and portal integration assumptions |
+| [ADR 006: Policy Enforcement](operations/006-policy-enforcement.md) | Proposed | 2027-07-11 | Validate preventive controls, default-deny networking, protective DNS, evidence, and enforcement boundaries |
+| [ADR 021: Workload mTLS](security/021-workload-mtls.md) | Proposed | 2027-07-11 | Validate Linkerd compatibility across supported Kubernetes services, staged default-deny policy, certificate operations, observability, performance, and rollback |
 
 ## Proposed Reference Architectures
 
 | Document | Current status | Next review | Review focus |
 |----------|----------------|-------------|--------------|
-| [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) | Proposed | 2027-06-17 | Validate Open Responses gateway, Bedrock Mantle backend, data minimisation, human accountability, and standalone review companion pattern |
-| [Content Management](reference-architectures/content-management.md) | Proposed | 2026-07-28 | Validate CMS, CDN, WAF, editorial workflow, and media-storage assumptions |
-| [Data Pipelines](reference-architectures/data-pipelines.md) | Proposed | 2026-01-28 | Validate object-storage lakehouse, DuckDB/DuckLake, S3 Tables, and reporting flow |
-| [Federated Application Portal](reference-architectures/federated-application-portal.md) | Proposed | 2027-06-16 | Validate SDK scope, cross-organisation ownership, PWA support, mobile-webview handoff, and central service boundaries |
-| [Identity Management](reference-architectures/identity-management.md) | Proposed | 2026-07-29 | Validate broker pattern, managed identity platform use, and Digital ID assumptions |
-| [OpenAPI Backends](reference-architectures/openapi-backends.md) | Proposed | 2026-07-28 | Validate public/admin API separation, contract testing, and edge controls |
+| [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) | Proposed | 2027-07-11 | Pilot low-risk and bounded variants; validate evaluation, human fallback, data handling, accessibility, operations, cost, and provider exit |
+| [Content Management](reference-architectures/content-management.md) | Proposed | 2027-07-11 | Pilot static, SaaS, managed-runtime, and legacy variants; validate editorial usability, accessibility, records, recovery, migration, and export |
+| [Data Pipelines](reference-architectures/data-pipelines.md) | Proposed | 2027-07-11 | Pilot batch and higher-assurance variants; validate contracts, runtime lineage, reconciliation, recovery, cost, interoperability, and exit |
+| [Federated Application Portal](reference-architectures/federated-application-portal.md) | Proposed | 2027-07-11 | Validate selectable shared capabilities, cross-agency governance, direct-access fallback, compatibility, resilience, onboarding, and offboarding |
+| [Identity Federation](reference-architectures/identity-management.md) | Proposed | 2027-07-11 | Validate direct OIDC, justified broker, privileged, and legacy variants; test claims, recovery, accessibility, rollover, migration, and exit |
+| [OpenAPI Backends](reference-architectures/openapi-backends.md) | Proposed | 2027-07-11 | Validate internal, public/partner, and administrative variants; test contracts, exposure, documentation, resilience, migration, and runtime exit |
 
 ## Acceptance Criteria
 
@@ -35,6 +31,14 @@ Move a proposed item to `Accepted` when:
 - The scope and non-goals are clear enough for delivery teams to apply
 - Required related ADRs are linked
 - Implementation steps are practical and testable
+- Mandatory statements trace to Accepted ADRs or authoritative policy
+- Proposed dependencies are accepted, removed, optional, or explicitly labelled
+- Minimum, higher-assurance, and legacy-transition variants have representative
+  agency validation
+- Provider examples remain non-normative and cover realistic cloud, SaaS, and
+  legacy contexts where relevant
+- Required artifacts, ownership, accessibility, data handling, operations,
+  resilience, migration, and exit checks are complete
 - Compliance mapping is complete where relevant
 - A reviewer confirms the technology and policy assumptions still hold
 - The annual `Review` date is set one year after the document `Date`
