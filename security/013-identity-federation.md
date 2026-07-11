@@ -2,6 +2,23 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Integrating new interactive user identities or workload
+  identities across enterprise, citizen, privileged, or cloud identity domains.
+- **Avoid when:** SAML is selected despite available OIDC support, identity
+  domains are collapsed despite different assurance needs, or legacy
+  authentication can bypass MFA.
+- **Decision:** Standardise new interactive federation on OIDC, retain SAML only
+  for unavoidable legacy integration, use workload federation for non-human
+  identities, and govern identity domains separately.
+- **Required evidence:** Relying-service register, identity-policy exports,
+  authentication events and alerts, and annual federation, key-rollover,
+  recovery, and fallback tests.
+- **Dependencies:** [ADR 012: Privileged Remote Access](012-privileged-remote-access.md)
+  for privileged access and [ADR 007: Centralised Security
+  Logging](../operations/007-logging.md) for authentication audit trails.
+
 ## Context
 
 Applications need to integrate with multiple identity providers

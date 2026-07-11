@@ -2,6 +2,21 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Managing any active, delegated, parked, sending, receiving, or
+  non-sending agency-controlled domain.
+- **Avoid when:** Moving DMARC to reject before legitimate sender alignment is
+  measured or enabling forensic reporting without assessing privacy, retention,
+  processor, and cross-border risks.
+- **Decision:** Apply SPF, DKIM, DMARC, inbound impersonation controls, and
+  protected mail transport to every controlled domain, progressing enforcement
+  through measured, owned stages.
+- **Required evidence:** Domain and sender inventory, DNS records and independent
+  tests, DMARC progression reports, transport status where used, and spoofing
+  alerts and incidents.
+- **Dependencies:** None.
+
 ## Context
 
 Government email domains are prime targets for cybercriminals who

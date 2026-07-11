@@ -2,6 +2,25 @@
 
 **Status:** Proposed | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Establishing automated governance, compliance, network, and
+  policy controls across cloud, Kubernetes, SaaS, or legacy estates.
+- **Avoid when:** Broad preventive or deny policies would be enabled before
+  resources, dependencies, impact, rollback, and break-glass paths have been
+  inventoried and tested.
+- **Decision:** Implement provider-neutral governance capabilities through native
+  enforcement points, version-controlled policy, staged audit-to-enforce
+  adoption, drift management, and time-bound exceptions.
+- **Required evidence:** Policy definitions and tests, approvals, inventory and
+  drift reports, flow matrix, enforcement and break-glass results, and linked
+  exceptions.
+- **Dependencies:** Proposed [ADR 021: Workload mTLS and Service
+  Authorisation](../security/021-workload-mtls.md) for Kubernetes workload
+  controls, [ADR 010: Infrastructure and Configuration as
+  Code](010-configmgmt.md) for provisioning, and [ADR 007: Centralised Security
+  Logging](007-logging.md) for telemetry.
+
 ## Context
 
 Governance must work across AWS, Azure, Google Cloud, and legacy or on-premises

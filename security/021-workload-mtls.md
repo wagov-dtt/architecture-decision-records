@@ -2,6 +2,25 @@
 
 **Status:** Proposed | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Protecting production application traffic between workloads on
+  supported Kubernetes clusters.
+- **Avoid when:** Traffic is outside the supported mesh scope or an existing
+  cluster would switch directly to broad deny without flow inventory,
+  compatibility testing, rollback, and break-glass preparation.
+- **Decision:** Prefer Linkerd for Kubernetes workload identity and mTLS, then
+  progress compatible services to explicit default-deny inbound authorisation
+  tied to dedicated workload service accounts.
+- **Required evidence:** Workload and flow inventory, version-controlled policy,
+  positive and negative tests, health and certificate monitoring, and trust,
+  performance, upgrade, and rollback records.
+- **Dependencies:** [ADR 001: Application Isolation](001-isolation.md), Proposed
+  [ADR 006: Automated Policy Enforcement](../operations/006-policy-enforcement.md),
+  [ADR 010: Infrastructure and Configuration as
+  Code](../operations/010-configmgmt.md), and [ADR 007: Centralised Security
+  Logging](../operations/007-logging.md).
+
 ## Context
 
 Private network location does not authenticate a workload or authorise a service

@@ -2,6 +2,22 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Publishing a controlled analytical output built from versioned
+  narrative and code as HTML, a document, a presentation, or a bounded report.
+- **Avoid when:** The requirement is governed enterprise business intelligence,
+  real-time operational monitoring, broad self-service analytics, row-level
+  security, or application-style interaction.
+- **Decision:** Use Quarto by default only for suitable reproducible publications,
+  with controlled builds, pinned inputs, retained artifacts, disclosure controls,
+  accessibility testing, and approved publishing paths.
+- **Required evidence:** Suitability decision, reproducible build records,
+  calculation and disclosure reviews, accessibility tests, publishing approval,
+  and retention decision.
+- **Dependencies:** [ADR 016: Web Application Edge
+  Protection](../security/016-edge-protection.md) for public HTML hosting.
+
 ## Context
 
 Some analytical outputs combine narrative, code, tables, and charts and need a

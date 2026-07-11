@@ -4,6 +4,17 @@
 
 Set `Review` to one year after `Date`.
 
+## Synopsis
+
+- **Use when:** One sentence describing the conditions that make this ADR
+  applicable.
+- **Avoid when:** One sentence describing important exclusions or simpler
+  alternatives.
+- **Decision:** One sentence stating the selected approach.
+- **Required evidence:** The minimum artifacts that demonstrate implementation.
+- **Dependencies:** Link direct ADR dependencies, including their status where
+  relevant, or write `None.`
+
 ## Context
 
 What problem are we solving? Include background and constraints.

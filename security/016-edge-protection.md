@@ -2,6 +2,22 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Exposing a web application or API to the Internet.
+- **Avoid when:** A CDN or WAF is mandated without demonstrated need, clients can
+  bypass the edge, or edge controls are treated as substitutes for secure design,
+  patching, authentication, or application testing.
+- **Decision:** Require risk-appropriate managed edge and DDoS controls, add WAF
+  or CDN capabilities where justified, restrict origin access, and stage
+  enforcement with monitoring and tested failure handling.
+- **Required evidence:** Edge and origin configuration, Internet service
+  inventory, WAF and penetration tests, tuning records, alerts, and central logs.
+- **Dependencies:** [ADR 019: Shared File
+  Access](../operations/019-shared-file-access.md) for file-backed assets and [ADR
+  007: Centralised Security Logging](../operations/007-logging.md) for WAF and
+  security logging.
+
 ## Context
 
 Government web applications face heightened security threats including

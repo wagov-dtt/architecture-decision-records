@@ -36,6 +36,7 @@ themselves prove project or agency compliance.
 | Add OIDC or legacy SAML federation | [Identity Federation](reference-architectures/identity-management.md) |
 | Build an agency-controlled HTTP API | [OpenAPI Backends](reference-architectures/openapi-backends.md) |
 | Check controls, standards, and policy coverage | [Compliance Mapping](compliance-mapping.md) |
+| Check ADR status, review dates, and dependencies | [ADR Catalogue](decision-finder.md#adr-catalogue) |
 | Review proposed guidance before adoption | [Proposed Decision Backlog](proposed-decision-backlog.md) |
 | Review whether guidance is current | [Annual Review Schedule](review-schedule.md) |
 

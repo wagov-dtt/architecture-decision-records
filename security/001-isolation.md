@@ -2,6 +2,25 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Designing boundaries between applications, environments, trust
+  domains, data stores, or administrative paths.
+- **Avoid when:** The design relies on a Kubernetes namespace or cloud resource
+  group alone as a security boundary or permits undocumented cross-boundary
+  traffic.
+- **Decision:** Isolate applications and environments by default using the
+  strongest practical combination of administrative, network, compute, and
+  workload boundaries with default-deny flows.
+- **Required evidence:** Trust-boundary diagram, approved flow allow-list,
+  default-deny and environment-separation configuration, workload controls, and
+  prohibited-path tests.
+- **Dependencies:** Proposed [ADR 021: Workload mTLS and Service
+  Authorisation](021-workload-mtls.md) for Kubernetes workload controls, [ADR
+  006: Automated Policy Enforcement](../operations/006-policy-enforcement.md) for
+  ingress and egress policy, and [ADR 007: Centralised Security
+  Logging](../operations/007-logging.md) for traffic logging.
+
 ## Context
 
 Not isolating applications and environments can lead to significant

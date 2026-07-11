@@ -145,6 +145,8 @@ See [templates/reference-architecture-template.md](templates/reference-architect
 
 - [ ] Title is concise (under 50 characters) and actionable
 - [ ] Status, date, and annual review metadata are present
+- [ ] Synopsis states when to use and avoid the ADR, the decision, minimum
+      evidence, and direct ADR dependencies
 - [ ] All acronyms defined on first use
 - [ ] Active voice (not passive)
 - [ ] Scope, non-goals, and related ADRs are clear

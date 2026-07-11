@@ -2,6 +2,19 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Creating or materially changing an agency-controlled public,
+  partner, administrative, or service-to-service HTTP API.
+- **Avoid when:** The interface is non-HTTP, GraphQL, an event stream, a static
+  route, a non-business health probe, or an unchangeable third-party API.
+- **Decision:** Maintain a version-controlled machine-readable HTTP contract,
+  preferably OpenAPI, with compatibility conventions and automated contract,
+  behaviour, and risk-based security testing.
+- **Required evidence:** Contract and compatibility policy, CI/CD test results,
+  applicable exposure approval, and breaking-change migration records.
+- **Dependencies:** None.
+
 ## Context
 
 HTTP APIs need stable, discoverable contracts so consumers can integrate safely and

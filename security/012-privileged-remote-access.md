@@ -2,6 +2,23 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Administrators need remote privileged access to production,
+  cloud, legacy, or on-premises targets.
+- **Avoid when:** The path requires direct Internet-exposed administration,
+  standing privilege, shared credentials, unmanaged jump hosts, missing MFA, or
+  unrecorded sessions.
+- **Decision:** Broker privileged access through an approved identity-aware
+  service using named identities, MFA, just-in-time approval, automatic expiry,
+  managed devices, recording, logging, and tested break-glass access.
+- **Required evidence:** Privileged identity and entitlement inventory, MFA and
+  approval records, access reviews, session records, and break-glass tests.
+- **Dependencies:** [ADR 007: Centralised Security
+  Logging](../operations/007-logging.md) for session records and [ADR 010:
+  Infrastructure and Configuration as Code](../operations/010-configmgmt.md) for
+  routine infrastructure changes.
+
 ## Context
 
 Persistent administrative exposure, standing privilege, shared credentials,

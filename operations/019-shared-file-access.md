@@ -2,6 +2,23 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** An application needs object-backed file access or true managed
+  NFS or SMB semantics.
+- **Avoid when:** An object adapter has not demonstrated required locking,
+  atomicity, metadata, concurrency, or consistency semantics, or the design
+  creates uncontrolled dual canonical stores.
+- **Decision:** Select an object-backed adapter or managed file service using
+  representative semantic testing, define one canonical store, and apply
+  explicit access, lifecycle, recovery, and migration controls.
+- **Required evidence:** Canonical-store decision, semantic and performance tests,
+  access and lifecycle controls, backup and restore results, and migration
+  reconciliation and rollback records.
+- **Dependencies:** [ADR 016: Web Application Edge
+  Protection](../security/016-edge-protection.md) for public delivery and [ADR
+  014: Independent Backups and Recovery](014-object-backup.md) for recovery.
+
 ## Context
 
 Applications may need object access, file paths, NFS or SMB protocols, or

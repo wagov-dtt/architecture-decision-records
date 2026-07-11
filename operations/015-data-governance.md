@@ -2,6 +2,21 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Operating production data pipelines that publish transformed
+  data to consumers.
+- **Avoid when:** Git history is being substituted for runtime lineage or invalid
+  records would be silently discarded without reconciliation and replay.
+- **Decision:** Require versioned contracts, measurable quality thresholds,
+  fail-safe publication, quarantined-record handling, and authoritative runtime
+  lineage independent of tool or cloud choice.
+- **Required evidence:** Approved contracts, quality and reconciliation results,
+  quarantine and replay records, sampled end-to-end lineage, and transformation
+  approvals.
+- **Dependencies:** [ADR 007: Centralised Security Logging](007-logging.md) for
+  pipeline operational and quality events.
+
 ## Context
 
 Data pipelines need explicit interfaces, measurable quality, and evidence of

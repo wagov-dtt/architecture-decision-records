@@ -26,6 +26,7 @@ next-number:
 lint:
     rumdl check --fix .
     just check-metadata
+    just check-catalogue
     just check-summary
     lychee '*.md' '**/*.md' --exclude-path book
 
@@ -34,6 +35,7 @@ lint:
 lint-ci:
     rumdl check --fix .
     just check-metadata
+    just check-catalogue
     just check-summary
     lychee '*.md' '**/*.md' --exclude-path book || true
 
@@ -46,6 +48,16 @@ check-summary:
 [group('quality')]
 check-metadata:
     python3 scripts/check_metadata.py
+
+# Verify the generated ADR catalogue matches source metadata
+[group('quality')]
+check-catalogue:
+    python3 scripts/generate_catalogue.py --check
+
+# Refresh the ADR catalogue after changing metadata or dependencies
+[group('development')]
+update-catalogue:
+    python3 scripts/generate_catalogue.py
 
 # Build documentation website (includes link checking)
 [group('build')]

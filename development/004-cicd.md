@@ -2,6 +2,22 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** A pipeline builds, tests, packages, releases, or deploys agency
+  software.
+- **Avoid when:** A documentation-only repository or unreleasable prototype has
+  an approved reduced pipeline, or CI/CD is being treated as a substitute for
+  operational vulnerability management.
+- **Decision:** Use repeatable, security-gated pipelines that produce immutable
+  releases with testing, scanning, a software bill of materials, provenance,
+  protected environments, and short-lived cloud privilege.
+- **Required evidence:** Pipeline and branch controls, test and scan results,
+  software bill of materials, provenance, approvals, and linked exceptions.
+- **Dependencies:** [ADR 003: HTTP API Contract Standards](003-apis.md) for
+  applicable API testing and [ADR 010: Infrastructure and Configuration as
+  Code](../operations/010-configmgmt.md) for infrastructure delivery.
+
 ## Context
 
 Ensure security and integrity of software artifacts that are consumed by

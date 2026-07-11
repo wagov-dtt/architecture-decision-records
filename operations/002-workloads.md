@@ -2,6 +2,25 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** A compatible containerised bespoke workload has a justified need
+  for Kubernetes scheduling, scaling, or ecosystem capabilities.
+- **Avoid when:** The workload needs unsupported host privileges, specialist
+  hardware, unvalidated state semantics, unavailable regional capabilities, or
+  disproportionate platform overhead.
+- **Decision:** Use managed Kubernetes with provider-managed compute only for
+  validated compatible workloads, while preferring simpler supported hosting
+  when it meets the need.
+- **Required evidence:** Workload-fit, security, region, recovery, support, cost,
+  exit, performance, resilience, scaling, and recovery assessments and tests.
+- **Dependencies:** [ADR 018: Managed Relational Databases and Open
+  Lakehouses](018-database-patterns.md) for durable database state, [ADR 019:
+  Shared File Access](019-shared-file-access.md) for shared file state, and
+  Proposed [ADR 021: Workload mTLS and Service
+  Authorisation](../security/021-workload-mtls.md) when relying on the preferred
+  workload-security profile.
+
 ## Context
 
 WA public-sector estates span multiple clouds and legacy or on-premises

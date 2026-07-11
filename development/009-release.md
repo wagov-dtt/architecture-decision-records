@@ -2,6 +2,20 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Releasing deployable agency software or packaged artifacts.
+- **Avoid when:** Applying the full process unchanged to documentation-only
+  changes or unreleased prototypes, or rebuilding an artifact between user
+  acceptance testing and production.
+- **Decision:** Use Markdown release notes, protected source-control workflows,
+  immutable identifiers, and promotion of the same digest-identified artifact
+  from testing to production.
+- **Required evidence:** Release identifier, digest, source revision, approvals,
+  tests, scans, release notes, promotion record, and linked exceptions.
+- **Dependencies:** [ADR 007: Centralised Security
+  Logging](../operations/007-logging.md) for release change tracking.
+
 ## Context
 
 Release notes should be standardised so security and infrastructure

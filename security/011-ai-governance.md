@@ -2,6 +2,23 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Any development, content, analysis, testing, operational,
+  generative, or agentic AI tool processes data, generates outputs, or invokes
+  tools.
+- **Avoid when:** An unapproved public AI service would receive sensitive data or
+  an AI system would take consequential, privileged, or hard-to-reverse action
+  without required human approval.
+- **Decision:** Assign human accountability, risk-tier every AI use case,
+  constrain data and privileges, validate outputs, monitor tool activity, and
+  require explicit human gates for high-impact actions.
+- **Required evidence:** Approved register entry, provider and data assessments,
+  agentic risk assessment, human approvals, and tool-call, denial, output, and
+  approval logs.
+- **Dependencies:** [ADR 001: Application Isolation](001-isolation.md) for
+  isolated or local AI execution environments.
+
 ## Context
 
 Generative and agentic AI tools used for development and operations can

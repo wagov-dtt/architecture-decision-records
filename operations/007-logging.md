@@ -2,6 +2,20 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Collecting, retaining, analysing, and operating security
+  telemetry from cloud, SaaS, on-premises, or legacy services.
+- **Avoid when:** Central forwarding is assumed to replace tested source
+  retention, or collection unnecessarily exposes sensitive data.
+- **Decision:** Collect and buffer events on source platforms, route
+  security-relevant telemetry to the central analysis platform, and use
+  risk-based logging profiles, detections, retention, and operating coverage.
+- **Required evidence:** Source inventory, logging profiles, detection catalogue,
+  parsing and end-to-end test records, access reviews, and tamper-protection
+  evidence.
+- **Dependencies:** None.
+
 ## Context
 
 Security monitoring requires reliable telemetry from cloud and legacy estates

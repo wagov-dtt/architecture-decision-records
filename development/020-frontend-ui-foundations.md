@@ -2,6 +2,21 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Building or materially changing public or staff-facing websites,
+  portals, content-management templates, previews, or embedded web widgets.
+- **Avoid when:** The interface is native, an email or document, a specialised
+  visualisation, an unchangeable vendor interface, or a functioning legacy
+  interface that would be replaced only to adopt a component library.
+- **Decision:** Use the applicable government design system first, otherwise use
+  semantic HTML and an approved component approach, with WCAG 2.2 AA and user
+  research governing outcomes.
+- **Required evidence:** Design-system decision, user research, accessibility
+  results, browser and device tests, and any approved improvement plan or
+  exception.
+- **Dependencies:** None.
+
 ## Context
 
 WA Government digital services need accessible, consistent web interfaces

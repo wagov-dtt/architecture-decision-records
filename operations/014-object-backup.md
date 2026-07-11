@@ -2,6 +2,20 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** A service needs recoverable copies of data, configuration,
+  software, keys, audit information, or other recovery dependencies.
+- **Avoid when:** Replication, snapshots, versioning, point-in-time recovery, or
+  immutability alone are being treated as an independent tested backup.
+- **Decision:** Maintain at least one logically and administratively independent,
+  retention-protected backup copy with separated access and a tested isolated
+  restoration path.
+- **Required evidence:** Backup inventory, independence and access design,
+  encryption and key recovery, monitoring records, and annual and post-change
+  restoration tests with measured RTO and RPO.
+- **Dependencies:** None.
+
 ## Context
 
 Critical services require recoverable copies of data, software,

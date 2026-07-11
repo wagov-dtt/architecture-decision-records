@@ -2,6 +2,22 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Provisioning or recovering cloud, network, identity, Kubernetes,
+  operating-system, or supported platform configuration.
+- **Avoid when:** Changes would remain manual, unreconciled, non-reproducible, or
+  dependent on a developer workstation without recorded justification and
+  equivalent controls.
+- **Decision:** Manage infrastructure declaratively in version control,
+  preferring OpenTofu or Terraform, with protected promotion, reviewed plans,
+  secured state, drift detection, controlled imports, and tested recovery.
+- **Required evidence:** Baselines, plans and approvals, artifact and dependency
+  versions, state protection and recovery, import records, scans, and drift
+  remediation.
+- **Dependencies:** [ADR 009: Release Standards](../development/009-release.md)
+  for protected promotion of immutable configuration commits or artifacts.
+
 ## Context
 
 Cloud and legacy environments must be reproducible and recoverable without

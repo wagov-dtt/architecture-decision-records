@@ -2,6 +2,22 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Selecting transactional database hosting or an analytical
+  lakehouse pattern across cloud or legacy estates.
+- **Avoid when:** Durable database state would be kept in Kubernetes, a
+  transactional database would become the default data lake, or managed
+  snapshots would be treated as complete backup compliance.
+- **Decision:** Prefer evidence-selected managed relational services for new
+  transactional workloads and decoupled open-format lakehouse components for
+  analytical workloads, while retaining viable supported legacy databases.
+- **Required evidence:** Selection and exit record, performance and recovery
+  tests, independent backup evidence, lakehouse interoperability and lineage,
+  and migration reconciliation.
+- **Dependencies:** [ADR 014: Independent Backups and
+  Recovery](014-object-backup.md) for independent copies and tested restoration.
+
 ## Context
 
 Transactional applications and analytical platforms need different data

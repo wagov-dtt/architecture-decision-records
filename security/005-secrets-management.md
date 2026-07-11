@@ -2,6 +2,19 @@
 
 **Status:** Accepted | **Date:** 2026-07-11 | **Review:** 2027-07-11
 
+## Synopsis
+
+- **Use when:** Storing, delivering, rotating, or auditing application,
+  automation, or administrative secrets.
+- **Avoid when:** Source code, configuration, images, logs, prompts, or
+  Kubernetes Secrets would become the authoritative long-term secret store.
+- **Decision:** Use an agency-approved managed secret service as the system of
+  record, prefer workload identity and short-lived credentials, and enforce
+  ownership, least privilege, encryption, rotation, scanning, and auditing.
+- **Required evidence:** Secret inventory, access and encryption configuration,
+  rotation and secret-scan results, and central administrative-access records.
+- **Dependencies:** None.
+
 ## Context
 
 Per the [Open Web Application Security Project (OWASP) Secrets
