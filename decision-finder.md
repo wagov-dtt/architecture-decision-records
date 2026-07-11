@@ -6,9 +6,10 @@ Use this page to find the right starting point for common delivery needs.
 Start with a reference architecture when one matches the project. Use ADRs
 directly when you need a specific decision or control.
 
-All current reference architectures are **Proposed**. Use them as evaluation and
-project-kickoff aids, not active standards. A project must either rely on Accepted
-ADRs directly or explicitly approve use of Proposed guidance and its dependencies.
+Reference architectures display their status at the top of each page. Accepted
+architectures are active project-kickoff guidance. Proposed architectures remain
+evaluation aids and require explicit project approval, including approval of their
+Proposed dependencies.
 
 ## Project Preflight
 
@@ -24,14 +25,14 @@ Before choosing a pattern, record:
 
 ## Start by Project Type
 
-| Project need | Proposed starting point | Then check |
-|--------------|-------------------------|------------|
-| Bounded AI assistance with human accountability | [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) | [ADR 011: AI Tool and Agent Governance](security/011-ai-governance.md), [ADR 007: Logging](operations/007-logging.md) |
-| Public website, intranet, content portal, or static publishing | [Content Management](reference-architectures/content-management.md) | [ADR 016: Edge Protection](security/016-edge-protection.md), [ADR 013: Identity Federation](security/013-identity-federation.md), [ADR 020: Frontend UI](development/020-frontend-ui-foundations.md) |
-| Independently owned apps that may share entry, identity, messaging, or channel capabilities | [Federated Application Portal](reference-architectures/federated-application-portal.md) | [Identity Federation](reference-architectures/identity-management.md), [OpenAPI Backends](reference-architectures/openapi-backends.md) |
-| Governed batch, streaming, warehouse, lakehouse, or analytical data movement | [Data Pipelines](reference-architectures/data-pipelines.md) | [ADR 015: Data Pipeline Quality](operations/015-data-governance.md), [ADR 018: Databases and Lakehouses](operations/018-database-patterns.md) |
-| OIDC or legacy SAML federation for workforce, citizen, customer, partner, or privileged users | [Identity Federation](reference-architectures/identity-management.md) | [ADR 013: Identity Federation](security/013-identity-federation.md), [ADR 012: Privileged Remote Access](security/012-privileged-remote-access.md) |
-| Agency-controlled HTTP API accurately described by OpenAPI | [OpenAPI Backends](reference-architectures/openapi-backends.md) | [ADR 003: HTTP API Contracts](development/003-apis.md), [ADR 016: Edge Protection](security/016-edge-protection.md), [ADR 004: CI/CD](development/004-cicd.md) |
+| Project need | Starting point | Status | Then check |
+|--------------|----------------|--------|------------|
+| Bounded AI assistance with human accountability | [AI-Assisted Digital Services](reference-architectures/ai-assisted-digital-services.md) | Proposed | [ADR 011: AI Tool and Agent Governance](security/011-ai-governance.md), [ADR 007: Logging](operations/007-logging.md) |
+| Public website, intranet, content portal, or static publishing | [Content Management](reference-architectures/content-management.md) | Accepted | [ADR 016: Edge Protection](security/016-edge-protection.md), [ADR 013: Identity Federation](security/013-identity-federation.md), [ADR 020: Frontend UI](development/020-frontend-ui-foundations.md) |
+| Independently owned apps that may share entry, identity, messaging, or channel capabilities | [Federated Application Portal](reference-architectures/federated-application-portal.md) | Proposed | [Identity Federation](reference-architectures/identity-management.md), [OpenAPI Backends](reference-architectures/openapi-backends.md) |
+| Governed batch, streaming, warehouse, lakehouse, or analytical data movement | [Data Pipelines](reference-architectures/data-pipelines.md) | Accepted | [ADR 015: Data Pipeline Quality](operations/015-data-governance.md), [ADR 018: Databases and Lakehouses](operations/018-database-patterns.md) |
+| OIDC or legacy SAML federation for workforce, citizen, customer, partner, or privileged users | [Identity Federation](reference-architectures/identity-management.md) | Proposed | [ADR 013: Identity Federation](security/013-identity-federation.md), [ADR 012: Privileged Remote Access](security/012-privileged-remote-access.md) |
+| Agency-controlled HTTP API accurately described by OpenAPI | [OpenAPI Backends](reference-architectures/openapi-backends.md) | Accepted | [ADR 003: HTTP API Contracts](development/003-apis.md), [ADR 016: Edge Protection](security/016-edge-protection.md), [ADR 004: CI/CD](development/004-cicd.md) |
 
 ## Start by Capability
 

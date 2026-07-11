@@ -373,10 +373,10 @@ Accepted dependencies:
 - [ADR 015: Data Pipeline Contracts, Quality and Lineage](../operations/015-data-governance.md)
 - [ADR 018: Managed Relational Databases and Open Lakehouses](../operations/018-database-patterns.md)
 - [ADR 020: Frontend UI Foundations](../development/020-frontend-ui-foundations.md)
+- [OpenAPI Backend](openapi-backends.md)
 
 Proposed dependencies and examples to assess rather than treat as mandates:
 
 - [ADR 021: Workload mTLS and Service Authorisation](../security/021-workload-mtls.md),
   when shared services run on Kubernetes
 - [Identity Federation](identity-management.md)
-- [OpenAPI Backend](openapi-backends.md)
